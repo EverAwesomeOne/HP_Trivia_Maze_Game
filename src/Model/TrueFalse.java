@@ -1,4 +1,5 @@
 package Model;
 
-public class TrueFalse extends Question{
+public class TrueFalse extends Question_Answer {
+
 }

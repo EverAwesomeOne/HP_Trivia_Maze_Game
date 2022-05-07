@@ -1,4 +1,4 @@
 package Model;
 
-public class ShortAnswer extends Question{
+public class ShortAnswer extends Question_Answer {
 }
