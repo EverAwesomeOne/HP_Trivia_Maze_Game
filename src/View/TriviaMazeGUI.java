@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
 public class TriviaMazeGUI extends JFrame /*implements ActionListener*/ {
@@ -26,6 +27,8 @@ public class TriviaMazeGUI extends JFrame /*implements ActionListener*/ {
     final JMenuBar mainBar = new JMenuBar();
 
     private final ImageIcon mazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
+
+    private final ImageIcon mazeCharacterIcon = new ImageIcon("src//View//Images//mazeCharacterIcon.png");
 
     public TriviaMazeGUI() {
         initializeGUI();
@@ -133,17 +136,23 @@ public class TriviaMazeGUI extends JFrame /*implements ActionListener*/ {
 
     private JPanel setupButtonPanel() {
         JPanel directionButtonPanel = new JPanel();
-        directionButtonPanel.setLayout(new BorderLayout());
+        directionButtonPanel.setLayout(new GridLayout(3,3));
 
-        JButton northButton = new JButton(NORTH_COMMAND);
-        JButton southButton = new JButton(SOUTH_COMMAND);
-        JButton eastButton = new JButton(EAST_COMMAND);
-        JButton westButton = new JButton(WEST_COMMAND);
+        BasicArrowButton northButton = new BasicArrowButton(BasicArrowButton.NORTH);
+        BasicArrowButton southButton = new BasicArrowButton(BasicArrowButton.SOUTH);
+        BasicArrowButton eastButton = new BasicArrowButton(BasicArrowButton.EAST);
+        BasicArrowButton westButton = new BasicArrowButton(BasicArrowButton.WEST);
+        JLabel buttonPanelCenterLabel = new JLabel(scale(mazeCharacterIcon));
 
-        directionButtonPanel.add(northButton, BorderLayout.NORTH);
-        directionButtonPanel.add(southButton, BorderLayout.SOUTH);
-        directionButtonPanel.add(eastButton, BorderLayout.EAST);
-        directionButtonPanel.add(westButton, BorderLayout.WEST);
+        directionButtonPanel.add(new JLabel(""));
+        directionButtonPanel.add(northButton);
+        directionButtonPanel.add(new JLabel(""));
+        directionButtonPanel.add(westButton);
+        directionButtonPanel.add(buttonPanelCenterLabel);
+        directionButtonPanel.add(eastButton);
+        directionButtonPanel.add(new JLabel(""));
+        directionButtonPanel.add(southButton);
+        directionButtonPanel.add(new JLabel(""));
 
         directionButtonPanel.setVisible(true);
 
@@ -151,7 +160,7 @@ public class TriviaMazeGUI extends JFrame /*implements ActionListener*/ {
     }
 
     private ImageIcon scale(ImageIcon icon) {
-        return new ImageIcon(icon.getImage().getScaledInstance(500, 440, Image.SCALE_SMOOTH));
+        return new ImageIcon(icon.getImage().getScaledInstance(30, 80, Image.SCALE_SMOOTH));
     }
 
     private void setFrameLocation() {
