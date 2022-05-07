@@ -9,3 +9,5 @@
 # Files that break our project
 /vcs.xml
 /misc.xml
+/codeStyles/
+/qaplug_profiles.xml
