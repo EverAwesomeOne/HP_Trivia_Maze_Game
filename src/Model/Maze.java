@@ -1,9 +1,9 @@
 package Model;
 
 public class Maze {
-    Room[][] maze;
-    int characterRow;
-    int characterColumn;
+    private Room[][] maze;
+    private int characterRow;
+    private int characterColumn;
 
     Maze(int chosenRows, int chosenColumns) {
         characterRow = 0;

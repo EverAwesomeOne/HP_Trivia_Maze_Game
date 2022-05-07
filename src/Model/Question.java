@@ -9,7 +9,7 @@ public class Question {
         private String answer;
     }
 
-    private String askQuestion() {
-        return "";
+    void askQuestion() {
+
     }
 }
