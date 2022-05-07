@@ -5,7 +5,7 @@ public class Maze {
     int characterRow;
     int characterColumn;
 
-    Maze() {
+    Maze(int chosenRows, int chosenColumns) {
         characterRow = 0;
         characterColumn = 0;
 
