@@ -49,7 +49,13 @@ public class Maze {
     }
 
     private boolean noValidPaths() {
+        
         return false;
+    }
+
+    private void removeEdgeFromGraph(int firstNodeToRemoveFrom, int secondNodeToRemoveFrom) {
+        roomConnections[firstNodeToRemoveFrom].remove((Integer) secondNodeToRemoveFrom);
+        roomConnections[secondNodeToRemoveFrom].remove((Integer) firstNodeToRemoveFrom);
     }
 
     private void createInitialGraph() {
