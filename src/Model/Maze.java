@@ -84,6 +84,15 @@ public class Maze {
     }
 
     private void closeDatabaseConnection() {
-
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException e) { /* Ignored */}
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) { /* Ignored */}
+        }
     }
 }
