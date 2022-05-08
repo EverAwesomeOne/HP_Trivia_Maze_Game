@@ -27,7 +27,7 @@ public class Question_Answer {
         String query = "SELECT * FROM questions ORDER BY RANDOM() LIMIT 1";
 
         //don't need to close cause we do try - catch - resources
-        try (ResultSet rs = stmt.executeQuery(query);) {
+        try (ResultSet rs = stmt.executeQuery(query)) {
 
             question = rs.getString("QUESTION");
             correctAnswer = rs.getString("CORRECT_ANSWER");
