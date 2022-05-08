@@ -15,9 +15,8 @@ public class Maze {
     private Statement stmt;
 
     Maze(int chosenRows, int chosenColumns) {
-        characterRow = chosenRows;
-        characterColumn = chosenColumns;
-        maze = new Room[characterRow][characterColumn];
+        characterRow = 0;
+        characterColumn = 0;
 
         for (int i = 0; i < chosenRows; i++) {
             for (int j = 0; j < chosenColumns; j++) {
@@ -25,12 +24,8 @@ public class Maze {
             }
         }
 
-        /*lockEdgeDoors();*/
+        lockEdgeDoors();
         openDatabaseConnection();
-        //TAKE THESE TWO LINES OUT LATER, TESTING PURPOSES ONLY
-        Question_Answer questionAnswer = new Question_Answer();
-        questionAnswer.getQuestionAnswerFromDatabase(stmt);
-        //
     }
 
     private void move(Direction directionToMove) {

@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Question_Answer {
-    //REMINDER TO FOLLOW PROPER NAMING CONVENTIONS -> EDIT LATER
     private String question;
     private String correctAnswer;
     private String answer2;
@@ -20,8 +19,7 @@ public class Question_Answer {
         answer4 = "";
     }
 
-    //CHANGE THIS FROM PUBLIC, FOR TESTING PURPOSES ONLY
-    public void getQuestionAnswerFromDatabase(Statement stmt) {
+    void getQuestionAnswerFromDatabase(Statement stmt) {
 
         //query the database table for a random row
         String query = "SELECT * FROM questions ORDER BY RANDOM() LIMIT 1";
@@ -40,12 +38,6 @@ public class Question_Answer {
             e.printStackTrace();
             System.exit(0);
         }
-
-        System.out.println(question);
-        System.out.println(correctAnswer);
-        System.out.println(answer2);
-        System.out.println(answer3);
-        System.out.println(answer4);
     }
 
 }
