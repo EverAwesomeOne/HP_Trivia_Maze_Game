@@ -5,11 +5,13 @@ import org.sqlite.SQLiteDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
 public class Maze {
     private Room[][] maze;
     private int characterRow;
     private int characterColumn;
+    private LinkedList<Integer>[] roomConnections;
 
     private Connection conn;
     private Statement stmt;
@@ -25,6 +27,8 @@ public class Maze {
         }
 
         lockEdgeDoors();
+        connectSharedDoors();
+        createInitialGraph();
         openDatabaseConnection();
     }
 
@@ -48,23 +52,69 @@ public class Maze {
         return false;
     }
 
-    private void lockEdgeDoors() {
-        for (int i = 0; i < maze.length; i++) {
-            maze[i][0].getDoor(Direction.WEST).lockDoor();
-            maze[i][maze[i].length - 1].getDoor(Direction.EAST).lockDoor();
-            maze[0][i].getDoor(Direction.NORTH).lockDoor();
-            maze[maze.length - 1][i].getDoor(Direction.SOUTH).lockDoor();
+    private void createInitialGraph() {
+        roomConnections = new LinkedList[maze.length * maze[0].length];
+        for (int i = 0; i < roomConnections.length; i++) {
+            int rowIndex = i / maze.length;
+            int columnIndex = i % maze[i].length;
+
+            if (roomConnections[i] == null) {
+                roomConnections[i] = new LinkedList<Integer>();
+            }
+
+            if (!maze[rowIndex][columnIndex].getDoor(Direction.NORTH).isLocked()) {
+                roomConnections[i].add(i - maze.length);
+            }
+            if (!maze[rowIndex][columnIndex].getDoor(Direction.EAST).isLocked()) {
+                roomConnections[i].add(i + 1);
+            }
+            if (!maze[rowIndex][columnIndex].getDoor(Direction.SOUTH).isLocked()) {
+                roomConnections[i].add(i + maze.length);
+            }
+            if (!maze[rowIndex][columnIndex].getDoor(Direction.WEST).isLocked()) {
+                roomConnections[i].add(i - 1);
+            }
         }
     }
 
-    private void openDatabaseConnection()  {
+    private void connectSharedDoors() {
+        // we want doors to adjacent rooms to be shared
+
+        // east and west door of adjacent rooms
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length - 1; j++) {
+                Door rightRoomWestDoor = maze[i][j + 1].getDoor(Direction.WEST);
+                maze[i][j].setSharedDoor(Direction.EAST, rightRoomWestDoor);
+            }
+        }
+
+        // north and south doors of adjacent rooms
+        for (int i = 0; i < maze.length - 1; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
+                Door bottomRoomNorthDoor = maze[i][j].getDoor(Direction.NORTH);
+                maze[i][j].setSharedDoor(Direction.SOUTH, bottomRoomNorthDoor);
+            }
+        }
+    }
+
+    private void lockEdgeDoors() {
+        for (int i = 0; i < maze.length; i++) {
+            // we want to lock the doors on the edge of the maze since there are no rooms beyond that
+            maze[i][0].getDoor(Direction.WEST).lockDoor(); // left
+            maze[i][maze[i].length - 1].getDoor(Direction.EAST).lockDoor(); // right
+            maze[0][i].getDoor(Direction.NORTH).lockDoor(); // top
+            maze[maze.length - 1][i].getDoor(Direction.SOUTH).lockDoor(); // bottom
+        }
+    }
+
+    private void openDatabaseConnection() {
         SQLiteDataSource ds = null;
 
         //establish connection (creates db file if it does not exist :-)
         try {
             ds = new SQLiteDataSource();
             ds.setUrl("jdbc:sqlite:questions.db");
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
         }

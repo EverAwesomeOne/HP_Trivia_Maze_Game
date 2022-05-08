@@ -7,7 +7,10 @@ public class Room {
     private Door westDoor;
 
     Room() {
-
+        northDoor = new Door();
+        eastDoor = new Door();
+        southDoor = new Door();
+        westDoor = new Door();
     }
 
     Door getDoor(Direction direction) {
@@ -19,6 +22,18 @@ public class Room {
             return southDoor;
         } else {
             return westDoor;
+        }
+    }
+
+    void setSharedDoor(Direction direction, Door doorToShare) {
+        if (direction == Direction.NORTH) {
+            northDoor = doorToShare;
+        } else if (direction == Direction.EAST) {
+            eastDoor = doorToShare;
+        } else if (direction == Direction.SOUTH) {
+            southDoor = doorToShare;
+        } else {
+            westDoor = doorToShare;
         }
     }
 }
