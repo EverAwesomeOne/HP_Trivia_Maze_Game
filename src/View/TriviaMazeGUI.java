@@ -67,6 +67,7 @@ public class TriviaMazeGUI extends JFrame /*implements ActionListener*/ {
 
     private Component setupMenuBar(String menuTitle) {
         final JMenu addMenu = new JMenu(menuTitle);
+        final JMenuItem menuItem = new JMenuItem(menuTitle);
 
         /*final JMenu gameInfo = new JMenu("Game Info");
         final JMenu aboutAuthor = new JMenu("About Hodgepodge Team");*/
@@ -74,12 +75,31 @@ public class TriviaMazeGUI extends JFrame /*implements ActionListener*/ {
         /*mainBar.add(gameInfo);
         mainBar.add(aboutAuthor);*/
 
+        addActionListener(menuItem, menuTitle);
+
         mainBar.add(addMenu);
 
         mainPanel.add(mainBar, BorderLayout.NORTH);
 
         mainBar.setVisible(true);
         return mainBar;
+    }
+
+    private void addActionListener(JMenuItem addMenu, String menuTitle) {
+        if (menuTitle.equals("Game Info")) {
+            addMenu.addActionListener(
+                    e -> {
+                        new GameInfo();
+                    }
+            );
+        }
+        else if (menuTitle.equals("About Hodgepodge Team")) {
+            addMenu.addActionListener(
+                    e -> {
+                        new AboutTeam();
+                    }
+            );
+        }
     }
 
     private void setupStartPanel() {
