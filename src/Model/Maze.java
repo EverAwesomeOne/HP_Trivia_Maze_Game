@@ -5,6 +5,7 @@ import org.sqlite.SQLiteDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Maze {
@@ -19,6 +20,7 @@ public class Maze {
     Maze(int chosenRows, int chosenColumns) {
         characterRow = 0;
         characterColumn = 0;
+        maze = new Room[chosenRows][chosenColumns];
 
         for (int i = 0; i < chosenRows; i++) {
             for (int j = 0; j < chosenColumns; j++) {
@@ -48,12 +50,46 @@ public class Maze {
         }
     }
 
-    private boolean noValidPaths() {
-        
+    // performs a BFS traversal from the given room
+    boolean noValidPaths() {
+        int roomNumber = characterRow * maze.length + characterColumn;
+
+        // Mark all the vertices as not visited(By default
+        // set as false)
+        boolean visited[] = new boolean[maze.length * maze[0].length];
+
+        // Create a queue for BFS
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+
+        // Mark the current node as visited and enqueue it
+        visited[roomNumber] = true;
+        queue.add(roomNumber);
+
+        while (queue.size() != 0) {
+            // Dequeue a vertex from queue and print it
+            roomNumber = queue.poll();
+
+            if (roomNumber == maze.length * maze[0].length - 1) {
+                return true;
+            }
+
+            // Get all adjacent vertices of the dequeued vertex s
+            // If a adjacent has not been visited, then mark it
+            // visited and enqueue it
+            Iterator<Integer> i = roomConnections[roomNumber].listIterator();
+            while (i.hasNext()) {
+                int n = i.next();
+                if (!visited[n]) {
+                    visited[n] = true;
+                    queue.add(n);
+                }
+            }
+        }
+
         return false;
     }
 
-    private void removeEdgeFromGraph(int firstNodeToRemoveFrom, int secondNodeToRemoveFrom) {
+    void removeEdgeFromGraph(int firstNodeToRemoveFrom, int secondNodeToRemoveFrom) {
         roomConnections[firstNodeToRemoveFrom].remove((Integer) secondNodeToRemoveFrom);
         roomConnections[secondNodeToRemoveFrom].remove((Integer) firstNodeToRemoveFrom);
     }
@@ -62,7 +98,7 @@ public class Maze {
         roomConnections = new LinkedList[maze.length * maze[0].length];
         for (int i = 0; i < roomConnections.length; i++) {
             int rowIndex = i / maze.length;
-            int columnIndex = i % maze[i].length;
+            int columnIndex = i % maze[0].length;
 
             if (roomConnections[i] == null) {
                 roomConnections[i] = new LinkedList<Integer>();
@@ -97,7 +133,7 @@ public class Maze {
         // north and south doors of adjacent rooms
         for (int i = 0; i < maze.length - 1; i++) {
             for (int j = 0; j < maze[i].length; j++) {
-                Door bottomRoomNorthDoor = maze[i][j].getDoor(Direction.NORTH);
+                Door bottomRoomNorthDoor = maze[i+1][j].getDoor(Direction.NORTH);
                 maze[i][j].setSharedDoor(Direction.SOUTH, bottomRoomNorthDoor);
             }
         }
