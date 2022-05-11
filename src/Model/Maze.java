@@ -51,7 +51,7 @@ public class Maze {
     }
 
     // performs a BFS traversal from the given room
-    boolean noValidPaths() {
+    boolean hasValidPaths() {
         int roomNumber = characterRow * maze.length + characterColumn;
 
         // Mark all the vertices as not visited(By default
