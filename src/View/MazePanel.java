@@ -48,7 +48,7 @@ public class MazePanel extends JPanel {
         startRoom = new JLabel();
         endRoom = new JLabel();
 
-        startRoom.setIcon(iconStartRoom);
+        startRoom.setIcon(iconCurrentRoom);
         endRoom.setIcon(iconEndRoom);
 
         for (int i = 0; i < ROW; i++) {
