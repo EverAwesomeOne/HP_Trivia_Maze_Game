@@ -9,7 +9,7 @@ public class AddQuestionPanel extends JPanel {
     AddQuestionPanel(JFrame mainFrame) {
         adminPanel = new JPanel();
 
-        JLabel temp = new JLabel("HELLO TEAM");
+        JLabel temp = new JLabel("ADD ADMIN FEATURES");
 
         adminPanel.add(temp);
 

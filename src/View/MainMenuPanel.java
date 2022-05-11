@@ -38,7 +38,7 @@ public class MainMenuPanel extends JPanel {
 
     private JPanel setupButtonPanel() {
         JPanel mainMenuBtnPanel = new JPanel();
-        mainMenuBtnPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        //mainMenuBtnPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         JButton btnNewGame = new JButton("New Game");
         mainMenuBtnPanel.add(btnNewGame);

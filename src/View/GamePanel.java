@@ -8,6 +8,8 @@ public class GamePanel extends JPanel {
 
     private JFrame mainFrame;
 
+    MazePanel MP;
+
     private int ROW = 4;
     private int COL = 4;
 
@@ -24,11 +26,12 @@ public class GamePanel extends JPanel {
         gamePanel.setLayout(new GridLayout(2,2));
 
         maze = new JPanel[ROW][COL];
+        MP = new MazePanel(gamePanel);
 
-        gamePanel.add(mazePanel());
+        gamePanel.add(MP);
+        gamePanel.add(new JLabel("Trivia Question Display"));
+        gamePanel.add(new JLabel("Current Room Display"));
         gamePanel.add(directionButtonPanel());
-        gamePanel.add(new JLabel("HELLO"));
-        gamePanel.add(new JLabel("SUP"));
 
         mainMenuBar = new JMenuBar();
         setupMenuBar("Game Info");
@@ -43,17 +46,9 @@ public class GamePanel extends JPanel {
 
     // make own class?
     private JPanel mazePanel() {
-        mazePanel = new JPanel();
+        //mazePanel = new MazePanel(gamePanel);
 
-        ImageIcon iconEmptyRoom;
-        ImageIcon iconCurrentRoom;
-        ImageIcon iconExitRoom;
-        ImageIcon iconLockedRoom;
-        JLabel[][] roomImages;
-
-        //
-
-        mazePanel.setVisible(true);
+        //mazePanel.setVisible(true);
 
         return mazePanel;
     }
@@ -67,6 +62,11 @@ public class GamePanel extends JPanel {
         BasicArrowButton eastButton = new BasicArrowButton(BasicArrowButton.EAST);
         BasicArrowButton westButton = new BasicArrowButton(BasicArrowButton.WEST);
         //JLabel buttonPanelCenterLabel = new JLabel(scale(mazeCharacterIcon));
+
+        addArrowActionListener(northButton, "North");
+        addArrowActionListener(southButton, "South");
+        addArrowActionListener(westButton, "West");
+        addArrowActionListener(eastButton, "East");
 
         directionButtonPanel.add(new JLabel(""));
         directionButtonPanel.add(northButton);
@@ -84,11 +84,42 @@ public class GamePanel extends JPanel {
         return directionButtonPanel;
     }
 
+    private void addArrowActionListener(BasicArrowButton arrowButton, String arrowDirection) {
+        if (arrowDirection.equals("North")) {
+            arrowButton.addActionListener(
+                    e -> {
+                        MP.move("North");
+                    }
+            );
+        }
+        else if (arrowDirection.equals("South")) {
+            arrowButton.addActionListener(
+                    e -> {
+                        MP.move("South");
+                    }
+            );
+        }
+        else if (arrowDirection.equals("West")) {
+            arrowButton.addActionListener(
+                    e -> {
+                        MP.move("West");
+                    }
+            );
+        }
+        else if (arrowDirection.equals("East")) {
+            arrowButton.addActionListener(
+                    e -> {
+                        MP.move("East");
+                    }
+            );
+        }
+    }
+
     private JMenuBar setupMenuBar(String menuTitle) {
         final JMenu addMenu = new JMenu(menuTitle);
         final JMenuItem menuItem = new JMenuItem(menuTitle);
 
-        addActionListener(menuItem, menuTitle);
+        addMenuActionListener(menuItem, menuTitle);
 
         addMenu.add(menuItem);
 
@@ -99,7 +130,7 @@ public class GamePanel extends JPanel {
         return mainMenuBar;
     }
 
-    private void addActionListener(JMenuItem menuItem, String menuName) {
+    private void addMenuActionListener(JMenuItem menuItem, String menuName) {
         if (menuName.equals("Game Info")) {
             menuItem.addActionListener(
                     e -> {
