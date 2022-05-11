@@ -105,6 +105,28 @@ public class MazePanel extends JPanel {
         }
     }
 
+    public boolean validDirection(String direction) {
+        boolean validDirection = true;
+
+        if (direction.equals("North")) {
+            if (currentRow - 1 < 0) validDirection = false;
+        }
+
+        else if (direction.equals("South")) {
+            if (currentRow + 1 > 3) validDirection = false;
+        }
+
+        else if (direction.equals("West")) {
+            if (currentCol - 1 < 0) validDirection = false;
+        }
+
+        else if (direction.equals("East")) {
+            if (currentCol + 1 > 3) validDirection = false;
+        }
+
+        return validDirection;
+    }
+
     private void setCurrentRoom(int row, int col) {
         roomImages[row][col].setIcon(iconCurrentRoom);
     }

@@ -19,6 +19,11 @@ public class GamePanel extends JPanel {
     private JPanel mazePanel;
     private JMenuBar mainMenuBar;
 
+    BasicArrowButton northButton;
+    BasicArrowButton southButton;
+    BasicArrowButton eastButton;
+    BasicArrowButton westButton;
+
     GamePanel(JFrame mainFrame) {
         this.mainFrame = mainFrame;
 
@@ -57,11 +62,13 @@ public class GamePanel extends JPanel {
         JPanel directionButtonPanel = new JPanel();
         directionButtonPanel.setLayout(new GridLayout(3,3));
 
-        BasicArrowButton northButton = new BasicArrowButton(BasicArrowButton.NORTH);
-        BasicArrowButton southButton = new BasicArrowButton(BasicArrowButton.SOUTH);
-        BasicArrowButton eastButton = new BasicArrowButton(BasicArrowButton.EAST);
-        BasicArrowButton westButton = new BasicArrowButton(BasicArrowButton.WEST);
+        northButton = new BasicArrowButton(BasicArrowButton.NORTH);
+        southButton = new BasicArrowButton(BasicArrowButton.SOUTH);
+        eastButton = new BasicArrowButton(BasicArrowButton.EAST);
+        westButton = new BasicArrowButton(BasicArrowButton.WEST);
         //JLabel buttonPanelCenterLabel = new JLabel(scale(mazeCharacterIcon));
+
+        disableButtons();
 
         addArrowActionListener(northButton, "North");
         addArrowActionListener(southButton, "South");
@@ -89,6 +96,7 @@ public class GamePanel extends JPanel {
             arrowButton.addActionListener(
                     e -> {
                         MP.move("North");
+                        disableButtons();
                     }
             );
         }
@@ -96,6 +104,7 @@ public class GamePanel extends JPanel {
             arrowButton.addActionListener(
                     e -> {
                         MP.move("South");
+                        disableButtons();
                     }
             );
         }
@@ -103,6 +112,7 @@ public class GamePanel extends JPanel {
             arrowButton.addActionListener(
                     e -> {
                         MP.move("West");
+                        disableButtons();
                     }
             );
         }
@@ -110,9 +120,28 @@ public class GamePanel extends JPanel {
             arrowButton.addActionListener(
                     e -> {
                         MP.move("East");
+                        disableButtons();
                     }
             );
         }
+    }
+
+    private void disableButtons() {
+        if (!MP.validDirection("North")) {
+            northButton.setEnabled(false);
+        } else northButton.setEnabled(true);
+
+        if (!MP.validDirection("South")) {
+            southButton.setEnabled(false);
+        } else southButton.setEnabled(true);
+
+        if (!MP.validDirection("West")) {
+            westButton.setEnabled(false);
+        } else westButton.setEnabled(true);
+
+        if (!MP.validDirection("East")) {
+            eastButton.setEnabled(false);
+        } else eastButton.setEnabled(true);
     }
 
     private JMenuBar setupMenuBar(String menuTitle) {
