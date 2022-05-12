@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    private JFrame mainFrame;
+    private final JFrame mainFrame;
 
     private final String TITLE = "Hodgepodge Trivia Maze";
 
@@ -17,6 +17,7 @@ public class MainFrame extends JFrame {
         mainFrame.setTitle(TITLE);
         mainFrame.setSize(500,500);
         mainFrame.setIconImage(mazeIcon.getImage());
+        mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setFrameLocation(mainFrame);
 

@@ -6,6 +6,13 @@ public class QAPanel {
 
     private JPanel panelQA;
 
+    // take in question
+    // take in Array of answers
+    // display qType depending on num of answers
+
+    //
+
+
     QAPanel(int qType) {
 
         if (qType == 1) {

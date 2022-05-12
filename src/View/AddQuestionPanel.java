@@ -17,4 +17,5 @@ public class AddQuestionPanel extends JPanel {
 
         adminPanel.setVisible(true);
     }
+
 }

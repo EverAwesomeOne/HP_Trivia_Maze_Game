@@ -25,9 +25,14 @@ public class MazePanel extends JPanel {
     private JLabel currentRoom;
     private JLabel otherRoom;
 
+    boolean[] lockedDirection = new boolean[4];
+
     MazePanel(JPanel panel) {
         mazePanel = new JPanel();
         mazePanel.setLayout(new GridLayout(ROW,COL));
+
+        // for debugging
+        mazePanel.setBorder(BorderFactory.createTitledBorder("Maze"));
 
         initializeMaze();
 

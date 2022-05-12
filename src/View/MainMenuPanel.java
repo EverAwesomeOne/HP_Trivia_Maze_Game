@@ -5,11 +5,11 @@ import java.awt.*;
 
 public class MainMenuPanel extends JPanel {
 
-    private final String TITLE = "Hodgepodge Trivia Maze";
+    private static final String TITLE = "Hodgepodge Trivia Maze";
 
     private static final Toolkit KIT = Toolkit.getDefaultToolkit();
 
-    private final ImageIcon mazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
+    private static final ImageIcon mazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
 
     private JFrame mainFrame;
 
