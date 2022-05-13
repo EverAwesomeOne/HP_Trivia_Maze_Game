@@ -10,6 +10,7 @@ public class Question_Answer {
     private String answer2;
     private String answer3;
     private String answer4;
+    private String[] questionList;
 
     Question_Answer() {
         question = "";
@@ -17,6 +18,7 @@ public class Question_Answer {
         answer2 = "";
         answer3 = "";
         answer4 = "";
+        questionList = new String[5];
     }
 
     void getQuestionAnswerFromDatabase(Statement stmt) {
@@ -28,16 +30,32 @@ public class Question_Answer {
         try (ResultSet rs = stmt.executeQuery(query)) {
 
             question = rs.getString("QUESTION");
+            questionList[0] = question;
             correctAnswer = rs.getString("CORRECT_ANSWER");
+            questionList[1] = correctAnswer;
             answer2 = rs.getString("ANSWER_2");
+            questionList[2] = answer2;
             answer3 = rs.getString("ANSWER_3");
+            questionList[3] = answer3;
             answer4 = rs.getString("ANSWER_4");
+            questionList[4] = answer4;
 
 
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(0);
         }
+    }
+
+    String[] getQuestionList() {
+        return questionList;
+    }
+
+    boolean selectedCorrectAnswer(String userAnswer) {
+        if (userAnswer.equals(correctAnswer)) {
+            return true;
+        }
+        return false;
     }
 
 }
