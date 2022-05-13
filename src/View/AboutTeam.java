@@ -5,34 +5,29 @@ import java.awt.*;
 
 public class AboutTeam extends JPanel {
     private JPanel aboutPanel;
-    private JTextArea aboutTextArea;
-    private JButton closeAboutButton;
 
-    AboutTeam() {
-        setupHelpPanel();
-    }
-
-    private JPanel setupHelpPanel() {
+    AboutTeam(JFrame mainFrame, JPanel gamePanel, JMenuBar mainMenuBar) {
         aboutPanel = new JPanel();
-        aboutPanel.setLayout(new GridLayout(2,1));
+        aboutPanel.setLayout(new BorderLayout());
 
-        aboutTextArea = new JTextArea("Temp Text");
-        aboutTextArea.setEditable(false);
-        aboutTextArea.setLineWrap(true);
-        aboutTextArea.setWrapStyleWord(true);
+        JTextField textField = new JTextField("Add Text");
+        textField.setHorizontalAlignment(JTextField.CENTER);
+        textField.setEditable(false);
 
-        closeAboutButton = new JButton("OK");
-        closeAboutButton.addActionListener(
+        JButton OK = new JButton("OK");
+        OK.addActionListener(
                 e -> {
                     aboutPanel.setVisible(false);
+                    gamePanel.setVisible(true);
+                    mainMenuBar.setVisible(true);
                 }
         );
 
-        aboutPanel.add(aboutTextArea);
-        aboutPanel.add(closeAboutButton);
+        aboutPanel.add(textField, BorderLayout.CENTER);
+        aboutPanel.add(OK, BorderLayout.SOUTH);
+
+        mainFrame.add(aboutPanel);
 
         aboutPanel.setVisible(true);
-
-        return aboutPanel;
     }
 }

@@ -38,7 +38,6 @@ public class MainMenuPanel extends JPanel {
 
     private JPanel setupButtonPanel() {
         JPanel mainMenuBtnPanel = new JPanel();
-        //mainMenuBtnPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         JButton btnNewGame = new JButton("New Game");
         mainMenuBtnPanel.add(btnNewGame);
@@ -77,8 +76,7 @@ public class MainMenuPanel extends JPanel {
             button.addActionListener(
                     e -> {
                         mainPanel.setVisible(false);
-                        mainPanel.setVisible(false);
-                        new AddQuestionPanel(mainFrame);
+                        new AdminPanel(mainFrame);
                     }
             );
         }

@@ -7,35 +7,35 @@ public class MazePanel extends JPanel {
 
     private JPanel mazePanel;
 
-    private ImageIcon iconEmptyRoom = new ImageIcon("src//View//Images//EmptyRoom.png");
-    private ImageIcon iconCurrentRoom = new ImageIcon("src//View//Images//CurrentRoom.png");
-    private ImageIcon iconStartRoom = new ImageIcon("src//View//Images//StartRoom.png");
-    private ImageIcon iconEndRoom = new ImageIcon("src//View//Images//ExitRoom.png");
-    private ImageIcon iconLockedRoom = new ImageIcon("src//View//Images//LockedRoom.png");
+    private final ImageIcon iconEmptyRoom = new ImageIcon("src//View//Images//EmptyRoom.png");
+    private final ImageIcon iconCurrentRoom = new ImageIcon("src//View//Images//CurrentRoom.png");
+    private final ImageIcon iconStartRoom = new ImageIcon("src//View//Images//StartRoom.png");
+    private final ImageIcon iconEndRoom = new ImageIcon("src//View//Images//ExitRoom.png");
+    private final ImageIcon iconLockedRoom = new ImageIcon("src//View//Images//LockedRoom.png");
 
-    private int ROW = 4;
-    private int COL = 4;
+    private final int ROW = 4;
+    private final int COL = 4;
 
+    // create getter methods?
     private int currentRow;
     private int currentCol;
 
     private JLabel[][] roomImages;
     private JLabel startRoom;
     private JLabel endRoom;
-    private JLabel currentRoom;
-    private JLabel otherRoom;
+    private JLabel initializeRoom;
 
     boolean[] lockedDirection = new boolean[4];
 
     MazePanel(JPanel panel) {
         mazePanel = new JPanel();
         mazePanel.setLayout(new GridLayout(ROW,COL));
-
-        // for debugging
         mazePanel.setBorder(BorderFactory.createTitledBorder("Maze"));
 
         initializeMaze();
 
+        // add each JLabel stored in roomImages to mazePanel
+        // make own method?
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 mazePanel.add(roomImages[i][j]);
@@ -50,25 +50,22 @@ public class MazePanel extends JPanel {
     private void initializeMaze() {
         roomImages = new JLabel[ROW][COL];
 
-        startRoom = new JLabel();
-        endRoom = new JLabel();
-
-        startRoom.setIcon(iconCurrentRoom);
-        endRoom.setIcon(iconEndRoom);
-
+        // initialize all rooms to empty rooms
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                //if ((ROW != 0 && COL != 0) && (ROW != 3 && COL != 3)) {
-                    otherRoom = new JLabel();
-                    otherRoom.setIcon(iconEmptyRoom);
-                    roomImages[i][j] = otherRoom;
-                //}
+                initializeRoom = new JLabel();
+                initializeRoom.setIcon(iconEmptyRoom);
+                roomImages[i][j] = initializeRoom;
             }
         }
 
-        roomImages[0][0] = startRoom;
-        roomImages[3][3] = endRoom;
+        // initialize start room to show current position
+        roomImages[0][0] = setStartRoom();
 
+        // initialize end room to show target end room
+        roomImages[3][3] = setEndRoom();
+
+        // set current position in maze
         currentRow = 0;
         currentCol = 0;
     }
@@ -79,33 +76,29 @@ public class MazePanel extends JPanel {
 
         if (direction.equals("North")) {
             newRow = currentRow - 1;
-            //currentRow--;
-            setCurrentRoom(newRow, currentCol);
-            setOldRoom(currentRow, currentCol);
+            setCurrentRoomIcon(newRow, currentCol);
+            setOldRoomIcon(currentRow, currentCol);
             currentRow = newRow;
         }
 
         else if (direction.equals("South")) {
             newRow = currentRow + 1;
-            //currentRow++;
-            setCurrentRoom(newRow, currentCol);
-            setOldRoom(currentRow, currentCol);
+            setCurrentRoomIcon(newRow, currentCol);
+            setOldRoomIcon(currentRow, currentCol);
             currentRow = newRow;
         }
 
         else if (direction.equals("East")) {
             newCol = currentCol + 1;
-            //currentCol++;
-            setCurrentRoom(currentRow, newCol);
-            setOldRoom(currentRow, currentCol);
+            setCurrentRoomIcon(currentRow, newCol);
+            setOldRoomIcon(currentRow, currentCol);
             currentCol = newCol;
         }
 
         else if (direction.equals("West")) {
             newCol = currentCol - 1;
-            //currentCol--;
-            setCurrentRoom(currentRow, newCol);
-            setOldRoom(currentRow, currentCol);
+            setCurrentRoomIcon(currentRow, newCol);
+            setOldRoomIcon(currentRow, currentCol);
             currentCol = newCol;
         }
     }
@@ -132,11 +125,15 @@ public class MazePanel extends JPanel {
         return validDirection;
     }
 
-    private void setCurrentRoom(int row, int col) {
+    private void setLockedRoomIcon(int row, int col) {
+        roomImages[row][col].setIcon(iconLockedRoom);
+    }
+
+    private void setCurrentRoomIcon(int row, int col) {
         roomImages[row][col].setIcon(iconCurrentRoom);
     }
 
-    private void setOldRoom(int row, int col) {
+    private void setOldRoomIcon(int row, int col) {
         if (row == 0 && col == 0) {
             roomImages[row][col].setIcon(iconStartRoom);
         }
@@ -148,19 +145,15 @@ public class MazePanel extends JPanel {
         }
     }
 
-    private void setStartRoom() {
-
+    private JLabel setStartRoom() {
+        startRoom = new JLabel();
+        startRoom.setIcon(iconCurrentRoom);
+        return startRoom;
     }
 
-    private void setEndRoom() {
-
-    }
-
-    private void setRoomIcon() {
-
-    }
-
-    private void setLockedRoom(int row, int col) {
-        roomImages[row][col].setIcon(iconLockedRoom);
+    private JLabel setEndRoom() {
+        endRoom = new JLabel();
+        endRoom.setIcon(iconEndRoom);
+        return endRoom;
     }
 }
