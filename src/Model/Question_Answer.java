@@ -47,15 +47,12 @@ public class Question_Answer {
         }
     }
 
-    String[] getQuestionList() {
+    public String[] getQuestionList() {
         return questionList;
     }
 
-    boolean selectedCorrectAnswer(String userAnswer) {
-        if (userAnswer.equals(correctAnswer)) {
-            return true;
-        }
-        return false;
+    public boolean selectedCorrectAnswer(String userAnswer) {
+        return userAnswer.equals(correctAnswer);
     }
 
 }
