@@ -35,8 +35,14 @@ public class GamePanel extends JPanel {
         // sets up these panels and adds to gamePanel
         MP = new MazePanel(gamePanel);
         gamePanel.add(directionButtonPanel());
-        gamePanel.add(new JLabel("Question"));
-        gamePanel.add(new JLabel("Answer"));
+
+
+        //TESTING PURPOSES ONLY
+        //String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "", "", ""};
+        //String[] questionList = {"Does Harry get put into Gryffindor?", "True", "False", "", ""};
+        String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"};
+        new QuestionPanel(questionList, gamePanel);
+        new AnswerPanel(questionList, gamePanel);
 
         // display menuBar on JFrame only when game is in progress
         mainMenuBar = new JMenuBar();
@@ -49,6 +55,7 @@ public class GamePanel extends JPanel {
         mainFrame.setJMenuBar(mainMenuBar);
 
         gamePanel.setVisible(true);
+
     }
 
     private JPanel directionButtonPanel() {

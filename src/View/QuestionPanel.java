@@ -6,14 +6,12 @@ public class QuestionPanel {
 
     private JPanel questionPanel;
 
-    QuestionPanel(JPanel gamePanel) {
-        // make it equal to chosen question type panel instead
+    QuestionPanel(String[] answerArray, JPanel gamePanel) {
+
         questionPanel = new JPanel();
-
-        // set up layout
-        // determine question type given Answer array
-        // display determined question type panel
-
+        questionPanel.setBorder(BorderFactory.createTitledBorder("Question"));
+        JLabel questionLabel = new JLabel(answerArray[0]);
+        questionPanel.add(questionLabel);
 
         gamePanel.add(questionPanel);
 
