@@ -14,6 +14,9 @@ public class AdminPanel extends JPanel {
         JLabel temp = new JLabel("ADD ADMIN FEATURES");
         temp.setHorizontalAlignment(JLabel.CENTER);
 
+        JCheckBox selectDebugFeatureBox = new JCheckBox("Turn on debug feature");
+
+
         JButton okBtn = new JButton("OK");
         okBtn.addActionListener(
                 e -> {
@@ -22,7 +25,8 @@ public class AdminPanel extends JPanel {
                 }
         );
 
-        adminPanel.add(temp, BorderLayout.CENTER);
+        adminPanel.add(temp, BorderLayout.NORTH);
+        adminPanel.add(selectDebugFeatureBox, BorderLayout.CENTER);
         adminPanel.add(okBtn, BorderLayout.SOUTH);
 
         mainFrame.add(adminPanel);
