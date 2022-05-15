@@ -45,12 +45,12 @@ public class MainMenuPanel extends JPanel {
         JButton btnLoadGame = new JButton("Load Game");
         mainMenuBtnPanel.add(btnLoadGame);
 
-        JButton btnAddQuestion = new JButton("Admin Settings");
-        mainMenuBtnPanel.add(btnAddQuestion);
+        //JButton btnAddQuestion = new JButton("Admin Settings");
+        //mainMenuBtnPanel.add(btnAddQuestion);
 
         addActionListener(btnNewGame, "New Game");
         addActionListener(btnLoadGame, "Load Game");
-        addActionListener(btnAddQuestion, "Admin Settings");
+        //addActionListener(btnAddQuestion, "Admin Settings");
 
         return mainMenuBtnPanel;
     }
@@ -67,6 +67,7 @@ public class MainMenuPanel extends JPanel {
         else if (buttonName.equals("Load Game")) {
             button.addActionListener(
                     e -> {
+                        // call deserialize method
                         mainPanel.setVisible(false);
                         new GamePanel(mainFrame);
                     }
@@ -77,7 +78,6 @@ public class MainMenuPanel extends JPanel {
                     e -> {
                         mainPanel.setVisible(false);
                         new AdminPanel(mainFrame);
-                        //adminPanel.setVisible(true);
                     }
             );
         }
