@@ -13,7 +13,7 @@ public class Room {
         westDoor = new Door();
     }
 
-    Door getDoor(Direction direction) {
+    public Door getDoor(Direction direction) {
         if (direction == Direction.NORTH) {
             return northDoor;
         } else if (direction == Direction.EAST) {

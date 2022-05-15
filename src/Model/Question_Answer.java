@@ -19,7 +19,7 @@ public class Question_Answer {
         answer4 = "";
     }
 
-    void getQuestionAnswerFromDatabase(Statement stmt) {
+    public void getQuestionAnswerFromDatabase(Statement stmt) {
 
         //query the database table for a random row
         String query = "SELECT * FROM questions ORDER BY RANDOM() LIMIT 1";

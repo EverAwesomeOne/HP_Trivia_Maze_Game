@@ -1,23 +1,15 @@
 package Model;
 
-import org.sqlite.SQLiteDataSource;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Maze {
-    private Room[][] maze;
+    private final Room[][] maze;
     private int characterRow;
     private int characterColumn;
     private LinkedList<Integer>[] roomConnections;
 
-    private Connection conn;
-    private Statement stmt;
-
-    Maze(int chosenRows, int chosenColumns) {
+    public Maze(int chosenRows, int chosenColumns) {
         characterRow = 0;
         characterColumn = 0;
         maze = new Room[chosenRows][chosenColumns];
@@ -31,34 +23,28 @@ public class Maze {
         lockEdgeDoors();
         connectSharedDoors();
         createInitialGraph();
-        openDatabaseConnection();
     }
 
-    private void move(Direction directionToMove) {
-        Door chosenDoor = maze[characterRow][characterColumn].getDoor(directionToMove);
-        chosenDoor.getQuestion().getQuestionAnswerFromDatabase(stmt);
-        if (!chosenDoor.isLocked()) {
-            if (directionToMove == Direction.NORTH) {
-                characterRow -= 1;
-            } else if (directionToMove == Direction.EAST) {
-                characterColumn += 1;
-            } else if (directionToMove == Direction.SOUTH) {
-                characterRow += 1;
-            } else {
-                characterColumn -= 1;
-            }
+    public void updatePosition(Direction directionToMove) {
+        if (directionToMove == Direction.NORTH) {
+            characterRow -= 1;
+        } else if (directionToMove == Direction.EAST) {
+            characterColumn += 1;
+        } else if (directionToMove == Direction.SOUTH) {
+            characterRow += 1;
+        } else {
+            characterColumn -= 1;
         }
     }
 
-    // performs a BFS traversal from the given room
+    // performs a BFS traversal from the current room
     boolean hasValidPaths() {
         int roomNumber = characterRow * maze.length + characterColumn;
 
-        // Mark all the vertices as not visited(By default
-        // set as false)
-        boolean visited[] = new boolean[maze.length * maze[0].length];
+        // Mark all the nodes as not visited
+        boolean[] visited = new boolean[maze.length * maze[0].length];
 
-        // Create a queue for BFS
+        // Create a queue for BFS through the remaining room connections
         LinkedList<Integer> queue = new LinkedList<Integer>();
 
         // Mark the current node as visited and enqueue it
@@ -66,16 +52,15 @@ public class Maze {
         queue.add(roomNumber);
 
         while (queue.size() != 0) {
-            // Dequeue a vertex from queue and print it
+            // Dequeue a node from queue and check if it is the exit room
             roomNumber = queue.poll();
 
             if (roomNumber == maze.length * maze[0].length - 1) {
                 return true;
             }
 
-            // Get all adjacent vertices of the dequeued vertex s
-            // If a adjacent has not been visited, then mark it
-            // visited and enqueue it
+            // Get all adjacent nodes of the dequeued node
+            // If an adjacent node has not been visited, then mark it visited and enqueue it
             Iterator<Integer> i = roomConnections[roomNumber].listIterator();
             while (i.hasNext()) {
                 int n = i.next();
@@ -104,6 +89,7 @@ public class Maze {
                 roomConnections[i] = new LinkedList<Integer>();
             }
 
+            // we only want to add valid edges to our undirected graph
             if (!maze[rowIndex][columnIndex].getDoor(Direction.NORTH).isLocked()) {
                 roomConnections[i].add(i - maze.length);
             }
@@ -133,7 +119,7 @@ public class Maze {
         // north and south doors of adjacent rooms
         for (int i = 0; i < maze.length - 1; i++) {
             for (int j = 0; j < maze[i].length; j++) {
-                Door bottomRoomNorthDoor = maze[i+1][j].getDoor(Direction.NORTH);
+                Door bottomRoomNorthDoor = maze[i + 1][j].getDoor(Direction.NORTH);
                 maze[i][j].setSharedDoor(Direction.SOUTH, bottomRoomNorthDoor);
             }
         }
@@ -149,37 +135,15 @@ public class Maze {
         }
     }
 
-    private void openDatabaseConnection() {
-        SQLiteDataSource ds = null;
-
-        //establish connection (creates db file if it does not exist :-)
-        try {
-            ds = new SQLiteDataSource();
-            ds.setUrl("jdbc:sqlite:questions.db");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-
-        try {
-            conn = ds.getConnection();
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+    public Room getCurrentRoom() {
+        return maze[characterRow][characterColumn];
     }
 
-    private void closeDatabaseConnection() {
-        if (stmt != null) {
-            try {
-                stmt.close();
-            } catch (SQLException e) { /* Ignored */}
-        }
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) { /* Ignored */}
-        }
+    public int getCharacterRow() {
+        return characterRow;
+    }
+
+    public int getCharacterColumn() {
+        return characterColumn;
     }
 }

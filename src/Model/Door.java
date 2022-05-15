@@ -10,7 +10,7 @@ public class Door {
         questionAnswer = new Question_Answer();
     }
 
-    boolean isLocked() {
+    public boolean isLocked() {
         return locked;
     }
 
@@ -18,9 +18,11 @@ public class Door {
         return firstTime;
     }
 
-    void lockDoor() {
+    public void lockDoor() {
         locked = true;
     }
 
-    Question_Answer getQuestion() {return questionAnswer;}
+    public Question_Answer getQuestion() {
+        return questionAnswer;
+    }
 }
