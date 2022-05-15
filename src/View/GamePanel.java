@@ -26,14 +26,19 @@ public class GamePanel extends JPanel {
         MP = new MazePanel(gamePanel);
         DP = new DirectionButtonPanel(gamePanel, MP);
 
-        //gamePanel.add(directionButtonPanel());
-        gamePanel.add(new JLabel("Question"));
-        gamePanel.add(new JLabel("Answer"));
+
+        //TESTING PURPOSES ONLY
+        //String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "", "", ""};
+        //String[] questionList = {"Does Harry get put into Gryffindor?", "True", "False", "", ""};
+        String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"};
+        new QuestionPanel(questionList, gamePanel);
+        new AnswerPanel(questionList, gamePanel);
 
         // display menuBar on JFrame only when game is in progress
         mainMenuBar = new JMenuBar();
-        setupMenuBar("Game Info");
+        setupMenuBar("Admin Settings");
         setupMenuBar("About Hodgepodge Team");
+        setupMenuBar("Game Info");
         setupMenuBar("Save Game");
         setupMenuBar("Exit Game");
 
@@ -41,15 +46,25 @@ public class GamePanel extends JPanel {
         mainFrame.setJMenuBar(mainMenuBar);
 
         gamePanel.setVisible(true);
+
     }
 
     private void setupMenuBar(String menuTitle) {
         final JMenu addMenu = new JMenu(menuTitle);
-        final JMenuItem menuItem = new JMenuItem(menuTitle);
 
-        addMenuActionListener(menuItem, menuTitle);
+        if (menuTitle.equals("Admin Settings")) {
+            final JCheckBoxMenuItem menuCheckBoxItem = new JCheckBoxMenuItem("Enable Debug Feature");
+            addMenuActionListener(menuCheckBoxItem, menuTitle);
+            addMenu.add(menuCheckBoxItem);
+        }
 
-        addMenu.add(menuItem);
+        else {
+            final JMenuItem menuItem = new JMenuItem(menuTitle);
+
+            addMenuActionListener(menuItem, menuTitle);
+
+            addMenu.add(menuItem);
+        }
 
         mainMenuBar.add(addMenu);
 
@@ -75,6 +90,16 @@ public class GamePanel extends JPanel {
                     }
             );
         }
+        else if (menuName.equals("Admin Settings")) {
+            menuItem.addActionListener(
+                    e -> {
+                        System.out.println("Admin settings changed");
+                    }
+            );
+        }
+        // edit to include save game option
+        // exit game should check if game is saved
+        // if not saved prompt for saving, else:
         else {
             menuItem.addActionListener(
                     e -> {
