@@ -7,11 +7,11 @@ public class MainMenuPanel extends JPanel {
 
     private static final String TITLE = "Hodgepodge Trivia Maze";
 
-    private static final Toolkit KIT = Toolkit.getDefaultToolkit();
-
     private static final ImageIcon mazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
 
     private JFrame mainFrame;
+
+    private JPanel adminPanel;
 
     private JPanel mainPanel;
 
@@ -77,15 +77,9 @@ public class MainMenuPanel extends JPanel {
                     e -> {
                         mainPanel.setVisible(false);
                         new AdminPanel(mainFrame);
+                        //adminPanel.setVisible(true);
                     }
             );
         }
-    }
-
-    private void setFrameLocation(JFrame frame) {
-        Dimension dimension = KIT.getScreenSize();
-        final int x = (int)((dimension.getWidth() - frame.getWidth()) / 2);
-        final int y = (int)((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x,y);
     }
 }

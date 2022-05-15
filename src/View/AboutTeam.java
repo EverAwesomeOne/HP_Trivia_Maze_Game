@@ -10,8 +10,9 @@ public class AboutTeam extends JPanel {
         aboutPanel = new JPanel();
         aboutPanel.setLayout(new BorderLayout());
 
-        JTextField textField = new JTextField("Add Text");
-        textField.setHorizontalAlignment(JTextField.CENTER);
+        JTextArea textField = new JTextArea("Hodgepodge Trivia Maze Team\n" +
+                "Maria Babko ~ Chloe Duncan ~ Edwin Solis-Bruno\nTCSS 360 A, " +
+                "Professor Tom Capaul\nMay 2022");
         textField.setEditable(false);
 
         JButton OK = new JButton("OK");
