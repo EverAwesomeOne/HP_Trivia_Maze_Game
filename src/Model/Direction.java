@@ -1,5 +1,11 @@
 package Model;
 
 public enum Direction {
-    NORTH, WEST, EAST, SOUTH
+    NORTH("North"), WEST("West"), EAST("East"), SOUTH("South");
+
+    private final String direction;
+
+    Direction(String direction) {
+        this.direction = direction;
+    }
 }

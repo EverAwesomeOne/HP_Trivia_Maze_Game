@@ -17,6 +17,8 @@ public class MainMenuPanel extends JPanel {
 
     private JLabel gameTitle;
 
+    private GamePanel gamePanel;
+
     MainMenuPanel(JFrame mainFrame) {
         this.mainFrame = mainFrame;
 
@@ -55,12 +57,16 @@ public class MainMenuPanel extends JPanel {
         return mainMenuBtnPanel;
     }
 
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
     private void addActionListener(JButton button, String buttonName) {
         if (buttonName.equals("New Game")) {
             button.addActionListener(
                     e -> {
                         mainPanel.setVisible(false);
-                        new GamePanel(mainFrame);
+                        gamePanel = new GamePanel(mainFrame);
                     }
             );
         }
@@ -69,7 +75,7 @@ public class MainMenuPanel extends JPanel {
                     e -> {
                         // call deserialize method
                         mainPanel.setVisible(false);
-                        new GamePanel(mainFrame);
+                        gamePanel = new GamePanel(mainFrame);
                     }
             );
         }

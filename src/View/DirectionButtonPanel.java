@@ -1,5 +1,7 @@
 package View;
 
+import Controller.TriviaMazeBrain;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
@@ -9,6 +11,7 @@ public class DirectionButtonPanel extends JPanel {
     private static JPanel directionButtonPanel;
 
     private final MazePanel MP;
+    private final TriviaMazeBrain triviaMazeBrain;
 
     private static final String DIR_NORTH = "North";
     private static final String DIR_SOUTH = "South";
@@ -20,9 +23,9 @@ public class DirectionButtonPanel extends JPanel {
     BasicArrowButton eastButton;
     BasicArrowButton westButton;
 
-    DirectionButtonPanel(JPanel gamePanel, MazePanel MP) {
+    DirectionButtonPanel(JPanel gamePanel, MazePanel MP, TriviaMazeBrain triviaMazeBrain) {
         this.MP = MP;
-
+        this.triviaMazeBrain = triviaMazeBrain;
         directionButtonPanel = new JPanel();
         directionButtonPanel.setLayout(new GridLayout(3,3));
         directionButtonPanel.setBorder(BorderFactory.createTitledBorder("Choose Door"));
@@ -64,8 +67,8 @@ public class DirectionButtonPanel extends JPanel {
         if (arrowDirection.equals(DIR_NORTH)) {
             arrowButton.addActionListener(
                     e -> {
-
                         // send direction to controller,
+                        triviaMazeBrain.move(DIR_NORTH);
                         // receive QA.
                         // hide DisplayDoorsPanel so user can't click,
                         // display QAPanel, user return A.
@@ -78,7 +81,6 @@ public class DirectionButtonPanel extends JPanel {
 
                         //
 
-                        MP.move(DIR_NORTH);
                         disableButtons();
                     }
             );
@@ -86,7 +88,7 @@ public class DirectionButtonPanel extends JPanel {
         else if (arrowDirection.equals(DIR_SOUTH)) {
             arrowButton.addActionListener(
                     e -> {
-                        MP.move(DIR_SOUTH);
+                        triviaMazeBrain.move(DIR_SOUTH);
                         disableButtons();
                     }
             );
@@ -94,7 +96,7 @@ public class DirectionButtonPanel extends JPanel {
         else if (arrowDirection.equals(DIR_WEST)) {
             arrowButton.addActionListener(
                     e -> {
-                        MP.move(DIR_WEST);
+                        triviaMazeBrain.move(DIR_WEST);
                         disableButtons();
                     }
             );
@@ -102,7 +104,7 @@ public class DirectionButtonPanel extends JPanel {
         else if (arrowDirection.equals(DIR_EAST)) {
             arrowButton.addActionListener(
                     e -> {
-                        MP.move(DIR_EAST);
+                        triviaMazeBrain.move(DIR_EAST);
                         disableButtons();
                     }
             );

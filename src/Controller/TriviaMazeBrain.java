@@ -4,9 +4,13 @@ import Model.Direction;
 import Model.Door;
 import Model.Maze;
 import Model.Question_Answer;
+import View.GamePanel;
+import View.MainFrame;
+import View.MazePanel;
 import View.QuestionPanel;
 import org.sqlite.SQLiteDataSource;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,18 +19,32 @@ public class TriviaMazeBrain {
     private Connection conn;
     private Statement stmt;
     private Maze maze;
+    private GamePanel gamePanel;
+    private MainFrame mainFrame;
+    private MazePanel mazePanel;
+
+    public static void main(String[] args) {
+        TriviaMazeBrain triviaMazeBrain = new TriviaMazeBrain();
+    }
+
+    public TriviaMazeBrain() {
+        runGame();
+    }
 
     private void runGame() {
         maze = new Maze(4, 4);
         openDatabaseConnection();
+        mainFrame = new MainFrame();
+        gamePanel = mainFrame.getMainMenuPanel().getGamePanel();
     }
 
     public void move(String directionType) {
+        mazePanel = gamePanel.getMP();
         Direction directionToMove = Direction.valueOf(directionType);
         Door chosenDoor = maze.getCurrentRoom().getDoor(directionToMove);
         Question_Answer qa = chosenDoor.getQuestion();
         qa.getQuestionAnswerFromDatabase(stmt);
-        String userAnswer = QuestionPanel.askQuestion(qa.getQuestionList());
+        String userAnswer = gamePanel.askQuestion(qa.getQuestionList());
 
         if (!qa.selectedCorrectAnswer(userAnswer)) {
             chosenDoor.lockDoor();
@@ -35,7 +53,7 @@ public class TriviaMazeBrain {
         if(!chosenDoor.isLocked()) {
             maze.updatePosition(directionToMove);
         }
-        updateCharacterPlacement(maze.getCharacterRow(), maze.getCharacterColumn());
+        mazePanel.updateCharacterPlacement(maze.getCharacterRow(), maze.getCharacterColumn());
     }
 
     private void openDatabaseConnection() {

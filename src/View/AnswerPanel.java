@@ -12,6 +12,8 @@ public class AnswerPanel {
 
     private String[] answerArray;
 
+    private String userAnswer;
+
     private int nullCount;
 
 
@@ -22,6 +24,8 @@ public class AnswerPanel {
         this.gamePanel = gamePanel;
 
         this.answerArray = answerArray;
+
+        userAnswer = null;
 
         for (String s : answerArray) {
             if (s.equals("")) {
@@ -65,8 +69,7 @@ public class AnswerPanel {
         JButton submitAButton = new JButton("SUBMIT");
         submitAButton.addActionListener(
                 e -> {
-                    String answerString = answerTextArea.getText();
-                    System.out.println(answerString);
+                    userAnswer = answerTextArea.getText();
                     shortAnswerQPanel.setVisible(false);
                     answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);
@@ -101,8 +104,7 @@ public class AnswerPanel {
         JButton submitAButton = new JButton("SUBMIT");
         submitAButton.addActionListener(
                 e -> {
-                    String answerString = answerTextArea.getText();
-                    System.out.println(answerString);
+                    userAnswer = answerTextArea.getText();
                     trueFalseQPanel.setVisible(false);
                     answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);
@@ -112,6 +114,10 @@ public class AnswerPanel {
         trueFalseQPanel.add(questionLabel, BorderLayout.NORTH);
         trueFalseQPanel.add(submitAButton, BorderLayout.SOUTH);
         return trueFalseQPanel;
+    }
+
+    String getUserAnswer() {
+        return userAnswer;
     }
 
     private JPanel multiChoiceQ() {
@@ -135,7 +141,9 @@ public class AnswerPanel {
         ButtonGroup radioButtonGroup = new ButtonGroup();
 
         for (int i = 0; i < questionListRandomIndex.length; i++) {
-            JRadioButton answer = new JRadioButton(answerArray[questionListRandomIndex[i]]);
+            String index = answerArray[questionListRandomIndex[i]];
+            JRadioButton answer = new JRadioButton(index);
+            answer.setActionCommand(index);
             verticalBox.add(answer);
             radioButtonGroup.add(answer);
         }
@@ -146,6 +154,7 @@ public class AnswerPanel {
         JButton submitAButton = new JButton("SUBMIT");
         submitAButton.addActionListener(
                 e -> {
+                    userAnswer = radioButtonGroup.getSelection().getActionCommand();
                     multiChoiceQPanel.setVisible(false);
                     answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);

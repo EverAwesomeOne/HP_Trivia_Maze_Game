@@ -27,7 +27,7 @@ public class MazePanel extends JPanel {
 
     boolean[] lockedDirection = new boolean[4];
 
-    MazePanel(JPanel panel) {
+    public MazePanel(JPanel panel) {
         mazePanel = new JPanel();
         mazePanel.setLayout(new GridLayout(ROW,COL));
         mazePanel.setBorder(BorderFactory.createTitledBorder("Maze"));
@@ -70,11 +70,14 @@ public class MazePanel extends JPanel {
         currentCol = 0;
     }
 
-    public void move(String direction) {
-        int newRow = 0;
-        int newCol = 0;
+    public void updateCharacterPlacement(int row, int col) {
 
-        if (direction.equals("North")) {
+        setCurrentRoomIcon(row, col);
+        setOldRoomIcon(currentRow, currentCol);
+        currentRow = row;
+        currentCol = col;
+
+        /*if (direction.equals("North")) {
             newRow = currentRow - 1;
             setCurrentRoomIcon(newRow, currentCol);
             setOldRoomIcon(currentRow, currentCol);
@@ -100,7 +103,7 @@ public class MazePanel extends JPanel {
             setCurrentRoomIcon(currentRow, newCol);
             setOldRoomIcon(currentRow, currentCol);
             currentCol = newCol;
-        }
+        }*/
     }
 
     public boolean validDirection(String direction) {

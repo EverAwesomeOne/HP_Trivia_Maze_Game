@@ -1,5 +1,7 @@
 package View;
 
+import Controller.TriviaMazeBrain;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,23 +18,27 @@ public class GamePanel extends JPanel {
     private final JPanel gamePanel;
     private final JMenuBar mainMenuBar;
 
-    GamePanel(JFrame mainFrame) {
+    private final TriviaMazeBrain triviaMazeBrain;
+    private QuestionPanel questionPanel;
+    private AnswerPanel answerPanel;
+
+    public GamePanel(JFrame mainFrame) {
         this.mainFrame = mainFrame;
+
+        this.triviaMazeBrain = new TriviaMazeBrain();
 
         gamePanel = new JPanel();
         gamePanel.setLayout(new GridLayout(2,2));
 
         // sets up these panels and adds to gamePanel
         MP = new MazePanel(gamePanel);
-        DP = new DirectionButtonPanel(gamePanel, MP);
+        DP = new DirectionButtonPanel(gamePanel, MP, triviaMazeBrain);
 
 
         //TESTING PURPOSES ONLY
         //String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "", "", ""};
         //String[] questionList = {"Does Harry get put into Gryffindor?", "True", "False", "", ""};
         String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"};
-        new QuestionPanel(questionList, gamePanel);
-        new AnswerPanel(questionList, gamePanel);
 
         // display menuBar on JFrame only when game is in progress
         mainMenuBar = new JMenuBar();
@@ -47,6 +53,20 @@ public class GamePanel extends JPanel {
 
         gamePanel.setVisible(true);
 
+    }
+
+    public String askQuestion(String[] questionList) {
+        questionPanel = new QuestionPanel(questionList, gamePanel);
+        answerPanel = new AnswerPanel(questionList, gamePanel);
+        String userAnswer = answerPanel.getUserAnswer();
+        while ( userAnswer == null) {
+            userAnswer = answerPanel.getUserAnswer();
+        }
+        return userAnswer;
+    }
+
+    public MazePanel getMP() {
+        return MP;
     }
 
     private void setupMenuBar(String menuTitle) {

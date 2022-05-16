@@ -12,7 +12,9 @@ public class MainFrame extends JFrame {
 
     private static final Toolkit KIT = Toolkit.getDefaultToolkit();
 
-    MainFrame() {
+    private MainMenuPanel mainMenuPanel;
+
+    public MainFrame() {
         mainFrame = new JFrame();
         mainFrame.setTitle(TITLE);
         mainFrame.setSize(500,500);
@@ -21,9 +23,13 @@ public class MainFrame extends JFrame {
 
         setFrameLocation(mainFrame);
 
-        new MainMenuPanel(mainFrame);
+        mainMenuPanel = new MainMenuPanel(mainFrame);
 
         mainFrame.setVisible(true);
+    }
+
+    public MainMenuPanel getMainMenuPanel() {
+        return mainMenuPanel;
     }
 
     private void setFrameLocation(JFrame frame) {
