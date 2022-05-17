@@ -23,11 +23,25 @@ public class AnswerPanel {
 
     private String directionType;
 
+    private JPanel questionTypePanel = new JPanel();
 
-    AnswerPanel(String[] answerArray, JPanel gamePanel, TriviaMazeBrain triviaMazeBrain, String directionType) {
+    private QuestionPanel questionPanel;
+
+    AnswerPanel(JPanel gamePanel, TriviaMazeBrain triviaMazeBrain, QuestionPanel questionPanel) {
 
         this.gamePanel = gamePanel;
         this.triviaMazeBrain = triviaMazeBrain;
+        this.questionPanel = questionPanel;
+
+        answerPanel = new JPanel();
+        answerPanel.setBorder(BorderFactory.createTitledBorder("Answer"));
+
+        gamePanel.add(answerPanel);
+
+        answerPanel.setVisible(true);
+    }
+
+    void createQuestionType(String[] answerArray, String directionType) {
         this.directionType = directionType;
         this.answerArray = answerArray;
 
@@ -38,18 +52,6 @@ public class AnswerPanel {
                 nullCount++;
             }
         }
-
-        answerPanel = getQuestionType(nullCount);
-        answerPanel.setBorder(BorderFactory.createTitledBorder("Answer"));
-        answerPanel.setVisible(true);
-
-        gamePanel.add(answerPanel);
-
-        answerPanel.setVisible(true);
-    }
-
-    private JPanel getQuestionType(int nullCount) {
-        JPanel questionTypePanel = null;
 
         if (nullCount == 0) {
             questionTypePanel = multiChoiceQ();
@@ -64,7 +66,7 @@ public class AnswerPanel {
         }
         //add an else to catch possible errors
 
-        return questionTypePanel;
+        answerPanel.add(questionTypePanel);
     }
 
     private JPanel shortAnswerQ() {
@@ -76,9 +78,10 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = answerTextArea.getText();
+                    answerPanel.remove(questionTypePanel);
+                    questionTypePanel = new JPanel();
+                    questionPanel.removeQuestion();
                     triviaMazeBrain.move2(userAnswer, directionType);
-                    shortAnswerQPanel.setVisible(false);
-                    answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);
                 }
         );
@@ -112,9 +115,11 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = answerTextArea.getText();
+                    answerPanel.remove(questionTypePanel);
+                    questionTypePanel = new JPanel();
+                    questionPanel.removeQuestion();
+
                     triviaMazeBrain.move2(userAnswer, directionType);
-                    trueFalseQPanel.setVisible(false);
-                    answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);
                 }
         );
@@ -163,9 +168,10 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = radioButtonGroup.getSelection().getActionCommand();
+                    answerPanel.remove(questionTypePanel);
+                    questionTypePanel = new JPanel();
+                    questionPanel.removeQuestion();
                     triviaMazeBrain.move2(userAnswer, directionType);
-                    multiChoiceQPanel.setVisible(false);
-                    answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);
                 }
         );

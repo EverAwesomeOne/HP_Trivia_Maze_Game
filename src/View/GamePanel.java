@@ -33,7 +33,8 @@ public class GamePanel extends JPanel {
         // sets up these panels and adds to gamePanel
         MP = new MazePanel(gamePanel);
         DP = new DirectionButtonPanel(gamePanel, MP, triviaMazeBrain);
-
+        questionPanel = new QuestionPanel(gamePanel);
+        answerPanel = new AnswerPanel(gamePanel, triviaMazeBrain, questionPanel);
 
         //TESTING PURPOSES ONLY
         //String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "", "", ""};
@@ -56,8 +57,8 @@ public class GamePanel extends JPanel {
     }
 
     public void askQuestion(String[] questionList, String directionType) {
-        questionPanel = new QuestionPanel(questionList, gamePanel);
-        answerPanel = new AnswerPanel(questionList, gamePanel, triviaMazeBrain, directionType);
+        questionPanel.createQuestion(questionList);
+        answerPanel.createQuestionType(questionList, directionType);
     }
 
     public MazePanel getMP() {
