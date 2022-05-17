@@ -13,10 +13,10 @@ public class DirectionButtonPanel extends JPanel {
     private final MazePanel MP;
     private final TriviaMazeBrain triviaMazeBrain;
 
-    private static final String DIR_NORTH = "North";
-    private static final String DIR_SOUTH = "South";
-    private static final String DIR_WEST = "West";
-    private static final String DIR_EAST = "East";
+    private static final String DIR_NORTH = "NORTH";
+    private static final String DIR_SOUTH = "SOUTH";
+    private static final String DIR_WEST = "WEST";
+    private static final String DIR_EAST = "EAST";
 
     BasicArrowButton northButton;
     BasicArrowButton southButton;

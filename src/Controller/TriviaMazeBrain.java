@@ -34,17 +34,26 @@ public class TriviaMazeBrain {
     private void runGame() {
         maze = new Maze(4, 4);
         openDatabaseConnection();
-        mainFrame = new MainFrame();
-        gamePanel = mainFrame.getMainMenuPanel().getGamePanel();
+        mainFrame = new MainFrame(this);
+
     }
 
     public void move(String directionType) {
+        gamePanel = mainFrame.getMainMenuPanel().getGamePanel();
         mazePanel = gamePanel.getMP();
         Direction directionToMove = Direction.valueOf(directionType);
         Door chosenDoor = maze.getCurrentRoom().getDoor(directionToMove);
         Question_Answer qa = chosenDoor.getQuestion();
         qa.getQuestionAnswerFromDatabase(stmt);
-        String userAnswer = gamePanel.askQuestion(qa.getQuestionList());
+        gamePanel.askQuestion(qa.getQuestionList(), directionType);
+    }
+
+    public void move2 (String userAnswer, String directionType) {
+
+        Direction directionToMove = Direction.valueOf(directionType);
+        Door chosenDoor = maze.getCurrentRoom().getDoor(directionToMove);
+        Question_Answer qa = chosenDoor.getQuestion();
+        qa.getQuestionAnswerFromDatabase(stmt);
 
         if (!qa.selectedCorrectAnswer(userAnswer)) {
             chosenDoor.lockDoor();

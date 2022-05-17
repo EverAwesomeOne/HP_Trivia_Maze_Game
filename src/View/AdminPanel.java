@@ -1,5 +1,7 @@
 package View;
 
+import Controller.TriviaMazeBrain;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,9 +9,12 @@ public class AdminPanel extends JPanel {
 
     private JPanel adminPanel;
 
-    AdminPanel(JFrame mainFrame) {
+    private TriviaMazeBrain triviaMazeBrain;
+
+    AdminPanel(JFrame mainFrame, TriviaMazeBrain triviaMazeBrain) {
         adminPanel = new JPanel();
         adminPanel.setLayout(new BorderLayout());
+        this.triviaMazeBrain =triviaMazeBrain;
 
         JLabel temp = new JLabel("ADD ADMIN FEATURES");
         temp.setHorizontalAlignment(JLabel.CENTER);
@@ -21,7 +26,7 @@ public class AdminPanel extends JPanel {
         okBtn.addActionListener(
                 e -> {
                     adminPanel.setVisible(false);
-                    new MainMenuPanel(mainFrame);
+                    new MainMenuPanel(mainFrame, triviaMazeBrain);
                 }
         );
 

@@ -22,10 +22,10 @@ public class GamePanel extends JPanel {
     private QuestionPanel questionPanel;
     private AnswerPanel answerPanel;
 
-    public GamePanel(JFrame mainFrame) {
+    public GamePanel(JFrame mainFrame, TriviaMazeBrain triviaMazeBrain) {
         this.mainFrame = mainFrame;
 
-        this.triviaMazeBrain = new TriviaMazeBrain();
+        this.triviaMazeBrain = triviaMazeBrain;
 
         gamePanel = new JPanel();
         gamePanel.setLayout(new GridLayout(2,2));
@@ -55,14 +55,9 @@ public class GamePanel extends JPanel {
 
     }
 
-    public String askQuestion(String[] questionList) {
+    public void askQuestion(String[] questionList, String directionType) {
         questionPanel = new QuestionPanel(questionList, gamePanel);
-        answerPanel = new AnswerPanel(questionList, gamePanel);
-        String userAnswer = answerPanel.getUserAnswer();
-        while ( userAnswer == null) {
-            userAnswer = answerPanel.getUserAnswer();
-        }
-        return userAnswer;
+        answerPanel = new AnswerPanel(questionList, gamePanel, triviaMazeBrain, directionType);
     }
 
     public MazePanel getMP() {
@@ -125,7 +120,7 @@ public class GamePanel extends JPanel {
                     e -> {
                         gamePanel.setVisible(false);
                         mainMenuBar.setVisible(false);
-                        new MainMenuPanel(mainFrame);
+                        new MainMenuPanel(mainFrame, triviaMazeBrain);
                     }
             );
         }

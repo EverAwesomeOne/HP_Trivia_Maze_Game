@@ -1,5 +1,7 @@
 package View;
 
+import Controller.TriviaMazeBrain;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,8 +21,11 @@ public class MainMenuPanel extends JPanel {
 
     private GamePanel gamePanel;
 
-    MainMenuPanel(JFrame mainFrame) {
+    private TriviaMazeBrain triviaMazeBrain;
+
+    MainMenuPanel(JFrame mainFrame, TriviaMazeBrain triviaMazeBrain) {
         this.mainFrame = mainFrame;
+        this.triviaMazeBrain = triviaMazeBrain;
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -66,7 +71,7 @@ public class MainMenuPanel extends JPanel {
             button.addActionListener(
                     e -> {
                         mainPanel.setVisible(false);
-                        gamePanel = new GamePanel(mainFrame);
+                        gamePanel = new GamePanel(mainFrame, triviaMazeBrain);
                     }
             );
         }
@@ -75,7 +80,7 @@ public class MainMenuPanel extends JPanel {
                     e -> {
                         // call deserialize method
                         mainPanel.setVisible(false);
-                        gamePanel = new GamePanel(mainFrame);
+                        gamePanel = new GamePanel(mainFrame, triviaMazeBrain);
                     }
             );
         }
@@ -83,7 +88,7 @@ public class MainMenuPanel extends JPanel {
             button.addActionListener(
                     e -> {
                         mainPanel.setVisible(false);
-                        new AdminPanel(mainFrame);
+                        new AdminPanel(mainFrame, triviaMazeBrain);
                     }
             );
         }

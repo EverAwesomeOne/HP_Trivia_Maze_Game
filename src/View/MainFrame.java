@@ -1,5 +1,7 @@
 package View;
 
+import Controller.TriviaMazeBrain;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,16 +16,19 @@ public class MainFrame extends JFrame {
 
     private MainMenuPanel mainMenuPanel;
 
-    public MainFrame() {
+    private TriviaMazeBrain triviaMazeBrain;
+
+    public MainFrame(TriviaMazeBrain triviaMazeBrain) {
         mainFrame = new JFrame();
         mainFrame.setTitle(TITLE);
         mainFrame.setSize(500,500);
         mainFrame.setIconImage(mazeIcon.getImage());
         mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        this.triviaMazeBrain = triviaMazeBrain;
         setFrameLocation(mainFrame);
 
-        mainMenuPanel = new MainMenuPanel(mainFrame);
+        mainMenuPanel = new MainMenuPanel(mainFrame, triviaMazeBrain);
 
         mainFrame.setVisible(true);
     }

@@ -1,5 +1,8 @@
 package View;
 
+import Controller.TriviaMazeBrain;
+import Model.Direction;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
@@ -16,19 +19,22 @@ public class AnswerPanel {
 
     private int nullCount;
 
+    private TriviaMazeBrain triviaMazeBrain;
+
+    private String directionType;
 
 
-
-    AnswerPanel(String[] answerArray, JPanel gamePanel) {
+    AnswerPanel(String[] answerArray, JPanel gamePanel, TriviaMazeBrain triviaMazeBrain, String directionType) {
 
         this.gamePanel = gamePanel;
-
+        this.triviaMazeBrain = triviaMazeBrain;
+        this.directionType = directionType;
         this.answerArray = answerArray;
 
         userAnswer = null;
 
         for (String s : answerArray) {
-            if (s.equals("")) {
+            if (s == null) {
                 nullCount++;
             }
         }
@@ -70,6 +76,7 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = answerTextArea.getText();
+                    triviaMazeBrain.move2(userAnswer, directionType);
                     shortAnswerQPanel.setVisible(false);
                     answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);
@@ -105,6 +112,7 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = answerTextArea.getText();
+                    triviaMazeBrain.move2(userAnswer, directionType);
                     trueFalseQPanel.setVisible(false);
                     answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);
@@ -155,6 +163,7 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = radioButtonGroup.getSelection().getActionCommand();
+                    triviaMazeBrain.move2(userAnswer, directionType);
                     multiChoiceQPanel.setVisible(false);
                     answerPanel.setVisible(false);
                     //new DisplayDoorsPanel(gamePanel);
