@@ -87,18 +87,11 @@ public class AnswerPanel {
                     answerPanel.removeAll();
                     answerPanel.revalidate();
                     answerPanel.repaint();
-                    /*answerPanel.remove(questionTypePanel);
-                    questionTypePanel = new JPanel();
-                    answerPanel.add(questionTypePanel);
-                    questionTypePanel.setVisible(true);
-                    questionTypePanel.revalidate();*/
+
                     questionPanel.removeQuestion();
 
                     triviaMazeBrain.move2(userAnswer, directionType);
-                    //answerPanel.revalidate();
 
-                    //questionPanel.revalidate();
-                    //new DisplayDoorsPanel(gamePanel);
                 }
         );
 
@@ -137,22 +130,10 @@ public class AnswerPanel {
                     answerPanel.removeAll();
                     answerPanel.revalidate();
                     answerPanel.repaint();
-                    /*
-                    answerPanel.remove(questionTypePanel);
-
-                    questionTypePanel = new JPanel();
-                    answerPanel.add(questionTypePanel);
-                    questionTypePanel.setVisible(true);*/
-
 
                     questionPanel.removeQuestion();
 
                     triviaMazeBrain.move2(userAnswer, directionType);
-                    //answerPanel.revalidate();
-                    /*questionTypePanel.revalidate();
-
-                    questionPanel.revalidate();*/
-                    //new DisplayDoorsPanel(gamePanel);
                 }
         );
 
@@ -203,19 +184,11 @@ public class AnswerPanel {
                     answerPanel.removeAll();
                     answerPanel.revalidate();
                     answerPanel.repaint();
-                   /* answerPanel.remove(questionTypePanel);
-
-                    questionTypePanel = new JPanel();
-                    answerPanel.add(questionTypePanel);
-                    questionTypePanel.setVisible(true);*/
 
                     questionPanel.removeQuestion();
 
                     triviaMazeBrain.move2(userAnswer, directionType);
-                    //answerPanel.revalidate();
-                    /*questionTypePanel.revalidate();
-                    questionPanel.revalidate();*/
-                    //new DisplayDoorsPanel(gamePanel);
+
                 }
         );
 
