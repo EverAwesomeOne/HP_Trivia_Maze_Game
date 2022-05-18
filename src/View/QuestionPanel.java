@@ -19,8 +19,9 @@ public class QuestionPanel {
     }
 
     void createQuestion(String[] answerArray) {
-        JLabel questionLabel = new JLabel(answerArray[0]);
-        questionLabel.setSize(2, 20);
+        JTextArea questionLabel = new JTextArea(answerArray[0], 8, 25);
+        questionLabel.setLineWrap(true);
+        questionLabel.setEditable(false);
         question.add(questionLabel);
         questionPanel.add(question);
     }
