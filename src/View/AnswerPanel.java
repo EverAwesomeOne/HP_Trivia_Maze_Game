@@ -104,17 +104,20 @@ public class AnswerPanel {
         ButtonGroup radioButtonGroup = new ButtonGroup();
         JRadioButton trueButton = new JRadioButton("True");
         JRadioButton falseButton = new JRadioButton("False");
+
         verticalBox.add(trueButton);
         radioButtonGroup.add(trueButton);
+        trueButton.setActionCommand("True");
+
         verticalBox.add(falseButton);
         radioButtonGroup.add(falseButton);
+        falseButton.setActionCommand("False");
         trueFalseQPanel.add(verticalBox);
 
-        JTextField answerTextArea = new JTextField(10);
         JButton submitAButton = new JButton("SUBMIT");
         submitAButton.addActionListener(
                 e -> {
-                    userAnswer = answerTextArea.getText();
+                    userAnswer = radioButtonGroup.getSelection().getActionCommand();
                     answerPanel.remove(questionTypePanel);
                     questionTypePanel = new JPanel();
                     questionPanel.removeQuestion();
