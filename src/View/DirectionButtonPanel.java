@@ -69,39 +69,6 @@ public class DirectionButtonPanel extends JPanel {
                     triviaMazeBrain.move(arrowDirection);
                 }
         );
-//
-//        if (arrowDirection.equals(DIR_NORTH)) {
-//            arrowButton.addActionListener(
-//                    e -> {
-//                        triviaMazeBrain.move(DIR_NORTH);
-//                        disableButtons();
-//                    }
-//            );
-//        }
-//        else if (arrowDirection.equals(DIR_SOUTH)) {
-//            arrowButton.addActionListener(
-//                    e -> {
-//                        triviaMazeBrain.move(DIR_SOUTH);
-//                        disableButtons();
-//                    }
-//            );
-//        }
-//        else if (arrowDirection.equals(DIR_WEST)) {
-//            arrowButton.addActionListener(
-//                    e -> {
-//                        triviaMazeBrain.move(DIR_WEST);
-//                        disableButtons();
-//                    }
-//            );
-//        }
-//        else if (arrowDirection.equals(DIR_EAST)) {
-//            arrowButton.addActionListener(
-//                    e -> {
-//                        triviaMazeBrain.move(DIR_EAST);
-//                        disableButtons();
-//                    }
-//            );
-//        }
     }
 
     void disableButtons() {
