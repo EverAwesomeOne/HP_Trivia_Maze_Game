@@ -13,8 +13,6 @@ public class MainMenuPanel extends JPanel {
 
     private JFrame mainFrame;
 
-    private JPanel adminPanel;
-
     private JPanel mainPanel;
 
     private JLabel gameTitle;
@@ -52,12 +50,8 @@ public class MainMenuPanel extends JPanel {
         JButton btnLoadGame = new JButton("Load Game");
         mainMenuBtnPanel.add(btnLoadGame);
 
-        //JButton btnAddQuestion = new JButton("Admin Settings");
-        //mainMenuBtnPanel.add(btnAddQuestion);
-
         addActionListener(btnNewGame, "New Game");
         addActionListener(btnLoadGame, "Load Game");
-        //addActionListener(btnAddQuestion, "Admin Settings");
 
         return mainMenuBtnPanel;
     }
@@ -84,13 +78,6 @@ public class MainMenuPanel extends JPanel {
                     }
             );
         }
-        else {
-            button.addActionListener(
-                    e -> {
-                        mainPanel.setVisible(false);
-                        new AdminPanel(mainFrame, triviaMazeBrain);
-                    }
-            );
-        }
+        // else
     }
 }

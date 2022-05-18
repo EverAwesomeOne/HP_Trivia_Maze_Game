@@ -3,32 +3,32 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class AboutTeam extends JPanel {
-    private JPanel aboutPanel;
+class AboutTeam extends JPanel {
+    private final JPanel myAboutPanel;
 
-    AboutTeam(JFrame mainFrame, JPanel gamePanel, JMenuBar mainMenuBar) {
-        aboutPanel = new JPanel();
-        aboutPanel.setLayout(new BorderLayout());
+    AboutTeam(final JFrame theMainFrame, JPanel theGamePanel, final JMenuBar theMainMenuBar) {
+        myAboutPanel = new JPanel();
+        myAboutPanel.setLayout(new BorderLayout());
 
-        JTextArea textField = new JTextArea("Hodgepodge Trivia Maze Team\n" +
+        final JTextArea textField = new JTextArea("Hodgepodge Trivia Maze Team\n" +
                 "Maria Babko ~ Chloe Duncan ~ Edwin Solis-Bruno\nUniversity of Washington\n" +
                 "TCSS 360 A, Professor Tom Capaul\nMay 2022");
         textField.setEditable(false);
 
-        JButton OK = new JButton("OK");
-        OK.addActionListener(
+        final JButton okayButton = new JButton("OK");
+        okayButton.addActionListener(
                 e -> {
-                    aboutPanel.setVisible(false);
-                    gamePanel.setVisible(true);
-                    mainMenuBar.setVisible(true);
+                    myAboutPanel.setVisible(false);
+                    theGamePanel.setVisible(true);
+                    theMainMenuBar.setVisible(true);
                 }
         );
 
-        aboutPanel.add(textField, BorderLayout.CENTER);
-        aboutPanel.add(OK, BorderLayout.SOUTH);
+        myAboutPanel.add(textField, BorderLayout.CENTER);
+        myAboutPanel.add(okayButton, BorderLayout.SOUTH);
 
-        mainFrame.add(aboutPanel);
+        theMainFrame.add(myAboutPanel);
 
-        aboutPanel.setVisible(true);
+        myAboutPanel.setVisible(true);
     }
 }

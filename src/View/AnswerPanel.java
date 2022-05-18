@@ -1,105 +1,90 @@
 package View;
 
 import Controller.TriviaMazeBrain;
-import Model.Direction;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class AnswerPanel {
+class AnswerPanel {
 
-    private JPanel gamePanel;
+    private final JPanel myAnswerPanel;
+    private JPanel myQuestionTypePanel = new JPanel();
 
-    private JPanel answerPanel;
+    private final TriviaMazeBrain myTriviaMazeBrain;
 
-    private String[] answerArray;
+    private final QuestionPanel myQuestionPanel;
 
-    private String userAnswer;
+    private final DirectionButtonPanel myDirectionButtonPanel;
 
-    private int nullCount;
+    private String[] myAnswerArray;
 
-    private TriviaMazeBrain triviaMazeBrain;
+    private String myDirectionType;
+    private String myUserAnswer;
 
-    private String directionType;
+    private int myNullCount;
 
-    private JPanel questionTypePanel = new JPanel();
+    AnswerPanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain, final QuestionPanel theQuestionPanel, final DirectionButtonPanel theDirectionButtonPanel) {
+        myTriviaMazeBrain = theTriviaMazeBrain;
+        myQuestionPanel = theQuestionPanel;
+        myDirectionButtonPanel = theDirectionButtonPanel;
 
-    private QuestionPanel questionPanel;
+        myAnswerPanel = new JPanel();
+        myAnswerPanel.setBorder(BorderFactory.createTitledBorder("Answer"));
 
-    private DirectionButtonPanel DP;
+        theGamePanel.add(myAnswerPanel);
 
-    AnswerPanel(JPanel gamePanel, TriviaMazeBrain triviaMazeBrain, QuestionPanel questionPanel, DirectionButtonPanel DP) {
-
-        this.gamePanel = gamePanel;
-        this.triviaMazeBrain = triviaMazeBrain;
-        this.questionPanel = questionPanel;
-        this.DP = DP;
-
-        answerPanel = new JPanel();
-        answerPanel.setBorder(BorderFactory.createTitledBorder("Answer"));
-
-        gamePanel.add(answerPanel);
-
-        answerPanel.setVisible(true);
-
+        myAnswerPanel.setVisible(true);
     }
 
-    void createQuestionType(String[] answerArray, String directionType) {
-        this.directionType = directionType;
-        this.answerArray = answerArray;
+    void createQuestionType(final String[] theAnswerArray, final String theDirectionType) {
+        myDirectionType = theDirectionType;
+        myAnswerArray = theAnswerArray;
 
-        questionTypePanel.removeAll();
+        myQuestionTypePanel.removeAll();
 
-        userAnswer = null;
+        myUserAnswer = null;
 
-        for (String s : answerArray) {
+        for (String s : theAnswerArray) {
             if (s == null) {
-                nullCount++;
+                myNullCount++;
             }
         }
 
-        if (nullCount == 0) {
-            questionTypePanel = multiChoiceQ();
+        if (myNullCount == 0) {
+            myQuestionTypePanel = multiChoiceQ();
         }
 
-        else if (nullCount == 2) {
-            questionTypePanel = trueFalseQ();
+        else if (myNullCount == 2) {
+            myQuestionTypePanel = trueFalseQ();
         }
 
-        else if (nullCount == 3) {
-            questionTypePanel = shortAnswerQ();
+        else if (myNullCount == 3) {
+            myQuestionTypePanel = shortAnswerQ();
         }
         //add an else to catch possible errors
 
-        answerPanel.add(questionTypePanel);
-        questionTypePanel.setVisible(true);
-        answerPanel.revalidate();
-        answerPanel.repaint();
-        nullCount = 0;
+        myAnswerPanel.add(myQuestionTypePanel);
+        myQuestionTypePanel.setVisible(true);
+        myAnswerPanel.revalidate();
+        myAnswerPanel.repaint();
+        myNullCount = 0;
     }
 
     private JPanel shortAnswerQ() {
-        JPanel shortAnswerQPanel = new JPanel(new BorderLayout());
-        JLabel questionLabel = new JLabel("Short Answer:");
-        JTextField answerTextArea = new JTextField(10);
+        final JPanel shortAnswerQPanel = new JPanel(new BorderLayout());
+        final JLabel questionLabel = new JLabel("Short Answer:");
+        final JTextField answerTextArea = new JTextField(10);
 
-        JButton submitAButton = new JButton("SUBMIT");
+        final JButton submitAButton = new JButton("SUBMIT");
         submitAButton.addActionListener(
                 e -> {
-                    userAnswer = answerTextArea.getText();
-                    answerPanel.removeAll();
-                    answerPanel.revalidate();
-                    answerPanel.repaint();
-
-                    questionPanel.removeQuestion();
-
-                    triviaMazeBrain.move2(userAnswer, directionType);
-                    DP.disableButtons();
+                    myUserAnswer = answerTextArea.getText();
+                    updatePanels();
                 }
         );
 
-        JPanel labelAndTextAreaPanel = new JPanel();
+        final JPanel labelAndTextAreaPanel = new JPanel();
         shortAnswerQPanel.add(labelAndTextAreaPanel, BorderLayout.NORTH);
         labelAndTextAreaPanel.add(questionLabel, BorderLayout.NORTH);
         labelAndTextAreaPanel.add(answerTextArea, BorderLayout.SOUTH);
@@ -109,97 +94,85 @@ public class AnswerPanel {
     }
 
     private JPanel trueFalseQ() {
-        JPanel trueFalseQPanel = new JPanel(new BorderLayout());
+        final JPanel trueFalseQPanel = new JPanel(new BorderLayout());
 
-        JLabel questionLabel = new JLabel("True or False:");
+        final JLabel questionLabel = new JLabel("True or False:");
 
-        Box verticalBox = Box.createVerticalBox();
-        ButtonGroup radioButtonGroup = new ButtonGroup();
-        JRadioButton trueButton = new JRadioButton("True");
-        JRadioButton falseButton = new JRadioButton("False");
+        final Box verticalBox = Box.createVerticalBox();
+        final ButtonGroup radioButtonGroup = new ButtonGroup();
+        final String trueButtonText = "True";
+        final String falseButtonText = "False";
+        final JRadioButton trueButton = new JRadioButton(trueButtonText);
+        final JRadioButton falseButton = new JRadioButton(falseButtonText);
 
-        verticalBox.add(trueButton);
-        radioButtonGroup.add(trueButton);
-        trueButton.setActionCommand("True");
+        organizeVerticalBox(verticalBox, radioButtonGroup, trueButton, trueButtonText);
+        organizeVerticalBox(verticalBox, radioButtonGroup, falseButton, falseButtonText);
 
-        verticalBox.add(falseButton);
-        radioButtonGroup.add(falseButton);
-        falseButton.setActionCommand("False");
-        trueFalseQPanel.add(verticalBox);
-
-        JButton submitAButton = new JButton("SUBMIT");
-        submitAButton.addActionListener(
-                e -> {
-                    userAnswer = radioButtonGroup.getSelection().getActionCommand();
-                    answerPanel.removeAll();
-                    answerPanel.revalidate();
-                    answerPanel.repaint();
-
-                    questionPanel.removeQuestion();
-
-                    triviaMazeBrain.move2(userAnswer, directionType);
-                    DP.disableButtons();
-                }
-        );
-
-        trueFalseQPanel.add(questionLabel, BorderLayout.NORTH);
-        trueFalseQPanel.add(submitAButton, BorderLayout.SOUTH);
-        return trueFalseQPanel;
-    }
-
-    String getUserAnswer() {
-        return userAnswer;
+        return getQuestionTypePanel(trueFalseQPanel, questionLabel, verticalBox, radioButtonGroup);
     }
 
     private JPanel multiChoiceQ() {
-        JPanel multiChoiceQPanel = new JPanel(new BorderLayout());
+        final JPanel multiChoiceQPanel = new JPanel(new BorderLayout());
 
-        JLabel questionLabel = new JLabel("Multiple Choice:");
+        final JLabel questionLabel = new JLabel("Multiple Choice:");
 
         //Make possible answers displayed randomly
-        int[] questionListRandomIndex = { 1, 2, 3, 4};
+        final int[] randomizeAnswerOrderList = { 1, 2, 3, 4};
 
-        Random rand = new Random();
+        final Random rand = new Random();
 
-        for (int i = 0; i < questionListRandomIndex.length; i++) {
-            int randomIndexToSwap = rand.nextInt(questionListRandomIndex.length);
-            int temp = questionListRandomIndex[randomIndexToSwap];
-            questionListRandomIndex[randomIndexToSwap] = questionListRandomIndex[i];
-            questionListRandomIndex[i] = temp;
+        for (int i = 0; i < randomizeAnswerOrderList.length; i++) {
+            final int randomIndexToSwap = rand.nextInt(randomizeAnswerOrderList.length);
+            final int temp = randomizeAnswerOrderList[randomIndexToSwap];
+            randomizeAnswerOrderList[randomIndexToSwap] = randomizeAnswerOrderList[i];
+            randomizeAnswerOrderList[i] = temp;
         }
 
-        Box verticalBox = Box.createVerticalBox();
-        ButtonGroup radioButtonGroup = new ButtonGroup();
+        final Box verticalBox = Box.createVerticalBox();
+        final ButtonGroup radioButtonGroup = new ButtonGroup();
 
-        for (int i = 0; i < questionListRandomIndex.length; i++) {
-            String index = answerArray[questionListRandomIndex[i]];
-            JRadioButton answer = new JRadioButton(index);
-            answer.setActionCommand(index);
-            verticalBox.add(answer);
-            radioButtonGroup.add(answer);
+        //for (int i = 0; i < questionListRandomIndex.length; i++) {
+        for (int listRandomIndex : randomizeAnswerOrderList) {
+            final String answerText = myAnswerArray[listRandomIndex];
+            final JRadioButton answerButton = new JRadioButton(answerText);
+
+            organizeVerticalBox(verticalBox, radioButtonGroup, answerButton, answerText);
         }
+        return getQuestionTypePanel(multiChoiceQPanel, questionLabel, verticalBox, radioButtonGroup);
+    }
 
-        multiChoiceQPanel.add(verticalBox);
+    private void organizeVerticalBox(final Box theVerticalBox, final ButtonGroup theRadioButtonGroup, final JRadioButton theAnswerButton, final String theTextForButton) {
+        theVerticalBox.add(theAnswerButton);
+        theRadioButtonGroup.add(theAnswerButton);
+        theAnswerButton.setActionCommand(theTextForButton);
+    }
 
+    private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel, final JLabel theQuestionLabel, final Box theVerticalBox, final ButtonGroup theRadioButtonGroup) {
+        theQuestionTypePanel.add(theVerticalBox);
 
-        JButton submitAButton = new JButton("SUBMIT");
+        final JButton submitAButton = new JButton("SUBMIT");
         submitAButton.addActionListener(
                 e -> {
-                    userAnswer = radioButtonGroup.getSelection().getActionCommand();
-                    answerPanel.removeAll();
-                    answerPanel.revalidate();
-                    answerPanel.repaint();
-
-                    questionPanel.removeQuestion();
-
-                    triviaMazeBrain.move2(userAnswer, directionType);
-                    DP.disableButtons();
+                    myUserAnswer = theRadioButtonGroup.getSelection().getActionCommand();
+                    updatePanels();
                 }
         );
 
-        multiChoiceQPanel.add(questionLabel, BorderLayout.NORTH);
-        multiChoiceQPanel.add(submitAButton, BorderLayout.SOUTH);
+        theQuestionTypePanel.add(theQuestionLabel, BorderLayout.NORTH);
+        theQuestionTypePanel.add(submitAButton, BorderLayout.SOUTH);
 
-        return multiChoiceQPanel;
+        return theQuestionTypePanel;
+    }
+
+    private void updatePanels() {
+        myAnswerPanel.removeAll();
+        myAnswerPanel.revalidate();
+        myAnswerPanel.repaint();
+
+        myQuestionPanel.removeQuestion();
+
+        myTriviaMazeBrain.move2(myUserAnswer, myDirectionType);
+
+        myDirectionButtonPanel.disableButtons();
     }
 }
