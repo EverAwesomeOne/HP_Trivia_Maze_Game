@@ -39,11 +39,14 @@ public class AnswerPanel {
         gamePanel.add(answerPanel);
 
         answerPanel.setVisible(true);
+
     }
 
     void createQuestionType(String[] answerArray, String directionType) {
         this.directionType = directionType;
         this.answerArray = answerArray;
+
+        questionTypePanel.removeAll();
 
         userAnswer = null;
 
@@ -67,6 +70,9 @@ public class AnswerPanel {
         //add an else to catch possible errors
 
         answerPanel.add(questionTypePanel);
+        questionTypePanel.setVisible(true);
+        answerPanel.revalidate();
+        answerPanel.repaint();
     }
 
     private JPanel shortAnswerQ() {
@@ -78,10 +84,20 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = answerTextArea.getText();
-                    answerPanel.remove(questionTypePanel);
+                    answerPanel.removeAll();
+                    answerPanel.revalidate();
+                    answerPanel.repaint();
+                    /*answerPanel.remove(questionTypePanel);
                     questionTypePanel = new JPanel();
+                    answerPanel.add(questionTypePanel);
+                    questionTypePanel.setVisible(true);
+                    questionTypePanel.revalidate();*/
                     questionPanel.removeQuestion();
+
                     triviaMazeBrain.move2(userAnswer, directionType);
+                    //answerPanel.revalidate();
+
+                    //questionPanel.revalidate();
                     //new DisplayDoorsPanel(gamePanel);
                 }
         );
@@ -118,11 +134,24 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = radioButtonGroup.getSelection().getActionCommand();
+                    answerPanel.removeAll();
+                    answerPanel.revalidate();
+                    answerPanel.repaint();
+                    /*
                     answerPanel.remove(questionTypePanel);
+
                     questionTypePanel = new JPanel();
+                    answerPanel.add(questionTypePanel);
+                    questionTypePanel.setVisible(true);*/
+
+
                     questionPanel.removeQuestion();
 
                     triviaMazeBrain.move2(userAnswer, directionType);
+                    //answerPanel.revalidate();
+                    /*questionTypePanel.revalidate();
+
+                    questionPanel.revalidate();*/
                     //new DisplayDoorsPanel(gamePanel);
                 }
         );
@@ -171,10 +200,21 @@ public class AnswerPanel {
         submitAButton.addActionListener(
                 e -> {
                     userAnswer = radioButtonGroup.getSelection().getActionCommand();
-                    answerPanel.remove(questionTypePanel);
+                    answerPanel.removeAll();
+                    answerPanel.revalidate();
+                    answerPanel.repaint();
+                   /* answerPanel.remove(questionTypePanel);
+
                     questionTypePanel = new JPanel();
+                    answerPanel.add(questionTypePanel);
+                    questionTypePanel.setVisible(true);*/
+
                     questionPanel.removeQuestion();
+
                     triviaMazeBrain.move2(userAnswer, directionType);
+                    //answerPanel.revalidate();
+                    /*questionTypePanel.revalidate();
+                    questionPanel.revalidate();*/
                     //new DisplayDoorsPanel(gamePanel);
                 }
         );
