@@ -31,15 +31,10 @@ public class GamePanel extends JPanel {
         gamePanel.setLayout(new GridLayout(2,2));
 
         // sets up these panels and adds to gamePanel
-        MP = new MazePanel(gamePanel);
+        MP = new MazePanel(gamePanel, triviaMazeBrain);
         DP = new DirectionButtonPanel(gamePanel, MP, triviaMazeBrain);
         questionPanel = new QuestionPanel(gamePanel);
-        answerPanel = new AnswerPanel(gamePanel, triviaMazeBrain, questionPanel);
-
-        //TESTING PURPOSES ONLY
-        //String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "", "", ""};
-        //String[] questionList = {"Does Harry get put into Gryffindor?", "True", "False", "", ""};
-        String[] questionList = {"Which house does Harry get put into?", "Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"};
+        answerPanel = new AnswerPanel(gamePanel, triviaMazeBrain, questionPanel, DP);
 
         // display menuBar on JFrame only when game is in progress
         mainMenuBar = new JMenuBar();
@@ -57,6 +52,7 @@ public class GamePanel extends JPanel {
     }
 
     public void askQuestion(String[] questionList, String directionType) {
+        DP.disableAllButtons();
         questionPanel.createQuestion(questionList);
         answerPanel.createQuestionType(questionList, directionType);
     }
@@ -85,6 +81,10 @@ public class GamePanel extends JPanel {
         mainMenuBar.add(addMenu);
 
         mainMenuBar.setVisible(true);
+    }
+
+    void resetDirectionButtonPanel() {
+        DP = new DirectionButtonPanel(gamePanel, MP, triviaMazeBrain);
     }
 
     private void addMenuActionListener(JMenuItem menuItem, String menuName) {
@@ -122,6 +122,8 @@ public class GamePanel extends JPanel {
                         gamePanel.setVisible(false);
                         mainMenuBar.setVisible(false);
                         new MainMenuPanel(mainFrame, triviaMazeBrain);
+                        triviaMazeBrain.resetGameState();
+                        resetDirectionButtonPanel();
                     }
             );
         }

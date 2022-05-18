@@ -23,7 +23,7 @@ public class MainMenuPanel extends JPanel {
 
     private TriviaMazeBrain triviaMazeBrain;
 
-    MainMenuPanel(JFrame mainFrame, TriviaMazeBrain triviaMazeBrain) {
+    public MainMenuPanel(JFrame mainFrame, TriviaMazeBrain triviaMazeBrain) {
         this.mainFrame = mainFrame;
         this.triviaMazeBrain = triviaMazeBrain;
 

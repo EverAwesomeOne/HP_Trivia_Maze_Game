@@ -38,7 +38,7 @@ public class Maze {
     }
 
     // performs a BFS traversal from the current room
-    boolean hasValidPaths() {
+    public boolean hasValidPaths() {
         int roomNumber = characterRow * maze.length + characterColumn;
 
         // Mark all the nodes as not visited
@@ -74,7 +74,20 @@ public class Maze {
         return false;
     }
 
-    void removeEdgeFromGraph(int firstNodeToRemoveFrom, int secondNodeToRemoveFrom) {
+    public void removeEdgeFromGraph(Direction directionToMove) {
+        int firstNodeToRemoveFrom = characterRow * maze.length + characterColumn;
+        int secondNodeToRemoveFrom = firstNodeToRemoveFrom;
+
+        if (directionToMove == Direction.NORTH) {
+            secondNodeToRemoveFrom -= maze.length;
+        } else if (directionToMove == Direction.EAST) {
+            secondNodeToRemoveFrom += 1;
+        } else if (directionToMove == Direction.SOUTH) {
+            secondNodeToRemoveFrom += maze.length;
+        } else {
+            secondNodeToRemoveFrom -= 1;
+        }
+
         roomConnections[firstNodeToRemoveFrom].remove((Integer) secondNodeToRemoveFrom);
         roomConnections[secondNodeToRemoveFrom].remove((Integer) firstNodeToRemoveFrom);
     }

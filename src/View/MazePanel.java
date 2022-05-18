@@ -1,5 +1,7 @@
 package View;
 
+import Controller.TriviaMazeBrain;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -27,7 +29,11 @@ public class MazePanel extends JPanel {
 
     boolean[] lockedDirection = new boolean[4];
 
-    public MazePanel(JPanel panel) {
+    private TriviaMazeBrain triviaMazeBrain;
+
+    public MazePanel(JPanel panel, TriviaMazeBrain triviaMazeBrain) {
+        this.triviaMazeBrain = triviaMazeBrain;
+
         mazePanel = new JPanel();
         mazePanel.setLayout(new GridLayout(ROW,COL));
         mazePanel.setBorder(BorderFactory.createTitledBorder("Maze"));
@@ -71,61 +77,14 @@ public class MazePanel extends JPanel {
     }
 
     public void updateCharacterPlacement(int row, int col) {
-
-        setCurrentRoomIcon(row, col);
         setOldRoomIcon(currentRow, currentCol);
+        setCurrentRoomIcon(row, col);
         currentRow = row;
         currentCol = col;
-
-        /*if (direction.equals("North")) {
-            newRow = currentRow - 1;
-            setCurrentRoomIcon(newRow, currentCol);
-            setOldRoomIcon(currentRow, currentCol);
-            currentRow = newRow;
-        }
-
-        else if (direction.equals("South")) {
-            newRow = currentRow + 1;
-            setCurrentRoomIcon(newRow, currentCol);
-            setOldRoomIcon(currentRow, currentCol);
-            currentRow = newRow;
-        }
-
-        else if (direction.equals("East")) {
-            newCol = currentCol + 1;
-            setCurrentRoomIcon(currentRow, newCol);
-            setOldRoomIcon(currentRow, currentCol);
-            currentCol = newCol;
-        }
-
-        else if (direction.equals("West")) {
-            newCol = currentCol - 1;
-            setCurrentRoomIcon(currentRow, newCol);
-            setOldRoomIcon(currentRow, currentCol);
-            currentCol = newCol;
-        }*/
     }
 
     public boolean validDirection(String direction) {
-        boolean validDirection = true;
-
-        if (direction.equals("North")) {
-            if (currentRow - 1 < 0) validDirection = false;
-        }
-
-        else if (direction.equals("South")) {
-            if (currentRow + 1 > 3) validDirection = false;
-        }
-
-        else if (direction.equals("West")) {
-            if (currentCol - 1 < 0) validDirection = false;
-        }
-
-        else if (direction.equals("East")) {
-            if (currentCol + 1 > 3) validDirection = false;
-        }
-
-        return validDirection;
+        return triviaMazeBrain.checkIsLockedStatus(direction);
     }
 
     private void setLockedRoomIcon(int row, int col) {

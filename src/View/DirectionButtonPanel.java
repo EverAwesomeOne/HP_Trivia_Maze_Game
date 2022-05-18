@@ -64,57 +64,57 @@ public class DirectionButtonPanel extends JPanel {
     }
 
     private void addArrowActionListener(BasicArrowButton arrowButton, String arrowDirection) {
-        if (arrowDirection.equals(DIR_NORTH)) {
-            arrowButton.addActionListener(
-                    e -> {
-                        // send direction to controller,
-                        triviaMazeBrain.move(DIR_NORTH);
-                        // receive QA.
-                        // hide DisplayDoorsPanel so user can't click,
-                        // display QAPanel, user return A.
-                        // send A to controller,
-                        // receive boolean if correct A.
-                        // update buttons and room icon
-                        // false -> disable BasicArrowButton, NorthDoor in current room, set attempted room icon to locked
-                        // true -> move in that direction
-                        // show DisplayDoorsPanel for next move
-
-                        //
-
-                        disableButtons();
-                    }
-            );
-        }
-        else if (arrowDirection.equals(DIR_SOUTH)) {
-            arrowButton.addActionListener(
-                    e -> {
-                        triviaMazeBrain.move(DIR_SOUTH);
-                        disableButtons();
-                    }
-            );
-        }
-        else if (arrowDirection.equals(DIR_WEST)) {
-            arrowButton.addActionListener(
-                    e -> {
-                        triviaMazeBrain.move(DIR_WEST);
-                        disableButtons();
-                    }
-            );
-        }
-        else if (arrowDirection.equals(DIR_EAST)) {
-            arrowButton.addActionListener(
-                    e -> {
-                        triviaMazeBrain.move(DIR_EAST);
-                        disableButtons();
-                    }
-            );
-        }
+        arrowButton.addActionListener(
+                e -> {
+                    triviaMazeBrain.move(arrowDirection);
+                }
+        );
+//
+//        if (arrowDirection.equals(DIR_NORTH)) {
+//            arrowButton.addActionListener(
+//                    e -> {
+//                        triviaMazeBrain.move(DIR_NORTH);
+//                        disableButtons();
+//                    }
+//            );
+//        }
+//        else if (arrowDirection.equals(DIR_SOUTH)) {
+//            arrowButton.addActionListener(
+//                    e -> {
+//                        triviaMazeBrain.move(DIR_SOUTH);
+//                        disableButtons();
+//                    }
+//            );
+//        }
+//        else if (arrowDirection.equals(DIR_WEST)) {
+//            arrowButton.addActionListener(
+//                    e -> {
+//                        triviaMazeBrain.move(DIR_WEST);
+//                        disableButtons();
+//                    }
+//            );
+//        }
+//        else if (arrowDirection.equals(DIR_EAST)) {
+//            arrowButton.addActionListener(
+//                    e -> {
+//                        triviaMazeBrain.move(DIR_EAST);
+//                        disableButtons();
+//                    }
+//            );
+//        }
     }
 
-    private void disableButtons() {
+    void disableButtons() {
         northButton.setEnabled(MP.validDirection(DIR_NORTH));
         southButton.setEnabled(MP.validDirection(DIR_SOUTH));
         westButton.setEnabled(MP.validDirection(DIR_WEST));
         eastButton.setEnabled(MP.validDirection(DIR_EAST));
+    }
+
+    void disableAllButtons() {
+        northButton.setEnabled(false);
+        southButton.setEnabled(false);
+        westButton.setEnabled(false);
+        eastButton.setEnabled(false);
     }
 }

@@ -4,10 +4,7 @@ import Model.Direction;
 import Model.Door;
 import Model.Maze;
 import Model.Question_Answer;
-import View.GamePanel;
-import View.MainFrame;
-import View.MazePanel;
-import View.QuestionPanel;
+import View.*;
 import org.sqlite.SQLiteDataSource;
 
 import javax.swing.*;
@@ -53,16 +50,43 @@ public class TriviaMazeBrain {
         Direction directionToMove = Direction.valueOf(directionType);
         Door chosenDoor = maze.getCurrentRoom().getDoor(directionToMove);
         Question_Answer qa = chosenDoor.getQuestion();
-        qa.getQuestionAnswerFromDatabase(stmt);
+        //qa.getQuestionAnswerFromDatabase(stmt);
 
         if (!qa.selectedCorrectAnswer(userAnswer)) {
             chosenDoor.lockDoor();
+            maze.removeEdgeFromGraph(Direction.valueOf(directionType));
+        }
+
+        if (!maze.hasValidPaths()) {
+            JDialog losingMessaging = new JDialog();
+            losingMessaging.setTitle("Game Over :((");
+            JButton exitGameButton = new JButton("Take the L");
+            exitGameButton.addActionListener(
+                    e -> {
+                        gamePanel.setVisible(false);
+                        //mainMenuBar.setVisible(false);
+                        new MainMenuPanel(mainFrame, this);
+                    }
+            );
+
+            losingMessaging.add(exitGameButton);
+            losingMessaging.setSize(300, 100);
+            losingMessaging.setLocationRelativeTo(null);
+            losingMessaging.setVisible(true);
         }
 
         if(!chosenDoor.isLocked()) {
             maze.updatePosition(directionToMove);
         }
         mazePanel.updateCharacterPlacement(maze.getCharacterRow(), maze.getCharacterColumn());
+    }
+
+    public boolean checkIsLockedStatus(String directionType) {
+        return !maze.getCurrentRoom().getDoor(Direction.valueOf(directionType)).isLocked();
+    }
+
+    public void resetGameState() {
+        maze = new Maze(4, 4);
     }
 
     private void openDatabaseConnection() {

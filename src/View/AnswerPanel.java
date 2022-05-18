@@ -27,11 +27,14 @@ public class AnswerPanel {
 
     private QuestionPanel questionPanel;
 
-    AnswerPanel(JPanel gamePanel, TriviaMazeBrain triviaMazeBrain, QuestionPanel questionPanel) {
+    private DirectionButtonPanel DP;
+
+    AnswerPanel(JPanel gamePanel, TriviaMazeBrain triviaMazeBrain, QuestionPanel questionPanel, DirectionButtonPanel DP) {
 
         this.gamePanel = gamePanel;
         this.triviaMazeBrain = triviaMazeBrain;
         this.questionPanel = questionPanel;
+        this.DP = DP;
 
         answerPanel = new JPanel();
         answerPanel.setBorder(BorderFactory.createTitledBorder("Answer"));
@@ -73,6 +76,7 @@ public class AnswerPanel {
         questionTypePanel.setVisible(true);
         answerPanel.revalidate();
         answerPanel.repaint();
+        nullCount = 0;
     }
 
     private JPanel shortAnswerQ() {
@@ -91,7 +95,7 @@ public class AnswerPanel {
                     questionPanel.removeQuestion();
 
                     triviaMazeBrain.move2(userAnswer, directionType);
-
+                    DP.disableButtons();
                 }
         );
 
@@ -134,6 +138,7 @@ public class AnswerPanel {
                     questionPanel.removeQuestion();
 
                     triviaMazeBrain.move2(userAnswer, directionType);
+                    DP.disableButtons();
                 }
         );
 
@@ -188,7 +193,7 @@ public class AnswerPanel {
                     questionPanel.removeQuestion();
 
                     triviaMazeBrain.move2(userAnswer, directionType);
-
+                    DP.disableButtons();
                 }
         );
 
