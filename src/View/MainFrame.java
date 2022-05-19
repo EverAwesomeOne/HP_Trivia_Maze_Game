@@ -6,32 +6,29 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    private final JFrame theMainFrame;
 
-    private final String theTitle = "Hodgepodge Trivia Maze";
+    private final static String TITLE = "Hodgepodge Trivia Maze";
 
-    private final ImageIcon theMazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
+    private final static ImageIcon MAZE_ICON = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
 
-    private static final Toolkit theKit = Toolkit.getDefaultToolkit();
+    private final static Toolkit KIT = Toolkit.getDefaultToolkit();
 
     private final MainMenuPanel theMainMenuPanel;
 
-    //private TriviaMazeBrain triviaMazeBrain;
 
     public MainFrame(final TriviaMazeBrain theTriviaMazeBrain) {
-        theMainFrame = new JFrame();
-        theMainFrame.setTitle(theTitle);
-        theMainFrame.setSize(500,500);
-        theMainFrame.setIconImage(theMazeIcon.getImage());
-        theMainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        final JFrame myMainFrame = new JFrame();
+        myMainFrame.setTitle(TITLE);
+        myMainFrame.setSize(500,500);
+        myMainFrame.setIconImage(MAZE_ICON.getImage());
+        myMainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //this.triviaMazeBrain = triviaMazeBrain;
-        setFrameLocation(theMainFrame);
+        setFrameLocation(myMainFrame);
 
-        theMainMenuPanel = new MainMenuPanel(theMainFrame, theTriviaMazeBrain);
+        theMainMenuPanel = new MainMenuPanel(myMainFrame, theTriviaMazeBrain);
 
-        theMainFrame.setResizable(false);
-        theMainFrame.setVisible(true);
+        myMainFrame.setResizable(false);
+        myMainFrame.setVisible(true);
     }
 
     public MainMenuPanel getTheMainMenuPanel() {
@@ -39,7 +36,7 @@ public class MainFrame extends JFrame {
     }
 
     private void setFrameLocation(final JFrame theFrame) {
-        final Dimension dimension = theKit.getScreenSize();
+        final Dimension dimension = KIT.getScreenSize();
         final int x = (int)((dimension.getWidth() - theFrame.getWidth()) / 2);
         final int y = (int)((dimension.getHeight() - theFrame.getHeight()) / 2);
         theFrame.setLocation(x,y);
