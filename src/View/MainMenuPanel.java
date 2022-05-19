@@ -11,34 +11,34 @@ public class MainMenuPanel extends JPanel {
 
     private static final ImageIcon mazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
 
-    private JFrame mainFrame;
+    private final JFrame myMainFrame;
 
-    private JPanel mainPanel;
+    private final JPanel myMainPanel;
 
-    private JLabel gameTitle;
+    private final JLabel myGameTitle;
 
-    private GamePanel gamePanel;
+    private GamePanel myGamePanel;
 
-    private TriviaMazeBrain triviaMazeBrain;
+    private TriviaMazeBrain myTriviaMazeBrain;
 
-    public MainMenuPanel(JFrame mainFrame, TriviaMazeBrain triviaMazeBrain) {
-        this.mainFrame = mainFrame;
-        this.triviaMazeBrain = triviaMazeBrain;
+    public MainMenuPanel(final JFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain) {
+        myMainFrame = theMainFrame;
+        myTriviaMazeBrain = theTriviaMazeBrain;
 
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
+        myMainPanel = new JPanel();
+        myMainPanel.setLayout(new BorderLayout());
 
-        gameTitle = new JLabel(TITLE);
-        gameTitle.setHorizontalAlignment(JLabel.CENTER);
-        mainPanel.add(gameTitle, BorderLayout.NORTH);
+        myGameTitle = new JLabel(TITLE);
+        myGameTitle.setHorizontalAlignment(JLabel.CENTER);
+        myMainPanel.add(myGameTitle, BorderLayout.NORTH);
 
-        mainPanel.add(setupButtonPanel(), BorderLayout.CENTER);
+        myMainPanel.add(setupButtonPanel(), BorderLayout.CENTER);
 
-        mainPanel.add(new JLabel(mazeIcon), BorderLayout.SOUTH);
+        myMainPanel.add(new JLabel(mazeIcon), BorderLayout.SOUTH);
 
-        mainFrame.add(mainPanel);
+        theMainFrame.add(myMainPanel);
 
-        mainPanel.setVisible(true);
+        myMainPanel.setVisible(true);
     }
 
     private JPanel setupButtonPanel() {
@@ -57,15 +57,15 @@ public class MainMenuPanel extends JPanel {
     }
 
     public GamePanel getGamePanel() {
-        return gamePanel;
+        return myGamePanel;
     }
 
     private void addActionListener(JButton button, String buttonName) {
         if (buttonName.equals("New Game")) {
             button.addActionListener(
                     e -> {
-                        mainPanel.setVisible(false);
-                        gamePanel = new GamePanel(mainFrame, triviaMazeBrain);
+                        myMainPanel.setVisible(false);
+                        myGamePanel = new GamePanel(myMainFrame, myTriviaMazeBrain);
                     }
             );
         }
@@ -73,8 +73,8 @@ public class MainMenuPanel extends JPanel {
             button.addActionListener(
                     e -> {
                         // call deserialize method
-                        mainPanel.setVisible(false);
-                        gamePanel = new GamePanel(mainFrame, triviaMazeBrain);
+                        myMainPanel.setVisible(false);
+                        myGamePanel = new GamePanel(myMainFrame, myTriviaMazeBrain);
                     }
             );
         }
