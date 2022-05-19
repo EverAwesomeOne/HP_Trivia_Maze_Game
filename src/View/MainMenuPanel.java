@@ -65,6 +65,7 @@ public class MainMenuPanel extends JPanel {
             button.addActionListener(
                     e -> {
                         myMainPanel.setVisible(false);
+                        myTriviaMazeBrain.openDatabaseConnection();
                         myGamePanel = new GamePanel(myMainFrame, myTriviaMazeBrain);
                     }
             );

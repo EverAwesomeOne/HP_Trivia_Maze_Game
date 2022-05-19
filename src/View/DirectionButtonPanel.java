@@ -37,7 +37,7 @@ public class DirectionButtonPanel extends JPanel {
         final JLabel centerLabel = new JLabel("<html>Current<br/>Room</html>", SwingConstants.CENTER);
 
         // initialize BasicArrowButtons based on the start position in maze
-        disableButtons();
+        setDirectionButtonsVisibility();
 
         addArrowActionListener(myNorthButton, DIR_NORTH);
         addArrowActionListener(mySouthButton, DIR_SOUTH);
@@ -67,7 +67,7 @@ public class DirectionButtonPanel extends JPanel {
         );
     }
 
-    void disableButtons() {
+    void setDirectionButtonsVisibility() {
         myNorthButton.setEnabled(myMazePanel.validDirection(DIR_NORTH));
         mySouthButton.setEnabled(myMazePanel.validDirection(DIR_SOUTH));
         myWestButton.setEnabled(myMazePanel.validDirection(DIR_WEST));

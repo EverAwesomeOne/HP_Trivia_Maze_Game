@@ -34,7 +34,6 @@ public class GamePanel extends JPanel {
 
         // display menuBar on JFrame only when game is in progress
         myMainMenuBar = new JMenuBar();
-        setupMenuBar("Admin Settings");
         setupMenuBar("About Hodgepodge Team");
         setupMenuBar("Game Info");
         setupMenuBar("Save Game");
@@ -59,19 +58,11 @@ public class GamePanel extends JPanel {
     private void setupMenuBar(final String theMenuTitle) {
         final JMenu addMenu = new JMenu(theMenuTitle);
 
-        if (theMenuTitle.equals("Admin Settings")) {
-            final JCheckBoxMenuItem menuCheckBoxItem = new JCheckBoxMenuItem("Enable Debug Feature");
-            addMenuActionListener(menuCheckBoxItem, theMenuTitle);
-            addMenu.add(menuCheckBoxItem);
-        }
+        final JMenuItem menuItem = new JMenuItem(theMenuTitle);
 
-        else {
-            final JMenuItem menuItem = new JMenuItem(theMenuTitle);
+        addMenuActionListener(menuItem, theMenuTitle);
 
-            addMenuActionListener(menuItem, theMenuTitle);
-
-            addMenu.add(menuItem);
-        }
+        addMenu.add(menuItem);
 
         myMainMenuBar.add(addMenu);
 
@@ -101,16 +92,19 @@ public class GamePanel extends JPanel {
                     }
             );
         }
-        else if (theMenuName.equals("Admin Settings")) {
+        else if (theMenuName.equals("Exit")) {
             theMenuItem.addActionListener(
                     e -> {
-                        System.out.println("Admin settings changed");
+                        myGamePanel.setVisible(false);
+                        myMainMenuBar.setVisible(false);
+                        myTriviaMazeBrain.closeDatabaseConnection();
+                        new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
+                        myTriviaMazeBrain.resetGameState();
+                        resetDirectionButtonPanel();
                     }
             );
         }
         // edit to include save game option
-        // exit game should check if game is saved
-        // if not saved prompt for saving, else:
         else {
             theMenuItem.addActionListener(
                     e -> {
@@ -122,5 +116,30 @@ public class GamePanel extends JPanel {
                     }
             );
         }
+    }
+
+    public void displayLosingMessageBox() {
+        final JDialog losingMessaging = new JDialog();
+        losingMessaging.setTitle("Game Over :((");
+
+        final JButton exitGameButton = new JButton("Take the L");
+        exitGameButton.addActionListener(
+                e -> {
+                    myTriviaMazeBrain.closeDatabaseConnection();
+                    myGamePanel.setVisible(false);
+                    myMainMenuBar.setVisible(false);
+                    losingMessaging.setVisible(false);
+
+                    myTriviaMazeBrain.resetGameState();
+                    resetDirectionButtonPanel();
+
+                    new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
+                }
+        );
+
+        losingMessaging.add(exitGameButton);
+        losingMessaging.setSize(300, 100);
+        losingMessaging.setLocationRelativeTo(null);
+        losingMessaging.setVisible(true);
     }
 }

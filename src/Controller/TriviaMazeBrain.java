@@ -59,21 +59,7 @@ public class TriviaMazeBrain {
         }
 
         if (!maze.hasValidPaths()) {
-            JDialog losingMessaging = new JDialog();
-            losingMessaging.setTitle("Game Over :((");
-            JButton exitGameButton = new JButton("Take the L");
-            exitGameButton.addActionListener(
-                    e -> {
-                        gamePanel.setVisible(false);
-                        //mainMenuBar.setVisible(false);
-                        new MainMenuPanel(mainFrame, this);
-                    }
-            );
-
-            losingMessaging.add(exitGameButton);
-            losingMessaging.setSize(300, 100);
-            losingMessaging.setLocationRelativeTo(null);
-            losingMessaging.setVisible(true);
+            gamePanel.displayLosingMessageBox();
         }
 
         if(!chosenDoor.isLocked()) {
@@ -90,7 +76,7 @@ public class TriviaMazeBrain {
         maze = new Maze(4, 4);
     }
 
-    private void openDatabaseConnection() {
+    public void openDatabaseConnection() {
         SQLiteDataSource ds = null;
 
         //establish connection (creates db file if it does not exist :-)
@@ -111,7 +97,7 @@ public class TriviaMazeBrain {
 
     }
 
-    private void closeDatabaseConnection() {
+    public void closeDatabaseConnection() {
         if (stmt != null) {
             try {
                 stmt.close();

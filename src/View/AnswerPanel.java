@@ -172,6 +172,6 @@ class AnswerPanel {
 
         myTriviaMazeBrain.move2(myUserAnswer, myDirectionType);
 
-        myDirectionButtonPanel.disableButtons();
+        myDirectionButtonPanel.setDirectionButtonsVisibility();
     }
 }
