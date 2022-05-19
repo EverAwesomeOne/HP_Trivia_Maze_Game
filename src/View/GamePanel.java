@@ -12,9 +12,6 @@ public class GamePanel extends JPanel {
     final MazePanel myMazePanel;
     DirectionButtonPanel myDirectionButtonPanel;
 
-    private final int ROW = 4;
-    private final int COL = 4;
-
     private final JPanel myGamePanel;
     private final JMenuBar myMainMenuBar;
 

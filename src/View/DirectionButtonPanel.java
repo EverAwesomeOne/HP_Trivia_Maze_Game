@@ -8,8 +8,6 @@ import java.awt.*;
 
 public class DirectionButtonPanel extends JPanel {
 
-    private static JPanel myDirectionButtonPanel;
-
     private final MazePanel myMazePanel;
     private final TriviaMazeBrain myTriviaMazeBrain;
 
@@ -26,7 +24,7 @@ public class DirectionButtonPanel extends JPanel {
     DirectionButtonPanel(final JPanel theGamePanel, final MazePanel theMazePanel, final TriviaMazeBrain theTriviaMazeBrain) {
         myMazePanel = theMazePanel;
         myTriviaMazeBrain = theTriviaMazeBrain;
-        myDirectionButtonPanel = new JPanel();
+        JPanel myDirectionButtonPanel = new JPanel();
         myDirectionButtonPanel.setLayout(new GridLayout(3,3));
         myDirectionButtonPanel.setBorder(BorderFactory.createTitledBorder("Choose Door"));
 
@@ -65,9 +63,7 @@ public class DirectionButtonPanel extends JPanel {
 
     private void addArrowActionListener(final BasicArrowButton theArrowButton, final String theArrowDirection) {
         theArrowButton.addActionListener(
-                e -> {
-                    myTriviaMazeBrain.move(theArrowDirection);
-                }
+                e -> myTriviaMazeBrain.move(theArrowDirection)
         );
     }
 
