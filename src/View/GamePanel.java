@@ -120,17 +120,31 @@ public class GamePanel {
         }
     }
 
-    public void displayLosingMessageBox() {
-        final JDialog losingMessaging = new JDialog();
-        losingMessaging.setTitle("Game Over :((");
+    public void displayWinningMessageBox() {
+        final String title = "You Win! :))";
+        final String winningMessage = "Take the (U)W!";
 
-        final JButton exitGameButton = new JButton("Take the L");
+        setUpDialogBox(title, winningMessage);
+    }
+
+    public void displayLosingMessageBox() {
+        final String title = "Game Over :((";
+        final String losingMessage = "Take the L";
+
+        setUpDialogBox(title, losingMessage);
+    }
+
+    private void setUpDialogBox(final String theTitle, final String theMessage) {
+        final JDialog endGameMessage = new JDialog();
+        endGameMessage.setTitle(theTitle);
+
+        final JButton exitGameButton = new JButton(theMessage);
         exitGameButton.addActionListener(
                 e -> {
                     myTriviaMazeBrain.closeDatabaseConnection();
                     myGamePanel.setVisible(false);
                     myMainMenuBar.setVisible(false);
-                    losingMessaging.setVisible(false);
+                    endGameMessage.setVisible(false);
 
                     myTriviaMazeBrain.resetGameState();
                     resetDirectionButtonPanel();
@@ -139,9 +153,9 @@ public class GamePanel {
                 }
         );
 
-        losingMessaging.add(exitGameButton);
-        losingMessaging.setSize(300, 100);
-        losingMessaging.setLocationRelativeTo(null);
-        losingMessaging.setVisible(true);
+        endGameMessage.add(exitGameButton);
+        endGameMessage.setSize(300, 100);
+        endGameMessage.setLocationRelativeTo(null);
+        endGameMessage.setVisible(true);
     }
 }

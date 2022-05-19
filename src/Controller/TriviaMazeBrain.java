@@ -79,6 +79,10 @@ public class TriviaMazeBrain {
         myGamePanel.getDirectionButtonPanel().setDirectionButtonsVisibility();
         myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(),
                 myMaze.getCharacterColumn());
+
+        if (myMaze.getCharacterRow() == MAZE_LENGTH - 1 && myMaze.getCharacterColumn() == MAZE_LENGTH - 1) {
+            myGamePanel.displayWinningMessageBox();
+        }
     }
 
     public boolean checkIsLockedStatus(final String theDirectionType) {
