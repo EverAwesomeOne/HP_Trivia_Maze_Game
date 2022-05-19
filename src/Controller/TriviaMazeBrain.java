@@ -12,17 +12,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class TriviaMazeBrain {
-    private Connection conn;
-    private Statement stmt;
-    private Maze maze;
-    private GamePanel gamePanel;
-    private MainFrame mainFrame;
-    private MazePanel mazePanel;
+    private Connection myConnection;
+    private Statement myStatement;
+    private Maze myMaze;
+    private GamePanel myGamePanel;
+    private MainFrame myMainFrame;
+    private MazePanel myMazePanel;
 
     public final static int MAZE_LENGTH = 4;
 
-    public static void main(String[] args) {
-        TriviaMazeBrain triviaMazeBrain = new TriviaMazeBrain();
+    public static void main(final String[] theArgs) {
+        new TriviaMazeBrain();
     }
 
     public TriviaMazeBrain() {
@@ -30,51 +30,50 @@ public class TriviaMazeBrain {
     }
 
     private void runGame() {
-        maze = new Maze(MAZE_LENGTH);
+        myMaze = new Maze(MAZE_LENGTH);
         openDatabaseConnection();
-        mainFrame = new MainFrame(this);
+        myMainFrame = new MainFrame(this);
 
     }
 
-    public void move(String directionType) {
-        gamePanel = mainFrame.getTheMainMenuPanel().getGamePanel();
-        mazePanel = gamePanel.getMyMazePanel();
-        Direction directionToMove = Direction.valueOf(directionType);
-        Door chosenDoor = maze.getCurrentRoom().getDoor(directionToMove);
+    public void move(final String theDirectionType) {
+        myGamePanel = myMainFrame.getTheMainMenuPanel().getGamePanel();
+        myMazePanel = myGamePanel.getMyMazePanel();
+        final Direction directionToMove = Direction.valueOf(theDirectionType);
+        final Door chosenDoor = myMaze.getCurrentRoom().getDoor(directionToMove);
         // check first time of door to move freely
-        QuestionAnswer qa = chosenDoor.getQuestion();
-        qa.getQuestionAnswerFromDatabase(stmt);
-        gamePanel.askQuestion(qa.getQuestionList(), directionType);
+        final QuestionAnswer qa = chosenDoor.getQuestion();
+        qa.getQuestionAnswerFromDatabase(myStatement);
+        myGamePanel.askQuestion(qa.getQuestionList(), theDirectionType);
     }
 
-    public void move2 (String userAnswer, String directionType) {
+    public void move2 (final String theUserAnswer, final String theDirectionType) {
 
-        Direction directionToMove = Direction.valueOf(directionType);
-        Door chosenDoor = maze.getCurrentRoom().getDoor(directionToMove);
-        QuestionAnswer qa = chosenDoor.getQuestion();
-        //qa.getQuestionAnswerFromDatabase(stmt);
+        final Direction directionToMove = Direction.valueOf(theDirectionType);
+        final Door chosenDoor = myMaze.getCurrentRoom().getDoor(directionToMove);
+        final QuestionAnswer qa = chosenDoor.getQuestion();
 
-        if (!qa.selectedCorrectAnswer(userAnswer)) {
+        if (!qa.selectedCorrectAnswer(theUserAnswer)) {
             chosenDoor.lockDoor();
-            maze.removeEdgeFromGraph(Direction.valueOf(directionType));
+            myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
         }
 
-        if (!maze.hasValidPaths()) {
-            gamePanel.displayLosingMessageBox();
+        if (!myMaze.hasValidPaths()) {
+            myGamePanel.displayLosingMessageBox();
         }
 
         if(!chosenDoor.isLocked()) {
-            maze.updatePosition(directionToMove);
+            myMaze.updatePosition(directionToMove);
         }
-        mazePanel.updateCharacterPlacement(maze.getCharacterRow(), maze.getCharacterColumn());
+        myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(), myMaze.getCharacterColumn());
     }
 
-    public boolean checkIsLockedStatus(String directionType) {
-        return !maze.getCurrentRoom().getDoor(Direction.valueOf(directionType)).isLocked();
+    public boolean checkIsLockedStatus(final String theDirectionType) {
+        return !myMaze.getCurrentRoom().getDoor(Direction.valueOf(theDirectionType)).isLocked();
     }
 
     public void resetGameState() {
-        maze = new Maze(MAZE_LENGTH);
+        myMaze = new Maze(MAZE_LENGTH);
     }
 
     public void openDatabaseConnection() {
@@ -90,8 +89,8 @@ public class TriviaMazeBrain {
         }
 
         try {
-            conn = ds.getConnection();
-            stmt = conn.createStatement();
+            myConnection = ds.getConnection();
+            myStatement = myConnection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -99,14 +98,14 @@ public class TriviaMazeBrain {
     }
 
     public void closeDatabaseConnection() {
-        if (stmt != null) {
+        if (myStatement != null) {
             try {
-                stmt.close();
+                myStatement.close();
             } catch (SQLException e) { /* Ignored */}
         }
-        if (conn != null) {
+        if (myConnection != null) {
             try {
-                conn.close();
+                myConnection.close();
             } catch (SQLException e) { /* Ignored */}
         }
     }
