@@ -7,7 +7,6 @@ import Model.Question_Answer;
 import View.*;
 import org.sqlite.SQLiteDataSource;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,7 +19,7 @@ public class TriviaMazeBrain {
     private MainFrame mainFrame;
     private MazePanel mazePanel;
 
-    private final static int MAZE_LENGTH = 4;
+    public final static int MAZE_LENGTH = 4;
 
     public static void main(String[] args) {
         TriviaMazeBrain triviaMazeBrain = new TriviaMazeBrain();
