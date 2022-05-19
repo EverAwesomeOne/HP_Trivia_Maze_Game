@@ -38,7 +38,7 @@ public class TriviaMazeBrain {
     }
 
     public void setUpQuestion(final String theDirectionType) {
-        myGamePanel = myMainFrame.getTheMainMenuPanel().getGamePanel();
+        myGamePanel = myMainFrame.getMainMenuPanel().getGamePanel();
         myMazePanel = myGamePanel.getMazePanel();
         final Direction directionToMove = Direction.valueOf(theDirectionType);
         final Door chosenDoor = myMaze.getCurrentRoom().getDoor(directionToMove);

@@ -16,7 +16,7 @@ public class MainFrame {
 
     private final static Toolkit KIT = Toolkit.getDefaultToolkit();
 
-    private final MainMenuPanel theMainMenuPanel;
+    private final MainMenuPanel myMainMenuPanel;
 
 
     public MainFrame(final TriviaMazeBrain theTriviaMazeBrain) {
@@ -28,14 +28,14 @@ public class MainFrame {
 
         setFrameLocation(myMainFrame);
 
-        theMainMenuPanel = new MainMenuPanel(myMainFrame, theTriviaMazeBrain);
+        myMainMenuPanel = new MainMenuPanel(myMainFrame, theTriviaMazeBrain);
 
         myMainFrame.setResizable(false);
         myMainFrame.setVisible(true);
     }
 
-    public MainMenuPanel getTheMainMenuPanel() {
-        return theMainMenuPanel;
+    public MainMenuPanel getMainMenuPanel() {
+        return myMainMenuPanel;
     }
 
     private void setFrameLocation(final JFrame theFrame) {
