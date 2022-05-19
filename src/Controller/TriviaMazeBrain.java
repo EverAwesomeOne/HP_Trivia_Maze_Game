@@ -19,7 +19,7 @@ public class TriviaMazeBrain {
     private MainFrame mainFrame;
     private MazePanel mazePanel;
 
-    private final static int MAZE_LENGTH = 4;
+    public final static int MAZE_LENGTH = 4;
 
     public static void main(String[] args) {
         TriviaMazeBrain triviaMazeBrain = new TriviaMazeBrain();

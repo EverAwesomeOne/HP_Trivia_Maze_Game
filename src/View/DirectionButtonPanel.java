@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
-public class DirectionButtonPanel extends JPanel {
+public class DirectionButtonPanel {
 
     private final MazePanel myMazePanel;
     private final TriviaMazeBrain myTriviaMazeBrain;

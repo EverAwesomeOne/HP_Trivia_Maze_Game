@@ -5,7 +5,9 @@ import Controller.TriviaMazeBrain;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
+public class MainFrame {
 
     private final static String TITLE = "Hodgepodge Trivia Maze";
 

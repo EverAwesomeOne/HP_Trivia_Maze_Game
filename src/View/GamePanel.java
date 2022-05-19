@@ -5,7 +5,7 @@ import Controller.TriviaMazeBrain;
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel {
+public class GamePanel {
 
     private final JFrame myMainFrame;
 

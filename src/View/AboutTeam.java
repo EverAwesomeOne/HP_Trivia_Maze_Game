@@ -3,7 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-class AboutTeam extends JPanel {
+class AboutTeam {
     private final JPanel myAboutPanel;
 
     AboutTeam(final JFrame theMainFrame, JPanel theGamePanel, final JMenuBar theMainMenuBar) {
