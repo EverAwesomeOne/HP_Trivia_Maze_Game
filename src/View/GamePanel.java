@@ -53,8 +53,12 @@ public class GamePanel {
         myAnswerPanel.createQuestionType(theQuestionList, theDirectionType);
     }
 
-    public MazePanel getMyMazePanel() {
+    public MazePanel getMazePanel() {
         return myMazePanel;
+    }
+
+    public DirectionButtonPanel getDirectionButtonPanel() {
+        return myDirectionButtonPanel;
     }
 
     private void setupMenuBar(final String theMenuTitle) {

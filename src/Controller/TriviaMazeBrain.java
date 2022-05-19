@@ -39,7 +39,7 @@ public class TriviaMazeBrain {
 
     public void setUpQuestion(final String theDirectionType) {
         myGamePanel = myMainFrame.getTheMainMenuPanel().getGamePanel();
-        myMazePanel = myGamePanel.getMyMazePanel();
+        myMazePanel = myGamePanel.getMazePanel();
         final Direction directionToMove = Direction.valueOf(theDirectionType);
         final Door chosenDoor = myMaze.getCurrentRoom().getDoor(directionToMove);
         // check first time of door to move freely
@@ -76,6 +76,7 @@ public class TriviaMazeBrain {
             }
         }
 
+        myGamePanel.getDirectionButtonPanel().setDirectionButtonsVisibility();
         myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(),
                 myMaze.getCharacterColumn());
     }

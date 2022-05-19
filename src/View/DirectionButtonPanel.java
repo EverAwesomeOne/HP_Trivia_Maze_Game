@@ -70,7 +70,7 @@ public class DirectionButtonPanel {
         );
     }
 
-    void setDirectionButtonsVisibility() {
+    public void setDirectionButtonsVisibility() {
         myNorthButton.setEnabled(myMazePanel.validDirection(DIR_NORTH));
         mySouthButton.setEnabled(myMazePanel.validDirection(DIR_SOUTH));
         myWestButton.setEnabled(myMazePanel.validDirection(DIR_WEST));
