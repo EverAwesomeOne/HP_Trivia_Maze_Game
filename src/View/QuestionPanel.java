@@ -21,8 +21,9 @@ public class QuestionPanel {
     void createQuestion(final String[] theAnswerArray) {
         myQuestion.removeAll();
 
-        final JTextArea questionLabel = new JTextArea(theAnswerArray[0], 8, 25);
+        final JTextArea questionLabel = new JTextArea(theAnswerArray[0], 8, 22);
         questionLabel.setLineWrap(true);
+        questionLabel.setWrapStyleWord(true);
         questionLabel.setEditable(false);
 
         myQuestion.add(questionLabel);
