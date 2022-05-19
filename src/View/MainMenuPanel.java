@@ -9,7 +9,8 @@ public class MainMenuPanel {
 
     private static final String TITLE = "Hodgepodge Trivia Maze";
 
-    private static final ImageIcon mazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
+    private static final ImageIcon mazeIcon =
+            new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
 
     private final JFrame myMainFrame;
 

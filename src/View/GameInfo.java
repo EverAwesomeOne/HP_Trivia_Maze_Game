@@ -7,7 +7,8 @@ public class GameInfo {
 
     private final JPanel myGameInfoPanel;
 
-    GameInfo(final JFrame theMainFrame, final JPanel theGamePanel, final JMenuBar theMainMenuBar) {
+    GameInfo(final JFrame theMainFrame, final JPanel theGamePanel,
+             final JMenuBar theMainMenuBar) {
         myGameInfoPanel = new JPanel();
         myGameInfoPanel.setLayout(new BorderLayout());
 

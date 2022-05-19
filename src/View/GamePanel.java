@@ -28,9 +28,11 @@ public class GamePanel {
 
         // sets up these panels and adds to gamePanel
         myMazePanel = new MazePanel(myGamePanel, theTriviaMazeBrain);
-        myDirectionButtonPanel = new DirectionButtonPanel(myGamePanel, myMazePanel, theTriviaMazeBrain);
+        myDirectionButtonPanel = new DirectionButtonPanel(myGamePanel, myMazePanel,
+                theTriviaMazeBrain);
         myQuestionPanel = new QuestionPanel(myGamePanel);
-        myAnswerPanel = new AnswerPanel(myGamePanel, theTriviaMazeBrain, myQuestionPanel, myDirectionButtonPanel);
+        myAnswerPanel = new AnswerPanel(myGamePanel, theTriviaMazeBrain, myQuestionPanel,
+                myDirectionButtonPanel);
 
         // display menuBar on JFrame only when game is in progress
         myMainMenuBar = new JMenuBar();
@@ -70,7 +72,8 @@ public class GamePanel {
     }
 
     void resetDirectionButtonPanel() {
-        myDirectionButtonPanel = new DirectionButtonPanel(myGamePanel, myMazePanel, myTriviaMazeBrain);
+        myDirectionButtonPanel = new DirectionButtonPanel(myGamePanel, myMazePanel,
+                myTriviaMazeBrain);
     }
 
     private void addMenuActionListener(final JMenuItem theMenuItem, final String theMenuName) {

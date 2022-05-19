@@ -24,7 +24,9 @@ class AnswerPanel {
 
     private int myNullCount;
 
-    AnswerPanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain, final QuestionPanel theQuestionPanel, final DirectionButtonPanel theDirectionButtonPanel) {
+    AnswerPanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain,
+                final QuestionPanel theQuestionPanel,
+                final DirectionButtonPanel theDirectionButtonPanel) {
         myTriviaMazeBrain = theTriviaMazeBrain;
         myQuestionPanel = theQuestionPanel;
         myDirectionButtonPanel = theDirectionButtonPanel;
@@ -140,13 +142,15 @@ class AnswerPanel {
         return getQuestionTypePanel(multiChoiceQPanel, questionLabel, verticalBox, radioButtonGroup);
     }
 
-    private void organizeVerticalBox(final Box theVerticalBox, final ButtonGroup theRadioButtonGroup, final JRadioButton theAnswerButton, final String theTextForButton) {
+    private void organizeVerticalBox(final Box theVerticalBox, final ButtonGroup theRadioButtonGroup,
+                                     final JRadioButton theAnswerButton, final String theTextForButton) {
         theVerticalBox.add(theAnswerButton);
         theRadioButtonGroup.add(theAnswerButton);
         theAnswerButton.setActionCommand(theTextForButton);
     }
 
-    private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel, final JLabel theQuestionLabel, final Box theVerticalBox, final ButtonGroup theRadioButtonGroup) {
+    private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel, final JLabel theQuestionLabel,
+                                        final Box theVerticalBox, final ButtonGroup theRadioButtonGroup) {
         theQuestionTypePanel.add(theVerticalBox);
 
         final JButton submitAButton = new JButton("SUBMIT");

@@ -11,7 +11,8 @@ public class MainFrame {
 
     private final static String TITLE = "Hodgepodge Trivia Maze";
 
-    private final static ImageIcon MAZE_ICON = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
+    private final static ImageIcon MAZE_ICON =
+            new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
 
     private final static Toolkit KIT = Toolkit.getDefaultToolkit();
 

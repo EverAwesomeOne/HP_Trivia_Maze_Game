@@ -38,6 +38,4 @@ public class QuestionPanel {
         myQuestionPanel.repaint();
     }
 
-    // base question type panels based off of what is in QAPanel class
-    // then delete QAPanel class
 }

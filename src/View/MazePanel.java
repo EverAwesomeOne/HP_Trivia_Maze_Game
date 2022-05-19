@@ -7,15 +7,20 @@ import java.awt.*;
 
 public class MazePanel {
 
-    private static final ImageIcon ICON_EMPTY_ROOM = new ImageIcon("src//View//Images//EmptyRoom.png");
-    private static final ImageIcon ICON_CURRENT_ROOM = new ImageIcon("src//View//Images//CurrentRoom.png");
-    private static final ImageIcon ICON_START_ROOM = new ImageIcon("src//View//Images//StartRoom.png");
-    private static final ImageIcon ICON_END_ROOM = new ImageIcon("src//View//Images//ExitRoom.png");
-    private static final ImageIcon ICON_LOCKED_ROOM = new ImageIcon("src//View//Images//LockedRoom.png");
+    private static final ImageIcon ICON_EMPTY_ROOM =
+            new ImageIcon("src//View//Images//EmptyRoom.png");
+    private static final ImageIcon ICON_CURRENT_ROOM =
+            new ImageIcon("src//View//Images//CurrentRoom.png");
+    private static final ImageIcon ICON_START_ROOM =
+            new ImageIcon("src//View//Images//StartRoom.png");
+    private static final ImageIcon ICON_END_ROOM =
+            new ImageIcon("src//View//Images//ExitRoom.png");
+    private static final ImageIcon ICON_LOCKED_ROOM =
+            new ImageIcon("src//View//Images//LockedRoom.png");
 
     private static final int ROW = TriviaMazeBrain.MAZE_LENGTH;
     private final int COL = ROW;
-    // should we have a constant for the starting row and column of the character?
+    // should we have a constant for the starting row and column of the character or YAGNI?
 
     private int myCurrentRow;
     private int myCurrentCol;

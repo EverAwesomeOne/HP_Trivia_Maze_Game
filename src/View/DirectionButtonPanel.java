@@ -21,7 +21,8 @@ public class DirectionButtonPanel {
     private final BasicArrowButton myEastButton;
     private final BasicArrowButton myWestButton;
 
-    DirectionButtonPanel(final JPanel theGamePanel, final MazePanel theMazePanel, final TriviaMazeBrain theTriviaMazeBrain) {
+    DirectionButtonPanel(final JPanel theGamePanel, final MazePanel theMazePanel,
+                         final TriviaMazeBrain theTriviaMazeBrain) {
         myMazePanel = theMazePanel;
         myTriviaMazeBrain = theTriviaMazeBrain;
         JPanel myDirectionButtonPanel = new JPanel();
@@ -34,7 +35,8 @@ public class DirectionButtonPanel {
         myWestButton = new BasicArrowButton(BasicArrowButton.WEST);
 
         // Replace with an icon?
-        final JLabel centerLabel = new JLabel("<html>Current<br/>Room</html>", SwingConstants.CENTER);
+        final JLabel centerLabel =
+                new JLabel("<html>Current<br/>Room</html>", SwingConstants.CENTER);
 
         // initialize BasicArrowButtons based on the start position in maze
         setDirectionButtonsVisibility();
@@ -61,7 +63,8 @@ public class DirectionButtonPanel {
         myDirectionButtonPanel.setVisible(true);
     }
 
-    private void addArrowActionListener(final BasicArrowButton theArrowButton, final String theArrowDirection) {
+    private void addArrowActionListener(final BasicArrowButton theArrowButton,
+                                        final String theArrowDirection) {
         theArrowButton.addActionListener(
                 e -> myTriviaMazeBrain.move(theArrowDirection)
         );

@@ -65,11 +65,13 @@ public class TriviaMazeBrain {
         if(!chosenDoor.isLocked()) {
             myMaze.updatePosition(directionToMove);
         }
-        myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(), myMaze.getCharacterColumn());
+        myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(),
+                myMaze.getCharacterColumn());
     }
 
     public boolean checkIsLockedStatus(final String theDirectionType) {
-        return !myMaze.getCurrentRoom().getDoor(Direction.valueOf(theDirectionType)).isLocked();
+        return !myMaze.getCurrentRoom().getDoor
+                (Direction.valueOf(theDirectionType)).isLocked();
     }
 
     public void resetGameState() {
