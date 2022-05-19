@@ -4,35 +4,37 @@ import javax.swing.*;
 
 public class QuestionPanel {
 
-    private JPanel questionPanel;
-    private JPanel question = new JPanel();
+    private final JPanel myQuestionPanel;
+    private final JPanel myQuestion = new JPanel();
 
-    QuestionPanel(JPanel gamePanel) {
+    QuestionPanel(final JPanel theGamePanel) {
 
-        questionPanel = new JPanel();
-        questionPanel.setBorder(BorderFactory.createTitledBorder("Question"));
+        myQuestionPanel = new JPanel();
+        myQuestionPanel.setBorder(BorderFactory.createTitledBorder("Question"));
 
 
-        gamePanel.add(questionPanel);
+        theGamePanel.add(myQuestionPanel);
 
-        questionPanel.setVisible(true);
+        myQuestionPanel.setVisible(true);
     }
 
-    void createQuestion(String[] answerArray) {
-        question.removeAll();
-        JTextArea questionLabel = new JTextArea(answerArray[0], 8, 25);
+    void createQuestion(final String[] theAnswerArray) {
+        myQuestion.removeAll();
+
+        final JTextArea questionLabel = new JTextArea(theAnswerArray[0], 8, 25);
         questionLabel.setLineWrap(true);
         questionLabel.setEditable(false);
-        question.add(questionLabel);
-        questionPanel.add(question);
-        questionPanel.revalidate();
-        questionPanel.repaint();
+
+        myQuestion.add(questionLabel);
+        myQuestionPanel.add(myQuestion);
+        myQuestionPanel.revalidate();
+        myQuestionPanel.repaint();
     }
 
     void removeQuestion() {
-        questionPanel.removeAll();
-        questionPanel.revalidate();
-        questionPanel.repaint();
+        myQuestionPanel.removeAll();
+        myQuestionPanel.revalidate();
+        myQuestionPanel.repaint();
     }
 
     // base question type panels based off of what is in QAPanel class

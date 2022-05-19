@@ -6,41 +6,42 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    private final JFrame mainFrame;
+    private final JFrame theMainFrame;
 
-    private final String TITLE = "Hodgepodge Trivia Maze";
+    private final String theTitle = "Hodgepodge Trivia Maze";
 
-    private final ImageIcon mazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
+    private final ImageIcon theMazeIcon = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
 
-    private static final Toolkit KIT = Toolkit.getDefaultToolkit();
+    private static final Toolkit theKit = Toolkit.getDefaultToolkit();
 
-    private MainMenuPanel mainMenuPanel;
+    private final MainMenuPanel theMainMenuPanel;
 
-    private TriviaMazeBrain triviaMazeBrain;
+    //private TriviaMazeBrain triviaMazeBrain;
 
-    public MainFrame(TriviaMazeBrain triviaMazeBrain) {
-        mainFrame = new JFrame();
-        mainFrame.setTitle(TITLE);
-        mainFrame.setSize(500,500);
-        mainFrame.setIconImage(mazeIcon.getImage());
-        mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    public MainFrame(final TriviaMazeBrain theTriviaMazeBrain) {
+        theMainFrame = new JFrame();
+        theMainFrame.setTitle(theTitle);
+        theMainFrame.setSize(500,500);
+        theMainFrame.setIconImage(theMazeIcon.getImage());
+        theMainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        this.triviaMazeBrain = triviaMazeBrain;
-        setFrameLocation(mainFrame);
+        //this.triviaMazeBrain = triviaMazeBrain;
+        setFrameLocation(theMainFrame);
 
-        mainMenuPanel = new MainMenuPanel(mainFrame, triviaMazeBrain);
+        theMainMenuPanel = new MainMenuPanel(theMainFrame, theTriviaMazeBrain);
 
-        mainFrame.setVisible(true);
+        theMainFrame.setResizable(false);
+        theMainFrame.setVisible(true);
     }
 
-    public MainMenuPanel getMainMenuPanel() {
-        return mainMenuPanel;
+    public MainMenuPanel getTheMainMenuPanel() {
+        return theMainMenuPanel;
     }
 
-    private void setFrameLocation(JFrame frame) {
-        Dimension dimension = KIT.getScreenSize();
-        final int x = (int)((dimension.getWidth() - frame.getWidth()) / 2);
-        final int y = (int)((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x,y);
+    private void setFrameLocation(final JFrame theFrame) {
+        final Dimension dimension = theKit.getScreenSize();
+        final int x = (int)((dimension.getWidth() - theFrame.getWidth()) / 2);
+        final int y = (int)((dimension.getHeight() - theFrame.getHeight()) / 2);
+        theFrame.setLocation(x,y);
     }
 }
