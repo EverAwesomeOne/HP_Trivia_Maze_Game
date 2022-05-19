@@ -2,7 +2,7 @@ package Model;
 
 public class Door {
     private boolean myLocked;
-    private final boolean myFirstTime;
+    private boolean myFirstTime;
     private final QuestionAnswer myQuestionAnswer;
 
     Door() {
@@ -14,8 +14,12 @@ public class Door {
         return myLocked;
     }
 
-    boolean wasVisited() {
+    public boolean wasFirstTime() {
         return myFirstTime;
+    }
+
+    public void setFirstTime(final boolean theFirstTime) {
+        myFirstTime = theFirstTime;
     }
 
     public void lockDoor() {

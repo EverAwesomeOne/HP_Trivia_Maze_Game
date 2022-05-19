@@ -20,6 +20,7 @@ public class TriviaMazeBrain {
     private MazePanel myMazePanel;
 
     public final static int MAZE_LENGTH = 4;
+    public final static String MOVE_FREELY = "Move freely";
 
     public static void main(final String[] theArgs) {
         new TriviaMazeBrain();
@@ -42,9 +43,14 @@ public class TriviaMazeBrain {
         final Direction directionToMove = Direction.valueOf(theDirectionType);
         final Door chosenDoor = myMaze.getCurrentRoom().getDoor(directionToMove);
         // check first time of door to move freely
-        final QuestionAnswer qa = chosenDoor.getQuestion();
-        qa.getQuestionAnswerFromDatabase(myStatement);
-        myGamePanel.askQuestion(qa.getQuestionList(), theDirectionType);
+        if (chosenDoor.wasFirstTime()) {
+            final QuestionAnswer qa = chosenDoor.getQuestion();
+            qa.getQuestionAnswerFromDatabase(myStatement);
+            myGamePanel.askQuestion(qa.getQuestionList(), theDirectionType);
+            chosenDoor.setFirstTime(false);
+        } else {
+            moveCharacter(MOVE_FREELY, theDirectionType);
+        }
     }
 
     public void moveCharacter(final String theUserAnswer, final String theDirectionType) {
@@ -53,18 +59,23 @@ public class TriviaMazeBrain {
         final Door chosenDoor = myMaze.getCurrentRoom().getDoor(directionToMove);
         final QuestionAnswer qa = chosenDoor.getQuestion();
 
-        if (!qa.selectedCorrectAnswer(theUserAnswer)) {
-            chosenDoor.lockDoor();
-            myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
-        }
-
-        if (!myMaze.hasValidPaths()) {
-            myGamePanel.displayLosingMessageBox();
-        }
-
-        if(!chosenDoor.isLocked()) {
+        if (MOVE_FREELY.equals(theUserAnswer)) {
             myMaze.updatePosition(directionToMove);
+        } else {
+            if (!qa.selectedCorrectAnswer(theUserAnswer)) {
+                chosenDoor.lockDoor();
+                myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
+            }
+
+            if (!myMaze.hasValidPaths()) {
+                myGamePanel.displayLosingMessageBox();
+            }
+
+            if(!chosenDoor.isLocked()) {
+                myMaze.updatePosition(directionToMove);
+            }
         }
+
         myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(),
                 myMaze.getCharacterColumn());
     }
