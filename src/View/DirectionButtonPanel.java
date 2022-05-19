@@ -66,7 +66,7 @@ public class DirectionButtonPanel {
     private void addArrowActionListener(final BasicArrowButton theArrowButton,
                                         final String theArrowDirection) {
         theArrowButton.addActionListener(
-                e -> myTriviaMazeBrain.move(theArrowDirection)
+                e -> myTriviaMazeBrain.setUpQuestion(theArrowDirection)
         );
     }
 

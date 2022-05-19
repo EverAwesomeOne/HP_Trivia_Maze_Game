@@ -174,7 +174,7 @@ class AnswerPanel {
 
         myQuestionPanel.removeQuestion();
 
-        myTriviaMazeBrain.move2(myUserAnswer, myDirectionType);
+        myTriviaMazeBrain.moveCharacter(myUserAnswer, myDirectionType);
 
         myDirectionButtonPanel.setDirectionButtonsVisibility();
     }
