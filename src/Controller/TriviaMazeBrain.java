@@ -33,7 +33,6 @@ public class TriviaMazeBrain {
         maze = new Maze(MAZE_LENGTH);
         openDatabaseConnection();
         mainFrame = new MainFrame(this);
-
     }
 
     public void move(String directionType) {
@@ -44,7 +43,7 @@ public class TriviaMazeBrain {
         // check first time of door to move freely
         QuestionAnswer qa = chosenDoor.getQuestion();
         qa.getQuestionAnswerFromDatabase(stmt);
-        gamePanel.askQuestion(qa.getQuestionList(), directionType);
+        gamePanel.askQuestion(qa.getMyQuestionList(), directionType);
     }
 
     public void move2 (String userAnswer, String directionType) {
@@ -63,14 +62,14 @@ public class TriviaMazeBrain {
             gamePanel.displayLosingMessageBox();
         }
 
-        if(!chosenDoor.isLocked()) {
+        if(!chosenDoor.isMyLocked()) {
             maze.updatePosition(directionToMove);
         }
-        mazePanel.updateCharacterPlacement(maze.getCharacterRow(), maze.getCharacterColumn());
+        mazePanel.updateCharacterPlacement(maze.getMyCharacterRow(), maze.getMyCharacterColumn());
     }
 
     public boolean checkIsLockedStatus(String directionType) {
-        return !maze.getCurrentRoom().getDoor(Direction.valueOf(directionType)).isLocked();
+        return !maze.getCurrentRoom().getDoor(Direction.valueOf(directionType)).isMyLocked();
     }
 
     public void resetGameState() {

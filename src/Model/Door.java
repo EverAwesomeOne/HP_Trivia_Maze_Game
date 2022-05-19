@@ -1,28 +1,28 @@
 package Model;
 
 public class Door {
-    private boolean locked;
-    private boolean firstTime;
-    private QuestionAnswer questionAnswer;
+    private boolean myLocked;
+    private final boolean myFirstTime;
+    private final QuestionAnswer myQuestionAnswer;
 
     Door() {
-        firstTime = true;
-        questionAnswer = new QuestionAnswer();
+        myFirstTime = true;
+        myQuestionAnswer = new QuestionAnswer();
     }
 
-    public boolean isLocked() {
-        return locked;
+    public boolean isMyLocked() {
+        return myLocked;
     }
 
     boolean wasVisited() {
-        return firstTime;
+        return myFirstTime;
     }
 
     public void lockDoor() {
-        locked = true;
+        myLocked = true;
     }
 
     public QuestionAnswer getQuestion() {
-        return questionAnswer;
+        return myQuestionAnswer;
     }
 }

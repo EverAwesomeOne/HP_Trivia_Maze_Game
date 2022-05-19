@@ -5,41 +5,40 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class QuestionAnswer {
-    private String question;
-    private String correctAnswer;
-    private String answer2;
-    private String answer3;
-    private String answer4;
-    private String[] questionList;
+    private String myQuestion;
+    private String myCorrectAnswer;
+    private String myAnswer2;
+    private String myAnswer3;
+    private String myAnswer4;
+    private final String[] myQuestionList;
 
     QuestionAnswer() {
-        question = "";
-        correctAnswer = "";
-        answer2 = "";
-        answer3 = "";
-        answer4 = "";
-        questionList = new String[5];
+        myQuestion = "";
+        myCorrectAnswer = "";
+        myAnswer2 = "";
+        myAnswer3 = "";
+        myAnswer4 = "";
+        myQuestionList = new String[5];
     }
 
-    public void getQuestionAnswerFromDatabase(Statement stmt) {
+    public void getQuestionAnswerFromDatabase(final Statement theStatement) {
 
         //query the database table for a random row
-        String query = "SELECT * FROM questions ORDER BY RANDOM() LIMIT 1";
+        final String query = "SELECT * FROM questions ORDER BY RANDOM() LIMIT 1";
 
         //don't need to close cause we do try - catch - resources
-        try (ResultSet rs = stmt.executeQuery(query)) {
+        try (ResultSet rs = theStatement.executeQuery(query)) {
 
-            question = rs.getString("QUESTION");
-            questionList[0] = question;
-            correctAnswer = rs.getString("CORRECT_ANSWER");
-            questionList[1] = correctAnswer;
-            answer2 = rs.getString("ANSWER_2");
-            questionList[2] = answer2;
-            answer3 = rs.getString("ANSWER_3");
-            questionList[3] = answer3;
-            answer4 = rs.getString("ANSWER_4");
-            questionList[4] = answer4;
-
+            myQuestion = rs.getString("QUESTION");
+            myQuestionList[0] = myQuestion;
+            myCorrectAnswer = rs.getString("CORRECT_ANSWER");
+            myQuestionList[1] = myCorrectAnswer;
+            myAnswer2 = rs.getString("ANSWER_2");
+            myQuestionList[2] = myAnswer2;
+            myAnswer3 = rs.getString("ANSWER_3");
+            myQuestionList[3] = myAnswer3;
+            myAnswer4 = rs.getString("ANSWER_4");
+            myQuestionList[4] = myAnswer4;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,12 +46,11 @@ public class QuestionAnswer {
         }
     }
 
-    public String[] getQuestionList() {
-        return questionList;
+    public String[] getMyQuestionList() {
+        return myQuestionList;
     }
 
-    public boolean selectedCorrectAnswer(String userAnswer) {
-        return userAnswer.equals(correctAnswer);
+    public boolean selectedCorrectAnswer(final String theUserAnswer) {
+        return theUserAnswer.equals(myCorrectAnswer);
     }
-
 }
