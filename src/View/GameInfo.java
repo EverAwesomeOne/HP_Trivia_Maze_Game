@@ -3,7 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameInfo extends JPanel {
+public class GameInfo {
 
     private final JPanel myGameInfoPanel;
 

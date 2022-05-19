@@ -5,7 +5,7 @@ import Controller.TriviaMazeBrain;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainMenuPanel extends JPanel {
+public class MainMenuPanel {
 
     private static final String TITLE = "Hodgepodge Trivia Maze";
 

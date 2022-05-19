@@ -5,15 +5,13 @@ import Controller.TriviaMazeBrain;
 import javax.swing.*;
 import java.awt.*;
 
-public class MazePanel extends JPanel {
+public class MazePanel {
 
-    private JPanel mazePanel;
-
-    private final ImageIcon iconEmptyRoom = new ImageIcon("src//View//Images//EmptyRoom.png");
-    private final ImageIcon iconCurrentRoom = new ImageIcon("src//View//Images//CurrentRoom.png");
-    private final ImageIcon iconStartRoom = new ImageIcon("src//View//Images//StartRoom.png");
-    private final ImageIcon iconEndRoom = new ImageIcon("src//View//Images//ExitRoom.png");
-    private final ImageIcon iconLockedRoom = new ImageIcon("src//View//Images//LockedRoom.png");
+    private static final ImageIcon iconEmptyRoom = new ImageIcon("src//View//Images//EmptyRoom.png");
+    private static final ImageIcon iconCurrentRoom = new ImageIcon("src//View//Images//CurrentRoom.png");
+    private static final ImageIcon iconStartRoom = new ImageIcon("src//View//Images//StartRoom.png");
+    private static final ImageIcon iconEndRoom = new ImageIcon("src//View//Images//ExitRoom.png");
+    private static final ImageIcon iconLockedRoom = new ImageIcon("src//View//Images//LockedRoom.png");
 
     private final int ROW = 4;
     private final int COL = 4;
@@ -32,7 +30,7 @@ public class MazePanel extends JPanel {
     public MazePanel(JPanel panel, TriviaMazeBrain triviaMazeBrain) {
         this.triviaMazeBrain = triviaMazeBrain;
 
-        mazePanel = new JPanel();
+        JPanel mazePanel = new JPanel();
         mazePanel.setLayout(new GridLayout(ROW,COL));
         mazePanel.setBorder(BorderFactory.createTitledBorder("Maze"));
 
