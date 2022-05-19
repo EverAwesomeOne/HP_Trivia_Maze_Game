@@ -3,11 +3,11 @@ package Model;
 public class Door {
     private boolean locked;
     private boolean firstTime;
-    private Question_Answer questionAnswer;
+    private QuestionAnswer questionAnswer;
 
     Door() {
         firstTime = true;
-        questionAnswer = new Question_Answer();
+        questionAnswer = new QuestionAnswer();
     }
 
     public boolean isLocked() {
@@ -22,7 +22,7 @@ public class Door {
         locked = true;
     }
 
-    public Question_Answer getQuestion() {
+    public QuestionAnswer getQuestion() {
         return questionAnswer;
     }
 }

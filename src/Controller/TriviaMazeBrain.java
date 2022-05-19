@@ -3,11 +3,10 @@ package Controller;
 import Model.Direction;
 import Model.Door;
 import Model.Maze;
-import Model.Question_Answer;
+import Model.QuestionAnswer;
 import View.*;
 import org.sqlite.SQLiteDataSource;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,7 +42,7 @@ public class TriviaMazeBrain {
         Direction directionToMove = Direction.valueOf(directionType);
         Door chosenDoor = maze.getCurrentRoom().getDoor(directionToMove);
         // check first time of door to move freely
-        Question_Answer qa = chosenDoor.getQuestion();
+        QuestionAnswer qa = chosenDoor.getQuestion();
         qa.getQuestionAnswerFromDatabase(stmt);
         gamePanel.askQuestion(qa.getQuestionList(), directionType);
     }
@@ -52,7 +51,7 @@ public class TriviaMazeBrain {
 
         Direction directionToMove = Direction.valueOf(directionType);
         Door chosenDoor = maze.getCurrentRoom().getDoor(directionToMove);
-        Question_Answer qa = chosenDoor.getQuestion();
+        QuestionAnswer qa = chosenDoor.getQuestion();
         //qa.getQuestionAnswerFromDatabase(stmt);
 
         if (!qa.selectedCorrectAnswer(userAnswer)) {

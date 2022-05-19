@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Question_Answer {
+public class QuestionAnswer {
     private String question;
     private String correctAnswer;
     private String answer2;
@@ -12,7 +12,7 @@ public class Question_Answer {
     private String answer4;
     private String[] questionList;
 
-    Question_Answer() {
+    QuestionAnswer() {
         question = "";
         correctAnswer = "";
         answer2 = "";
