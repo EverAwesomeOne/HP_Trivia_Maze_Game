@@ -7,111 +7,109 @@ import java.awt.*;
 
 public class MazePanel {
 
-    private static final ImageIcon iconEmptyRoom = new ImageIcon("src//View//Images//EmptyRoom.png");
-    private static final ImageIcon iconCurrentRoom = new ImageIcon("src//View//Images//CurrentRoom.png");
-    private static final ImageIcon iconStartRoom = new ImageIcon("src//View//Images//StartRoom.png");
-    private static final ImageIcon iconEndRoom = new ImageIcon("src//View//Images//ExitRoom.png");
-    private static final ImageIcon iconLockedRoom = new ImageIcon("src//View//Images//LockedRoom.png");
+    private static final ImageIcon ICON_EMPTY_ROOM = new ImageIcon("src//View//Images//EmptyRoom.png");
+    private static final ImageIcon ICON_CURRENT_ROOM = new ImageIcon("src//View//Images//CurrentRoom.png");
+    private static final ImageIcon ICON_START_ROOM = new ImageIcon("src//View//Images//StartRoom.png");
+    private static final ImageIcon ICON_END_ROOM = new ImageIcon("src//View//Images//ExitRoom.png");
+    private static final ImageIcon ICON_LOCKED_ROOM = new ImageIcon("src//View//Images//LockedRoom.png");
 
-    private final int ROW = 4;
-    private final int COL = 4;
+    private static final int ROW = TriviaMazeBrain.MAZE_LENGTH;
+    private final int COL = ROW;
+    // should we have a constant for the starting row and column of the character?
 
-    // create getter methods?
-    private int currentRow;
-    private int currentCol;
+    private int myCurrentRow;
+    private int myCurrentCol;
 
-    private JLabel[][] roomImages;
-    private JLabel startRoom;
-    private JLabel endRoom;
-    private JLabel initializeRoom;
+    private JLabel[][] myRoomImages;
 
-    private TriviaMazeBrain triviaMazeBrain;
+    private final TriviaMazeBrain myTriviaMazeBrain;
 
-    public MazePanel(JPanel panel, TriviaMazeBrain triviaMazeBrain) {
-        this.triviaMazeBrain = triviaMazeBrain;
+    public MazePanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain) {
+        myTriviaMazeBrain = theTriviaMazeBrain;
 
-        JPanel mazePanel = new JPanel();
-        mazePanel.setLayout(new GridLayout(ROW,COL));
+        final JPanel mazePanel = new JPanel();
+        mazePanel.setLayout(new GridLayout(ROW, COL));
         mazePanel.setBorder(BorderFactory.createTitledBorder("Maze"));
 
         initializeMaze();
+        addImagesToMazePanel(mazePanel);
 
-        // add each JLabel stored in roomImages to mazePanel
-        // make own method?
-        for (int i = 0; i < ROW; i++) {
-            for (int j = 0; j < COL; j++) {
-                mazePanel.add(roomImages[i][j]);
-            }
-        }
-
-        panel.add(mazePanel);
+        theGamePanel.add(mazePanel);
 
         mazePanel.setVisible(true);
     }
 
+    private void addImagesToMazePanel(JPanel theMazePanel) {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                theMazePanel.add(myRoomImages[i][j]);
+            }
+        }
+    }
+
     private void initializeMaze() {
-        roomImages = new JLabel[ROW][COL];
+        myRoomImages = new JLabel[ROW][COL];
 
         // initialize all rooms to empty rooms
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                initializeRoom = new JLabel();
-                initializeRoom.setIcon(iconEmptyRoom);
-                roomImages[i][j] = initializeRoom;
+                final JLabel initializeRoom = new JLabel();
+                initializeRoom.setIcon(ICON_EMPTY_ROOM);
+                myRoomImages[i][j] = initializeRoom;
             }
         }
 
         // initialize start room to show current position
-        roomImages[0][0] = setStartRoom();
+        myRoomImages[0][0] = setStartRoom();
 
         // initialize end room to show target end room
-        roomImages[3][3] = setEndRoom();
+        myRoomImages[ROW - 1][COL - 1] = setEndRoom();
 
         // set current position in maze
-        currentRow = 0;
-        currentCol = 0;
+        myCurrentRow = 0;
+        myCurrentCol = 0;
     }
 
-    public void updateCharacterPlacement(int row, int col) {
-        setOldRoomIcon(currentRow, currentCol);
-        setCurrentRoomIcon(row, col);
-        currentRow = row;
-        currentCol = col;
+    public void updateCharacterPlacement(final int theRow, final int theCol) {
+        setOldRoomIcon(myCurrentRow, myCurrentCol);
+        setCurrentRoomIcon(theRow, theCol);
+        myCurrentRow = theRow;
+        myCurrentCol = theCol;
     }
 
-    public boolean validDirection(String direction) {
-        return triviaMazeBrain.checkIsLockedStatus(direction);
+    public boolean validDirection(final String theDirection) {
+        return myTriviaMazeBrain.checkIsLockedStatus(theDirection);
     }
 
-    private void setLockedRoomIcon(int row, int col) {
-        roomImages[row][col].setIcon(iconLockedRoom);
+    private void setLockedRoomIcon(final int theRow, final int theCol) {
+        myRoomImages[theRow][theCol].setIcon(ICON_LOCKED_ROOM);
     }
 
-    private void setCurrentRoomIcon(int row, int col) {
-        roomImages[row][col].setIcon(iconCurrentRoom);
+    private void setCurrentRoomIcon(final int theRow, final int theCol) {
+        myRoomImages[theRow][theCol].setIcon(ICON_CURRENT_ROOM);
     }
 
-    private void setOldRoomIcon(int row, int col) {
-        if (row == 0 && col == 0) {
-            roomImages[row][col].setIcon(iconStartRoom);
+    private void setOldRoomIcon(final int theRow, final int theCol) {
+        if (theRow == 0 && theCol == 0) {
+            myRoomImages[theRow][theCol].setIcon(ICON_START_ROOM);
         }
-        else if (row == 3 && col == 3) {
-            roomImages[row][col].setIcon(iconEndRoom);
+        else if (theRow == ROW - 1 && theCol == COL - 1) {
+            myRoomImages[theRow][theCol].setIcon(ICON_END_ROOM);
         }
         else {
-            roomImages[row][col].setIcon(iconEmptyRoom);
+            myRoomImages[theRow][theCol].setIcon(ICON_EMPTY_ROOM);
         }
     }
 
     private JLabel setStartRoom() {
-        startRoom = new JLabel();
-        startRoom.setIcon(iconCurrentRoom);
+        final JLabel startRoom = new JLabel();
+        startRoom.setIcon(ICON_CURRENT_ROOM);
         return startRoom;
     }
 
     private JLabel setEndRoom() {
-        endRoom = new JLabel();
-        endRoom.setIcon(iconEndRoom);
+        final JLabel endRoom = new JLabel();
+        endRoom.setIcon(ICON_END_ROOM);
         return endRoom;
     }
 }
