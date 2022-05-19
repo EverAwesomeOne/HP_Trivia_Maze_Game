@@ -139,18 +139,23 @@ class AnswerPanel {
 
             organizeVerticalBox(verticalBox, radioButtonGroup, answerButton, answerText);
         }
-        return getQuestionTypePanel(multiChoiceQPanel, questionLabel, verticalBox, radioButtonGroup);
+        return getQuestionTypePanel(multiChoiceQPanel, questionLabel,
+                verticalBox, radioButtonGroup);
     }
 
-    private void organizeVerticalBox(final Box theVerticalBox, final ButtonGroup theRadioButtonGroup,
-                                     final JRadioButton theAnswerButton, final String theTextForButton) {
+    private void organizeVerticalBox(final Box theVerticalBox,
+                                     final ButtonGroup theRadioButtonGroup,
+                                     final JRadioButton theAnswerButton,
+                                     final String theTextForButton) {
         theVerticalBox.add(theAnswerButton);
         theRadioButtonGroup.add(theAnswerButton);
         theAnswerButton.setActionCommand(theTextForButton);
     }
 
-    private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel, final JLabel theQuestionLabel,
-                                        final Box theVerticalBox, final ButtonGroup theRadioButtonGroup) {
+    private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel,
+                                        final JLabel theQuestionLabel,
+                                        final Box theVerticalBox,
+                                        final ButtonGroup theRadioButtonGroup) {
         theQuestionTypePanel.add(theVerticalBox);
 
         final JButton submitAButton = new JButton("SUBMIT");
