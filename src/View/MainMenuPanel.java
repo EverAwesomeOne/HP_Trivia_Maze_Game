@@ -16,11 +16,9 @@ public class MainMenuPanel {
 
     private final JPanel myMainPanel;
 
-    private final JLabel myGameTitle;
-
     private GamePanel myGamePanel;
 
-    private TriviaMazeBrain myTriviaMazeBrain;
+    private final TriviaMazeBrain myTriviaMazeBrain;
 
     public MainMenuPanel(final JFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain) {
         myMainFrame = theMainFrame;
@@ -29,7 +27,7 @@ public class MainMenuPanel {
         myMainPanel = new JPanel();
         myMainPanel.setLayout(new BorderLayout());
 
-        myGameTitle = new JLabel(TITLE);
+        final JLabel myGameTitle = new JLabel(TITLE);
         myGameTitle.setHorizontalAlignment(JLabel.CENTER);
         myMainPanel.add(myGameTitle, BorderLayout.NORTH);
 

@@ -77,26 +77,22 @@ public class GamePanel {
     }
 
     private void addMenuActionListener(final JMenuItem theMenuItem, final String theMenuName) {
-        if (theMenuName.equals("Game Info")) {
-            theMenuItem.addActionListener(
+        switch (theMenuName) {
+            case "Game Info" -> theMenuItem.addActionListener(
                     e -> {
                         myGamePanel.setVisible(false);
                         myMainMenuBar.setVisible(false);
                         new GameInfo(myMainFrame, myGamePanel, myMainMenuBar);
                     }
             );
-        }
-        else if (theMenuName.equals("About Hodgepodge Team")) {
-            theMenuItem.addActionListener(
+            case "About Hodgepodge Team" -> theMenuItem.addActionListener(
                     e -> {
                         myGamePanel.setVisible(false);
                         myMainMenuBar.setVisible(false);
                         new AboutTeam(myMainFrame, myGamePanel, myMainMenuBar);
                     }
             );
-        }
-        else if (theMenuName.equals("Exit")) {
-            theMenuItem.addActionListener(
+            case "Exit" -> theMenuItem.addActionListener(
                     e -> {
                         myGamePanel.setVisible(false);
                         myMainMenuBar.setVisible(false);
@@ -106,10 +102,9 @@ public class GamePanel {
                         resetDirectionButtonPanel();
                     }
             );
-        }
-        // edit to include save game option
-        else {
-            theMenuItem.addActionListener(
+
+            // edit to include save game option
+            default -> theMenuItem.addActionListener(
                     e -> {
                         myGamePanel.setVisible(false);
                         myMainMenuBar.setVisible(false);

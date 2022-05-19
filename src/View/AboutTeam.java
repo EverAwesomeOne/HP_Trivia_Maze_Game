@@ -10,9 +10,12 @@ class AboutTeam {
         myAboutPanel = new JPanel();
         myAboutPanel.setLayout(new BorderLayout());
 
-        final JTextArea textField = new JTextArea("Hodgepodge Trivia Maze Team\n" +
-                "Maria Babko ~ Chloe Duncan ~ Edwin Solis-Bruno\nUniversity of Washington\n" +
-                "TCSS 360 A, Professor Tom Capaul\nMay 2022");
+        final JTextArea textField = new JTextArea("""
+                Hodgepodge Trivia Maze Team
+                Maria Babko ~ Chloe Duncan ~ Edwin Solis-Bruno
+                University of Washington
+                TCSS 360 A, Professor Tom Capaul
+                May 2022""");
         textField.setEditable(false);
 
         final JButton okayButton = new JButton("OK");
