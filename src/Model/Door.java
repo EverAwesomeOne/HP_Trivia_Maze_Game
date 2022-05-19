@@ -10,7 +10,7 @@ public class Door {
         myQuestionAnswer = new QuestionAnswer();
     }
 
-    public boolean isMyLocked() {
+    public boolean isLocked() {
         return myLocked;
     }
 

@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Maze {
@@ -47,7 +46,7 @@ public class Maze {
         final boolean[] visited = new boolean[myMaze.length * myMaze[0].length];
 
         // Create a queue for BFS through the remaining room connections
-        final LinkedList<Integer> queue = new LinkedList<Integer>();
+        final LinkedList<Integer> queue = new LinkedList<>();
 
         // Mark the current node as visited and enqueue it
         visited[roomNumber] = true;
@@ -63,14 +62,13 @@ public class Maze {
 
             // Get all adjacent nodes of the dequeued node
             // If an adjacent node has not been visited, then mark it visited and enqueue it
-            final Iterator<Integer> i = myRoomConnections[roomNumber].listIterator();
-            while (i.hasNext()) {
-                int n = i.next();
+            for (int n : myRoomConnections[roomNumber]) {
                 if (!visited[n]) {
                     visited[n] = true;
                     queue.add(n);
                 }
             }
+
         }
         return false;
     }
@@ -100,20 +98,20 @@ public class Maze {
             final int columnIndex = i % myMaze[0].length;
 
             if (myRoomConnections[i] == null) {
-                myRoomConnections[i] = new LinkedList<Integer>();
+                myRoomConnections[i] = new LinkedList<>();
             }
 
             // we only want to add valid edges to our undirected graph
-            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.NORTH).isMyLocked()) {
+            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.NORTH).isLocked()) {
                 myRoomConnections[i].add(i - myMaze.length);
             }
-            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.EAST).isMyLocked()) {
+            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.EAST).isLocked()) {
                 myRoomConnections[i].add(i + 1);
             }
-            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.SOUTH).isMyLocked()) {
+            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.SOUTH).isLocked()) {
                 myRoomConnections[i].add(i + myMaze.length);
             }
-            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.WEST).isMyLocked()) {
+            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.WEST).isLocked()) {
                 myRoomConnections[i].add(i - 1);
             }
         }
@@ -123,10 +121,10 @@ public class Maze {
         // we want doors to adjacent rooms to be shared
 
         // east and west door of adjacent rooms
-        for (int i = 0; i < myMaze.length; i++) {
-            for (int j = 0; j < myMaze[i].length - 1; j++) {
-                final Door rightRoomWestDoor = myMaze[i][j + 1].getDoor(Direction.WEST);
-                myMaze[i][j].setSharedDoor(Direction.EAST, rightRoomWestDoor);
+        for (final Room[] rowOfRooms : myMaze) {
+            for (int singleRoom = 0; singleRoom < rowOfRooms.length - 1; singleRoom++) {
+                final Door rightRoomWestDoor = rowOfRooms[singleRoom + 1].getDoor(Direction.WEST);
+                rowOfRooms[singleRoom].setSharedDoor(Direction.EAST, rightRoomWestDoor);
             }
         }
 
@@ -153,11 +151,11 @@ public class Maze {
         return myMaze[myCharacterRow][myCharacterColumn];
     }
 
-    public int getMyCharacterRow() {
+    public int getCharacterRow() {
         return myCharacterRow;
     }
 
-    public int getMyCharacterColumn() {
+    public int getCharacterColumn() {
         return myCharacterColumn;
     }
 }

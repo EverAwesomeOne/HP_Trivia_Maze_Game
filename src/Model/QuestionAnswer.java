@@ -46,7 +46,7 @@ public class QuestionAnswer {
         }
     }
 
-    public String[] getMyQuestionList() {
+    public String[] getQuestionList() {
         return myQuestionList;
     }
 
