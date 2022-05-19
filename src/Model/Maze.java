@@ -4,21 +4,21 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Maze {
-    private final Room[][] maze;
-    private int characterRow;
-    private int characterColumn;
-    private LinkedList<Integer>[] roomConnections;
+    private final Room[][] myMaze;
+    private int myCharacterRow;
+    private int myCharacterColumn;
+    private LinkedList<Integer>[] myRoomConnections;
 
-    public Maze(int theMazeLength) {
-        int chosenRows = theMazeLength;
-        int chosenColumns = theMazeLength;
-        characterRow = 0;
-        characterColumn = 0;
-        maze = new Room[chosenRows][chosenColumns];
+    public Maze(final int theMazeLength) {
+        final int chosenRows = theMazeLength;
+        final int chosenColumns = theMazeLength;
+        myCharacterRow = 0;
+        myCharacterColumn = 0;
+        myMaze = new Room[chosenRows][chosenColumns];
 
         for (int i = 0; i < chosenRows; i++) {
             for (int j = 0; j < chosenColumns; j++) {
-                maze[i][j] = new Room();
+                myMaze[i][j] = new Room();
             }
         }
 
@@ -27,27 +27,27 @@ public class Maze {
         createInitialGraph();
     }
 
-    public void updatePosition(Direction directionToMove) {
-        if (directionToMove == Direction.NORTH) {
-            characterRow -= 1;
-        } else if (directionToMove == Direction.EAST) {
-            characterColumn += 1;
-        } else if (directionToMove == Direction.SOUTH) {
-            characterRow += 1;
+    public void updatePosition(final Direction theDirectionToMove) {
+        if (theDirectionToMove == Direction.NORTH) {
+            myCharacterRow -= 1;
+        } else if (theDirectionToMove == Direction.EAST) {
+            myCharacterColumn += 1;
+        } else if (theDirectionToMove == Direction.SOUTH) {
+            myCharacterRow += 1;
         } else {
-            characterColumn -= 1;
+            myCharacterColumn -= 1;
         }
     }
 
     // performs a BFS traversal from the current room
     public boolean hasValidPaths() {
-        int roomNumber = characterRow * maze.length + characterColumn;
+        int roomNumber = myCharacterRow * myMaze.length + myCharacterColumn;
 
         // Mark all the nodes as not visited
-        boolean[] visited = new boolean[maze.length * maze[0].length];
+        final boolean[] visited = new boolean[myMaze.length * myMaze[0].length];
 
         // Create a queue for BFS through the remaining room connections
-        LinkedList<Integer> queue = new LinkedList<Integer>();
+        final LinkedList<Integer> queue = new LinkedList<Integer>();
 
         // Mark the current node as visited and enqueue it
         visited[roomNumber] = true;
@@ -57,13 +57,13 @@ public class Maze {
             // Dequeue a node from queue and check if it is the exit room
             roomNumber = queue.poll();
 
-            if (roomNumber == maze.length * maze[0].length - 1) {
+            if (roomNumber == myMaze.length * myMaze[0].length - 1) {
                 return true;
             }
 
             // Get all adjacent nodes of the dequeued node
             // If an adjacent node has not been visited, then mark it visited and enqueue it
-            Iterator<Integer> i = roomConnections[roomNumber].listIterator();
+            final Iterator<Integer> i = myRoomConnections[roomNumber].listIterator();
             while (i.hasNext()) {
                 int n = i.next();
                 if (!visited[n]) {
@@ -72,50 +72,49 @@ public class Maze {
                 }
             }
         }
-
         return false;
     }
 
-    public void removeEdgeFromGraph(Direction directionToMove) {
-        int firstNodeToRemoveFrom = characterRow * maze.length + characterColumn;
+    public void removeEdgeFromGraph(final Direction theDirectionToMove) {
+        final int firstNodeToRemoveFrom = myCharacterRow * myMaze.length + myCharacterColumn;
         int secondNodeToRemoveFrom = firstNodeToRemoveFrom;
 
-        if (directionToMove == Direction.NORTH) {
-            secondNodeToRemoveFrom -= maze.length;
-        } else if (directionToMove == Direction.EAST) {
+        if (theDirectionToMove == Direction.NORTH) {
+            secondNodeToRemoveFrom -= myMaze.length;
+        } else if (theDirectionToMove == Direction.EAST) {
             secondNodeToRemoveFrom += 1;
-        } else if (directionToMove == Direction.SOUTH) {
-            secondNodeToRemoveFrom += maze.length;
+        } else if (theDirectionToMove == Direction.SOUTH) {
+            secondNodeToRemoveFrom += myMaze.length;
         } else {
             secondNodeToRemoveFrom -= 1;
         }
 
-        roomConnections[firstNodeToRemoveFrom].remove((Integer) secondNodeToRemoveFrom);
-        roomConnections[secondNodeToRemoveFrom].remove((Integer) firstNodeToRemoveFrom);
+        myRoomConnections[firstNodeToRemoveFrom].remove((Integer) secondNodeToRemoveFrom);
+        myRoomConnections[secondNodeToRemoveFrom].remove((Integer) firstNodeToRemoveFrom);
     }
 
     private void createInitialGraph() {
-        roomConnections = new LinkedList[maze.length * maze[0].length];
-        for (int i = 0; i < roomConnections.length; i++) {
-            int rowIndex = i / maze.length;
-            int columnIndex = i % maze[0].length;
+        myRoomConnections = new LinkedList[myMaze.length * myMaze[0].length];
+        for (int i = 0; i < myRoomConnections.length; i++) {
+            final int rowIndex = i / myMaze.length;
+            final int columnIndex = i % myMaze[0].length;
 
-            if (roomConnections[i] == null) {
-                roomConnections[i] = new LinkedList<Integer>();
+            if (myRoomConnections[i] == null) {
+                myRoomConnections[i] = new LinkedList<Integer>();
             }
 
             // we only want to add valid edges to our undirected graph
-            if (!maze[rowIndex][columnIndex].getDoor(Direction.NORTH).isLocked()) {
-                roomConnections[i].add(i - maze.length);
+            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.NORTH).isMyLocked()) {
+                myRoomConnections[i].add(i - myMaze.length);
             }
-            if (!maze[rowIndex][columnIndex].getDoor(Direction.EAST).isLocked()) {
-                roomConnections[i].add(i + 1);
+            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.EAST).isMyLocked()) {
+                myRoomConnections[i].add(i + 1);
             }
-            if (!maze[rowIndex][columnIndex].getDoor(Direction.SOUTH).isLocked()) {
-                roomConnections[i].add(i + maze.length);
+            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.SOUTH).isMyLocked()) {
+                myRoomConnections[i].add(i + myMaze.length);
             }
-            if (!maze[rowIndex][columnIndex].getDoor(Direction.WEST).isLocked()) {
-                roomConnections[i].add(i - 1);
+            if (!myMaze[rowIndex][columnIndex].getDoor(Direction.WEST).isMyLocked()) {
+                myRoomConnections[i].add(i - 1);
             }
         }
     }
@@ -124,41 +123,41 @@ public class Maze {
         // we want doors to adjacent rooms to be shared
 
         // east and west door of adjacent rooms
-        for (int i = 0; i < maze.length; i++) {
-            for (int j = 0; j < maze[i].length - 1; j++) {
-                Door rightRoomWestDoor = maze[i][j + 1].getDoor(Direction.WEST);
-                maze[i][j].setSharedDoor(Direction.EAST, rightRoomWestDoor);
+        for (int i = 0; i < myMaze.length; i++) {
+            for (int j = 0; j < myMaze[i].length - 1; j++) {
+                final Door rightRoomWestDoor = myMaze[i][j + 1].getDoor(Direction.WEST);
+                myMaze[i][j].setSharedDoor(Direction.EAST, rightRoomWestDoor);
             }
         }
 
         // north and south doors of adjacent rooms
-        for (int i = 0; i < maze.length - 1; i++) {
-            for (int j = 0; j < maze[i].length; j++) {
-                Door bottomRoomNorthDoor = maze[i + 1][j].getDoor(Direction.NORTH);
-                maze[i][j].setSharedDoor(Direction.SOUTH, bottomRoomNorthDoor);
+        for (int i = 0; i < myMaze.length - 1; i++) {
+            for (int j = 0; j < myMaze[i].length; j++) {
+                final Door bottomRoomNorthDoor = myMaze[i + 1][j].getDoor(Direction.NORTH);
+                myMaze[i][j].setSharedDoor(Direction.SOUTH, bottomRoomNorthDoor);
             }
         }
     }
 
     private void lockEdgeDoors() {
-        for (int i = 0; i < maze.length; i++) {
+        for (int i = 0; i < myMaze.length; i++) {
             // we want to lock the doors on the edge of the maze since there are no rooms beyond that
-            maze[i][0].getDoor(Direction.WEST).lockDoor(); // left
-            maze[i][maze[i].length - 1].getDoor(Direction.EAST).lockDoor(); // right
-            maze[0][i].getDoor(Direction.NORTH).lockDoor(); // top
-            maze[maze.length - 1][i].getDoor(Direction.SOUTH).lockDoor(); // bottom
+            myMaze[i][0].getDoor(Direction.WEST).lockDoor(); // left
+            myMaze[i][myMaze[i].length - 1].getDoor(Direction.EAST).lockDoor(); // right
+            myMaze[0][i].getDoor(Direction.NORTH).lockDoor(); // top
+            myMaze[myMaze.length - 1][i].getDoor(Direction.SOUTH).lockDoor(); // bottom
         }
     }
 
     public Room getCurrentRoom() {
-        return maze[characterRow][characterColumn];
+        return myMaze[myCharacterRow][myCharacterColumn];
     }
 
-    public int getCharacterRow() {
-        return characterRow;
+    public int getMyCharacterRow() {
+        return myCharacterRow;
     }
 
-    public int getCharacterColumn() {
-        return characterColumn;
+    public int getMyCharacterColumn() {
+        return myCharacterColumn;
     }
 }

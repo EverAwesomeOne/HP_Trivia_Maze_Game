@@ -1,39 +1,39 @@
 package Model;
 
 public class Room {
-    private Door northDoor;
-    private Door eastDoor;
-    private Door southDoor;
-    private Door westDoor;
+    private Door myNorthDoor;
+    private Door myEastDoor;
+    private Door mySouthDoor;
+    private Door myWestDoor;
 
     Room() {
-        northDoor = new Door();
-        eastDoor = new Door();
-        southDoor = new Door();
-        westDoor = new Door();
+        myNorthDoor = new Door();
+        myEastDoor = new Door();
+        mySouthDoor = new Door();
+        myWestDoor = new Door();
     }
 
-    public Door getDoor(Direction direction) {
-        if (direction == Direction.NORTH) {
-            return northDoor;
-        } else if (direction == Direction.EAST) {
-            return eastDoor;
-        } else if (direction == Direction.SOUTH) {
-            return southDoor;
+    public Door getDoor(final Direction theDirection) {
+        if (theDirection == Direction.NORTH) {
+            return myNorthDoor;
+        } else if (theDirection == Direction.EAST) {
+            return myEastDoor;
+        } else if (theDirection == Direction.SOUTH) {
+            return mySouthDoor;
         } else {
-            return westDoor;
+            return myWestDoor;
         }
     }
 
-    void setSharedDoor(Direction direction, Door doorToShare) {
-        if (direction == Direction.NORTH) {
-            northDoor = doorToShare;
-        } else if (direction == Direction.EAST) {
-            eastDoor = doorToShare;
-        } else if (direction == Direction.SOUTH) {
-            southDoor = doorToShare;
+    void setSharedDoor(final Direction theDirection, final Door theDoorToShare) {
+        if (theDirection == Direction.NORTH) {
+            myNorthDoor = theDoorToShare;
+        } else if (theDirection == Direction.EAST) {
+            myEastDoor = theDoorToShare;
+        } else if (theDirection == Direction.SOUTH) {
+            mySouthDoor = theDoorToShare;
         } else {
-            westDoor = doorToShare;
+            myWestDoor = theDoorToShare;
         }
     }
 }
