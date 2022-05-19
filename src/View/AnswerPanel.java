@@ -131,9 +131,8 @@ class AnswerPanel {
         final Box verticalBox = Box.createVerticalBox();
         final ButtonGroup radioButtonGroup = new ButtonGroup();
 
-        //for (int i = 0; i < questionListRandomIndex.length; i++) {
-        for (int listRandomIndex : randomizeAnswerOrderList) {
-            final String answerText = myAnswerArray[listRandomIndex];
+        for (int i = 0; i < randomizeAnswerOrderList.length; i++) {
+            final String answerText = myAnswerArray[i];
             final JRadioButton answerButton = new JRadioButton(answerText);
 
             organizeVerticalBox(verticalBox, radioButtonGroup, answerButton, answerText);

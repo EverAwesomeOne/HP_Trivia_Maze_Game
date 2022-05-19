@@ -5,11 +5,11 @@ import java.awt.*;
 
 public class GameInfo extends JPanel {
 
-    private JPanel gameInfoPanel;
+    private final JPanel myGameInfoPanel;
 
-    GameInfo(JFrame mainFrame, JPanel gamePanel, JMenuBar mainMenuBar) {
-        gameInfoPanel = new JPanel();
-        gameInfoPanel.setLayout(new BorderLayout());
+    GameInfo(final JFrame theMainFrame, final JPanel theGamePanel, final JMenuBar theMainMenuBar) {
+        myGameInfoPanel = new JPanel();
+        myGameInfoPanel.setLayout(new BorderLayout());
 
         JTextField textField = new JTextField("Add Text");
         textField.setHorizontalAlignment(JTextField.CENTER);
@@ -18,17 +18,17 @@ public class GameInfo extends JPanel {
         JButton OK = new JButton("OK");
         OK.addActionListener(
                 e -> {
-                    gameInfoPanel.setVisible(false);
-                    gamePanel.setVisible(true);
-                    mainMenuBar.setVisible(true);
+                    myGameInfoPanel.setVisible(false);
+                    theGamePanel.setVisible(true);
+                    theMainMenuBar.setVisible(true);
                 }
         );
 
-        gameInfoPanel.add(textField, BorderLayout.CENTER);
-        gameInfoPanel.add(OK, BorderLayout.SOUTH);
+        myGameInfoPanel.add(textField, BorderLayout.CENTER);
+        myGameInfoPanel.add(OK, BorderLayout.SOUTH);
 
-        mainFrame.add(gameInfoPanel);
+        theMainFrame.add(myGameInfoPanel);
 
-        gameInfoPanel.setVisible(true);
+        myGameInfoPanel.setVisible(true);
     }
 }
