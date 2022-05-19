@@ -9,7 +9,9 @@ public class Maze {
     private int characterColumn;
     private LinkedList<Integer>[] roomConnections;
 
-    public Maze(int chosenRows, int chosenColumns) {
+    public Maze(int theMazeLength) {
+        int chosenRows = theMazeLength;
+        int chosenColumns = theMazeLength;
         characterRow = 0;
         characterColumn = 0;
         maze = new Room[chosenRows][chosenColumns];

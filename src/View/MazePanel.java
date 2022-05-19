@@ -27,8 +27,6 @@ public class MazePanel extends JPanel {
     private JLabel endRoom;
     private JLabel initializeRoom;
 
-    boolean[] lockedDirection = new boolean[4];
-
     private TriviaMazeBrain triviaMazeBrain;
 
     public MazePanel(JPanel panel, TriviaMazeBrain triviaMazeBrain) {

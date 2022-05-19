@@ -20,6 +20,8 @@ public class TriviaMazeBrain {
     private MainFrame mainFrame;
     private MazePanel mazePanel;
 
+    private final static int MAZE_LENGTH = 4;
+
     public static void main(String[] args) {
         TriviaMazeBrain triviaMazeBrain = new TriviaMazeBrain();
     }
@@ -29,7 +31,7 @@ public class TriviaMazeBrain {
     }
 
     private void runGame() {
-        maze = new Maze(4, 4);
+        maze = new Maze(MAZE_LENGTH);
         openDatabaseConnection();
         mainFrame = new MainFrame(this);
 
@@ -73,7 +75,7 @@ public class TriviaMazeBrain {
     }
 
     public void resetGameState() {
-        maze = new Maze(4, 4);
+        maze = new Maze(MAZE_LENGTH);
     }
 
     public void openDatabaseConnection() {
