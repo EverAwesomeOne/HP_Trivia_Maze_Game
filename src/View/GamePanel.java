@@ -195,8 +195,8 @@ public class GamePanel {
     }
 
     public void displayLosingMessageBox() {
-        final String title = "Game Over :((";
-        final String losingMessage = "You're not a wizard, Harry";
+        final String title = "Game Over...Play Again!";
+        final String losingMessage = "Guess you're not a trivia wizard";
 
         setUpDialogBox(title, losingMessage);
     }

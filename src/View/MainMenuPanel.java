@@ -9,7 +9,7 @@ public class MainMenuPanel {
 
     private static final String TITLE = "Hodgepodge Trivia Maze";
 
-    private static final ImageIcon mazeIcon =
+    private static final ImageIcon MAZE_ICON =
             new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
 
     private final JFrame myMainFrame;
@@ -20,12 +20,35 @@ public class MainMenuPanel {
 
     private final TriviaMazeBrain myTriviaMazeBrain;
 
+    final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 22);
+    final static Font BUTTON_FONT = new Font("SansSerif", Font.BOLD, 18);
+
     public MainMenuPanel(final JFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain) {
         myMainFrame = theMainFrame;
         myTriviaMazeBrain = theTriviaMazeBrain;
 
         myMainPanel = new JPanel();
-        myMainPanel.setLayout(new BorderLayout());
+        myMainPanel.setLayout(new GridLayout(1,3));
+
+        final JPanel gameTitlePanel = new JPanel();
+        gameTitlePanel.setLayout(new GridLayout(2,1));
+
+        final JLabel myGameTitle = new JLabel("<html><div style='text-align: center;'>" + "Hodgepodge<br>Trivia Maze<br>Game" + "</div></html>");
+        myGameTitle.setHorizontalAlignment(JLabel.CENTER);
+        myGameTitle.setFont(TITLE_FONT);
+
+        gameTitlePanel.add(myGameTitle);
+        gameTitlePanel.add(setupButtonPanel());
+
+        myMainPanel.add(new JLabel(MAZE_ICON));
+        myMainPanel.add(gameTitlePanel);
+        myMainPanel.add(new JLabel(MAZE_ICON));
+
+        //myMainPanel.add(new JLabel());
+        //myMainPanel.add(setupButtonPanel());
+
+
+        /*myMainPanel.setLayout(new BorderLayout());
 
         final JLabel myGameTitle = new JLabel(TITLE);
         myGameTitle.setHorizontalAlignment(JLabel.CENTER);
@@ -33,7 +56,7 @@ public class MainMenuPanel {
 
         myMainPanel.add(setupButtonPanel(), BorderLayout.CENTER);
 
-        myMainPanel.add(new JLabel(mazeIcon), BorderLayout.SOUTH);
+        myMainPanel.add(new JLabel(mazeIcon), BorderLayout.SOUTH);*/
 
         theMainFrame.add(myMainPanel);
 
@@ -44,9 +67,11 @@ public class MainMenuPanel {
         JPanel mainMenuBtnPanel = new JPanel();
 
         JButton btnNewGame = new JButton("New Game");
+        btnNewGame.setFont(BUTTON_FONT);
         mainMenuBtnPanel.add(btnNewGame);
 
         JButton btnLoadGame = new JButton("Load Game");
+        btnLoadGame.setFont(BUTTON_FONT);
         mainMenuBtnPanel.add(btnLoadGame);
 
         addActionListener(btnNewGame, "New Game");
