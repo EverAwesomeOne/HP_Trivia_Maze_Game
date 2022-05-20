@@ -4,6 +4,8 @@ import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class GamePanel {
@@ -136,19 +138,23 @@ public class GamePanel {
 
         int selectRandomMessage = randomNumber.nextInt(winningMessageArray.length);
 
-        //setUpDialogBox(title, winningMessageArray[selectRandomMessage]);
-
         final JDialog endGameMessage = new JDialog();
         endGameMessage.setTitle(title);
 
-        final JButton exitGameButton = new JButton(winningMessageArray[selectRandomMessage]);
-        exitGameButton.addActionListener(
-                e -> {
-                    endGameMessage.setVisible(false);
-                }
-        );
+        final JLabel endGameLabel = new JLabel(winningMessageArray[selectRandomMessage]);
+        endGameLabel.setHorizontalAlignment(JLabel.CENTER);
+        endGameMessage.add(endGameLabel);
 
-        endGameMessage.add(exitGameButton);
+        final Timer timer = new Timer(2500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                endGameMessage.setVisible(false);
+                endGameMessage.dispose();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+
         endGameMessage.setSize(300, 100);
         endGameMessage.setLocationRelativeTo(null);
         endGameMessage.setVisible(true);
@@ -169,19 +175,23 @@ public class GamePanel {
 
         int selectRandomMessage = randomNumber.nextInt(winningMessageArray.length);
 
-        //setUpDialogBox(title, winningMessageArray[selectRandomMessage]);
-
         final JDialog endGameMessage = new JDialog();
         endGameMessage.setTitle(title);
 
-        final JButton exitGameButton = new JButton(winningMessageArray[selectRandomMessage]);
-        exitGameButton.addActionListener(
-                e -> {
-                    endGameMessage.setVisible(false);
-                }
-        );
+        final JLabel endGameLabel = new JLabel(winningMessageArray[selectRandomMessage]);
+        endGameLabel.setHorizontalAlignment(JLabel.CENTER);
+        endGameMessage.add(endGameLabel);
 
-        endGameMessage.add(exitGameButton);
+        final Timer timer = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                endGameMessage.setVisible(false);
+                endGameMessage.dispose();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+
         endGameMessage.setSize(300, 100);
         endGameMessage.setLocationRelativeTo(null);
         endGameMessage.setVisible(true);
