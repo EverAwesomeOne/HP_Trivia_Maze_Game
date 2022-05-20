@@ -62,14 +62,13 @@ public class TriviaMazeBrain {
 
         if (MOVE_FREELY.equals(theUserAnswer)) {
             myMaze.updatePosition(directionToMove);
-        } else {
+        }
+
+        else {
+
             if (!qa.selectedCorrectAnswer(theUserAnswer)) {
                 chosenDoor.lockDoor();
                 myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
-            }
-
-            if (!myMaze.hasValidPaths()) {
-                myGamePanel.displayLosingMessageBox();
             }
 
             if(!chosenDoor.isLocked()) {
@@ -81,8 +80,22 @@ public class TriviaMazeBrain {
         myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(),
                 myMaze.getCharacterColumn());
 
-        if (myMaze.getCharacterRow() == MAZE_LENGTH - 1 && myMaze.getCharacterColumn() == MAZE_LENGTH - 1) {
-            myGamePanel.displayWinningMessageBox();
+        // every time answer is correct (except for if you win), display correct answer message
+        if (qa.selectedCorrectAnswer(theUserAnswer)) {
+            if (myMaze.hasWon()) {
+                myGamePanel.displayWinningMessageBox();
+            } else {
+                myGamePanel.displayCorrectAnswerMessageBox();
+            }
+        }
+
+        // every time answer is incorrect (except for if you lose), display incorrect answer message
+        else if (!qa.selectedCorrectAnswer(theUserAnswer) && !MOVE_FREELY.equals(theUserAnswer)) {
+            if (!myMaze.hasValidPaths()) {
+                myGamePanel.displayLosingMessageBox();
+            } else {
+                myGamePanel.displayIncorrectAnswerMessageBox();
+            }
         }
     }
 
