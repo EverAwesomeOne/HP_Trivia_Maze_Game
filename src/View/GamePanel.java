@@ -66,8 +66,11 @@ public class GamePanel {
 
     private void setupMenuBar(final String theMenuTitle) {
         final JMenu addMenu = new JMenu(theMenuTitle);
-
         final JMenuItem menuItem = new JMenuItem(theMenuTitle);
+
+        final Font MENU_FONT = new Font("SansSerif", Font.BOLD, 16);
+        addMenu.setFont(MENU_FONT);
+        menuItem.setFont(MENU_FONT);
 
         addMenuActionListener(menuItem, theMenuTitle);
 
