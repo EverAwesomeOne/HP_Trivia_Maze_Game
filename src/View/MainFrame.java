@@ -9,7 +9,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class MainFrame {
 
-    private final static String TITLE = "Hodgepodge Trivia Maze";
+    private final static String TITLE = "Harry Potter Trivia Maze Game";
 
     private final static ImageIcon MAZE_ICON =
             new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
