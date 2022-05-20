@@ -38,6 +38,10 @@ public class Maze {
         }
     }
 
+    public boolean hasWon() {
+        return myCharacterRow == 3 && myCharacterColumn ==3;
+    }
+
     // performs a BFS traversal from the current room
     public boolean hasValidPaths() {
         int roomNumber = myCharacterRow * myMaze.length + myCharacterColumn;

@@ -4,6 +4,7 @@ import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class GamePanel {
 
@@ -120,6 +121,72 @@ public class GamePanel {
         }
     }
 
+    public void displayCorrectAnswerMessageBox() {
+        final String title = "Correct Answer! You're a wizard, Harry!";
+
+        final Random randomNumber = new Random();
+
+        final String winningMessage1 = "You're doing awesome :)";
+        final String winningMessage2 = "Keep it up!";
+        final String winningMessage3 = "Eek, one step closer!";
+        final String winningMessage4 = "You're on a roll~~";
+
+        final String[] winningMessageArray = {winningMessage1, winningMessage2,
+                                              winningMessage3, winningMessage4};
+
+        int selectRandomMessage = randomNumber.nextInt(winningMessageArray.length);
+
+        //setUpDialogBox(title, winningMessageArray[selectRandomMessage]);
+
+        final JDialog endGameMessage = new JDialog();
+        endGameMessage.setTitle(title);
+
+        final JButton exitGameButton = new JButton(winningMessageArray[selectRandomMessage]);
+        exitGameButton.addActionListener(
+                e -> {
+                    endGameMessage.setVisible(false);
+                }
+        );
+
+        endGameMessage.add(exitGameButton);
+        endGameMessage.setSize(300, 100);
+        endGameMessage.setLocationRelativeTo(null);
+        endGameMessage.setVisible(true);
+    }
+
+    public void displayIncorrectAnswerMessageBox() {
+        final String title = "Incorrect Answer";
+
+        final Random randomNumber = new Random();
+
+        final String winningMessage1 = "Dang, not quite";
+        final String winningMessage2 = "You were so close";
+        final String winningMessage3 = "Try again. You got this!";
+        final String winningMessage4 = "Oopsie, that wasn't right!";
+
+        final String[] winningMessageArray = {winningMessage1, winningMessage2,
+                winningMessage3, winningMessage4};
+
+        int selectRandomMessage = randomNumber.nextInt(winningMessageArray.length);
+
+        //setUpDialogBox(title, winningMessageArray[selectRandomMessage]);
+
+        final JDialog endGameMessage = new JDialog();
+        endGameMessage.setTitle(title);
+
+        final JButton exitGameButton = new JButton(winningMessageArray[selectRandomMessage]);
+        exitGameButton.addActionListener(
+                e -> {
+                    endGameMessage.setVisible(false);
+                }
+        );
+
+        endGameMessage.add(exitGameButton);
+        endGameMessage.setSize(300, 100);
+        endGameMessage.setLocationRelativeTo(null);
+        endGameMessage.setVisible(true);
+    }
+
     public void displayWinningMessageBox() {
         final String title = "You Win! :))";
         final String winningMessage = "Take the (U)W!";
@@ -129,7 +196,7 @@ public class GamePanel {
 
     public void displayLosingMessageBox() {
         final String title = "Game Over :((";
-        final String losingMessage = "Take the L";
+        final String losingMessage = "You're not a wizard, Harry";
 
         setUpDialogBox(title, losingMessage);
     }
