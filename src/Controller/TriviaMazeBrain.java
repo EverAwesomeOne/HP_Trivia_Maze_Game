@@ -45,6 +45,7 @@ public class TriviaMazeBrain {
         // check first time of door to move freely
         if (chosenDoor.wasFirstTime()) {
             final QuestionAnswer qa = chosenDoor.getQuestion();
+            //QuestionAnswer qa = QuestionAnswer.getQuestionAnswerfromdatabase()
             qa.getQuestionAnswerFromDatabase(myStatement);
             myGamePanel.askQuestion(qa.getQuestionList(), theDirectionType);
             chosenDoor.setFirstTime(false);
