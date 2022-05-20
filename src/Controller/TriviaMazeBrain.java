@@ -89,7 +89,7 @@ public class TriviaMazeBrain {
         }
 
         // every time answer is incorrect (except for if you lose), display incorrect answer message
-        if (!qa.selectedCorrectAnswer(theUserAnswer) && !MOVE_FREELY.equals(theUserAnswer)) {
+        else if (!qa.selectedCorrectAnswer(theUserAnswer) && !MOVE_FREELY.equals(theUserAnswer)) {
             if (!myMaze.hasValidPaths()) {
                 myGamePanel.displayLosingMessageBox();
             } else {
