@@ -4,8 +4,6 @@ import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -160,12 +158,9 @@ public class GamePanel {
         endGameLabel.setHorizontalAlignment(JLabel.CENTER);
         endGameMessage.add(endGameLabel);
 
-        final Timer timer = new Timer(2500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                endGameMessage.setVisible(false);
-                endGameMessage.dispose();
-            }
+        final Timer timer = new Timer(2500, e -> {
+            endGameMessage.setVisible(false);
+            endGameMessage.dispose();
         });
         timer.setRepeats(false);
         timer.start();
