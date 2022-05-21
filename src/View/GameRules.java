@@ -2,17 +2,12 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GameRules {
-
-    private final JPanel myGameInfoPanel;
+public class GameRules extends JPanel {
 
     GameRules(final JFrame theMainFrame, final JPanel theGamePanel,
               final JMenuBar theMainMenuBar) {
-        myGameInfoPanel = new JPanel();
-        myGameInfoPanel.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         JTextField textField = new JTextField("Add Text");
         textField.setHorizontalAlignment(JTextField.CENTER);
@@ -21,23 +16,21 @@ public class GameRules {
         JButton okayButton = new JButton("OK");
         okayButton.addActionListener(
                 e -> {
-                    myGameInfoPanel.setVisible(false);
+                    setVisible(false);
                     theGamePanel.setVisible(true);
                     theMainMenuBar.setVisible(true);
                 }
         );
 
-        myGameInfoPanel.add(textField, BorderLayout.CENTER);
-        myGameInfoPanel.add(okayButton, BorderLayout.SOUTH);
+        add(textField, BorderLayout.CENTER);
+        add(okayButton, BorderLayout.SOUTH);
 
-        theMainFrame.add(myGameInfoPanel);
-
-        myGameInfoPanel.setVisible(true);
+        theMainFrame.add(this);
+        setVisible(true);
     }
 
     GameRules(final JFrame theMainFrame, final JPanel theMainMenuPanel) {
-        myGameInfoPanel = new JPanel();
-        myGameInfoPanel.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         JTextField textField = new JTextField("Add Text");
         textField.setHorizontalAlignment(JTextField.CENTER);
@@ -46,24 +39,23 @@ public class GameRules {
         JButton okayButton = new JButton("OK");
         okayButton.addActionListener(
                 e -> {
-                    myGameInfoPanel.setVisible(false);
+                    setVisible(false);
                     theMainMenuPanel.setVisible(true);
                 }
         );
 
-        myGameInfoPanel.add(textField, BorderLayout.CENTER);
-        myGameInfoPanel.add(okayButton, BorderLayout.SOUTH);
+        add(textField, BorderLayout.CENTER);
+        add(okayButton, BorderLayout.SOUTH);
 
-        theMainFrame.add(myGameInfoPanel);
-
-        myGameInfoPanel.setVisible(true);
+        theMainFrame.add(this);
+        setVisible(true);
     }
 
     // Pull out common code!!
 
     /*private void setupGameRulesPanel(String buttonActionType) {
-        myGameInfoPanel = new JPanel();
-        myGameInfoPanel.setLayout(new BorderLayout());
+        this = new JPanel();
+        setLayout(new BorderLayout());
 
         JTextField textField = new JTextField("Add Text");
         textField.setHorizontalAlignment(JTextField.CENTER);
@@ -76,18 +68,18 @@ public class GameRules {
             okayButton.addActionListener(okayButtonTwo);
         }
 
-        myGameInfoPanel.add(textField, BorderLayout.CENTER);
-        myGameInfoPanel.add(okayButton, BorderLayout.SOUTH);
+        add(textField, BorderLayout.CENTER);
+        add(okayButton, BorderLayout.SOUTH);
 
-        //theMainFrame.add(myGameInfoPanel);
+        //theMainFrame.add(this);
 
-        myGameInfoPanel.setVisible(true);
+        setVisible(true);
     }
 
     ActionListener okayButtonOne = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent event) {
-            myGameInfoPanel.setVisible(false);
+            setVisible(false);
             theGamePanel.setVisible(true);
             theMainMenuBar.setVisible(true);
         }
@@ -96,7 +88,7 @@ public class GameRules {
     ActionListener okayButtonTwo = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent event) {
-            myGameInfoPanel.setVisible(false);
+            setVisible(false);
             theMainMenuPanel.setVisible(true);
         }
     };*/

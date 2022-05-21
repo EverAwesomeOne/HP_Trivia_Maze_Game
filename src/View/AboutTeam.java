@@ -3,12 +3,10 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-class AboutTeam {
-    private final JPanel myAboutPanel;
+class AboutTeam extends JPanel {
 
     AboutTeam(final JFrame theMainFrame, JPanel theGamePanel, final JMenuBar theMainMenuBar) {
-        myAboutPanel = new JPanel();
-        myAboutPanel.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         final JTextArea textField = new JTextArea("""
                 Hodgepodge Trivia Maze Team
@@ -21,17 +19,17 @@ class AboutTeam {
         final JButton okayButton = new JButton("OK");
         okayButton.addActionListener(
                 e -> {
-                    myAboutPanel.setVisible(false);
+                    setVisible(false);
                     theGamePanel.setVisible(true);
                     theMainMenuBar.setVisible(true);
                 }
         );
 
-        myAboutPanel.add(textField, BorderLayout.CENTER);
-        myAboutPanel.add(okayButton, BorderLayout.SOUTH);
+        add(textField, BorderLayout.CENTER);
+        add(okayButton, BorderLayout.SOUTH);
 
-        theMainFrame.add(myAboutPanel);
+        theMainFrame.add(this);
 
-        myAboutPanel.setVisible(true);
+        setVisible(true);
     }
 }

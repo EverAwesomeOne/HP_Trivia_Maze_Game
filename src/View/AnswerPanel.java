@@ -6,19 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-class AnswerPanel {
-
-    private final JPanel myAnswerPanel;
-    private JPanel myQuestionTypePanel = new JPanel();
-
+class AnswerPanel extends JPanel {
     private final TriviaMazeBrain myTriviaMazeBrain;
 
+    private JPanel myQuestionTypePanel = new JPanel();
     private final QuestionPanel myQuestionPanel;
-
     private final DirectionButtonPanel myDirectionButtonPanel;
 
     private String[] myAnswerArray;
-
     private String myDirectionType;
     private String myUserAnswer;
 
@@ -30,13 +25,11 @@ class AnswerPanel {
         myTriviaMazeBrain = theTriviaMazeBrain;
         myQuestionPanel = theQuestionPanel;
         myDirectionButtonPanel = theDirectionButtonPanel;
+        
+        setBorder(BorderFactory.createTitledBorder("Answer"));
 
-        myAnswerPanel = new JPanel();
-        myAnswerPanel.setBorder(BorderFactory.createTitledBorder("Answer"));
-
-        theGamePanel.add(myAnswerPanel);
-
-        myAnswerPanel.setVisible(true);
+        theGamePanel.add(this);
+        setVisible(true);
     }
 
     void createQuestionType(final String[] theAnswerArray, final String theDirectionType) {
@@ -44,7 +37,6 @@ class AnswerPanel {
         myAnswerArray = theAnswerArray;
 
         myQuestionTypePanel.removeAll();
-
         myUserAnswer = null;
 
         for (String s : theAnswerArray) {
@@ -66,10 +58,10 @@ class AnswerPanel {
         }
         //add an else to catch possible errors
 
-        myAnswerPanel.add(myQuestionTypePanel);
+        add(myQuestionTypePanel);
         myQuestionTypePanel.setVisible(true);
-        myAnswerPanel.revalidate();
-        myAnswerPanel.repaint();
+        revalidate();
+        repaint();
         myNullCount = 0;
     }
 
@@ -97,7 +89,6 @@ class AnswerPanel {
 
     private JPanel trueFalseQ() {
         final JPanel trueFalseQPanel = new JPanel(new BorderLayout());
-
         final JLabel questionLabel = new JLabel("True or False:");
 
         final Box verticalBox = Box.createVerticalBox();
@@ -115,7 +106,6 @@ class AnswerPanel {
 
     private JPanel multiChoiceQ() {
         final JPanel multiChoiceQPanel = new JPanel(new BorderLayout());
-
         final JLabel questionLabel = new JLabel("Multiple Choice:");
 
         //Make possible answers displayed randomly
@@ -177,14 +167,12 @@ class AnswerPanel {
     }
 
     private void updatePanels() {
-        myAnswerPanel.removeAll();
-        myAnswerPanel.revalidate();
-        myAnswerPanel.repaint();
+        removeAll();
+        revalidate();
+        repaint();
 
         myQuestionPanel.removeQuestion();
-
         myTriviaMazeBrain.moveCharacter(myUserAnswer, myDirectionType);
-
         myDirectionButtonPanel.setDirectionButtonsVisibility();
     }
 }

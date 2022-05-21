@@ -2,20 +2,13 @@ package View;
 
 import javax.swing.*;
 
-public class QuestionPanel {
-
-    private final JPanel myQuestionPanel;
+public class QuestionPanel extends JPanel {
     private final JPanel myQuestion = new JPanel();
 
     QuestionPanel(final JPanel theGamePanel) {
-
-        myQuestionPanel = new JPanel();
-        myQuestionPanel.setBorder(BorderFactory.createTitledBorder("Question"));
-
-
-        theGamePanel.add(myQuestionPanel);
-
-        myQuestionPanel.setVisible(true);
+        setBorder(BorderFactory.createTitledBorder("Question"));
+        theGamePanel.add(this);
+        setVisible(true);
     }
 
     void createQuestion(final String[] theAnswerArray) {
@@ -27,15 +20,15 @@ public class QuestionPanel {
         questionLabel.setEditable(false);
 
         myQuestion.add(questionLabel);
-        myQuestionPanel.add(myQuestion);
-        myQuestionPanel.revalidate();
-        myQuestionPanel.repaint();
+        add(myQuestion);
+        revalidate();
+        repaint();
     }
 
     void removeQuestion() {
-        myQuestionPanel.removeAll();
-        myQuestionPanel.revalidate();
-        myQuestionPanel.repaint();
+        removeAll();
+        revalidate();
+        repaint();
     }
 
 }

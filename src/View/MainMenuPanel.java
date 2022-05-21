@@ -5,9 +5,10 @@ import Controller.TriviaMazeBrain;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainMenuPanel {
-
-    private static final String TITLE = "Hodgepodge Trivia Maze";
+public class MainMenuPanel extends JPanel {
+    private final TriviaMazeBrain myTriviaMazeBrain;
+    private final JFrame myMainFrame;
+    private GamePanel myGamePanel;
 
     private static final ImageIcon MAZE_ICON =
             new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
@@ -17,14 +18,6 @@ public class MainMenuPanel {
 
     private static final ImageIcon HARRY_POTTER_ICON =
             new ImageIcon("src//View//Images//HPTrivia.png");
-
-    private final JFrame myMainFrame;
-
-    private final JPanel myMainPanel;
-
-    private GamePanel myGamePanel;
-
-    private final TriviaMazeBrain myTriviaMazeBrain;
 
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 25);
     final static Font BUTTON_FONT = new Font("SansSerif", Font.BOLD, 18);
@@ -36,18 +29,15 @@ public class MainMenuPanel {
         myMainFrame = theMainFrame;
         myTriviaMazeBrain = theTriviaMazeBrain;
 
-        myMainPanel = new JPanel();
-        myMainPanel.setLayout(new GridLayout(1,3));
-        myMainPanel.setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
-        myMainPanel.setBackground(PURPLE_COLOR);
+        setLayout(new GridLayout(1,3));
+        setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
+        setBackground(PURPLE_COLOR);
 
-        myMainPanel.add(setupIconPanel());
-        myMainPanel.add(setupGameTitlePanel());
-        myMainPanel.add(setupIconPanel());
-
-        theMainFrame.add(myMainPanel);
-
-        myMainPanel.setVisible(true);
+        add(setupIconPanel());
+        add(setupGameTitlePanel());
+        add(setupIconPanel());
+        theMainFrame.add(this);
+        setVisible(true);
     }
 
     private JPanel setupGameTitlePanel() {
@@ -82,14 +72,12 @@ public class MainMenuPanel {
         final JPanel mainMenuBtnPanel = new JPanel();
         mainMenuBtnPanel.setBackground(PURPLE_COLOR);
 
-        // newGameButton refactor
         final JButton newGameButton = new JButton("New Game");
         newGameButton.setFont(BUTTON_FONT);
         newGameButton.setBackground(GOLD_COLOR);
         newGameButton.setForeground(Color.black);
         mainMenuBtnPanel.add(newGameButton);
 
-        // loadGameButton refactor
         final JButton loadGameButton = new JButton("Load Game");
         loadGameButton.setFont(BUTTON_FONT);
         loadGameButton.setBackground(GOLD_COLOR);
@@ -113,7 +101,7 @@ public class MainMenuPanel {
         if (buttonName.equals("New Game")) {
             button.addActionListener(
                     e -> {
-                        myMainPanel.setVisible(false);
+                        setVisible(false);
                         myTriviaMazeBrain.openDatabaseConnection();
                         myGamePanel = new GamePanel(myMainFrame, myTriviaMazeBrain);
                     }
@@ -123,7 +111,7 @@ public class MainMenuPanel {
             button.addActionListener(
                     e -> {
                         // call deserialize method
-                        myMainPanel.setVisible(false);
+                        setVisible(false);
                         myGamePanel = new GamePanel(myMainFrame, myTriviaMazeBrain);
                     }
             );
@@ -131,8 +119,8 @@ public class MainMenuPanel {
         else if (buttonName.equals("Game Rules")) {
             button.addActionListener(
                     e -> {
-                        myMainPanel.setVisible(false);
-                        new GameRules(myMainFrame, myMainPanel);
+                        setVisible(false);
+                        new GameRules(myMainFrame, this);
                     }
             );
         }

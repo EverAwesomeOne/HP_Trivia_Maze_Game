@@ -7,33 +7,27 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GamePanel {
-
-    private final JFrame myMainFrame;
-
-    final MazePanel myMazePanel;
-    DirectionButtonPanel myDirectionButtonPanel;
-
-    private final JPanel myGamePanel;
-    final JMenuBar myMainMenuBar;
-
+public class GamePanel extends JPanel {
     private final TriviaMazeBrain myTriviaMazeBrain;
+    private final JFrame myMainFrame;
+    private final MazePanel myMazePanel;
+    private DirectionButtonPanel myDirectionButtonPanel;
     private final QuestionPanel myQuestionPanel;
     private final AnswerPanel myAnswerPanel;
+    private final JMenuBar myMainMenuBar;
 
     public GamePanel(final JFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain) {
         myMainFrame = theMainFrame;
         myTriviaMazeBrain = theTriviaMazeBrain;
-
-        myGamePanel = new JPanel();
-        myGamePanel.setLayout(new GridLayout(2,2));
+        
+        setLayout(new GridLayout(2,2));
 
         // sets up these panels and adds to gamePanel
-        myMazePanel = new MazePanel(myGamePanel, theTriviaMazeBrain);
-        myDirectionButtonPanel = new DirectionButtonPanel(myGamePanel, myMazePanel,
+        myMazePanel = new MazePanel(this, theTriviaMazeBrain);
+        myDirectionButtonPanel = new DirectionButtonPanel(this, myMazePanel,
                 theTriviaMazeBrain);
-        myQuestionPanel = new QuestionPanel(myGamePanel);
-        myAnswerPanel = new AnswerPanel(myGamePanel, theTriviaMazeBrain, myQuestionPanel,
+        myQuestionPanel = new QuestionPanel(this);
+        myAnswerPanel = new AnswerPanel(this, theTriviaMazeBrain, myQuestionPanel,
                 myDirectionButtonPanel);
 
         // display menuBar on JFrame only when game is in progress
@@ -43,10 +37,10 @@ public class GamePanel {
         setupMenuBar("Save Game");
         setupMenuBar("Exit Game");
 
-        theMainFrame.add(myGamePanel);
+        theMainFrame.add(this);
         theMainFrame.setJMenuBar(myMainMenuBar);
 
-        myGamePanel.setVisible(true);
+        setVisible(true);
     }
 
     public void askQuestion(final String[] theQuestionList, final String theDirectionType) {
@@ -72,16 +66,14 @@ public class GamePanel {
         menuItem.setFont(MENU_FONT);
 
         addMenuActionListener(menuItem, theMenuTitle);
-
         addMenu.add(menuItem);
 
         myMainMenuBar.add(addMenu);
-
         myMainMenuBar.setVisible(true);
     }
 
     void resetDirectionButtonPanel() {
-        myDirectionButtonPanel = new DirectionButtonPanel(myGamePanel, myMazePanel,
+        myDirectionButtonPanel = new DirectionButtonPanel(this, myMazePanel,
                 myTriviaMazeBrain);
     }
 
@@ -89,21 +81,21 @@ public class GamePanel {
         switch (theMenuName) {
             case "Game Rules" -> theMenuItem.addActionListener(
                     e -> {
-                        myGamePanel.setVisible(false);
+                        setVisible(false);
                         myMainMenuBar.setVisible(false);
-                        new GameRules(myMainFrame, myGamePanel, myMainMenuBar);
+                        new GameRules(myMainFrame, this, myMainMenuBar);
                     }
             );
             case "About Hodgepodge Team" -> theMenuItem.addActionListener(
                     e -> {
-                        myGamePanel.setVisible(false);
+                        setVisible(false);
                         myMainMenuBar.setVisible(false);
-                        new AboutTeam(myMainFrame, myGamePanel, myMainMenuBar);
+                        new AboutTeam(myMainFrame, this, myMainMenuBar);
                     }
             );
             case "Exit" -> theMenuItem.addActionListener(
                     e -> {
-                        myGamePanel.setVisible(false);
+                        setVisible(false);
                         myMainMenuBar.setVisible(false);
                         myTriviaMazeBrain.closeDatabaseConnection();
                         new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
@@ -115,7 +107,7 @@ public class GamePanel {
             // edit to include save game option
             default -> theMenuItem.addActionListener(
                     e -> {
-                        myGamePanel.setVisible(false);
+                        setVisible(false);
                         myMainMenuBar.setVisible(false);
                         new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
                         myTriviaMazeBrain.resetGameState();
@@ -182,14 +174,12 @@ public class GamePanel {
     public void displayWinningMessageBox() {
         final String title = "You Win! :))";
         final String winningMessage = "Take the (U)W!";
-
         setUpDialogBox(title, winningMessage);
     }
 
     public void displayLosingMessageBox() {
         final String title = "Game Over...Play Again!";
         final String losingMessage = "Guess you're not a trivia wizard";
-
         setUpDialogBox(title, losingMessage);
     }
 
@@ -201,7 +191,7 @@ public class GamePanel {
         exitGameButton.addActionListener(
                 e -> {
                     myTriviaMazeBrain.closeDatabaseConnection();
-                    myGamePanel.setVisible(false);
+                    setVisible(false);
                     myMainMenuBar.setVisible(false);
                     endGameMessage.setVisible(false);
 

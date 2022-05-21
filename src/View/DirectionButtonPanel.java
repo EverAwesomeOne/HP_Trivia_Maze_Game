@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
-public class DirectionButtonPanel {
+public class DirectionButtonPanel extends JPanel {
 
     private final MazePanel myMazePanel;
     private final TriviaMazeBrain myTriviaMazeBrain;
@@ -25,9 +25,8 @@ public class DirectionButtonPanel {
                          final TriviaMazeBrain theTriviaMazeBrain) {
         myMazePanel = theMazePanel;
         myTriviaMazeBrain = theTriviaMazeBrain;
-        JPanel myDirectionButtonPanel = new JPanel();
-        myDirectionButtonPanel.setLayout(new GridLayout(3,3));
-        myDirectionButtonPanel.setBorder(BorderFactory.createTitledBorder("Choose Door"));
+        setLayout(new GridLayout(3,3));
+        setBorder(BorderFactory.createTitledBorder("Choose Door"));
 
         myNorthButton = new BasicArrowButton(BasicArrowButton.NORTH);
         mySouthButton = new BasicArrowButton(BasicArrowButton.SOUTH);
@@ -48,19 +47,19 @@ public class DirectionButtonPanel {
 
         // empty JLabels act as placeholders in GridLayout
         // to distance BasicArrowButtons
-        myDirectionButtonPanel.add(new JLabel(""));
-        myDirectionButtonPanel.add(myNorthButton);
-        myDirectionButtonPanel.add(new JLabel(""));
-        myDirectionButtonPanel.add(myWestButton);
-        myDirectionButtonPanel.add(centerLabel);
-        myDirectionButtonPanel.add(myEastButton);
-        myDirectionButtonPanel.add(new JLabel(""));
-        myDirectionButtonPanel.add(mySouthButton);
-        myDirectionButtonPanel.add(new JLabel(""));
+        add(new JLabel(""));
+        add(myNorthButton);
+        add(new JLabel(""));
+        add(myWestButton);
+        add(centerLabel);
+        add(myEastButton);
+        add(new JLabel(""));
+        add(mySouthButton);
+        add(new JLabel(""));
 
-        theGamePanel.add(myDirectionButtonPanel);
+        theGamePanel.add(this);
 
-        myDirectionButtonPanel.setVisible(true);
+        setVisible(true);
     }
 
     private void addArrowActionListener(final BasicArrowButton theArrowButton,

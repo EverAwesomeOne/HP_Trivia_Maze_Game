@@ -5,7 +5,7 @@ import Controller.TriviaMazeBrain;
 import javax.swing.*;
 import java.awt.*;
 
-public class MazePanel {
+public class MazePanel extends JPanel {
 
     private static final ImageIcon ICON_EMPTY_ROOM =
             new ImageIcon("src//View//Images//EmptyRoom.png");
@@ -31,17 +31,14 @@ public class MazePanel {
 
     public MazePanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain) {
         myTriviaMazeBrain = theTriviaMazeBrain;
-
-        final JPanel mazePanel = new JPanel();
-        mazePanel.setLayout(new GridLayout(ROW, COL));
-        mazePanel.setBorder(BorderFactory.createTitledBorder("Maze"));
+        
+        setLayout(new GridLayout(ROW, COL));
+        setBorder(BorderFactory.createTitledBorder("Maze"));
 
         initializeMaze();
-        addImagesToMazePanel(mazePanel);
-
-        theGamePanel.add(mazePanel);
-
-        mazePanel.setVisible(true);
+        addImagesToMazePanel(this);
+        theGamePanel.add(this);
+        setVisible(true);
     }
 
     private void addImagesToMazePanel(JPanel theMazePanel) {
