@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GamePanel {
@@ -128,23 +129,34 @@ public class GamePanel {
 
     public void displayCorrectAnswerMessageBox() {
         final String title = "Correct Answer! You're a wizard, Harry!";
-
         final Random randomNumber = new Random();
+        ArrayList<String> winningMessages = createWinningAnswerMessages();
+        displayPostAnswerMessageHelper(title, randomNumber, winningMessages);
+    }
 
-        final String winningMessage1 = "You're doing awesome :)";
-        final String winningMessage2 = "Keep it up!";
-        final String winningMessage3 = "Eek, one step closer!";
-        final String winningMessage4 = "You're on a roll~~";
+    public ArrayList<String> createWinningAnswerMessages() {
+        ArrayList<String> winningMessages = new ArrayList<>();
+        winningMessages.add("You're doing awesome :)");
+        winningMessages.add("Keep it up!");
+        winningMessages.add("Eek, one step closer!");
+        winningMessages.add("You're on a roll~~");
+        return winningMessages;
+    }
 
-        final String[] winningMessageArray = {winningMessage1, winningMessage2,
-                                              winningMessage3, winningMessage4};
+    public void displayIncorrectAnswerMessageBox() {
+        final String title = "Incorrect Answer";
+        final Random randomNumber = new Random();
+        ArrayList<String> losingMessages = createLosingAnswerMessages();
+        displayPostAnswerMessageHelper(title, randomNumber, losingMessages);
+    }
 
-        int selectRandomMessage = randomNumber.nextInt(winningMessageArray.length);
+    private void displayPostAnswerMessageHelper(String title, Random randomNumber, ArrayList<String> postAnswerMessages) {
+        int selectRandomMessage = randomNumber.nextInt(postAnswerMessages.size());
 
         final JDialog endGameMessage = new JDialog();
         endGameMessage.setTitle(title);
 
-        final JLabel endGameLabel = new JLabel(winningMessageArray[selectRandomMessage]);
+        final JLabel endGameLabel = new JLabel(postAnswerMessages.get(selectRandomMessage));
         endGameLabel.setHorizontalAlignment(JLabel.CENTER);
         endGameMessage.add(endGameLabel);
 
@@ -163,41 +175,13 @@ public class GamePanel {
         endGameMessage.setVisible(true);
     }
 
-    public void displayIncorrectAnswerMessageBox() {
-        final String title = "Incorrect Answer";
-
-        final Random randomNumber = new Random();
-
-        final String winningMessage1 = "Dang, not quite";
-        final String winningMessage2 = "You were so close";
-        final String winningMessage3 = "Try again. You got this!";
-        final String winningMessage4 = "Oopsie, that wasn't right!";
-
-        final String[] winningMessageArray = {winningMessage1, winningMessage2,
-                winningMessage3, winningMessage4};
-
-        int selectRandomMessage = randomNumber.nextInt(winningMessageArray.length);
-
-        final JDialog endGameMessage = new JDialog();
-        endGameMessage.setTitle(title);
-
-        final JLabel endGameLabel = new JLabel(winningMessageArray[selectRandomMessage]);
-        endGameLabel.setHorizontalAlignment(JLabel.CENTER);
-        endGameMessage.add(endGameLabel);
-
-        final Timer timer = new Timer(2000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                endGameMessage.setVisible(false);
-                endGameMessage.dispose();
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
-
-        endGameMessage.setSize(300, 100);
-        endGameMessage.setLocationRelativeTo(null);
-        endGameMessage.setVisible(true);
+    public ArrayList<String> createLosingAnswerMessages() {
+        ArrayList<String> losingMessages = new ArrayList<>();
+        losingMessages.add("Dang, not quite");
+        losingMessages.add("You were so close");
+        losingMessages.add("Try again. You got this!");
+        losingMessages.add("Oopsie, that wasn't right!");
+        return losingMessages;
     }
 
     public void displayWinningMessageBox() {
