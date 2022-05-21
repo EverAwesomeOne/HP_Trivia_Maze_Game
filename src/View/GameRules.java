@@ -7,69 +7,36 @@ import java.awt.event.ActionListener;
 
 public class GameRules {
 
-    private final JPanel myGameInfoPanel;
+    private JPanel myGameInfoPanel;
 
-    GameRules(final JFrame theMainFrame, final JPanel theGamePanel,
-              final JMenuBar theMainMenuBar) {
-        myGameInfoPanel = new JPanel();
-        myGameInfoPanel.setLayout(new BorderLayout());
+    private final JFrame myMainFrame;
+    private JPanel myGamePanel;
+    private JMenuBar myMainMenuBar;
 
-        JTextField textField = new JTextField("Add Text");
-        textField.setHorizontalAlignment(JTextField.CENTER);
-        textField.setEditable(false);
+    private JPanel myMainMenuPanel;
 
-        JButton okayButton = new JButton("OK");
-        okayButton.addActionListener(
-                e -> {
-                    myGameInfoPanel.setVisible(false);
-                    theGamePanel.setVisible(true);
-                    theMainMenuBar.setVisible(true);
-                }
-        );
-
-        myGameInfoPanel.add(textField, BorderLayout.CENTER);
-        myGameInfoPanel.add(okayButton, BorderLayout.SOUTH);
-
-        theMainFrame.add(myGameInfoPanel);
-
-        myGameInfoPanel.setVisible(true);
+    GameRules(final JFrame theMainFrame, final JPanel theGamePanel, final JMenuBar theMainMenuBar) {
+        myMainFrame = theMainFrame;
+        myGamePanel = theGamePanel;
+        myMainMenuBar = theMainMenuBar;
+        setupGameRulesPanel("One");
     }
 
     GameRules(final JFrame theMainFrame, final JPanel theMainMenuPanel) {
-        myGameInfoPanel = new JPanel();
-        myGameInfoPanel.setLayout(new BorderLayout());
-
-        JTextField textField = new JTextField("Add Text");
-        textField.setHorizontalAlignment(JTextField.CENTER);
-        textField.setEditable(false);
-
-        JButton okayButton = new JButton("OK");
-        okayButton.addActionListener(
-                e -> {
-                    myGameInfoPanel.setVisible(false);
-                    theMainMenuPanel.setVisible(true);
-                }
-        );
-
-        myGameInfoPanel.add(textField, BorderLayout.CENTER);
-        myGameInfoPanel.add(okayButton, BorderLayout.SOUTH);
-
-        theMainFrame.add(myGameInfoPanel);
-
-        myGameInfoPanel.setVisible(true);
+        myMainFrame = theMainFrame;
+        myMainMenuPanel = theMainMenuPanel;
+        setupGameRulesPanel("Two");
     }
 
-    // Pull out common code!!
-
-    /*private void setupGameRulesPanel(String buttonActionType) {
+    private void setupGameRulesPanel(String buttonActionType) {
         myGameInfoPanel = new JPanel();
         myGameInfoPanel.setLayout(new BorderLayout());
 
-        JTextField textField = new JTextField("Add Text");
+        final JTextField textField = new JTextField("Add Text");
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setEditable(false);
 
-        JButton okayButton = new JButton("OK");
+        final JButton okayButton = new JButton("OK");
         if (buttonActionType.equals("One")) {
             okayButton.addActionListener(okayButtonOne);
         } else {
@@ -79,7 +46,7 @@ public class GameRules {
         myGameInfoPanel.add(textField, BorderLayout.CENTER);
         myGameInfoPanel.add(okayButton, BorderLayout.SOUTH);
 
-        //theMainFrame.add(myGameInfoPanel);
+        myMainFrame.add(myGameInfoPanel);
 
         myGameInfoPanel.setVisible(true);
     }
@@ -88,8 +55,8 @@ public class GameRules {
         @Override
         public void actionPerformed(ActionEvent event) {
             myGameInfoPanel.setVisible(false);
-            theGamePanel.setVisible(true);
-            theMainMenuBar.setVisible(true);
+            myGamePanel.setVisible(true);
+            myMainMenuBar.setVisible(true);
         }
     };
 
@@ -97,8 +64,7 @@ public class GameRules {
         @Override
         public void actionPerformed(ActionEvent event) {
             myGameInfoPanel.setVisible(false);
-            theMainMenuPanel.setVisible(true);
+            myMainMenuPanel.setVisible(true);
         }
-    };*/
-
+    };
 }
