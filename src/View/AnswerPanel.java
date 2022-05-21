@@ -133,6 +133,10 @@ class AnswerPanel {
         final Box verticalBox = Box.createVerticalBox();
         final ButtonGroup radioButtonGroup = new ButtonGroup();
 
+        // EDWIN NOTES
+        // make custom JRadioButton class : button with textField
+        // use HTML add br tag if String length is wider than JPanel
+
         for (int index : randomizeAnswerOrderList) {
             final String answerText = myAnswerArray[index];
             final JRadioButton answerButton = new JRadioButton(answerText);

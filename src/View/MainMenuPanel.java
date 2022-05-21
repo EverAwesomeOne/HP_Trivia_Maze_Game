@@ -29,14 +29,17 @@ public class MainMenuPanel {
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 25);
     final static Font BUTTON_FONT = new Font("SansSerif", Font.BOLD, 18);
 
+    final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+
     public MainMenuPanel(final JFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain) {
         myMainFrame = theMainFrame;
         myTriviaMazeBrain = theTriviaMazeBrain;
 
         myMainPanel = new JPanel();
         myMainPanel.setLayout(new GridLayout(1,3));
-        myMainPanel.setBorder(BorderFactory.createLineBorder(new Color(255,204,51).darker(),5));
-        myMainPanel.setBackground(new Color(102,0,153).darker());
+        myMainPanel.setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
+        myMainPanel.setBackground(PURPLE_COLOR);
 
         myMainPanel.add(setupIconPanel());
         myMainPanel.add(setupGameTitlePanel());
@@ -50,10 +53,10 @@ public class MainMenuPanel {
     private JPanel setupGameTitlePanel() {
         final JPanel gameTitlePanel = new JPanel();
         gameTitlePanel.setLayout(new GridLayout(2,1));
-        gameTitlePanel.setBackground(new Color(102,0,153).darker());
+        gameTitlePanel.setBackground(PURPLE_COLOR);
 
         final JLabel myGameTitle = new JLabel("<html><div style='text-align: center;'>" + "Harry Potter<br>Trivia Maze<br>Game" + "</div></html>");
-        myGameTitle.setForeground(new Color(255,204,51).darker());
+        myGameTitle.setForeground(GOLD_COLOR);
         myGameTitle.setHorizontalAlignment(JLabel.CENTER);
         myGameTitle.setFont(TITLE_FONT);
 
@@ -66,7 +69,7 @@ public class MainMenuPanel {
     private JPanel setupIconPanel() {
         final JPanel iconPanel = new JPanel();
         iconPanel.setLayout(new GridLayout(3,1));
-        iconPanel.setBackground(new Color(102,0,153).darker());
+        iconPanel.setBackground(PURPLE_COLOR);
 
         iconPanel.add(new JLabel(scaleImageIcon(HARRY_POTTER_ICON)));
         iconPanel.add(new JLabel(scaleImageIcon(MAZE_ICON)));
@@ -77,18 +80,31 @@ public class MainMenuPanel {
 
     private JPanel setupButtonPanel() {
         final JPanel mainMenuBtnPanel = new JPanel();
-        mainMenuBtnPanel.setBackground(new Color(102,0,153).darker());
+        mainMenuBtnPanel.setBackground(PURPLE_COLOR);
 
-        final JButton btnNewGame = new JButton("New Game");
-        btnNewGame.setFont(BUTTON_FONT);
-        mainMenuBtnPanel.add(btnNewGame);
+        // newGameButton refactor
+        final JButton newGameButton = new JButton("New Game");
+        newGameButton.setFont(BUTTON_FONT);
+        newGameButton.setBackground(GOLD_COLOR);
+        newGameButton.setForeground(Color.black);
+        mainMenuBtnPanel.add(newGameButton);
 
-        final JButton btnLoadGame = new JButton("Load Game");
-        btnLoadGame.setFont(BUTTON_FONT);
-        mainMenuBtnPanel.add(btnLoadGame);
+        // loadGameButton refactor
+        final JButton loadGameButton = new JButton("Load Game");
+        loadGameButton.setFont(BUTTON_FONT);
+        loadGameButton.setBackground(GOLD_COLOR);
+        loadGameButton.setForeground(Color.black);
+        mainMenuBtnPanel.add(loadGameButton);
 
-        addActionListener(btnNewGame, "New Game");
-        addActionListener(btnLoadGame, "Load Game");
+        final JButton gameRulesButton = new JButton("Game Rules");
+        gameRulesButton.setFont(BUTTON_FONT);
+        gameRulesButton.setBackground(GOLD_COLOR);
+        gameRulesButton.setForeground(Color.black);
+        mainMenuBtnPanel.add(gameRulesButton);
+
+        addActionListener(newGameButton, "New Game");
+        addActionListener(loadGameButton, "Load Game");
+        addActionListener(gameRulesButton, "Game Rules");
 
         return mainMenuBtnPanel;
     }
@@ -112,7 +128,14 @@ public class MainMenuPanel {
                     }
             );
         }
-        // else
+        else if (buttonName.equals("Game Rules")) {
+            button.addActionListener(
+                    e -> {
+                        myMainPanel.setVisible(false);
+                        new GameRules(myMainFrame, myMainPanel);
+                    }
+            );
+        }
     }
 
     private ImageIcon scaleImageIcon(ImageIcon icon) {
@@ -122,5 +145,4 @@ public class MainMenuPanel {
     public GamePanel getGamePanel() {
         return myGamePanel;
     }
-
 }

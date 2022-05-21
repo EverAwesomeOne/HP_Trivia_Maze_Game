@@ -16,7 +16,7 @@ public class GamePanel {
     DirectionButtonPanel myDirectionButtonPanel;
 
     private final JPanel myGamePanel;
-    private final JMenuBar myMainMenuBar;
+    final JMenuBar myMainMenuBar;
 
     private final TriviaMazeBrain myTriviaMazeBrain;
     private final QuestionPanel myQuestionPanel;
@@ -40,7 +40,7 @@ public class GamePanel {
         // display menuBar on JFrame only when game is in progress
         myMainMenuBar = new JMenuBar();
         setupMenuBar("About Hodgepodge Team");
-        setupMenuBar("Game Info");
+        setupMenuBar("Game Rules");
         setupMenuBar("Save Game");
         setupMenuBar("Exit Game");
 
@@ -88,11 +88,11 @@ public class GamePanel {
 
     private void addMenuActionListener(final JMenuItem theMenuItem, final String theMenuName) {
         switch (theMenuName) {
-            case "Game Info" -> theMenuItem.addActionListener(
+            case "Game Rules" -> theMenuItem.addActionListener(
                     e -> {
                         myGamePanel.setVisible(false);
                         myMainMenuBar.setVisible(false);
-                        new GameInfo(myMainFrame, myGamePanel, myMainMenuBar);
+                        new GameRules(myMainFrame, myGamePanel, myMainMenuBar);
                     }
             );
             case "About Hodgepodge Team" -> theMenuItem.addActionListener(
