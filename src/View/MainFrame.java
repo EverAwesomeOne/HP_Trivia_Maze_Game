@@ -5,43 +5,34 @@ import Controller.TriviaMazeBrain;
 import javax.swing.*;
 import java.awt.*;
 
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
-public class MainFrame {
-
+public class MainFrame extends JFrame {
+    private final MainMenuPanel myMainMenuPanel;
     private final static String TITLE = "Harry Potter Trivia Maze Game";
-
     private final static ImageIcon MAZE_ICON =
             new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
-
     private final static Toolkit KIT = Toolkit.getDefaultToolkit();
 
-    private final MainMenuPanel myMainMenuPanel;
-
-
     public MainFrame(final TriviaMazeBrain theTriviaMazeBrain) {
-        final JFrame myMainFrame = new JFrame();
-        myMainFrame.setTitle(TITLE);
-        myMainFrame.setSize(500,500);
-        myMainFrame.setIconImage(MAZE_ICON.getImage());
-        myMainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setTitle(TITLE);
+        setSize(500,500);
+        setIconImage(MAZE_ICON.getImage());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setFrameLocation();
 
-        setFrameLocation(myMainFrame);
+        myMainMenuPanel = new MainMenuPanel(this, theTriviaMazeBrain);
 
-        myMainMenuPanel = new MainMenuPanel(myMainFrame, theTriviaMazeBrain);
-
-        myMainFrame.setResizable(false);
-        myMainFrame.setVisible(true);
+        setResizable(false);
+        setVisible(true);
     }
 
     public MainMenuPanel getMainMenuPanel() {
         return myMainMenuPanel;
     }
 
-    private void setFrameLocation(final JFrame theFrame) {
+    private void setFrameLocation() {
         final Dimension dimension = KIT.getScreenSize();
-        final int x = (int)((dimension.getWidth() - theFrame.getWidth()) / 2);
-        final int y = (int)((dimension.getHeight() - theFrame.getHeight()) / 2);
-        theFrame.setLocation(x,y);
+        final int x = (int)((dimension.getWidth() - getWidth()) / 2);
+        final int y = (int)((dimension.getHeight() - getHeight()) / 2);
+        setLocation(x,y);
     }
 }
