@@ -72,29 +72,20 @@ public class MainMenuPanel extends JPanel {
         final JPanel mainMenuBtnPanel = new JPanel();
         mainMenuBtnPanel.setBackground(PURPLE_COLOR);
 
-        final JButton newGameButton = new JButton("New Game");
-        newGameButton.setFont(BUTTON_FONT);
-        newGameButton.setBackground(GOLD_COLOR);
-        newGameButton.setForeground(Color.black);
-        mainMenuBtnPanel.add(newGameButton);
-
-        final JButton loadGameButton = new JButton("Load Game");
-        loadGameButton.setFont(BUTTON_FONT);
-        loadGameButton.setBackground(GOLD_COLOR);
-        loadGameButton.setForeground(Color.black);
-        mainMenuBtnPanel.add(loadGameButton);
-
-        final JButton gameRulesButton = new JButton("Game Rules");
-        gameRulesButton.setFont(BUTTON_FONT);
-        gameRulesButton.setBackground(GOLD_COLOR);
-        gameRulesButton.setForeground(Color.black);
-        mainMenuBtnPanel.add(gameRulesButton);
-
-        addActionListener(newGameButton, "New Game");
-        addActionListener(loadGameButton, "Load Game");
-        addActionListener(gameRulesButton, "Game Rules");
+        addStyledButtonToMainMenu("New Game", mainMenuBtnPanel);
+        addStyledButtonToMainMenu("Load Game", mainMenuBtnPanel);
+        addStyledButtonToMainMenu("Game Rules", mainMenuBtnPanel);
 
         return mainMenuBtnPanel;
+    }
+
+    private void addStyledButtonToMainMenu(final String theTextForBtn, final JPanel theMainMenuBtnPanel) {
+        final JButton mainMenuButton = new JButton(theTextForBtn);
+        mainMenuButton.setFont(BUTTON_FONT);
+        mainMenuButton.setBackground(GOLD_COLOR);
+        mainMenuButton.setForeground(Color.black);
+        theMainMenuBtnPanel.add(mainMenuButton);
+        addActionListener(mainMenuButton, theTextForBtn);
     }
 
     private void addActionListener(JButton button, String buttonName) {
