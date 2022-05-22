@@ -104,6 +104,7 @@ public class TriviaMazeBrain {
     }
 
     public void resetGameState() {
+        myMainFrame.dispose();
         runGame();
     }
 
