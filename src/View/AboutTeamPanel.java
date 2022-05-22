@@ -3,9 +3,9 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-class AboutTeam extends JPanel {
+class AboutTeamPanel extends JPanel {
 
-    AboutTeam(final JFrame theMainFrame, JPanel theGamePanel, final JMenuBar theMainMenuBar) {
+    AboutTeamPanel(JPanel theGamePanel, final JMenuBar theMenuBar) {
         setLayout(new BorderLayout());
 
         final JTextArea textField = new JTextArea("""
@@ -21,14 +21,12 @@ class AboutTeam extends JPanel {
                 e -> {
                     setVisible(false);
                     theGamePanel.setVisible(true);
-                    theMainMenuBar.setVisible(true);
+                    theMenuBar.setVisible(true);
                 }
         );
 
         add(textField, BorderLayout.CENTER);
         add(okayButton, BorderLayout.SOUTH);
-
-        theMainFrame.add(this);
 
         setVisible(true);
     }

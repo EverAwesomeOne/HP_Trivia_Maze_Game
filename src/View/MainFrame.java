@@ -7,6 +7,11 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
     private final MainMenuPanel myMainMenuPanel;
+    private final GamePanel myGamePanel;
+    private final GameRulesPanel myGameRulesPanelMM;
+    private final GameRulesPanel myGameRulesPanelGP;
+    private final AboutTeamPanel myAboutTeamPanel;
+
     private final static String TITLE = "Harry Potter Trivia Maze Game";
     private final static ImageIcon MAZE_ICON =
             new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
@@ -19,7 +24,17 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setFrameLocation();
 
-        myMainMenuPanel = new MainMenuPanel(this, theTriviaMazeBrain);
+        myMainMenuPanel = new MainMenuPanel(theTriviaMazeBrain);
+        add(myMainMenuPanel);
+        myGamePanel = new GamePanel(theTriviaMazeBrain);
+        add(myGamePanel);
+        final OptionsMenuBar myMenuBar = new OptionsMenuBar(theTriviaMazeBrain, myGamePanel);
+        setJMenuBar(myMenuBar);
+        myGameRulesPanelMM = new GameRulesPanel(myMainMenuPanel);
+        add(myGameRulesPanelMM);
+        myGameRulesPanelGP = new GameRulesPanel(myGamePanel, myMenuBar);
+        myAboutTeamPanel = new AboutTeamPanel(myGamePanel, myMenuBar);
+
 
         setResizable(false);
         setVisible(true);
@@ -27,6 +42,22 @@ public class MainFrame extends JFrame {
 
     public MainMenuPanel getMainMenuPanel() {
         return myMainMenuPanel;
+    }
+
+    public GamePanel getGamePanel() {
+        return myGamePanel;
+    }
+
+    public GameRulesPanel getGameRulesPanelMM() {
+        return myGameRulesPanelMM;
+    }
+
+    public GameRulesPanel getGameRulesPanelGP() {
+        return myGameRulesPanelGP;
+    }
+
+    public AboutTeamPanel getAboutTeamPanel() {
+        return myAboutTeamPanel;
     }
 
     private void setFrameLocation() {

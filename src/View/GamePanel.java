@@ -9,15 +9,12 @@ import java.util.Random;
 
 public class GamePanel extends JPanel {
     private final TriviaMazeBrain myTriviaMazeBrain;
-    private final JFrame myMainFrame;
     private final MazePanel myMazePanel;
     private DirectionButtonPanel myDirectionButtonPanel;
     private final QuestionPanel myQuestionPanel;
     private final AnswerPanel myAnswerPanel;
-    private final JMenuBar myMainMenuBar;
 
-    public GamePanel(final JFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain) {
-        myMainFrame = theMainFrame;
+    public GamePanel(final TriviaMazeBrain theTriviaMazeBrain) {
         myTriviaMazeBrain = theTriviaMazeBrain;
         
         setLayout(new GridLayout(2,2));
@@ -29,16 +26,6 @@ public class GamePanel extends JPanel {
         myQuestionPanel = new QuestionPanel(this);
         myAnswerPanel = new AnswerPanel(this, theTriviaMazeBrain, myQuestionPanel,
                 myDirectionButtonPanel);
-
-        // display menuBar on JFrame only when game is in progress
-        myMainMenuBar = new JMenuBar();
-        setupMenuBar("About Hodgepodge Team");
-        setupMenuBar("Game Rules");
-        setupMenuBar("Save Game");
-        setupMenuBar("Exit Game");
-
-        theMainFrame.add(this);
-        theMainFrame.setJMenuBar(myMainMenuBar);
 
         setVisible(true);
     }
@@ -57,64 +44,9 @@ public class GamePanel extends JPanel {
         return myDirectionButtonPanel;
     }
 
-    private void setupMenuBar(final String theMenuTitle) {
-        final JMenu addMenu = new JMenu(theMenuTitle);
-        final JMenuItem menuItem = new JMenuItem(theMenuTitle);
-
-        final Font MENU_FONT = new Font("SansSerif", Font.BOLD, 15);
-        addMenu.setFont(MENU_FONT);
-        menuItem.setFont(MENU_FONT);
-
-        addMenuActionListener(menuItem, theMenuTitle);
-        addMenu.add(menuItem);
-
-        myMainMenuBar.add(addMenu);
-        myMainMenuBar.setVisible(true);
-    }
-
     void resetDirectionButtonPanel() {
         myDirectionButtonPanel = new DirectionButtonPanel(this, myMazePanel,
                 myTriviaMazeBrain);
-    }
-
-    private void addMenuActionListener(final JMenuItem theMenuItem, final String theMenuName) {
-        switch (theMenuName) {
-            case "Game Rules" -> theMenuItem.addActionListener(
-                    e -> {
-                        setVisible(false);
-                        myMainMenuBar.setVisible(false);
-                        new GameRules(myMainFrame, this, myMainMenuBar);
-                    }
-            );
-            case "About Hodgepodge Team" -> theMenuItem.addActionListener(
-                    e -> {
-                        setVisible(false);
-                        myMainMenuBar.setVisible(false);
-                        new AboutTeam(myMainFrame, this, myMainMenuBar);
-                    }
-            );
-            case "Exit" -> theMenuItem.addActionListener(
-                    e -> {
-                        setVisible(false);
-                        myMainMenuBar.setVisible(false);
-                        myTriviaMazeBrain.closeDatabaseConnection();
-                        new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
-                        myTriviaMazeBrain.resetGameState();
-                        resetDirectionButtonPanel();
-                    }
-            );
-
-            // edit to include save game option
-            default -> theMenuItem.addActionListener(
-                    e -> {
-                        setVisible(false);
-                        myMainMenuBar.setVisible(false);
-                        new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
-                        myTriviaMazeBrain.resetGameState();
-                        resetDirectionButtonPanel();
-                    }
-            );
-        }
     }
 
     public void displayCorrectAnswerMessageBox() {
@@ -192,13 +124,13 @@ public class GamePanel extends JPanel {
                 e -> {
                     myTriviaMazeBrain.closeDatabaseConnection();
                     setVisible(false);
-                    myMainMenuBar.setVisible(false);
+                    //myMainMenuBar.setVisible(false);
                     endGameMessage.setVisible(false);
 
                     myTriviaMazeBrain.resetGameState();
                     resetDirectionButtonPanel();
 
-                    new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
+                    //new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
                 }
         );
 

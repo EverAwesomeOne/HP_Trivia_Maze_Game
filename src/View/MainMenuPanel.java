@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class MainMenuPanel extends JPanel {
     private final TriviaMazeBrain myTriviaMazeBrain;
-    private final JFrame myMainFrame;
     private GamePanel myGamePanel;
 
     private static final ImageIcon MAZE_ICON =
@@ -25,8 +24,7 @@ public class MainMenuPanel extends JPanel {
     final static Color GOLD_COLOR = new Color(255,204,51).darker();
     final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
-    public MainMenuPanel(final JFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain) {
-        myMainFrame = theMainFrame;
+    public MainMenuPanel(final TriviaMazeBrain theTriviaMazeBrain) {
         myTriviaMazeBrain = theTriviaMazeBrain;
 
         setLayout(new GridLayout(1,3));
@@ -36,7 +34,6 @@ public class MainMenuPanel extends JPanel {
         add(setupIconPanel());
         add(setupGameTitlePanel());
         add(setupIconPanel());
-        theMainFrame.add(this);
         setVisible(true);
     }
 
@@ -103,7 +100,7 @@ public class MainMenuPanel extends JPanel {
                     e -> {
                         setVisible(false);
                         myTriviaMazeBrain.openDatabaseConnection();
-                        myGamePanel = new GamePanel(myMainFrame, myTriviaMazeBrain);
+                        myGamePanel = new GamePanel(myTriviaMazeBrain);
                     }
             );
         }
@@ -112,7 +109,7 @@ public class MainMenuPanel extends JPanel {
                     e -> {
                         // call deserialize method
                         setVisible(false);
-                        myGamePanel = new GamePanel(myMainFrame, myTriviaMazeBrain);
+                        myGamePanel = new GamePanel(myTriviaMazeBrain);
                     }
             );
         }
@@ -120,7 +117,7 @@ public class MainMenuPanel extends JPanel {
             button.addActionListener(
                     e -> {
                         setVisible(false);
-                        new GameRules(myMainFrame, this);
+                        new GameRulesPanel(this);
                     }
             );
         }
