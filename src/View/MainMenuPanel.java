@@ -6,8 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainMenuPanel extends JPanel {
+    private final MainFrame myMainFrame;
     private final TriviaMazeBrain myTriviaMazeBrain;
-    private GamePanel myGamePanel;
+    private final GamePanel myGamePanel;
 
     private static final ImageIcon MAZE_ICON =
             new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
@@ -24,8 +25,10 @@ public class MainMenuPanel extends JPanel {
     final static Color GOLD_COLOR = new Color(255,204,51).darker();
     final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
-    public MainMenuPanel(final TriviaMazeBrain theTriviaMazeBrain) {
+    public MainMenuPanel(final MainFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain, final GamePanel theGamePanel) {
+        myMainFrame = theMainFrame;
         myTriviaMazeBrain = theTriviaMazeBrain;
+        myGamePanel = theGamePanel;
 
         setLayout(new GridLayout(1,3));
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
@@ -34,7 +37,6 @@ public class MainMenuPanel extends JPanel {
         add(setupIconPanel());
         add(setupGameTitlePanel());
         add(setupIconPanel());
-        setVisible(true);
     }
 
     private JPanel setupGameTitlePanel() {
@@ -65,6 +67,7 @@ public class MainMenuPanel extends JPanel {
         return iconPanel;
     }
 
+    // factor out the common code call it addStyledButton()
     private JPanel setupButtonPanel() {
         final JPanel mainMenuBtnPanel = new JPanel();
         mainMenuBtnPanel.setBackground(PURPLE_COLOR);
@@ -100,7 +103,9 @@ public class MainMenuPanel extends JPanel {
                     e -> {
                         setVisible(false);
                         myTriviaMazeBrain.openDatabaseConnection();
-                        myGamePanel = new GamePanel(myTriviaMazeBrain);
+                        myMainFrame.getJMenuBar().setVisible(true);
+                        myMainFrame.add(myGamePanel);
+                        myGamePanel.setVisible(true);
                     }
             );
         }
@@ -109,7 +114,7 @@ public class MainMenuPanel extends JPanel {
                     e -> {
                         // call deserialize method
                         setVisible(false);
-                        myGamePanel = new GamePanel(myTriviaMazeBrain);
+                        myGamePanel.setVisible(true);
                     }
             );
         }
@@ -117,7 +122,9 @@ public class MainMenuPanel extends JPanel {
             button.addActionListener(
                     e -> {
                         setVisible(false);
-                        new GameRulesPanel(this);
+                        GameRulesPanel gameRulesPanel = myMainFrame.getGameRulesPanelMM();
+                        myMainFrame.add(gameRulesPanel);
+                        gameRulesPanel.setVisible(true);
                     }
             );
         }
@@ -125,9 +132,5 @@ public class MainMenuPanel extends JPanel {
 
     private ImageIcon scaleImageIcon(ImageIcon icon) {
         return new ImageIcon(icon.getImage().getScaledInstance(140, 140, Image.SCALE_SMOOTH));
-    }
-
-    public GamePanel getGamePanel() {
-        return myGamePanel;
     }
 }

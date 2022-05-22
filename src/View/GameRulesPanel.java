@@ -38,7 +38,7 @@ public class GameRulesPanel extends JPanel {
         add(textField, BorderLayout.CENTER);
         add(okayButton, BorderLayout.SOUTH);
 
-        setVisible(true);
+        setVisible(false);
     }
 
     final ActionListener okayButtonOne = new ActionListener() {

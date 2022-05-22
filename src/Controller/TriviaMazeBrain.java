@@ -34,11 +34,10 @@ public class TriviaMazeBrain {
         myMaze = new Maze(MAZE_LENGTH);
         openDatabaseConnection();
         myMainFrame = new MainFrame(this);
-
     }
 
     public void setUpQuestion(final String theDirectionType) {
-        myGamePanel = myMainFrame.getMainMenuPanel().getGamePanel();
+        myGamePanel = myMainFrame.getGamePanel();
         myMazePanel = myGamePanel.getMazePanel();
         final Direction directionToMove = Direction.valueOf(theDirectionType);
         final Door chosenDoor = myMaze.getCurrentRoom().getDoor(directionToMove);
@@ -105,7 +104,7 @@ public class TriviaMazeBrain {
     }
 
     public void resetGameState() {
-        myMaze = new Maze(MAZE_LENGTH);
+        runGame();
     }
 
     public void openDatabaseConnection() {

@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GamePanel extends JPanel {
+    private final MainFrame myMainFrame;
     private final TriviaMazeBrain myTriviaMazeBrain;
     private final MazePanel myMazePanel;
-    private DirectionButtonPanel myDirectionButtonPanel;
+    private final DirectionButtonPanel myDirectionButtonPanel;
     private final QuestionPanel myQuestionPanel;
     private final AnswerPanel myAnswerPanel;
 
-    public GamePanel(final TriviaMazeBrain theTriviaMazeBrain) {
+    public GamePanel(final MainFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain) {
+        myMainFrame = theMainFrame;
         myTriviaMazeBrain = theTriviaMazeBrain;
         
         setLayout(new GridLayout(2,2));
@@ -26,8 +28,6 @@ public class GamePanel extends JPanel {
         myQuestionPanel = new QuestionPanel(this);
         myAnswerPanel = new AnswerPanel(this, theTriviaMazeBrain, myQuestionPanel,
                 myDirectionButtonPanel);
-
-        setVisible(true);
     }
 
     public void askQuestion(final String[] theQuestionList, final String theDirectionType) {
@@ -42,11 +42,6 @@ public class GamePanel extends JPanel {
 
     public DirectionButtonPanel getDirectionButtonPanel() {
         return myDirectionButtonPanel;
-    }
-
-    void resetDirectionButtonPanel() {
-        myDirectionButtonPanel = new DirectionButtonPanel(this, myMazePanel,
-                myTriviaMazeBrain);
     }
 
     public void displayCorrectAnswerMessageBox() {
@@ -124,13 +119,8 @@ public class GamePanel extends JPanel {
                 e -> {
                     myTriviaMazeBrain.closeDatabaseConnection();
                     setVisible(false);
-                    //myMainMenuBar.setVisible(false);
                     endGameMessage.setVisible(false);
-
                     myTriviaMazeBrain.resetGameState();
-                    resetDirectionButtonPanel();
-
-                    //new MainMenuPanel(myMainFrame, myTriviaMazeBrain);
                 }
         );
 

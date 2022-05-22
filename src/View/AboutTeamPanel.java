@@ -5,11 +5,11 @@ import java.awt.*;
 
 class AboutTeamPanel extends JPanel {
 
-    AboutTeamPanel(JPanel theGamePanel, final JMenuBar theMenuBar) {
+    AboutTeamPanel(final MainFrame theMainFrame, final JPanel theGamePanel, final JMenuBar theMenuBar) {
         setLayout(new BorderLayout());
 
         final JTextArea textField = new JTextArea("""
-                Hodgepodge Trivia Maze Team
+                Harry Potter Trivia Maze Team
                 Maria Babko ~ Chloe Duncan ~ Edwin Solis-Bruno
                 University of Washington
                 TCSS 360 A, Professor Tom Capaul
@@ -28,6 +28,6 @@ class AboutTeamPanel extends JPanel {
         add(textField, BorderLayout.CENTER);
         add(okayButton, BorderLayout.SOUTH);
 
-        setVisible(true);
+        setVisible(false);
     }
 }

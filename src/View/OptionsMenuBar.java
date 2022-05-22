@@ -8,11 +8,13 @@ import java.awt.*;
 public class OptionsMenuBar extends JMenuBar {
     private final TriviaMazeBrain myTriviaMazeBrain;
     private final GamePanel myGamePanel;
+    private final MainFrame myMainFrame;
 
-    OptionsMenuBar(final TriviaMazeBrain theTriviaMazeBrain, final GamePanel theGamePanel) {
+    OptionsMenuBar(final MainFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain, final GamePanel theGamePanel) {
+        myMainFrame = theMainFrame;
         myTriviaMazeBrain = theTriviaMazeBrain;
         myGamePanel = theGamePanel;
-        setupMenuBar("About Hodgepodge Team");
+        setupMenuBar("About The Developers");
         setupMenuBar("Game Rules");
         setupMenuBar("Save Game");
         setupMenuBar("Exit Game");
@@ -30,7 +32,7 @@ public class OptionsMenuBar extends JMenuBar {
         addMenu.add(menuItem);
 
         add(addMenu);
-        setVisible(true);
+        setVisible(false);
     }
 
     private void addMenuActionListener(final JMenuItem theMenuItem, final String theMenuName) {
@@ -38,36 +40,36 @@ public class OptionsMenuBar extends JMenuBar {
             case "Game Rules" -> theMenuItem.addActionListener(
                     e -> {
                         setVisible(false);
-                        setVisible(false);
-                        new GameRulesPanel(myGamePanel, this);
+                        myGamePanel.setVisible(false);
+                        GameRulesPanel gameRulesPanel = myMainFrame.getGameRulesPanelGP();
+                        myMainFrame.add(gameRulesPanel);
+                        gameRulesPanel.setVisible(true);
                     }
             );
-            case "About Hodgepodge Team" -> theMenuItem.addActionListener(
+            case "About The Developers" -> theMenuItem.addActionListener(
                     e -> {
                         setVisible(false);
-                        setVisible(false);
-                        new AboutTeamPanel(myGamePanel, this);
+                        myGamePanel.setVisible(false);
+                        AboutTeamPanel aboutTeamPanel = myMainFrame.getAboutTeamPanel();
+                        myMainFrame.add(aboutTeamPanel);
+                        aboutTeamPanel.setVisible(true);
                     }
             );
-            case "Exit" -> theMenuItem.addActionListener(
+            case "Exit Game" -> theMenuItem.addActionListener(
                     e -> {
-                        setVisible(false);
-                        setVisible(false);
                         myTriviaMazeBrain.closeDatabaseConnection();
-                        new MainMenuPanel(myTriviaMazeBrain);
+                        setVisible(false);
                         myTriviaMazeBrain.resetGameState();
-                        myGamePanel.resetDirectionButtonPanel();
                     }
             );
-
             // edit to include save game option
             default -> theMenuItem.addActionListener(
                     e -> {
-                        setVisible(false);
-                        setVisible(false);
-                        new MainMenuPanel(myTriviaMazeBrain);
-                        myTriviaMazeBrain.resetGameState();
-                        myGamePanel.resetDirectionButtonPanel();
+//                        setVisible(false);
+//                        setVisible(false);
+//                        new MainMenuPanel(myTriviaMazeBrain);
+//                        myTriviaMazeBrain.resetGameState();
+//                        myGamePanel.resetDirectionButtonPanel();
                     }
             );
         }

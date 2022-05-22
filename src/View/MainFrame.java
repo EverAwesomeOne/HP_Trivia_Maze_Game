@@ -24,17 +24,17 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setFrameLocation();
 
-        myMainMenuPanel = new MainMenuPanel(theTriviaMazeBrain);
-        add(myMainMenuPanel);
-        myGamePanel = new GamePanel(theTriviaMazeBrain);
-        add(myGamePanel);
-        final OptionsMenuBar myMenuBar = new OptionsMenuBar(theTriviaMazeBrain, myGamePanel);
-        setJMenuBar(myMenuBar);
-        myGameRulesPanelMM = new GameRulesPanel(myMainMenuPanel);
-        add(myGameRulesPanelMM);
-        myGameRulesPanelGP = new GameRulesPanel(myGamePanel, myMenuBar);
-        myAboutTeamPanel = new AboutTeamPanel(myGamePanel, myMenuBar);
 
+        myGamePanel = new GamePanel(this, theTriviaMazeBrain);
+        final OptionsMenuBar myMenuBar = new OptionsMenuBar(this, theTriviaMazeBrain, myGamePanel);
+        setJMenuBar(myMenuBar);
+        myGameRulesPanelGP = new GameRulesPanel(myGamePanel, myMenuBar);
+        myAboutTeamPanel = new AboutTeamPanel(this, myGamePanel, myMenuBar);
+        myMainMenuPanel = new MainMenuPanel(this, theTriviaMazeBrain, myGamePanel);
+        myGameRulesPanelMM = new GameRulesPanel(myMainMenuPanel);
+
+        add(myMainMenuPanel);
+        myMainMenuPanel.setVisible(true);
 
         setResizable(false);
         setVisible(true);
