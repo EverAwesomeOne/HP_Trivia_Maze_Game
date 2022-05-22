@@ -129,9 +129,21 @@ class AnswerPanel extends JPanel {
 
         for (int index : randomizeAnswerOrderList) {
             final String answerText = myAnswerArray[index];
-            final JRadioButton answerButton = new JRadioButton(answerText);
+            final TextWrappingJRadioButton textWrappingJRadioButton = new TextWrappingJRadioButton(answerText);
 
-            organizeVerticalBox(verticalBox, radioButtonGroup, answerButton, answerText);
+            final JPanel customJRadioButtonPanel = new JPanel();
+            FlowLayout layout = (FlowLayout) customJRadioButtonPanel.getLayout();
+            layout.setVgap(0);
+            customJRadioButtonPanel.add(textWrappingJRadioButton.getJRadioButton());
+            customJRadioButtonPanel.add(textWrappingJRadioButton.getJTextArea());
+
+            verticalBox.add(customJRadioButtonPanel);
+            radioButtonGroup.add(textWrappingJRadioButton.getJRadioButton());
+            textWrappingJRadioButton.getJRadioButton().setActionCommand(answerText);
+
+//            final JRadioButton answerButton = new JRadioButton(answerText);
+//
+//            organizeVerticalBox(verticalBox, radioButtonGroup, answerButton, answerText);
         }
         return getQuestionTypePanel(multiChoiceQPanel, questionLabel,
                 verticalBox, radioButtonGroup);
