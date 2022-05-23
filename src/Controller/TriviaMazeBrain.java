@@ -19,7 +19,7 @@ public class TriviaMazeBrain {
     private MainFrame myMainFrame;
     private MazePanel myMazePanel;
 
-    public final static int MAZE_LENGTH = 4;
+    public final static int MAZE_LENGTH = 7;
     public final static String MOVE_FREELY = "Move freely";
 
     public static void main(final String[] theArgs) {

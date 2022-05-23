@@ -28,18 +28,18 @@ public class Maze {
 
     public void updatePosition(final Direction theDirectionToMove) {
         if (theDirectionToMove == Direction.NORTH) {
-            myCharacterRow -= 1;
+            myCharacterRow -= 2;
         } else if (theDirectionToMove == Direction.EAST) {
-            myCharacterColumn += 1;
+            myCharacterColumn += 2;
         } else if (theDirectionToMove == Direction.SOUTH) {
-            myCharacterRow += 1;
+            myCharacterRow += 2;
         } else {
-            myCharacterColumn -= 1;
+            myCharacterColumn -= 2;
         }
     }
 
     public boolean hasWon() {
-        return myCharacterRow == 3 && myCharacterColumn ==3;
+        return myCharacterRow == myMaze.length - 1 && myCharacterColumn == myMaze.length - 1;
     }
 
     // performs a BFS traversal from the current room
@@ -126,16 +126,16 @@ public class Maze {
 
         // east and west door of adjacent rooms
         for (final Room[] rowOfRooms : myMaze) {
-            for (int singleRoom = 0; singleRoom < rowOfRooms.length - 1; singleRoom++) {
-                final Door rightRoomWestDoor = rowOfRooms[singleRoom + 1].getDoor(Direction.WEST);
+            for (int singleRoom = 0; singleRoom < rowOfRooms.length - 2; singleRoom++) {
+                final Door rightRoomWestDoor = rowOfRooms[singleRoom + 2].getDoor(Direction.WEST);
                 rowOfRooms[singleRoom].setSharedDoor(Direction.EAST, rightRoomWestDoor);
             }
         }
 
         // north and south doors of adjacent rooms
-        for (int i = 0; i < myMaze.length - 1; i++) {
+        for (int i = 0; i < myMaze.length - 2; i++) {
             for (int j = 0; j < myMaze[i].length; j++) {
-                final Door bottomRoomNorthDoor = myMaze[i + 1][j].getDoor(Direction.NORTH);
+                final Door bottomRoomNorthDoor = myMaze[i + 2][j].getDoor(Direction.NORTH);
                 myMaze[i][j].setSharedDoor(Direction.SOUTH, bottomRoomNorthDoor);
             }
         }
