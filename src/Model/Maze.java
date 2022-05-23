@@ -82,13 +82,13 @@ public class Maze {
         int secondNodeToRemoveFrom = firstNodeToRemoveFrom;
 
         if (theDirectionToMove == Direction.NORTH) {
-            secondNodeToRemoveFrom -= myMaze.length;
+            secondNodeToRemoveFrom -= 2 * myMaze.length;
         } else if (theDirectionToMove == Direction.EAST) {
-            secondNodeToRemoveFrom += 1;
+            secondNodeToRemoveFrom += 2;
         } else if (theDirectionToMove == Direction.SOUTH) {
-            secondNodeToRemoveFrom += myMaze.length;
+            secondNodeToRemoveFrom += 2 * myMaze.length;
         } else {
-            secondNodeToRemoveFrom -= 1;
+            secondNodeToRemoveFrom -= 2;
         }
 
         myRoomConnections[firstNodeToRemoveFrom].remove((Integer) secondNodeToRemoveFrom);
@@ -97,9 +97,16 @@ public class Maze {
 
     private void createInitialGraph() {
         myRoomConnections = new LinkedList[myMaze.length * myMaze[0].length];
-        for (int i = 0; i < myRoomConnections.length; i++) {
-            final int rowIndex = i / myMaze.length;
-            final int columnIndex = i % myMaze[0].length;
+        for (int i = 0; i < myRoomConnections.length; i += 2) {
+
+            int rowIndex = i / myMaze.length;
+            int columnIndex = i % myMaze[0].length;
+
+            if ((rowIndex * i + 1) % myMaze.length == 0) {
+                i += 8;
+                rowIndex++;
+                columnIndex--;
+            }
 
             if (myRoomConnections[i] == null) {
                 myRoomConnections[i] = new LinkedList<>();
@@ -107,16 +114,16 @@ public class Maze {
 
             // we only want to add valid edges to our undirected graph
             if (!myMaze[rowIndex][columnIndex].getDoor(Direction.NORTH).isLocked()) {
-                myRoomConnections[i].add(i - myMaze.length);
+                myRoomConnections[i].add(i - 2 * myMaze.length);
             }
             if (!myMaze[rowIndex][columnIndex].getDoor(Direction.EAST).isLocked()) {
-                myRoomConnections[i].add(i + 1);
+                myRoomConnections[i].add(i + 2);
             }
             if (!myMaze[rowIndex][columnIndex].getDoor(Direction.SOUTH).isLocked()) {
-                myRoomConnections[i].add(i + myMaze.length);
+                myRoomConnections[i].add(i + 2 * myMaze.length);
             }
             if (!myMaze[rowIndex][columnIndex].getDoor(Direction.WEST).isLocked()) {
-                myRoomConnections[i].add(i - 1);
+                myRoomConnections[i].add(i - 2);
             }
         }
     }
