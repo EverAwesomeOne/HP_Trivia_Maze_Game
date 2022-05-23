@@ -83,7 +83,7 @@ public class MazePanel extends JPanel {
         return myTriviaMazeBrain.checkIsLockedStatus(theDirection);
     }
 
-    public void setLockedDoorIcon(final int theRow, final int theCol, final String theDirectionType) {
+    public void setDoorIcon(final int theRow, final int theCol, final String theDirectionType, final boolean correctAnswer) {
         int rowOffset = 0;
         int columnOffset = 0;
         if ("NORTH".equals(theDirectionType)) {
@@ -97,30 +97,17 @@ public class MazePanel extends JPanel {
         }
 
         if (rowOffset != 0) {
-            myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_VERTICAL_DOOR);
-        } else {
-            myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
-        }
-        myRoomImages[theRow + rowOffset][theCol + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
-    }
-
-    public void setOpenDoorIcon(final int theRow, final int theCol, final String theDirectionType) {
-        int rowOffset = 0;
-        int columnOffset = 0;
-        if ("NORTH".equals(theDirectionType)) {
-            rowOffset = -1;
-        } else if ("SOUTH".equals(theDirectionType)) {
-            rowOffset = 1;
-        } else if ("EAST".equals(theDirectionType)) {
-            columnOffset = 1;
-        } else {
-            columnOffset = -1;
-        }
-
-        if (rowOffset != 0) {
+            if (correctAnswer) {
             myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
+            } else {
+                myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_VERTICAL_DOOR);
+            }
         } else {
-            myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+            if (correctAnswer) {
+                myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+            } else {
+                myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
+            }
         }
         myRoomImages[theRow + rowOffset][theCol + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
     }
