@@ -67,6 +67,7 @@ public class TriviaMazeBrain {
 
             if (!qa.selectedCorrectAnswer(theUserAnswer)) {
                 chosenDoor.lockDoor();
+                myMazePanel.setLockedDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(), theDirectionType);
                 myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
             }
 
