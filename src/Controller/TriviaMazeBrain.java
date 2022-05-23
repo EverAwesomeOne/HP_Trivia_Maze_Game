@@ -61,33 +61,25 @@ public class TriviaMazeBrain {
 
         if (MOVE_FREELY.equals(theUserAnswer)) {
             myMaze.updatePosition(directionToMove);
-        } else {
-
-            // every time answer is correct (except for if you win), display correct answer message
-            if (qa.selectedCorrectAnswer(theUserAnswer)) {
+        } else if (qa.selectedCorrectAnswer(theUserAnswer)) {
                 myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
                         theDirectionType, qa.selectedCorrectAnswer(theUserAnswer));
-                myGamePanel.displayCorrectAnswerMessageBox();
-            } else {
-                chosenDoor.lockDoor();
-                myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
-                        theDirectionType, qa.selectedCorrectAnswer(theUserAnswer));
-                myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
-
-                if (!myMaze.hasValidPaths()) {
-                    myGamePanel.displayLosingMessageBox();
-                } else {
-                    myGamePanel.displayIncorrectAnswerMessageBox();
-                }
-            }
-
-            if (!chosenDoor.isLocked()) {
                 myMaze.updatePosition(directionToMove);
-            }
-
             if (myMaze.hasWon()) {
                 myGamePanel.displayWinningMessageBox();
+                return;
             }
+            myGamePanel.displayCorrectAnswerMessageBox();
+        } else {
+            chosenDoor.lockDoor();
+            myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
+                    theDirectionType, qa.selectedCorrectAnswer(theUserAnswer));
+            myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
+            if (!myMaze.hasValidPaths()) {
+                myGamePanel.displayLosingMessageBox();
+                return;
+            }
+            myGamePanel.displayIncorrectAnswerMessageBox();
         }
 
         myGamePanel.getDirectionButtonPanel().setDirectionButtonsVisibility();
