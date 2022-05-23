@@ -61,22 +61,14 @@ public class TriviaMazeBrain {
 
         if (MOVE_FREELY.equals(theUserAnswer)) {
             myMaze.updatePosition(directionToMove);
-        }
-
-        else {
+        } else {
 
             // every time answer is correct (except for if you win), display correct answer message
             if (qa.selectedCorrectAnswer(theUserAnswer)) {
-                if (myMaze.hasWon()) {
-                    myGamePanel.displayWinningMessageBox();
-                } else {
-                    myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
-                            theDirectionType, qa.selectedCorrectAnswer(theUserAnswer));
-                    myGamePanel.displayCorrectAnswerMessageBox();
-                }
-            }
-
-            else {
+                myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
+                        theDirectionType, qa.selectedCorrectAnswer(theUserAnswer));
+                myGamePanel.displayCorrectAnswerMessageBox();
+            } else {
                 chosenDoor.lockDoor();
                 myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
                         theDirectionType, qa.selectedCorrectAnswer(theUserAnswer));
@@ -89,8 +81,12 @@ public class TriviaMazeBrain {
                 }
             }
 
-            if(!chosenDoor.isLocked()) {
+            if (!chosenDoor.isLocked()) {
                 myMaze.updatePosition(directionToMove);
+            }
+
+            if (myMaze.hasWon()) {
+                myGamePanel.displayWinningMessageBox();
             }
         }
 
