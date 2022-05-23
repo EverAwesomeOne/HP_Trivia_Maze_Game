@@ -96,11 +96,33 @@ public class MazePanel extends JPanel {
             columnOffset = -1;
         }
 
-        if (theRow % 2 == 0) {
-            myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
-        } else {
+        if (rowOffset != 0) {
             myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_VERTICAL_DOOR);
+        } else {
+            myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
         }
+        myRoomImages[theRow + rowOffset][theCol + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    public void setOpenDoorIcon(final int theRow, final int theCol, final String theDirectionType) {
+        int rowOffset = 0;
+        int columnOffset = 0;
+        if ("NORTH".equals(theDirectionType)) {
+            rowOffset = -1;
+        } else if ("SOUTH".equals(theDirectionType)) {
+            rowOffset = 1;
+        } else if ("EAST".equals(theDirectionType)) {
+            columnOffset = 1;
+        } else {
+            columnOffset = -1;
+        }
+
+        if (rowOffset != 0) {
+            myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
+        } else {
+            myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+        }
+        myRoomImages[theRow + rowOffset][theCol + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     private void setLockedRoomIcon(final int theRow, final int theCol) {
@@ -137,26 +159,18 @@ public class MazePanel extends JPanel {
                 if (i % 2 == 0) {
                     myRoomImages[theRow][i] = new JLabel(ICON_EMPTY_ROOM);
                 } else {
-                    myRoomImages[theRow][i] = new JLabel(ICON_UNLOCKED_HORIZONTAL_DOOR);
+                    //myRoomImages[theRow][i] = new JLabel(ICON_UNLOCKED_HORIZONTAL_DOOR);
+                    myRoomImages[theRow][i] = new JLabel();
                 }
             }
         } else {
             for (int i = 0; i < ROW; i++) {
                 if (i % 2 == 0) {
-                    myRoomImages[theRow][i] = new JLabel(ICON_UNLOCKED_VERTICAL_DOOR);
+                    myRoomImages[theRow][i] = new JLabel();
+                    //myRoomImages[theRow][i] = new JLabel(ICON_UNLOCKED_VERTICAL_DOOR);
                 } else {
                     myRoomImages[theRow][i] = new JLabel(ICON_EMPTY_ROOM);
                 }
-            }
-        }
-    }
-
-    private void createMazeRowWithVerticalDoors(int theRow) {
-        for (int i = 0; i < ROW; i++) {
-            if (i % 2 == 0) {
-                myRoomImages[theRow][i] = new JLabel(ICON_UNLOCKED_VERTICAL_DOOR);
-            } else {
-                myRoomImages[theRow][i] = new JLabel(ICON_EMPTY_ROOM);
             }
         }
     }

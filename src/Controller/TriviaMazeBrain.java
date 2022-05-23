@@ -65,10 +65,26 @@ public class TriviaMazeBrain {
 
         else {
 
-            if (!qa.selectedCorrectAnswer(theUserAnswer)) {
+            // every time answer is correct (except for if you win), display correct answer message
+            if (qa.selectedCorrectAnswer(theUserAnswer)) {
+                if (myMaze.hasWon()) {
+                    myGamePanel.displayWinningMessageBox();
+                } else {
+                    myMazePanel.setOpenDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(), theDirectionType);
+                    myGamePanel.displayCorrectAnswerMessageBox();
+                }
+            }
+
+            else {
                 chosenDoor.lockDoor();
                 myMazePanel.setLockedDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(), theDirectionType);
                 myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
+
+                if (!myMaze.hasValidPaths()) {
+                    myGamePanel.displayLosingMessageBox();
+                } else {
+                    myGamePanel.displayIncorrectAnswerMessageBox();
+                }
             }
 
             if(!chosenDoor.isLocked()) {
@@ -80,11 +96,12 @@ public class TriviaMazeBrain {
         myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(),
                 myMaze.getCharacterColumn());
 
-        // every time answer is correct (except for if you win), display correct answer message
+        /*// every time answer is correct (except for if you win), display correct answer message
         if (qa.selectedCorrectAnswer(theUserAnswer)) {
             if (myMaze.hasWon()) {
                 myGamePanel.displayWinningMessageBox();
             } else {
+                myMazePanel.setOpenDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(), theDirectionType);
                 myGamePanel.displayCorrectAnswerMessageBox();
             }
         }
@@ -96,7 +113,7 @@ public class TriviaMazeBrain {
             } else {
                 myGamePanel.displayIncorrectAnswerMessageBox();
             }
-        }
+        }*/
     }
 
     public boolean checkIsLockedStatus(final String theDirectionType) {
