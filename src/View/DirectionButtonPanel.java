@@ -3,6 +3,7 @@ package View;
 import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
@@ -21,21 +22,26 @@ public class DirectionButtonPanel extends JPanel {
     private final BasicArrowButton myEastButton;
     private final BasicArrowButton myWestButton;
 
+    final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+
     DirectionButtonPanel(final JPanel theGamePanel, final MazePanel theMazePanel,
                          final TriviaMazeBrain theTriviaMazeBrain) {
+
         myMazePanel = theMazePanel;
         myTriviaMazeBrain = theTriviaMazeBrain;
         setLayout(new GridLayout(3,3));
-        setBorder(BorderFactory.createTitledBorder("Choose Door"));
 
+        final TitledBorder border = new TitledBorder("Choose Door");
+        border.setTitleFont(TITLE_FONT);
+        setBorder(border);
         myNorthButton = new BasicArrowButton(BasicArrowButton.NORTH);
         mySouthButton = new BasicArrowButton(BasicArrowButton.SOUTH);
         myEastButton = new BasicArrowButton(BasicArrowButton.EAST);
         myWestButton = new BasicArrowButton(BasicArrowButton.WEST);
 
         // Replace with an icon?
-        final JLabel centerLabel =
-                new JLabel("<html>Current<br/>Room</html>", SwingConstants.CENTER);
+        final JLabel centerLabel = new JLabel("<html>Current<br/>Room</html>", SwingConstants.CENTER);
+        centerLabel.setFont(TITLE_FONT);
 
         // initialize BasicArrowButtons based on the start position in maze
         setDirectionButtonsVisibility();

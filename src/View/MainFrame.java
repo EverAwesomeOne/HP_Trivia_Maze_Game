@@ -19,7 +19,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(final TriviaMazeBrain theTriviaMazeBrain) {
         setTitle(TITLE);
-        setSize(500,500);
+        setSize(600,600);
         setIconImage(MAZE_ICON.getImage());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setFrameLocation();

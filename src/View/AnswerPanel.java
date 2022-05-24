@@ -3,6 +3,7 @@ package View;
 import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.Random;
 
@@ -19,15 +20,19 @@ class AnswerPanel extends JPanel {
 
     private int myNullCount;
 
+    final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+
     AnswerPanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain,
                 final QuestionPanel theQuestionPanel,
                 final DirectionButtonPanel theDirectionButtonPanel) {
+
         myTriviaMazeBrain = theTriviaMazeBrain;
         myQuestionPanel = theQuestionPanel;
         myDirectionButtonPanel = theDirectionButtonPanel;
-        
-        setBorder(BorderFactory.createTitledBorder("Answer"));
 
+        final TitledBorder border = new TitledBorder("Answer");
+        border.setTitleFont(TITLE_FONT);
+        setBorder(border);
         theGamePanel.add(this);
         setVisible(true);
     }

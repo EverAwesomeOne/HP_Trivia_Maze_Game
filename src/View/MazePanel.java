@@ -3,6 +3,7 @@ package View;
 import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class MazePanel extends JPanel {
@@ -30,11 +31,17 @@ public class MazePanel extends JPanel {
 
     private final TriviaMazeBrain myTriviaMazeBrain;
 
+    final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+
     public MazePanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain) {
         myTriviaMazeBrain = theTriviaMazeBrain;
         
         setLayout(new GridLayout(ROW, COL));
-        setBorder(BorderFactory.createTitledBorder("Maze"));
+        //setBorder(BorderFactory.createTitledBorder("Maze"));
+
+        final TitledBorder border = new TitledBorder("Maze");
+        border.setTitleFont(TITLE_FONT);
+        setBorder(border);
 
         initializeMaze();
         addImagesToMazePanel(this);
@@ -146,7 +153,6 @@ public class MazePanel extends JPanel {
                 if (i % 2 == 0) {
                     myRoomImages[theRow][i] = new JLabel(ICON_EMPTY_ROOM);
                 } else {
-                    //myRoomImages[theRow][i] = new JLabel(ICON_UNLOCKED_HORIZONTAL_DOOR);
                     myRoomImages[theRow][i] = new JLabel();
                 }
             }
@@ -154,7 +160,6 @@ public class MazePanel extends JPanel {
             for (int i = 0; i < ROW; i++) {
                 if (i % 2 == 0) {
                     myRoomImages[theRow][i] = new JLabel();
-                    //myRoomImages[theRow][i] = new JLabel(ICON_UNLOCKED_VERTICAL_DOOR);
                 } else {
                     myRoomImages[theRow][i] = new JLabel(ICON_EMPTY_ROOM);
                 }
@@ -165,12 +170,14 @@ public class MazePanel extends JPanel {
     private JLabel setStartRoom() {
         final JLabel startRoom = new JLabel();
         startRoom.setIcon(ICON_CURRENT_ROOM);
+        startRoom.setHorizontalAlignment(SwingConstants.CENTER);
         return startRoom;
     }
 
     private JLabel setEndRoom() {
         final JLabel endRoom = new JLabel();
         endRoom.setIcon(ICON_END_ROOM);
+        endRoom.setHorizontalAlignment(SwingConstants.CENTER);
         return endRoom;
     }
 }

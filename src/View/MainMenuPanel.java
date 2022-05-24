@@ -57,12 +57,11 @@ public class MainMenuPanel extends JPanel {
 
     private JPanel setupIconPanel() {
         final JPanel iconPanel = new JPanel();
-        iconPanel.setLayout(new GridLayout(3,1));
+        iconPanel.setLayout(new GridLayout(2,1));
         iconPanel.setBackground(PURPLE_COLOR);
 
-        iconPanel.add(new JLabel(scaleImageIcon(HARRY_POTTER_ICON)));
-        iconPanel.add(new JLabel(scaleImageIcon(MAZE_ICON)));
         iconPanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON)));
+        iconPanel.add(new JLabel(scaleImageIcon(HARRY_POTTER_ICON)));
 
         return iconPanel;
     }
@@ -72,8 +71,8 @@ public class MainMenuPanel extends JPanel {
         final JPanel mainMenuBtnPanel = new JPanel();
         mainMenuBtnPanel.setBackground(PURPLE_COLOR);
 
-        addStyledButtonToMainMenu("New Game", mainMenuBtnPanel);
-        addStyledButtonToMainMenu("Load Game", mainMenuBtnPanel);
+        addStyledButtonToMainMenu(" New Game ", mainMenuBtnPanel);
+        addStyledButtonToMainMenu("Load  Game", mainMenuBtnPanel);
         addStyledButtonToMainMenu("Game Rules", mainMenuBtnPanel);
 
         return mainMenuBtnPanel;
@@ -89,7 +88,7 @@ public class MainMenuPanel extends JPanel {
     }
 
     private void addActionListener(JButton button, String buttonName) {
-        if (buttonName.equals("New Game")) {
+        if (buttonName.equals(" New Game ")) {
             button.addActionListener(
                     e -> {
                         setVisible(false);
@@ -100,7 +99,7 @@ public class MainMenuPanel extends JPanel {
                     }
             );
         }
-        else if (buttonName.equals("Load Game")) {
+        else if (buttonName.equals("Load  Game")) {
             button.addActionListener(
                     e -> {
                         // call deserialize method
@@ -122,6 +121,6 @@ public class MainMenuPanel extends JPanel {
     }
 
     private ImageIcon scaleImageIcon(ImageIcon icon) {
-        return new ImageIcon(icon.getImage().getScaledInstance(140, 140, Image.SCALE_SMOOTH));
+        return new ImageIcon(icon.getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH));
     }
 }
