@@ -62,29 +62,39 @@ public class TriviaMazeBrain {
         if (MOVE_FREELY.equals(theUserAnswer)) {
             myMaze.updatePosition(directionToMove);
         } else if (qa.selectedCorrectAnswer(theUserAnswer)) {
-                myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
-                        theDirectionType, qa.selectedCorrectAnswer(theUserAnswer));
-                myMaze.updatePosition(directionToMove);
-            if (myMaze.hasWon()) {
-                myGamePanel.displayWinningMessageBox();
-                return;
-            }
-            myGamePanel.displayCorrectAnswerMessageBox();
+            answeredCorrectly(theUserAnswer, theDirectionType, directionToMove, qa);
         } else {
-            chosenDoor.lockDoor();
-            myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
-                    theDirectionType, qa.selectedCorrectAnswer(theUserAnswer));
-            myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
-            if (!myMaze.hasValidPaths()) {
-                myGamePanel.displayLosingMessageBox();
-                return;
-            }
-            myGamePanel.displayIncorrectAnswerMessageBox();
+            answeredIncorrectly(theUserAnswer, theDirectionType, chosenDoor, qa);
         }
 
         myGamePanel.getDirectionButtonPanel().setDirectionButtonsVisibility();
         myMazePanel.updateCharacterPlacement(myMaze.getCharacterRow(),
                 myMaze.getCharacterColumn());
+    }
+
+    private void answeredCorrectly(final String theUserAnswer, final String theDirectionType,
+                                   final Direction theDirectionToMove, final QuestionAnswer theQA) {
+        myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
+                theDirectionType, theQA.selectedCorrectAnswer(theUserAnswer));
+        myMaze.updatePosition(theDirectionToMove);
+        if (myMaze.hasWon()) {
+            myGamePanel.displayWinningMessageBox();
+        } else {
+            myGamePanel.displayCorrectAnswerMessageBox();
+        }
+    }
+
+    private void answeredIncorrectly(final String theUserAnswer, final String theDirectionType,
+                                     final Door theChosenDoor, final QuestionAnswer theQA) {
+        theChosenDoor.lockDoor();
+        myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
+                theDirectionType, theQA.selectedCorrectAnswer(theUserAnswer));
+        myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
+        if (!myMaze.hasValidPaths()) {
+            myGamePanel.displayLosingMessageBox();
+        } else {
+            myGamePanel.displayIncorrectAnswerMessageBox();
+        }
     }
 
     public boolean checkIsLockedStatus(final String theDirectionType) {
