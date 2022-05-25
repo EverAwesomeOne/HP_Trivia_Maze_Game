@@ -8,6 +8,7 @@ public class QuestionPanel extends JPanel {
     private final JPanel myQuestion = new JPanel();
 
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+    final static Font QUESTION_FONT = new Font("SansSerif", Font.PLAIN, 15);
 
     QuestionPanel(final JPanel theGamePanel) {
         final TitledBorder border = new TitledBorder("Question");
@@ -27,7 +28,7 @@ public class QuestionPanel extends JPanel {
         questionLabel.setEditable(false);
         questionLabel.setOpaque(false);
 
-        questionLabel.setFont(TITLE_FONT);
+        questionLabel.setFont(QUESTION_FONT);
 
         myQuestion.add(questionLabel);
         add(myQuestion);

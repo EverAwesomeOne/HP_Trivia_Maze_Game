@@ -21,6 +21,7 @@ class AnswerPanel extends JPanel {
     private int myNullCount;
 
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+    final static Font ANSWER_FONT = new Font("SansSerif", Font.PLAIN, 15);
 
     AnswerPanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain,
                 final QuestionPanel theQuestionPanel,
@@ -83,6 +84,10 @@ class AnswerPanel extends JPanel {
                 }
         );
 
+        questionLabel.setFont(ANSWER_FONT);
+        answerTextArea.setFont(ANSWER_FONT);
+        submitAButton.setFont(TITLE_FONT);
+
         final JPanel labelAndTextAreaPanel = new JPanel();
         shortAnswerQPanel.add(labelAndTextAreaPanel, BorderLayout.NORTH);
         labelAndTextAreaPanel.add(questionLabel, BorderLayout.NORTH);
@@ -106,6 +111,9 @@ class AnswerPanel extends JPanel {
         organizeVerticalBox(verticalBox, radioButtonGroup, trueButton, trueButtonText);
         organizeVerticalBox(verticalBox, radioButtonGroup, falseButton, falseButtonText);
 
+        trueButton.setFont(ANSWER_FONT);
+        falseButton.setFont(ANSWER_FONT);
+
         return getQuestionTypePanel(trueFalseQPanel, questionLabel, verticalBox, radioButtonGroup);
     }
 
@@ -128,13 +136,11 @@ class AnswerPanel extends JPanel {
         final Box verticalBox = Box.createVerticalBox();
         final ButtonGroup radioButtonGroup = new ButtonGroup();
 
-        // EDWIN NOTES
-        // make custom JRadioButton class : button with textField
-        // use HTML add br tag if String length is wider than JPanel
-
         for (int index : randomizeAnswerOrderList) {
             final String answerText = myAnswerArray[index];
             final TextWrappingJRadioButton textWrappingJRadioButton = new TextWrappingJRadioButton(answerText);
+
+            textWrappingJRadioButton.getJTextArea().setFont(ANSWER_FONT);
 
             final JPanel customJRadioButtonPanel = new JPanel();
             FlowLayout layout = (FlowLayout) customJRadioButtonPanel.getLayout();
@@ -145,11 +151,8 @@ class AnswerPanel extends JPanel {
             verticalBox.add(customJRadioButtonPanel);
             radioButtonGroup.add(textWrappingJRadioButton.getJRadioButton());
             textWrappingJRadioButton.getJRadioButton().setActionCommand(answerText);
-
-//            final JRadioButton answerButton = new JRadioButton(answerText);
-//
-//            organizeVerticalBox(verticalBox, radioButtonGroup, answerButton, answerText);
         }
+
         return getQuestionTypePanel(multiChoiceQPanel, questionLabel,
                 verticalBox, radioButtonGroup);
     }
@@ -176,6 +179,9 @@ class AnswerPanel extends JPanel {
                     updatePanels();
                 }
         );
+
+        theQuestionLabel.setFont(ANSWER_FONT);
+        submitAButton.setFont(TITLE_FONT);
 
         theQuestionTypePanel.add(theQuestionLabel, BorderLayout.NORTH);
         theQuestionTypePanel.add(submitAButton, BorderLayout.SOUTH);
