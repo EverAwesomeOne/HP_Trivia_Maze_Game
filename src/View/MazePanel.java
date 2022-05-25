@@ -37,7 +37,6 @@ public class MazePanel extends JPanel {
         myTriviaMazeBrain = theTriviaMazeBrain;
         
         setLayout(new GridLayout(ROW, COL));
-        //setBorder(BorderFactory.createTitledBorder("Maze"));
 
         final TitledBorder border = new TitledBorder("Maze");
         border.setTitleFont(TITLE_FONT);

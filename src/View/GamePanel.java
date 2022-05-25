@@ -54,7 +54,7 @@ public class GamePanel extends JPanel {
     public ArrayList<String> createWinningAnswerMessages() {
         ArrayList<String> winningMessages = new ArrayList<>();
         winningMessages.add("You're doing awesome :)");
-        winningMessages.add("Keep it up!");
+        winningMessages.add("Dementor? You just took my breath away!");
         winningMessages.add("Eek, one step closer!");
         winningMessages.add("You're on a roll~~");
         return winningMessages;
@@ -94,7 +94,10 @@ public class GamePanel extends JPanel {
         losingMessages.add("Dang, not quite");
         losingMessages.add("You were so close");
         losingMessages.add("Try again. You got this!");
-        losingMessages.add("Oopsie, that wasn't right!");
+        //losingMessages.add("Oopsie, that wasn't right!");
+        losingMessages.add("Muggle? You're hitting platform 9 and 3/4.");
+        //losingMessages.add("Muggle? Can't enter platform 9 and 3/4.");
+
         return losingMessages;
     }
 
