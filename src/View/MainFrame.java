@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
         final OptionsMenuBar myMenuBar = new OptionsMenuBar(this, theTriviaMazeBrain, myGamePanel);
         setJMenuBar(myMenuBar);
         myGameRulesPanelGP = new GameRulesPanel(myGamePanel, myMenuBar);
-        myAboutTeamPanel = new AboutTeamPanel(this, myGamePanel, myMenuBar);
+        myAboutTeamPanel = new AboutTeamPanel(myGamePanel, myMenuBar);
         myMainMenuPanel = new MainMenuPanel(this, theTriviaMazeBrain, myGamePanel);
         myGameRulesPanelMM = new GameRulesPanel(myMainMenuPanel);
 
