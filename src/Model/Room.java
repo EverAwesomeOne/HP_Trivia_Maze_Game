@@ -1,12 +1,12 @@
 package Model;
 
 public class Room {
-    private Door myNorthDoor;
-    private Door myEastDoor;
-    private Door mySouthDoor;
-    private Door myWestDoor;
+    public Door myNorthDoor;
+    public Door myEastDoor;
+    public Door mySouthDoor;
+    public Door myWestDoor;
 
-    Room() {
+    public Room() {
         myNorthDoor = new Door();
         myEastDoor = new Door();
         mySouthDoor = new Door();
