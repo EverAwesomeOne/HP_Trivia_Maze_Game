@@ -76,7 +76,7 @@ public class MainMenuPanel extends JPanel {
         final JButton mainMenuButton = new JButton(theTextForBtn);
         mainMenuButton.setFont(BUTTON_FONT);
         mainMenuButton.setBackground(GOLD_COLOR);
-        mainMenuButton.setForeground(Color.black);
+        mainMenuButton.setForeground(PURPLE_COLOR);
         theMainMenuBtnPanel.add(mainMenuButton);
         addActionListener(mainMenuButton, theTextForBtn);
     }
