@@ -5,7 +5,9 @@ import java.awt.*;
 
 class AboutTeamPanel extends JPanel {
 
-    AboutTeamPanel(final MainFrame theMainFrame, final JPanel theGamePanel, final JMenuBar theMenuBar) {
+    final static Font ABOUT_FONT = new Font("SansSerif", Font.PLAIN, 20);
+
+    AboutTeamPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
         setLayout(new BorderLayout());
 
         final JTextArea textField = new JTextArea("""
@@ -14,6 +16,8 @@ class AboutTeamPanel extends JPanel {
                 University of Washington
                 TCSS 360 A, Professor Tom Capaul
                 May 2022""");
+
+        textField.setAlignmentX(CENTER_ALIGNMENT);
         textField.setEditable(false);
 
         final JButton okayButton = new JButton("OK");
@@ -24,6 +28,9 @@ class AboutTeamPanel extends JPanel {
                     theMenuBar.setVisible(true);
                 }
         );
+
+        textField.setFont(ABOUT_FONT);
+        okayButton.setFont(ABOUT_FONT);
 
         add(textField, BorderLayout.CENTER);
         add(okayButton, BorderLayout.SOUTH);
