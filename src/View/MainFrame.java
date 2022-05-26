@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
     private final AboutTeamPanel myAboutTeamPanel;
 
     private final static String TITLE = "Harry Potter Trivia Maze Game";
-    private final static ImageIcon MAZE_ICON = new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
+    private final static ImageIcon MAZE_ICON = new ImageIcon("src//View//Images//HogwartsIcon.jpg");
     private final static Toolkit KIT = Toolkit.getDefaultToolkit();
 
     public MainFrame(final TriviaMazeBrain theTriviaMazeBrain) {

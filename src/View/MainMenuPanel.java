@@ -10,14 +10,8 @@ public class MainMenuPanel extends JPanel {
     private final TriviaMazeBrain myTriviaMazeBrain;
     private final GamePanel myGamePanel;
 
-    private static final ImageIcon MAZE_ICON =
-            new ImageIcon("src//View//Images//TriviaMazeIcon.jpg");
-
-    private static final ImageIcon HOGWARTS_ICON =
-            new ImageIcon("src//View//Images//HogwartsIcon.jpg");
-
-    private static final ImageIcon HARRY_POTTER_ICON =
-            new ImageIcon("src//View//Images//HPTrivia.png");
+    private static final ImageIcon HOGWARTS_ICON = new ImageIcon("src//View//Images//HogwartsIcon.jpg");
+    private static final ImageIcon HARRY_POTTER_ICON = new ImageIcon("src//View//Images//HPTrivia.png");
 
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 25);
     final static Font BUTTON_FONT = new Font("SansSerif", Font.BOLD, 18);
