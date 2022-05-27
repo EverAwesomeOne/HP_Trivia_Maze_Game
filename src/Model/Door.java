@@ -5,7 +5,7 @@ public class Door {
     private boolean myFirstTime;
     private final QuestionAnswer myQuestionAnswer;
 
-    public Door() {
+    Door() {
         myFirstTime = true;
         myQuestionAnswer = new QuestionAnswer();
     }
