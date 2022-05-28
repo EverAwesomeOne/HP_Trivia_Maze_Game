@@ -89,7 +89,7 @@ public class GameRulesPanel extends JPanel {
                 " the rooms and to the exit (labeled as E) to win! If you get a question wrong: " +
                 "the door will lock, an \"X\" will appear on that path, and you will have to try " +
                 "to find another way to get to the exit. If you run out of open doors to reach the " +
-                "exit, its game over.</div></html>");
+                "exit, it's game over.</div></html>");
 
         return setUpPanelsOnGameRulesPanel(howToPlayTitle, howToPlay);
     }
@@ -115,25 +115,22 @@ public class GameRulesPanel extends JPanel {
     }
 
     private JPanel setUpPanelsOnGameRulesPanel(final JLabel theTitle, final JLabel theText) {
-        GridLayout setUpPanelLayout = new GridLayout(2,1);
-        setUpPanelLayout.setVgap(1);
-        //I tried using border layout as well, still get big spaces ahhh
-        JPanel setUpPanel = new JPanel(setUpPanelLayout);
+        JPanel setUpPanel = new JPanel();
+        setUpPanel.setLayout(new BoxLayout(setUpPanel, BoxLayout.Y_AXIS));
 
         theTitle.setForeground(GOLD_COLOR);
         theText.setForeground(GOLD_COLOR);
 
-        theTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        theText.setHorizontalAlignment(SwingConstants.CENTER);
+        theTitle.setAlignmentX(CENTER_ALIGNMENT);
+        theText.setAlignmentX(CENTER_ALIGNMENT);
 
-        theTitle.setFont(new Font("SanSerif", Font.PLAIN, 14));
+        theTitle.setFont(new Font("SanSerif", Font.BOLD, 14));
         theText.setFont(new Font("SanSerif", Font.PLAIN, 12));
 
         setUpPanel.add(theTitle);
         setUpPanel.add(theText);
 
         setUpPanel.setBackground(PURPLE_COLOR);
-        //setUpPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         return setUpPanel;
     }
