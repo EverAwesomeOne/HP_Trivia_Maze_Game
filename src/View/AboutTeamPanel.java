@@ -54,7 +54,7 @@ class AboutTeamPanel extends JPanel {
         final JLabel aboutChloe = new JLabel("Chloe Duncan - Addicted to Java: " +
                                                 "☕ & \uD83D\uDCBB");
         final JLabel aboutEdwin = new JLabel("Edwin Solis-Bruno - A connoisseur for everything " +
-                "                               \uD83C\uDF53 related");
+                                                "\uD83C\uDF53 related");
 
         aboutMaria.setHorizontalAlignment(SwingConstants.LEFT);
         aboutChloe.setHorizontalAlignment(SwingConstants.LEFT);
