@@ -20,8 +20,7 @@ public class QuestionAnswer {
         myAnswer4 = "";
         myQuestionList = new String[5];
     }
-    //make it static and return QuestionAnswer object
-    //return new QuestionAnswer(questions and the answers)
+
     public void getQuestionAnswerFromDatabase(final Statement theStatement) {
 
         //query the database table for a random row

@@ -5,6 +5,9 @@ import Controller.TriviaMazeBrain;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Enumeration;
 import java.util.Random;
 
 class AnswerPanel extends JPanel {
@@ -114,7 +117,8 @@ class AnswerPanel extends JPanel {
         trueButton.setFont(ANSWER_FONT);
         falseButton.setFont(ANSWER_FONT);
 
-        return getQuestionTypePanel(trueFalseQPanel, questionLabel, verticalBox, radioButtonGroup);
+        return getQuestionTypePanel(trueFalseQPanel, questionLabel, verticalBox,
+                radioButtonGroup, null);
     }
 
     private JPanel multiChoiceQ() {
@@ -136,9 +140,12 @@ class AnswerPanel extends JPanel {
         final Box verticalBox = Box.createVerticalBox();
         final ButtonGroup radioButtonGroup = new ButtonGroup();
 
+        TextWrappingJRadioButton[] textWrappingJRadioButtons = new TextWrappingJRadioButton[4];
         for (int index : randomizeAnswerOrderList) {
             final String answerText = myAnswerArray[index];
-            final TextWrappingJRadioButton textWrappingJRadioButton = new TextWrappingJRadioButton(answerText);
+            final TextWrappingJRadioButton textWrappingJRadioButton =
+                    new TextWrappingJRadioButton(answerText);
+            textWrappingJRadioButtons[index-1] = textWrappingJRadioButton;
 
             textWrappingJRadioButton.getJTextArea().setFont(ANSWER_FONT);
 
@@ -154,7 +161,7 @@ class AnswerPanel extends JPanel {
         }
 
         return getQuestionTypePanel(multiChoiceQPanel, questionLabel,
-                verticalBox, radioButtonGroup);
+                verticalBox, radioButtonGroup, textWrappingJRadioButtons);
     }
 
     private void organizeVerticalBox(final Box theVerticalBox,
@@ -169,10 +176,28 @@ class AnswerPanel extends JPanel {
     private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel,
                                         final JLabel theQuestionLabel,
                                         final Box theVerticalBox,
-                                        final ButtonGroup theRadioButtonGroup) {
+                                        final ButtonGroup theRadioButtonGroup,
+                                        final TextWrappingJRadioButton[] theCustomButtons) {
         theQuestionTypePanel.add(theVerticalBox);
 
         final JButton submitAButton = new JButton("SUBMIT");
+        submitAButton.setEnabled(false);
+
+        if (theCustomButtons != null) {
+            for (TextWrappingJRadioButton theCustomButton: theCustomButtons) {
+                theCustomButton.getJTextArea().addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        submitAButton.setEnabled(true);
+                    }
+                });
+            }
+        }
+        Enumeration<AbstractButton> radioButtons = theRadioButtonGroup.getElements();
+        while (radioButtons.hasMoreElements()) {
+            radioButtons.nextElement().addActionListener(e->submitAButton.setEnabled(true));
+        }
+
         submitAButton.addActionListener(
                 e -> {
                     myUserAnswer = theRadioButtonGroup.getSelection().getActionCommand();
