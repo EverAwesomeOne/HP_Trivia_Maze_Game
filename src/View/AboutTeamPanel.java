@@ -44,16 +44,14 @@ class AboutTeamPanel extends JPanel {
 
     private JPanel membersPanel() {
         final JPanel membersPanel = new JPanel();
+        final ImageIcon CHLOE_ICON = new ImageIcon("src//View//Images//Chloe.png");
+        final ImageIcon MARIA_ICON = new ImageIcon("src//View//Images//Maria.jpg");
+        final ImageIcon EDWIN_ICON = new ImageIcon("src//View//Images//Edwin.png");
 
-        final ImageIcon HOGWARTS_ICON = new ImageIcon("src//View//Images//HogwartsIcon.jpg");
 
-        final ImageIcon mariaIcon = HOGWARTS_ICON;
-        final ImageIcon chloeIcon = HOGWARTS_ICON;
-        final ImageIcon edwinIcon = HOGWARTS_ICON;
-
-        final JLabel aboutMaria = new JLabel("Maria Biography Goes Here and this is the test");
-        final JLabel aboutChloe = new JLabel("Chloe Biography Goes Here");
-        final JLabel aboutEdwin = new JLabel("Edwin Bio");
+        final JLabel aboutMaria = new JLabel("Maria Babko - The only actual Potterhead here ⚡");
+        final JLabel aboutChloe = new JLabel("Chloe Duncan - Addicted to Java: ☕ & \uD83D\uDCBB");
+        final JLabel aboutEdwin = new JLabel("Edwin Solis-Bruno - A connoisseur for everything \uD83C\uDF53 related");
 
         aboutMaria.setHorizontalAlignment(SwingConstants.LEFT);
         aboutChloe.setHorizontalAlignment(SwingConstants.LEFT);
@@ -73,9 +71,9 @@ class AboutTeamPanel extends JPanel {
         final JPanel iconPanel = new JPanel();
         iconPanel.setLayout(iconPanelLayout);
         iconPanel.setBackground(PURPLE_COLOR);
-        iconPanel.add(new JLabel(scaleImageIcon(mariaIcon, 40)));
-        iconPanel.add(new JLabel(scaleImageIcon(chloeIcon, 40)));
-        iconPanel.add(new JLabel(scaleImageIcon(edwinIcon, 40)));
+        iconPanel.add(new JLabel(scaleImageIcon(MARIA_ICON, 40)));
+        iconPanel.add(new JLabel(scaleImageIcon(CHLOE_ICON, 40)));
+        iconPanel.add(new JLabel(scaleImageIcon(EDWIN_ICON, 40)));
 
         GridLayout bioPanelLayout = new GridLayout(3,1);
         bioPanelLayout.setVgap(45);
@@ -102,7 +100,7 @@ class AboutTeamPanel extends JPanel {
         final JLabel aboutTeamLabel = new JLabel("<html><div style='text-align: center;'>"
                 + "Maria Babko ~ Chloe Duncan ~ Edwin Solis-Bruno<br>" +
                 "University of Washington<br>TCSS 360 A, Professor Tom Capaul<br>" +
-                "June 2022" + "</div></html>");
+                "Spring 2022" + "</div></html>");
 
         aboutTeamLabel.setHorizontalAlignment(SwingConstants.CENTER);
         aboutTeamLabel.setVerticalAlignment(SwingConstants.CENTER);
