@@ -26,7 +26,8 @@ class AboutTeamPanel extends JPanel {
         final JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new GridLayout(1, 3));
 
-        final JLabel teamNameLabel = new JLabel("<html><div style='text-align: center;'>" + "Harry Potter<br>Trivia Maze<br>Team" + "</div></html>");
+        final JLabel teamNameLabel = new JLabel("<html><div style='text-align: center;'>"
+                + "Harry Potter<br>Trivia Maze<br>Team" + "</div></html>");
 
         teamNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         teamNameLabel.setFont(ABOUT_FONT);
@@ -50,8 +51,10 @@ class AboutTeamPanel extends JPanel {
 
 
         final JLabel aboutMaria = new JLabel("Maria Babko - The only actual Potterhead here ⚡");
-        final JLabel aboutChloe = new JLabel("Chloe Duncan - Addicted to Java: ☕ & \uD83D\uDCBB");
-        final JLabel aboutEdwin = new JLabel("Edwin Solis-Bruno - A connoisseur for everything \uD83C\uDF53 related");
+        final JLabel aboutChloe = new JLabel("Chloe Duncan - Addicted to Java: " +
+                                                "☕ & \uD83D\uDCBB");
+        final JLabel aboutEdwin = new JLabel("Edwin Solis-Bruno - A connoisseur for everything " +
+                "                               \uD83C\uDF53 related");
 
         aboutMaria.setHorizontalAlignment(SwingConstants.LEFT);
         aboutChloe.setHorizontalAlignment(SwingConstants.LEFT);
