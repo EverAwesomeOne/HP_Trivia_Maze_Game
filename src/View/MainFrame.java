@@ -41,10 +41,6 @@ public class MainFrame extends JFrame {
         setVisible(true);
     }
 
-    public MainMenuPanel getMainMenuPanel() {
-        return myMainMenuPanel;
-    }
-
     public GamePanel getGamePanel() {
         return myGamePanel;
     }
