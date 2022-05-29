@@ -102,8 +102,8 @@ public class Maze {
             int rowIndex = i / myMaze.length;
             int columnIndex = i % myMaze[0].length;
 
-            if ((rowIndex * i + 1) % myMaze.length == 0) {
-                i += 8;
+            if ((i - 1) % myMaze.length == 0) {
+                i += 6;
                 rowIndex++;
                 columnIndex--;
             }
