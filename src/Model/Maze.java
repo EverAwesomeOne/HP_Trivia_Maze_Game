@@ -149,7 +149,7 @@ public class Maze {
     }
 
     private void lockEdgeDoors() {
-        for (int i = 0; i < myMaze.length; i++) {
+        for (int i = 0; i < myMaze.length; i += 2) {
             // we want to lock the doors on the edge of the maze
             // since there are no rooms beyond that
             myMaze[i][0].getDoor(Direction.WEST).lockDoor(); // left
