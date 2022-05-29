@@ -132,16 +132,16 @@ public class Maze {
         // we want doors to adjacent rooms to be shared
 
         // east and west door of adjacent rooms
-        for (final Room[] rowOfRooms : myMaze) {
-            for (int singleRoom = 0; singleRoom < rowOfRooms.length - 2; singleRoom++) {
-                final Door rightRoomWestDoor = rowOfRooms[singleRoom + 2].getDoor(Direction.WEST);
-                rowOfRooms[singleRoom].setSharedDoor(Direction.EAST, rightRoomWestDoor);
+        for (int i = 0; i < myMaze.length; i += 2) {
+            for (int j = 0; j < myMaze[i].length - 2; j += 2) {
+                final Door rightRoomWestDoor = myMaze[i][j + 2].getDoor(Direction.WEST);
+                myMaze[i][j].setSharedDoor(Direction.EAST, rightRoomWestDoor);
             }
         }
 
         // north and south doors of adjacent rooms
-        for (int i = 0; i < myMaze.length - 2; i++) {
-            for (int j = 0; j < myMaze[i].length; j++) {
+        for (int i = 0; i < myMaze.length - 2; i += 2) {
+            for (int j = 0; j < myMaze[i].length; j += 2) {
                 final Door bottomRoomNorthDoor = myMaze[i + 2][j].getDoor(Direction.NORTH);
                 myMaze[i][j].setSharedDoor(Direction.SOUTH, bottomRoomNorthDoor);
             }
@@ -149,7 +149,7 @@ public class Maze {
     }
 
     private void lockEdgeDoors() {
-        for (int i = 0; i < myMaze.length; i++) {
+        for (int i = 0; i < myMaze.length; i += 2) {
             // we want to lock the doors on the edge of the maze
             // since there are no rooms beyond that
             myMaze[i][0].getDoor(Direction.WEST).lockDoor(); // left
