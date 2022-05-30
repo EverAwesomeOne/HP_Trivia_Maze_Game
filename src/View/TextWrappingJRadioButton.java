@@ -23,11 +23,11 @@ public class TextWrappingJRadioButton {
         });
     }
 
-    public JRadioButton getJRadioButton() {
+    JRadioButton getJRadioButton() {
         return myJRadioButton;
     }
 
-    public JTextArea getJTextArea() {
+    JTextArea getJTextArea() {
         return myJTextArea;
     }
 }
