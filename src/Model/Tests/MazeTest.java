@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MazeTest {
-/*
+
     // For the maze constructor test below, had to change the visibility
     // of myMaze from private to public
     @Test
@@ -98,6 +98,83 @@ public class MazeTest {
         maze.myCharacterRow = 6;
         maze.myCharacterColumn = 6;
         assertTrue(maze.hasWon());
+    }
+
+    // For the remove edge from graph tests below, had to change
+    // the visibility of myRoomConnections from private to public
+    @Test
+    public void testRemoveEdgeFromGraph0To2() {
+        Maze maze = new Maze(7);
+        assertEquals(2, maze.myRoomConnections[0].size());
+        assertEquals(3, maze.myRoomConnections[2].size());
+
+        assertEquals(2, maze.myRoomConnections[0].get(0));
+        assertEquals(14, maze.myRoomConnections[0].get(1));
+        assertEquals(4, maze.myRoomConnections[2].get(0));
+        assertEquals(16, maze.myRoomConnections[2].get(1));
+        assertEquals(0, maze.myRoomConnections[2].get(2));
+
+        maze.removeEdgeFromGraph(Direction.EAST);
+
+        assertEquals(1, maze.myRoomConnections[0].size());
+        assertEquals(2, maze.myRoomConnections[2].size());
+
+        assertEquals(14, maze.myRoomConnections[0].get(0));
+        assertEquals(4, maze.myRoomConnections[2].get(0));
+        assertEquals(16, maze.myRoomConnections[2].get(1));
+    }
+
+    @Test
+    public void testRemoveEdgeFromGraph0To14() {
+        Maze maze = new Maze(7);
+        assertEquals(2, maze.myRoomConnections[0].size());
+        assertEquals(3, maze.myRoomConnections[14].size());
+
+        assertEquals(2, maze.myRoomConnections[0].get(0));
+        assertEquals(14, maze.myRoomConnections[0].get(1));
+        assertEquals(0, maze.myRoomConnections[14].get(0));
+        assertEquals(16, maze.myRoomConnections[14].get(1));
+        assertEquals(28, maze.myRoomConnections[14].get(2));
+
+        maze.removeEdgeFromGraph(Direction.SOUTH);
+
+        assertEquals(1, maze.myRoomConnections[0].size());
+        assertEquals(2, maze.myRoomConnections[14].size());
+
+        assertEquals(2, maze.myRoomConnections[0].get(0));
+        assertEquals(16, maze.myRoomConnections[14].get(0));
+        assertEquals(28, maze.myRoomConnections[14].get(1));
+    }
+
+    @Test
+    public void testRemoveEdgeFromGraph18To32() {
+        Maze maze = new Maze(7);
+        maze.myCharacterRow = 2;
+        maze.myCharacterColumn = 4;
+
+        assertEquals(4, maze.myRoomConnections[18].size());
+        assertEquals(4, maze.myRoomConnections[32].size());
+
+        assertEquals(4, maze.myRoomConnections[18].get(0));
+        assertEquals(20, maze.myRoomConnections[18].get(1));
+        assertEquals(32, maze.myRoomConnections[18].get(2));
+        assertEquals(16, maze.myRoomConnections[18].get(3));
+        assertEquals(18, maze.myRoomConnections[32].get(0));
+        assertEquals(34, maze.myRoomConnections[32].get(1));
+        assertEquals(46, maze.myRoomConnections[32].get(2));
+        assertEquals(30, maze.myRoomConnections[32].get(3));
+
+        maze.removeEdgeFromGraph(Direction.SOUTH);
+
+        assertEquals(3, maze.myRoomConnections[18].size());
+        assertEquals(3, maze.myRoomConnections[32].size());
+
+        assertEquals(4, maze.myRoomConnections[18].get(0));
+        assertEquals(20, maze.myRoomConnections[18].get(1));
+        assertEquals(16, maze.myRoomConnections[18].get(2));
+        assertEquals(34, maze.myRoomConnections[32].get(0));
+        assertEquals(46, maze.myRoomConnections[32].get(1));
+        assertEquals(30, maze.myRoomConnections[32].get(2));
     }
 
     // For the create initial graph tests below, had to change
@@ -636,5 +713,5 @@ public class MazeTest {
             }
         }
     }
- */
+
 }
