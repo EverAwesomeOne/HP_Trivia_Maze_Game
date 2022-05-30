@@ -67,13 +67,13 @@ public class MazeTest {
     // For the has won tests below, had to change myCharacterRow
     // and myCharacterColumn visibility from private to public
     @Test
-    public void testHasWonNotTrueR0C0() {
+    public void testHasWonFalseR0C0() {
         Maze maze = new Maze(7);
         assertFalse(maze.hasWon());
     }
 
     @Test
-    public void testHasWonNotTrueR4C2() {
+    public void testHasWonFalseR4C2() {
         Maze maze = new Maze(7);
         maze.myCharacterRow = 4;
         maze.myCharacterColumn = 2;
@@ -81,7 +81,7 @@ public class MazeTest {
     }
 
     @Test
-    public void testHasWonNotTrueLoop() {
+    public void testHasWonFalseLoop() {
         Maze maze = new Maze(7);
         for (int i = 0; i < 6; i++) {
             maze.myCharacterRow = i;
@@ -98,6 +98,133 @@ public class MazeTest {
         maze.myCharacterRow = 6;
         maze.myCharacterColumn = 6;
         assertTrue(maze.hasWon());
+    }
+
+    @Test
+    public void testHasValidPathsTrueR0C0NoEdgesRemoved() {
+        Maze maze = new Maze(7);
+        assertTrue(maze.hasValidPaths());
+    }
+
+    @Test
+    public void testHasValidPathsTrueNoEdgesRemovedLoop() {
+        Maze maze = new Maze(7);
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                assertTrue(maze.hasValidPaths());
+            }
+        }
+    }
+
+    @Test
+    public void testHasValidPathsTrueR0C0RemoveEdgeToR0C2() {
+        Maze maze = new Maze(7);
+        assertTrue(maze.hasValidPaths());
+        maze.removeEdgeFromGraph(Direction.EAST);
+        assertTrue(maze.hasValidPaths());
+    }
+
+    @Test
+    public void testHasValidPathsFalseR0C0RemoveBothEdges() {
+        Maze maze = new Maze(7);
+        assertTrue(maze.hasValidPaths());
+        maze.removeEdgeFromGraph(Direction.EAST);
+        assertTrue(maze.hasValidPaths());
+        maze.removeEdgeFromGraph(Direction.SOUTH);
+        assertFalse(maze.hasValidPaths());
+    }
+
+    @Test
+    public void testHasValidPathsFalseR6C4() {
+        Maze maze = new Maze(7);
+        assertTrue(maze.hasValidPaths());
+        maze.myCharacterRow = 4;
+        maze.myCharacterColumn = 6;
+        maze.removeEdgeFromGraph(Direction.SOUTH);
+        assertTrue(maze.hasValidPaths());
+
+        maze.myCharacterRow = 6;
+        maze.myCharacterColumn = 4;
+        assertTrue(maze.hasValidPaths());
+        maze.removeEdgeFromGraph(Direction.EAST);
+        assertFalse(maze.hasValidPaths());
+    }
+
+    // For the remove edge from graph tests below, had to change
+    // the visibility of myRoomConnections from private to public
+    @Test
+    public void testRemoveEdgeFromGraph0To2() {
+        Maze maze = new Maze(7);
+        assertEquals(2, maze.myRoomConnections[0].size());
+        assertEquals(3, maze.myRoomConnections[2].size());
+
+        assertEquals(2, maze.myRoomConnections[0].get(0));
+        assertEquals(14, maze.myRoomConnections[0].get(1));
+        assertEquals(4, maze.myRoomConnections[2].get(0));
+        assertEquals(16, maze.myRoomConnections[2].get(1));
+        assertEquals(0, maze.myRoomConnections[2].get(2));
+
+        maze.removeEdgeFromGraph(Direction.EAST);
+
+        assertEquals(1, maze.myRoomConnections[0].size());
+        assertEquals(2, maze.myRoomConnections[2].size());
+
+        assertEquals(14, maze.myRoomConnections[0].get(0));
+        assertEquals(4, maze.myRoomConnections[2].get(0));
+        assertEquals(16, maze.myRoomConnections[2].get(1));
+    }
+
+    @Test
+    public void testRemoveEdgeFromGraph0To14() {
+        Maze maze = new Maze(7);
+        assertEquals(2, maze.myRoomConnections[0].size());
+        assertEquals(3, maze.myRoomConnections[14].size());
+
+        assertEquals(2, maze.myRoomConnections[0].get(0));
+        assertEquals(14, maze.myRoomConnections[0].get(1));
+        assertEquals(0, maze.myRoomConnections[14].get(0));
+        assertEquals(16, maze.myRoomConnections[14].get(1));
+        assertEquals(28, maze.myRoomConnections[14].get(2));
+
+        maze.removeEdgeFromGraph(Direction.SOUTH);
+
+        assertEquals(1, maze.myRoomConnections[0].size());
+        assertEquals(2, maze.myRoomConnections[14].size());
+
+        assertEquals(2, maze.myRoomConnections[0].get(0));
+        assertEquals(16, maze.myRoomConnections[14].get(0));
+        assertEquals(28, maze.myRoomConnections[14].get(1));
+    }
+
+    @Test
+    public void testRemoveEdgeFromGraph18To32() {
+        Maze maze = new Maze(7);
+        maze.myCharacterRow = 2;
+        maze.myCharacterColumn = 4;
+
+        assertEquals(4, maze.myRoomConnections[18].size());
+        assertEquals(4, maze.myRoomConnections[32].size());
+
+        assertEquals(4, maze.myRoomConnections[18].get(0));
+        assertEquals(20, maze.myRoomConnections[18].get(1));
+        assertEquals(32, maze.myRoomConnections[18].get(2));
+        assertEquals(16, maze.myRoomConnections[18].get(3));
+        assertEquals(18, maze.myRoomConnections[32].get(0));
+        assertEquals(34, maze.myRoomConnections[32].get(1));
+        assertEquals(46, maze.myRoomConnections[32].get(2));
+        assertEquals(30, maze.myRoomConnections[32].get(3));
+
+        maze.removeEdgeFromGraph(Direction.SOUTH);
+
+        assertEquals(3, maze.myRoomConnections[18].size());
+        assertEquals(3, maze.myRoomConnections[32].size());
+
+        assertEquals(4, maze.myRoomConnections[18].get(0));
+        assertEquals(20, maze.myRoomConnections[18].get(1));
+        assertEquals(16, maze.myRoomConnections[18].get(2));
+        assertEquals(34, maze.myRoomConnections[32].get(0));
+        assertEquals(46, maze.myRoomConnections[32].get(1));
+        assertEquals(30, maze.myRoomConnections[32].get(2));
     }
 
     // For the create initial graph tests below, had to change
@@ -228,16 +355,6 @@ public class MazeTest {
         Maze maze = new Maze(7);
         assertEquals(34, maze.myRoomConnections[48].get(0));
         assertEquals(46, maze.myRoomConnections[48].get(1));
-    }
-
-    @Test
-    public void testHasValidPathsNotTrue() {
-        Maze maze = new Maze(7);
-    }
-
-    @Test
-    public void testHasValidPathsTrue() {
-        Maze maze = new Maze(7);
     }
 
     // For the connect shared doors tests below, had to change
@@ -636,5 +753,5 @@ public class MazeTest {
             }
         }
     }
- */
+*/
 }
