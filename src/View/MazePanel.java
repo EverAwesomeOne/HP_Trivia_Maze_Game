@@ -6,13 +6,12 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-public class MazePanel extends JPanel {
+public class MazePanel extends JPanel{
 
     private static final ImageIcon ICON_EMPTY_ROOM = new ImageIcon("src//View//Images//EmptyRoom.png");
     private static final ImageIcon ICON_CURRENT_ROOM = new ImageIcon("src//View//Images//CurrentRoom.png");
     private static final ImageIcon ICON_START_ROOM = new ImageIcon("src//View//Images//StartRoom.png");
     private static final ImageIcon ICON_END_ROOM = new ImageIcon("src//View//Images//ExitRoom.png");
-    private static final ImageIcon ICON_LOCKED_ROOM = new ImageIcon("src//View//Images//LockedRoom.png");
 
     private static final ImageIcon ICON_UNLOCKED_VERTICAL_DOOR = new ImageIcon("src//View//Images//UnlockedDoorVertical.png");
     private static final ImageIcon ICON_UNLOCKED_HORIZONTAL_DOOR = new ImageIcon("src//View//Images//UnlockedDoorHorizontal.png");
@@ -21,8 +20,6 @@ public class MazePanel extends JPanel {
 
     private static final int ROW = TriviaMazeBrain.MAZE_LENGTH;
     private final int COL = ROW;
-
-    // should we have a constant for the starting row and column of the character or YAGNI?
 
     private int myCurrentRow;
     private int myCurrentCol;
@@ -86,7 +83,7 @@ public class MazePanel extends JPanel {
     }
 
     public boolean validDirection(final String theDirection) {
-        return myTriviaMazeBrain.checkIsLockedStatus(theDirection);
+        return myTriviaMazeBrain.checkCurrentRoomIsLockedStatus(theDirection);
     }
 
     public void setDoorIcon(final int theRow, final int theCol, final String theDirectionType, final boolean correctAnswer) {
@@ -118,8 +115,54 @@ public class MazePanel extends JPanel {
         myRoomImages[theRow + rowOffset][theCol + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
     }
 
-    private void setLockedRoomIcon(final int theRow, final int theCol) {
-        myRoomImages[theRow][theCol].setIcon(ICON_LOCKED_ROOM);
+    public void loadDoorIcons() {
+
+        for (int i = 0; i < 7; i+=2) {
+            for (int j = 0; j < 7; j+=2) {
+                int rowOffset = 0;
+                int columnOffset = 0;
+                //North
+                if (myTriviaMazeBrain.checkSpecificRoomIsNotLocked("NORTH", i, j) && i!=0) {
+                    rowOffset = -1;
+                    myRoomImages[i + rowOffset][j].setIcon(ICON_LOCKED_VERTICAL_DOOR);
+                } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("NORTH", i, j) && i!=0) {
+                    rowOffset = -1;
+                    myRoomImages[i + rowOffset][j].setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
+                }
+                myRoomImages[i + rowOffset][j].setHorizontalAlignment(SwingConstants.CENTER);
+
+                //East
+                if (myTriviaMazeBrain.checkSpecificRoomIsNotLocked("EAST", i, j) && j!=6) {
+                    columnOffset = 1;
+                    myRoomImages[i][j + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
+                } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("EAST", i, j) && j!=6) {
+                    columnOffset = 1;
+                    myRoomImages[i][j + columnOffset].setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+                }
+                myRoomImages[i][j + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
+
+                //South
+                if (myTriviaMazeBrain.checkSpecificRoomIsNotLocked("SOUTH", i, j) && i!=6) {
+                    rowOffset = 1;
+                    myRoomImages[i + rowOffset][j].setIcon(ICON_LOCKED_VERTICAL_DOOR);
+                } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("SOUTH", i, j) && i!=6) {
+                    rowOffset = 1;
+                    myRoomImages[i + rowOffset][j].setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
+                }
+                myRoomImages[i + rowOffset][j].setHorizontalAlignment(SwingConstants.CENTER);
+
+                //West
+                if (myTriviaMazeBrain.checkSpecificRoomIsNotLocked("WEST", i, j) && j!=0) {
+                    columnOffset = -1;
+                    myRoomImages[i][j + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
+                } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("WEST", i, j) && j!=0) {
+                    columnOffset = -1;
+                    myRoomImages[i][j + columnOffset].setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+                }
+                myRoomImages[i][j + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
+
+            }
+        }
     }
 
     private void setCurrentRoomIcon(final int theRow, final int theCol) {

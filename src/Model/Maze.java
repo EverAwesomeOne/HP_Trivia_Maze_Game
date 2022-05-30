@@ -1,12 +1,17 @@
 package Model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Maze {
+public class Maze implements Serializable {
     private final Room[][] myMaze;
     private int myCharacterRow;
     private int myCharacterColumn;
     private LinkedList<Integer>[] myRoomConnections;
+
+    @Serial
+    private static final long serialVersionUID = 109174852462682090L;
 
     public Maze(final int theMazeLength) {
         final int chosenRows = theMazeLength;
@@ -161,6 +166,10 @@ public class Maze {
 
     public Room getCurrentRoom() {
         return myMaze[myCharacterRow][myCharacterColumn];
+    }
+
+    public Room getSpecificRoom(final int theRow, final int theCol) {
+        return myMaze[theRow][theCol];
     }
 
     public int getCharacterRow() {

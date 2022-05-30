@@ -1,9 +1,15 @@
 package Model;
 
-public class Door {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Door implements Serializable {
     private boolean myLocked;
     private boolean myFirstTime;
     private final QuestionAnswer myQuestionAnswer;
+
+    @Serial
+    private static final long serialVersionUID = 109174852462682090L;
 
     Door() {
         myFirstTime = true;

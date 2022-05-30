@@ -1,16 +1,21 @@
 package Model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class QuestionAnswer {
+public class QuestionAnswer implements Serializable {
     private String myQuestion;
     private String myCorrectAnswer;
     private String myAnswer2;
     private String myAnswer3;
     private String myAnswer4;
     private final String[] myQuestionList;
+
+    @Serial
+    private static final long serialVersionUID = 109174852462682090L;
 
     QuestionAnswer() {
         myQuestion = "";

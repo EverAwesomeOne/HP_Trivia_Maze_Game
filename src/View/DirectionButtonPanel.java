@@ -6,8 +6,10 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
+import java.io.Serial;
+import java.io.Serializable;
 
-public class DirectionButtonPanel extends JPanel {
+public class DirectionButtonPanel extends JPanel implements Serializable {
 
     private final MazePanel myMazePanel;
     private final TriviaMazeBrain myTriviaMazeBrain;
@@ -23,6 +25,9 @@ public class DirectionButtonPanel extends JPanel {
     private final BasicArrowButton myWestButton;
 
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+
+    @Serial
+    private static final long serialVersionUID = 109174852462682090L;
 
     DirectionButtonPanel(final JPanel theGamePanel, final MazePanel theMazePanel,
                          final TriviaMazeBrain theTriviaMazeBrain) {

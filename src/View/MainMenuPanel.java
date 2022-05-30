@@ -96,9 +96,18 @@ public class MainMenuPanel extends JPanel {
         else if (buttonName.equals("Load  Game")) {
             button.addActionListener(
                     e -> {
-                        // call deserialize method
                         setVisible(false);
+                        myTriviaMazeBrain.deserialize();
+                        myTriviaMazeBrain.openDatabaseConnection();
+                        myMainFrame.getJMenuBar().setVisible(true);
+                        //set up proper gui stuff
+                        myGamePanel.getDirectionButtonPanel().setDirectionButtonsVisibility();
+                        myGamePanel.getMazePanel().updateCharacterPlacement(
+                                myTriviaMazeBrain.getRow(), myTriviaMazeBrain.getColumn());
+                        myGamePanel.getMazePanel().loadDoorIcons();
+                        myMainFrame.add(myGamePanel);
                         myGamePanel.setVisible(true);
+
                     }
             );
         }

@@ -4,6 +4,9 @@ import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class OptionsMenuBar extends JMenuBar {
     private final TriviaMazeBrain myTriviaMazeBrain;
@@ -62,14 +65,13 @@ public class OptionsMenuBar extends JMenuBar {
                         myTriviaMazeBrain.resetGameState();
                     }
             );
-            // edit to include save game option
+            //Save game
             default -> theMenuItem.addActionListener(
                     e -> {
-//                        setVisible(false);
-//                        setVisible(false);
-//                        new MainMenuPanel(myTriviaMazeBrain);
-//                        myTriviaMazeBrain.resetGameState();
-//                        myGamePanel.resetDirectionButtonPanel();
+                        myTriviaMazeBrain.serialize();
+                        myTriviaMazeBrain.closeDatabaseConnection();
+                        setVisible(false);
+                        myTriviaMazeBrain.resetGameState();
                     }
             );
         }

@@ -4,6 +4,8 @@ import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -94,9 +96,7 @@ public class GamePanel extends JPanel {
         losingMessages.add("Dang, not quite");
         losingMessages.add("You were so close");
         losingMessages.add("Try again. You got this!");
-        //losingMessages.add("Oopsie, that wasn't right!");
         losingMessages.add("Muggle? You're hitting platform 9 and 3/4.");
-        //losingMessages.add("Muggle? Can't enter platform 9 and 3/4.");
 
         return losingMessages;
     }
