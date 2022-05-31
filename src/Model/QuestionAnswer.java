@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * The QuestionAnswer class represents the question and answers that are
+ * attached to each door for the player to answer.
+ */
 public class QuestionAnswer implements Serializable {
     private String myQuestion;
     private String myCorrectAnswer;
@@ -17,6 +21,11 @@ public class QuestionAnswer implements Serializable {
     @Serial
     private static final long serialVersionUID = 109174852462682090L;
 
+    /**
+     * Constructor for the QuestionAnswer class.
+     * Initializes instance fields for the question and answers
+     * as well as the array that hold them.
+     */
     QuestionAnswer() {
         myQuestion = "";
         myCorrectAnswer = "";
@@ -26,6 +35,12 @@ public class QuestionAnswer implements Serializable {
         myQuestionList = new String[5];
     }
 
+    /**
+     * Gets a random row from the "questions" database by using a query and
+     * saves the question, correct answer, and other answers to the proper
+     * instance fields.
+     * @param theStatement - the statement needed to query the database
+     */
     public void getQuestionAnswerFromDatabase(final Statement theStatement) {
 
         //query the database table for a random row
@@ -51,10 +66,20 @@ public class QuestionAnswer implements Serializable {
         }
     }
 
+    /**
+     * Gets the questionList array that hold the question and answers.
+     * @return - the questionList array that hold the question and answers
+     */
     public String[] getQuestionList() {
         return myQuestionList;
     }
 
+    /**
+     * Checks to see if the player answer matches the correctAnswer to
+     * the question.
+     * @param theUserAnswer - the player's answer to the question
+     * @return - if the player got the answer correct or not
+     */
     public boolean selectedCorrectAnswer(final String theUserAnswer) {
         return theUserAnswer.equals(myCorrectAnswer);
     }
