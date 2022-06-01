@@ -3,6 +3,10 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The AboutTeamPanel class represents the "About the Developers" tab on the menu
+ * bar at the top of the trivia maze game.
+ */
 class AboutTeamPanel extends JPanel {
 
     final static Font ABOUT_FONT = new Font("SansSerif", Font.BOLD, 25);
@@ -10,6 +14,13 @@ class AboutTeamPanel extends JPanel {
     final static Color GOLD_COLOR = new Color(255,204,51).darker();
     final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
+    /**
+     * Constructor for the AboutTeamPanel class.
+     * Sets up the layout of the panel and adds it to the menu bar and the
+     * overall game panel screen.
+     * @param theGamePanel - the overall game panel screen
+     * @param theMenuBar - the menu bar at the top of the game screen
+     */
     AboutTeamPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
         setLayout(new GridLayout(3,1));
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));

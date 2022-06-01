@@ -10,6 +10,10 @@ import java.awt.event.MouseEvent;
 import java.util.Enumeration;
 import java.util.Random;
 
+/**
+ * The AnswerPanel class represents the part of the game screen that displays
+ * the answers.
+ */
 class AnswerPanel extends JPanel {
     private final TriviaMazeBrain myTriviaMazeBrain;
 
@@ -26,6 +30,16 @@ class AnswerPanel extends JPanel {
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
     final static Font ANSWER_FONT = new Font("SansSerif", Font.PLAIN, 15);
 
+    /**
+     * The constructor for the AnswerPanel class.
+     * Initializes some other references to GUI parts and the
+     * overall controller as well as sets up the
+     * answer panel and adds it to the overall game panel screen.
+     * @param theGamePanel
+     * @param theTriviaMazeBrain
+     * @param theQuestionPanel
+     * @param theDirectionButtonPanel
+     */
     AnswerPanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain,
                 final QuestionPanel theQuestionPanel,
                 final DirectionButtonPanel theDirectionButtonPanel) {
@@ -41,6 +55,11 @@ class AnswerPanel extends JPanel {
         setVisible(true);
     }
 
+    /**
+     *
+     * @param theAnswerArray
+     * @param theDirectionType
+     */
     void createQuestionType(final String[] theAnswerArray, final String theDirectionType) {
         myDirectionType = theDirectionType;
         myAnswerArray = theAnswerArray;
@@ -74,6 +93,11 @@ class AnswerPanel extends JPanel {
         myNullCount = 0;
     }
 
+    /**
+     * Sets up the answer panel with the layout for a short answer
+     * question.
+     * @return - the short answer question panel to add to the answer panel
+     */
     private JPanel shortAnswerQ() {
         final JPanel shortAnswerQPanel = new JPanel(new BorderLayout());
         final JLabel questionLabel = new JLabel("Short Answer:");
@@ -100,6 +124,11 @@ class AnswerPanel extends JPanel {
         return shortAnswerQPanel;
     }
 
+    /**
+     * Sets up the answer panel with the layout for a true or false
+     * question.
+     * @return - the  true or false question panel to add to the answer panel
+     */
     private JPanel trueFalseQ() {
         final JPanel trueFalseQPanel = new JPanel(new BorderLayout());
         final JLabel questionLabel = new JLabel("True or False:");
@@ -121,6 +150,11 @@ class AnswerPanel extends JPanel {
                 radioButtonGroup, null);
     }
 
+    /**
+     * Sets up the answer panel with the layout for a multiple choice
+     * question.
+     * @return - the multiple choice question panel to add to the answer panel
+     */
     private JPanel multiChoiceQ() {
         final JPanel multiChoiceQPanel = new JPanel(new BorderLayout());
         final JLabel questionLabel = new JLabel("Multiple Choice:");
@@ -164,6 +198,13 @@ class AnswerPanel extends JPanel {
                 verticalBox, radioButtonGroup, textWrappingJRadioButtons);
     }
 
+    /**
+     *
+     * @param theVerticalBox
+     * @param theRadioButtonGroup
+     * @param theAnswerButton
+     * @param theTextForButton
+     */
     private void organizeVerticalBox(final Box theVerticalBox,
                                      final ButtonGroup theRadioButtonGroup,
                                      final JRadioButton theAnswerButton,
@@ -173,6 +214,15 @@ class AnswerPanel extends JPanel {
         theAnswerButton.setActionCommand(theTextForButton);
     }
 
+    /**
+     *
+     * @param theQuestionTypePanel
+     * @param theQuestionLabel
+     * @param theVerticalBox
+     * @param theRadioButtonGroup
+     * @param theCustomButtons
+     * @return
+     */
     private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel,
                                         final JLabel theQuestionLabel,
                                         final Box theVerticalBox,
@@ -214,6 +264,9 @@ class AnswerPanel extends JPanel {
         return theQuestionTypePanel;
     }
 
+    /**
+     * Updates the answer
+     */
     private void updatePanels() {
         removeAll();
         revalidate();
