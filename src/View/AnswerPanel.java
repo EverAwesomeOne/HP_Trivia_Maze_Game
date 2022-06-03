@@ -30,6 +30,10 @@ class AnswerPanel extends JPanel {
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
     final static Font ANSWER_FONT = new Font("SansSerif", Font.PLAIN, 15);
 
+    final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+    final static Color LIGHT_PURPLE_COLOR = new Color(230,230,255);
+
     /**
      * The constructor for the AnswerPanel class.
      * Initializes some other references to GUI parts and the
@@ -48,8 +52,11 @@ class AnswerPanel extends JPanel {
         myQuestionPanel = theQuestionPanel;
         myDirectionButtonPanel = theDirectionButtonPanel;
 
+        setBackground(PURPLE_COLOR);
+
         final TitledBorder border = new TitledBorder("Answer");
         border.setTitleFont(TITLE_FONT);
+        border.setTitleColor(GOLD_COLOR);
         setBorder(border);
         theGamePanel.add(this);
         setVisible(true);
@@ -113,9 +120,15 @@ class AnswerPanel extends JPanel {
 
         questionLabel.setFont(ANSWER_FONT);
         answerTextArea.setFont(ANSWER_FONT);
+
+        answerTextArea.setBackground(LIGHT_PURPLE_COLOR);
+
         submitAButton.setFont(TITLE_FONT);
+        submitAButton.setBackground(GOLD_COLOR);
+        submitAButton.setForeground(PURPLE_COLOR);
 
         final JPanel labelAndTextAreaPanel = new JPanel();
+        labelAndTextAreaPanel.setBackground(LIGHT_PURPLE_COLOR);
         shortAnswerQPanel.add(labelAndTextAreaPanel, BorderLayout.NORTH);
         labelAndTextAreaPanel.add(questionLabel, BorderLayout.NORTH);
         labelAndTextAreaPanel.add(answerTextArea, BorderLayout.SOUTH);
@@ -145,6 +158,9 @@ class AnswerPanel extends JPanel {
 
         trueButton.setFont(ANSWER_FONT);
         falseButton.setFont(ANSWER_FONT);
+
+        trueButton.setBackground(LIGHT_PURPLE_COLOR);
+        falseButton.setBackground(LIGHT_PURPLE_COLOR);
 
         return getQuestionTypePanel(trueFalseQPanel, questionLabel, verticalBox,
                 radioButtonGroup, null);
@@ -177,8 +193,7 @@ class AnswerPanel extends JPanel {
         TextWrappingJRadioButton[] textWrappingJRadioButtons = new TextWrappingJRadioButton[4];
         for (int index : randomizeAnswerOrderList) {
             final String answerText = myAnswerArray[index];
-            final TextWrappingJRadioButton textWrappingJRadioButton =
-                    new TextWrappingJRadioButton(answerText);
+            final TextWrappingJRadioButton textWrappingJRadioButton = new TextWrappingJRadioButton(answerText);
             textWrappingJRadioButtons[index-1] = textWrappingJRadioButton;
 
             textWrappingJRadioButton.getJTextArea().setFont(ANSWER_FONT);
@@ -188,6 +203,7 @@ class AnswerPanel extends JPanel {
             layout.setVgap(0);
             customJRadioButtonPanel.add(textWrappingJRadioButton.getJRadioButton());
             customJRadioButtonPanel.add(textWrappingJRadioButton.getJTextArea());
+            customJRadioButtonPanel.setBackground(LIGHT_PURPLE_COLOR);
 
             verticalBox.add(customJRadioButtonPanel);
             radioButtonGroup.add(textWrappingJRadioButton.getJRadioButton());
@@ -229,6 +245,7 @@ class AnswerPanel extends JPanel {
                                         final ButtonGroup theRadioButtonGroup,
                                         final TextWrappingJRadioButton[] theCustomButtons) {
         theQuestionTypePanel.add(theVerticalBox);
+        theQuestionTypePanel.setBackground(LIGHT_PURPLE_COLOR);
 
         final JButton submitAButton = new JButton("SUBMIT");
         submitAButton.setEnabled(false);
@@ -243,7 +260,9 @@ class AnswerPanel extends JPanel {
                 });
             }
         }
+
         Enumeration<AbstractButton> radioButtons = theRadioButtonGroup.getElements();
+
         while (radioButtons.hasMoreElements()) {
             radioButtons.nextElement().addActionListener(e->submitAButton.setEnabled(true));
         }
@@ -256,7 +275,10 @@ class AnswerPanel extends JPanel {
         );
 
         theQuestionLabel.setFont(ANSWER_FONT);
+
         submitAButton.setFont(TITLE_FONT);
+        submitAButton.setBackground(GOLD_COLOR);
+        submitAButton.setForeground(PURPLE_COLOR);
 
         theQuestionTypePanel.add(theQuestionLabel, BorderLayout.NORTH);
         theQuestionTypePanel.add(submitAButton, BorderLayout.SOUTH);
