@@ -21,9 +21,9 @@ class AnswerPanel extends JPanel {
     private final QuestionPanel myQuestionPanel;
     private final DirectionButtonPanel myDirectionButtonPanel;
 
-    private String[] myAnswerArray;
+    private String[] myQuestionAndAnswerArray;
     private String myDirectionType;
-    private String myUserAnswer;
+    private String myPlayerAnswer;
 
     private int myNullCount;
 
@@ -65,17 +65,18 @@ class AnswerPanel extends JPanel {
     /**
      * Creates the answer panel depending on the question type: short answer, multiple choice,
      * or true false.
-     * @param theAnswerArray - the array containing the possible answers to list on the panel
+     * @param theQuestionAndAnswerArray - the array containing the possible answers and
+     *                       question to list on the panel
      * @param theDirectionType - the direction in which the door is located
      */
-    void createQuestionType(final String[] theAnswerArray, final String theDirectionType) {
+    void createQuestionType(final String[] theQuestionAndAnswerArray, final String theDirectionType) {
         myDirectionType = theDirectionType;
-        myAnswerArray = theAnswerArray;
+        myQuestionAndAnswerArray = theQuestionAndAnswerArray;
 
         myQuestionTypePanel.removeAll();
-        myUserAnswer = null;
+        myPlayerAnswer = null;
 
-        for (String s : theAnswerArray) {
+        for (String s : theQuestionAndAnswerArray) {
             if (s == null) {
                 myNullCount++;
             }
@@ -113,7 +114,7 @@ class AnswerPanel extends JPanel {
         final JButton submitAButton = new JButton("SUBMIT");
         submitAButton.addActionListener(
                 e -> {
-                    myUserAnswer = answerTextArea.getText();
+                    myPlayerAnswer = answerTextArea.getText();
                     updatePanels();
                 }
         );
@@ -192,7 +193,7 @@ class AnswerPanel extends JPanel {
 
         TextWrappingJRadioButton[] textWrappingJRadioButtons = new TextWrappingJRadioButton[4];
         for (int index : randomizeAnswerOrderList) {
-            final String answerText = myAnswerArray[index];
+            final String answerText = myQuestionAndAnswerArray[index];
             final TextWrappingJRadioButton textWrappingJRadioButton = new TextWrappingJRadioButton(answerText);
             textWrappingJRadioButtons[index-1] = textWrappingJRadioButton;
 
@@ -273,7 +274,7 @@ class AnswerPanel extends JPanel {
 
         submitAButton.addActionListener(
                 e -> {
-                    myUserAnswer = theRadioButtonGroup.getSelection().getActionCommand();
+                    myPlayerAnswer = theRadioButtonGroup.getSelection().getActionCommand();
                     updatePanels();
                 }
         );
@@ -299,7 +300,7 @@ class AnswerPanel extends JPanel {
         repaint();
 
         myQuestionPanel.removeQuestion();
-        myTriviaMazeBrain.moveCharacter(myUserAnswer, myDirectionType);
+        myTriviaMazeBrain.moveCharacter(myPlayerAnswer, myDirectionType);
         myDirectionButtonPanel.setDirectionButtonsVisibility();
     }
 }

@@ -1,11 +1,12 @@
 package View;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
+/**
+ * The QuestionPanel class represents the panel that displays the question to the player.
+ */
 public class QuestionPanel extends JPanel {
     private final JPanel myQuestionPanel = new JPanel();
 
@@ -16,6 +17,11 @@ public class QuestionPanel extends JPanel {
     final static Color PURPLE_COLOR = new Color(102,0,153).darker();
     final static Color LIGHT_PURPLE_COLOR = new Color(230,230,255);
 
+    /**
+     * Constructor for the QuestionPanel class.
+     * Initializes the overall game panel screen.
+     * @param theGamePanel - the overall game panel screen
+     */
     QuestionPanel(final JPanel theGamePanel) {
         final TitledBorder border = new TitledBorder("Question");
         border.setTitleFont(TITLE_FONT);
@@ -28,10 +34,15 @@ public class QuestionPanel extends JPanel {
         setVisible(true);
     }
 
-    void createQuestion(final String[] theAnswerArray) {
+    /**
+     * Sets up the styles and displays the question to the player.
+     * @param theQuestionAndAnswerArray - the - the array containing the possible answers and
+     *                       question to list on the panel
+     */
+    void createQuestion(final String[] theQuestionAndAnswerArray) {
         myQuestionPanel.removeAll();
 
-        final JTextArea questionTextArea = new JTextArea(theAnswerArray[0], 8, 20);
+        final JTextArea questionTextArea = new JTextArea(theQuestionAndAnswerArray[0], 8, 20);
         questionTextArea.setLineWrap(true);
         questionTextArea.setWrapStyleWord(true);
         questionTextArea.setEditable(false);
@@ -46,6 +57,9 @@ public class QuestionPanel extends JPanel {
         repaint();
     }
 
+    /**
+     * Removes the question from the GUI.
+     */
     void removeQuestion() {
         removeAll();
         revalidate();
