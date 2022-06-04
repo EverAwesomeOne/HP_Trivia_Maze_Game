@@ -39,10 +39,10 @@ class AnswerPanel extends JPanel {
      * Initializes some other references to GUI parts and the
      * overall controller as well as sets up the
      * answer panel and adds it to the overall game panel screen.
-     * @param theGamePanel
-     * @param theTriviaMazeBrain
-     * @param theQuestionPanel
-     * @param theDirectionButtonPanel
+     * @param theGamePanel - the overall game panel screen
+     * @param theTriviaMazeBrain - the controller that connects the GUI with the logic
+     * @param theQuestionPanel - the panel with the question
+     * @param theDirectionButtonPanel - the panel with the direction buttons
      */
     AnswerPanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain,
                 final QuestionPanel theQuestionPanel,
@@ -63,9 +63,10 @@ class AnswerPanel extends JPanel {
     }
 
     /**
-     *
-     * @param theAnswerArray
-     * @param theDirectionType
+     * Creates the answer panel depending on the question type: short answer, multiple choice,
+     * or true false.
+     * @param theAnswerArray - the array containing the possible answers to list on the panel
+     * @param theDirectionType - the direction in which the door is located
      */
     void createQuestionType(final String[] theAnswerArray, final String theDirectionType) {
         myDirectionType = theDirectionType;
@@ -91,7 +92,6 @@ class AnswerPanel extends JPanel {
         else if (myNullCount == 3) {
             myQuestionTypePanel = shortAnswerQ();
         }
-        //add an else to catch possible errors
 
         add(myQuestionTypePanel);
         myQuestionTypePanel.setVisible(true);
@@ -215,11 +215,13 @@ class AnswerPanel extends JPanel {
     }
 
     /**
-     *
-     * @param theVerticalBox
-     * @param theRadioButtonGroup
-     * @param theAnswerButton
-     * @param theTextForButton
+     * Sets up the display group and the action commands of the radio buttons for
+     * the answer
+     * @param theVerticalBox - the organizer that lets the radio buttons be vertically
+     *                       displayed
+     * @param theRadioButtonGroup - the organizer that groups the radio buttons
+     * @param theAnswerButton - the radio button with a possible answer
+     * @param theTextForButton - the text of the answer on the button
      */
     private void organizeVerticalBox(final Box theVerticalBox,
                                      final ButtonGroup theRadioButtonGroup,
@@ -231,13 +233,15 @@ class AnswerPanel extends JPanel {
     }
 
     /**
-     *
-     * @param theQuestionTypePanel
-     * @param theQuestionLabel
-     * @param theVerticalBox
-     * @param theRadioButtonGroup
-     * @param theCustomButtons
-     * @return
+     * Fully sets-up the answer panel with the needed buttons, labels, and action
+     * listeners.
+     * @param theQuestionTypePanel - the answer panel with the specified question type
+     * @param theQuestionLabel - the label for the specific question type
+     * @param theVerticalBox - the organizer that lets the radio buttons be vertically
+     *                       displayed
+     * @param theRadioButtonGroup - the organizer that groups the radio buttons
+     * @param theCustomButtons - the array of custom radio buttons
+     * @return - the set-up answer panel
      */
     private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel,
                                         final JLabel theQuestionLabel,
@@ -287,7 +291,7 @@ class AnswerPanel extends JPanel {
     }
 
     /**
-     * Updates the answer
+     * Updates the GUI after the player has answered
      */
     private void updatePanels() {
         removeAll();
