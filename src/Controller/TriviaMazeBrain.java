@@ -79,22 +79,22 @@ public class TriviaMazeBrain {
      * as well as the View side.
      * If the player has already answered a question correctly at this door,
      * they can just move freely through the door.
-     * @param theUserAnswer - the player answer
+     * @param thePlayerAnswer - the player answer
      * @param theDirectionType - the direction in which the door is located
      */
-    public void moveCharacter(final String theUserAnswer, final String theDirectionType) {
+    public void moveCharacter(final String thePlayerAnswer, final String theDirectionType) {
 
         final Direction directionToMove = Direction.valueOf(theDirectionType);
         final Door chosenDoor = myMaze.getCurrentRoom().getDoor(directionToMove);
         final QuestionAnswer qa = chosenDoor.getQuestion();
 
-        if (MOVE_FREELY.equals(theUserAnswer)) {
+        if (MOVE_FREELY.equals(thePlayerAnswer)) {
             myMaze.updatePosition(directionToMove);
-        } else if (qa.selectedCorrectAnswer(theUserAnswer)) {
-            answeredCorrectly(theUserAnswer, theDirectionType, directionToMove, qa);
+        } else if (qa.selectedCorrectAnswer(thePlayerAnswer)) {
+            answeredCorrectly(thePlayerAnswer, theDirectionType, directionToMove, qa);
             chosenDoor.setFirstTime(false);
         } else {
-            answeredIncorrectly(theUserAnswer, theDirectionType, chosenDoor, qa);
+            answeredIncorrectly(thePlayerAnswer, theDirectionType, chosenDoor, qa);
         }
 
         myGamePanel.getDirectionButtonPanel().setDirectionButtonsVisibility();
@@ -105,15 +105,15 @@ public class TriviaMazeBrain {
     /**
      * Updates the maze in Model and the GUI parts in View to reflect that the player
      * has gotten the answer correct.
-     * @param theUserAnswer - the player answer
+     * @param thePlayerAnswer - the player answer
      * @param theDirectionType - the String version of the direction in which the door is located
      * @param theDirectionToMove - the Enum version of the direction in which the door is located
      * @param theQA - the question and answers attached to the chosen door
      */
-    private void answeredCorrectly(final String theUserAnswer, final String theDirectionType,
+    private void answeredCorrectly(final String thePlayerAnswer, final String theDirectionType,
                                    final Direction theDirectionToMove, final QuestionAnswer theQA) {
         myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
-                theDirectionType, theQA.selectedCorrectAnswer(theUserAnswer));
+                theDirectionType, theQA.selectedCorrectAnswer(thePlayerAnswer));
         myMaze.updatePosition(theDirectionToMove);
         if (myMaze.hasWon()) {
             myGamePanel.displayWinningMessageBox();
@@ -127,16 +127,16 @@ public class TriviaMazeBrain {
      * has gotten the answer wrong.
      * If there are no paths left to get to the exit, the player will be displayed
      * a game over message.
-     * @param theUserAnswer - the player answer
+     * @param thePlayerAnswer - the player answer
      * @param theDirectionType - the direction in which the door is located
      * @param theChosenDoor - the door that was picked to go through by the player
      * @param theQA - the question and answers attached to the chosen door
      */
-    private void answeredIncorrectly(final String theUserAnswer, final String theDirectionType,
+    private void answeredIncorrectly(final String thePlayerAnswer, final String theDirectionType,
                                      final Door theChosenDoor, final QuestionAnswer theQA) {
         theChosenDoor.lockDoor();
         myMazePanel.setDoorIcon(myMaze.getCharacterRow(), myMaze.getCharacterColumn(),
-                theDirectionType, theQA.selectedCorrectAnswer(theUserAnswer));
+                theDirectionType, theQA.selectedCorrectAnswer(thePlayerAnswer));
         myMaze.removeEdgeFromGraph(Direction.valueOf(theDirectionType));
         if (!myMaze.hasValidPaths()) {
             myGamePanel.displayLosingMessageBox();
