@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * The GamePanel class represents the overall game screen that displays all the smaller
- * components within it
+ * components within it.
  */
 public class GamePanel extends JPanel {
     private final TriviaMazeBrain myTriviaMazeBrain;
@@ -21,7 +21,7 @@ public class GamePanel extends JPanel {
     /**
      * The constructor for the GamePanel class.
      * Initializes overall controller and sets up the different
-     * components located on the game panel
+     * components located on the game panel.
      * @param theTriviaMazeBrain - the controller that connects the GUI with the logic
      */
     public GamePanel(final TriviaMazeBrain theTriviaMazeBrain) {
@@ -39,7 +39,7 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * Set up and display the question and possible answers to the player
+     * Set up and display the question and possible answers to the player.
      * @param theQuestionList - the list of possible answers and the question
      * @param theDirectionType - the direction in which the door is located
      */
@@ -50,7 +50,7 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * Get the maze panel component, the panel that displays the maze visuals
+     * Get the maze panel component, the panel that displays the maze visuals.
      * @return - the panel that displays the maze visuals
      */
     public MazePanel getMazePanel() {
@@ -58,7 +58,7 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * Get direction button panel component, the panel with the direction buttons
+     * Get direction button panel component, the panel with the direction buttons.
      * @return - the panel with the direction buttons
      */
     public DirectionButtonPanel getDirectionButtonPanel() {
@@ -66,7 +66,7 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * Displays a good message pop-up if the player
+     * Displays a good message pop-up if the player.
      * got the answer correct
      */
     public void displayCorrectAnswerMessageBox() {
@@ -78,7 +78,7 @@ public class GamePanel extends JPanel {
 
     /**
      * Creation of the possible good messages to display if
-     * the player got the answer correct
+     * the player got the answer correct.
      * @return - the list of possible good messages
      */
     public ArrayList<String> createWinningAnswerMessages() {
@@ -91,7 +91,7 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     *  Displays a bad message pop-up if the player
+     *  Displays a bad message pop-up if the player.
      *  got the answer incorrect
      */
     public void displayIncorrectAnswerMessageBox() {
@@ -103,7 +103,7 @@ public class GamePanel extends JPanel {
 
     /**
      * Creation of the possible bad messages to display if
-     * the player got the answer incorrect
+     * the player got the answer incorrect.
      * @return - the list of possible bad messages
      */
     public ArrayList<String> createLosingAnswerMessages() {
@@ -118,7 +118,7 @@ public class GamePanel extends JPanel {
 
     /**
      * Helper method to set up and display the good/bad pop-up
-     * message for a small duration
+     * message for a small duration.
      * @param title - the title of the pop-up message
      * @param randomNumber - a random number to pick from the list of
      *                     good/bad messages
@@ -147,7 +147,7 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * Displays the winning game pop-up message
+     * Displays the winning game pop-up message.
      */
     public void displayWinningMessageBox() {
         final String title = "You Win! :))";
@@ -156,7 +156,7 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * Displays the losing game pop-up message
+     * Displays the losing game pop-up message.
      */
     public void displayLosingMessageBox() {
         final String title = "Game Over...Play Again!";
@@ -166,7 +166,7 @@ public class GamePanel extends JPanel {
 
     /**
      * Helper method to set up the winning/losing
-     * pop-up messages
+     * pop-up messages.
      * @param theTitle - the title of pop-up message
      * @param theMessage - the message to display in the pop-up
      */
