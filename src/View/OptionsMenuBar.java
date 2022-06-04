@@ -4,16 +4,27 @@ import Controller.TriviaMazeBrain;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
+/**
+ * The OptionsMenuBar class represents the menu tabs located at the top of the game screen.
+ */
 public class OptionsMenuBar extends JMenuBar {
     private final TriviaMazeBrain myTriviaMazeBrain;
     private final GamePanel myGamePanel;
     private final MainFrame myMainFrame;
 
-    OptionsMenuBar(final MainFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain, final GamePanel theGamePanel) {
+    /**
+     * The constructor for the OptionsMenuBar class.
+     * Initializes some other references to GUI parts and the
+     * overall controller as well as sets up the
+     * menu bar and adds it to the overall game panel screen.
+     * @param theMainFrame - the overall frame/window that all the other GUI
+     *                      components are displayed on
+     * @param theTriviaMazeBrain - the controller that connects the GUI with the logic
+     * @param theGamePanel - the overall game panel screen
+     */
+    OptionsMenuBar(final MainFrame theMainFrame, final TriviaMazeBrain theTriviaMazeBrain,
+                   final GamePanel theGamePanel) {
         myMainFrame = theMainFrame;
         myTriviaMazeBrain = theTriviaMazeBrain;
         myGamePanel = theGamePanel;
@@ -23,6 +34,11 @@ public class OptionsMenuBar extends JMenuBar {
         setupMenuBar("Exit Game");
     }
 
+    /**
+     * Sets up menu bar by adding the font and action listeners for the menu items
+     * and adds them to the menu bar.
+     * @param theMenuTitle - the title of the menu item
+     */
     private void setupMenuBar(final String theMenuTitle) {
         final JMenu addMenu = new JMenu(theMenuTitle);
         final JMenuItem menuItem = new JMenuItem(theMenuTitle);
@@ -38,6 +54,11 @@ public class OptionsMenuBar extends JMenuBar {
         setVisible(false);
     }
 
+    /**
+     * Adds an action listener to the specified menu item.
+     * @param theMenuItem - the menu tab
+     * @param theMenuName - the name of the menu tab
+     */
     private void addMenuActionListener(final JMenuItem theMenuItem, final String theMenuName) {
         switch (theMenuName) {
             case "Game Rules" -> theMenuItem.addActionListener(
