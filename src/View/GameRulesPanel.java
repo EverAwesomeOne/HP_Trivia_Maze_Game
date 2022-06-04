@@ -40,25 +40,8 @@ public class GameRulesPanel extends JPanel {
     }
 
     private JPanel titlePanel() {
-        final JPanel titlePanel = new JPanel();
-        titlePanel.setLayout(new GridLayout(1, 3));
-
-        final JLabel teamNameLabel = new JLabel("<html><div style='text-align: center;'>"
+        return setUpTitlePanel("<html><div style='text-align: center;'>"
                 + "Harry Potter<br>Trivia Maze<br>Game Rules" + "</div></html>");
-
-        teamNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        teamNameLabel.setFont(ABOUT_FONT);
-        teamNameLabel.setForeground(GOLD_COLOR);
-
-        final ImageIcon HOGWARTS_ICON = new ImageIcon("src//View//Images//HogwartsIcon.jpg");
-        titlePanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON, 90)));
-        titlePanel.add(teamNameLabel);
-        titlePanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON, 90)));
-
-        titlePanel.setBackground(PURPLE_COLOR);
-        titlePanel.setBorder(new EmptyBorder(45, 10, 5, 10));
-
-        return titlePanel;
     }
 
 
@@ -135,10 +118,10 @@ public class GameRulesPanel extends JPanel {
         return setUpPanel;
     }
 
-    private JPanel buttonPanel (final String buttonActionType) {
+    private JPanel buttonPanel (final String theButtonActionType) {
         final JPanel buttonPanel = new JPanel(new BorderLayout());
         final JButton okayButton = new JButton("OK");
-        if (buttonActionType.equals("One")) {
+        if (theButtonActionType.equals("One")) {
             okayButton.addActionListener(okayButtonOne);
         } else {
             okayButton.addActionListener(okayButtonTwo);
@@ -153,9 +136,34 @@ public class GameRulesPanel extends JPanel {
         return buttonPanel;
     }
 
-    private ImageIcon scaleImageIcon(final ImageIcon icon, final int scale) {
+    /////Helper methods used by both GameRulesPanel and AboutTeamPanel/////
+
+    static ImageIcon scaleImageIcon(final ImageIcon icon, final int scale) {
         return new ImageIcon(icon.getImage().getScaledInstance(scale, scale, Image.SCALE_SMOOTH));
     }
+
+    static JPanel setUpTitlePanel(final String theTeamNameLabel) {
+        final JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new GridLayout(1, 3));
+
+        final JLabel teamNameLabel = new JLabel(theTeamNameLabel);
+
+        teamNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        teamNameLabel.setFont(ABOUT_FONT);
+        teamNameLabel.setForeground(GOLD_COLOR);
+
+        final ImageIcon HOGWARTS_ICON = new ImageIcon("src//View//Images//HogwartsIcon.jpg");
+        titlePanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON, 90)));
+        titlePanel.add(teamNameLabel);
+        titlePanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON, 90)));
+
+        titlePanel.setBackground(PURPLE_COLOR);
+        titlePanel.setBorder(new EmptyBorder(20, 10, 5, 10));
+
+        return titlePanel;
+    }
+
+
 
     final ActionListener okayButtonOne = new ActionListener() {
         @Override

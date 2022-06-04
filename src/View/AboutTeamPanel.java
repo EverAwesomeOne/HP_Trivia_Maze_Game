@@ -9,8 +9,6 @@ import java.awt.*;
  */
 class AboutTeamPanel extends JPanel {
 
-    final static Font ABOUT_FONT = new Font("SansSerif", Font.BOLD, 25);
-
     final static Color GOLD_COLOR = new Color(255,204,51).darker();
     final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
@@ -34,24 +32,8 @@ class AboutTeamPanel extends JPanel {
     }
 
     private JPanel titlePanel() {
-        final JPanel titlePanel = new JPanel();
-        titlePanel.setLayout(new GridLayout(1, 3));
-
-        final JLabel teamNameLabel = new JLabel("<html><div style='text-align: center;'>"
+        return GameRulesPanel.setUpTitlePanel("<html><div style='text-align: center;'>"
                 + "Harry Potter<br>Trivia Maze<br>Team" + "</div></html>");
-
-        teamNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        teamNameLabel.setFont(ABOUT_FONT);
-        teamNameLabel.setForeground(GOLD_COLOR);
-
-        final ImageIcon HOGWARTS_ICON = new ImageIcon("src//View//Images//HogwartsIcon.jpg");
-        titlePanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON, 90)));
-        titlePanel.add(teamNameLabel);
-        titlePanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON, 90)));
-
-        titlePanel.setBackground(PURPLE_COLOR);
-
-        return titlePanel;
     }
 
     private JPanel membersPanel() {
@@ -61,43 +43,27 @@ class AboutTeamPanel extends JPanel {
         final ImageIcon EDWIN_ICON = new ImageIcon("src//View//Images//Edwin.png");
 
 
-        final JLabel aboutMaria = new JLabel("Maria Babko - The only actual Potterhead here ⚡");
-        final JLabel aboutChloe = new JLabel("Chloe Duncan - Addicted to Java: " +
-                                                "☕ & \uD83D\uDCBB");
-        final JLabel aboutEdwin = new JLabel("Edwin Solis-Bruno - A connoisseur for everything " +
-                                                "\uD83C\uDF53 related");
-
-        aboutMaria.setHorizontalAlignment(SwingConstants.LEFT);
-        aboutChloe.setHorizontalAlignment(SwingConstants.LEFT);
-        aboutEdwin.setHorizontalAlignment(SwingConstants.LEFT);
-
-        aboutMaria.setFont(new Font("SanSerif", Font.PLAIN, 15));
-        aboutChloe.setFont(new Font("SanSerif", Font.PLAIN, 15));
-        aboutEdwin.setFont(new Font("SanSerif", Font.PLAIN, 15));
-
-        aboutMaria.setForeground(GOLD_COLOR);
-        aboutChloe.setForeground(GOLD_COLOR);
-        aboutEdwin.setForeground(GOLD_COLOR);
+        final JLabel aboutMaria = setUpTeamMemberJLabel
+                ("Maria Babko - The only actual Potterhead here ⚡");
+        final JLabel aboutChloe = setUpTeamMemberJLabel
+                ("Chloe Duncan - Addicted to Java: ☕ & \uD83D\uDCBB");
+        final JLabel aboutEdwin = setUpTeamMemberJLabel
+                ("Edwin Solis-Bruno - A connoisseur for everything \uD83C\uDF53 related");
 
         GridLayout iconPanelLayout = new GridLayout(3,1);
         iconPanelLayout.setVgap(25);
 
-        final JPanel iconPanel = new JPanel();
-        iconPanel.setLayout(iconPanelLayout);
-        iconPanel.setBackground(PURPLE_COLOR);
-        iconPanel.add(new JLabel(scaleImageIcon(MARIA_ICON, 40)));
-        iconPanel.add(new JLabel(scaleImageIcon(CHLOE_ICON, 40)));
-        iconPanel.add(new JLabel(scaleImageIcon(EDWIN_ICON, 40)));
+        final JPanel iconPanel = setUpPanelsOnMemberPanel(iconPanelLayout,
+                new JLabel(GameRulesPanel.scaleImageIcon(MARIA_ICON, 40)),
+                new JLabel(GameRulesPanel.scaleImageIcon(CHLOE_ICON, 40)),
+                new JLabel(GameRulesPanel.scaleImageIcon(EDWIN_ICON, 40)));
+
 
         GridLayout bioPanelLayout = new GridLayout(3,1);
         bioPanelLayout.setVgap(45);
 
-        final JPanel bioPanel  = new JPanel();
-        bioPanel.setLayout(bioPanelLayout);
-        bioPanel.setBackground(PURPLE_COLOR);
-        bioPanel.add(aboutMaria);
-        bioPanel.add(aboutChloe);
-        bioPanel.add(aboutEdwin);
+        final JPanel bioPanel  = setUpPanelsOnMemberPanel(bioPanelLayout, aboutMaria,
+                                                        aboutChloe, aboutEdwin);
 
         membersPanel.add(iconPanel);
         membersPanel.add(bioPanel);
@@ -105,6 +71,28 @@ class AboutTeamPanel extends JPanel {
         membersPanel.setBackground(PURPLE_COLOR);
 
         return membersPanel;
+    }
+
+    private JLabel setUpTeamMemberJLabel(final String theTeamMemberInfo) {
+        final JLabel teamMemberLabel = new JLabel(theTeamMemberInfo);
+        teamMemberLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        teamMemberLabel.setFont(new Font("SanSerif", Font.PLAIN, 15));
+        teamMemberLabel.setForeground(GOLD_COLOR);
+
+        return teamMemberLabel;
+    }
+
+    private JPanel setUpPanelsOnMemberPanel(final GridLayout thePanelLayout,
+                                            final JLabel theLabel1, final JLabel theLabel2,
+                                            final JLabel theLabel3) {
+        final JPanel panelOnMemberPanel  = new JPanel();
+        panelOnMemberPanel.setLayout(thePanelLayout);
+        panelOnMemberPanel.setBackground(PURPLE_COLOR);
+        panelOnMemberPanel.add(theLabel1);
+        panelOnMemberPanel.add(theLabel2);
+        panelOnMemberPanel.add(theLabel3);
+
+        return panelOnMemberPanel;
     }
 
     private JPanel teamInfoAndButtonPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
@@ -143,7 +131,4 @@ class AboutTeamPanel extends JPanel {
         return teamInfoAndButtonPanel;
     }
 
-    private ImageIcon scaleImageIcon(final ImageIcon icon, final int scale) {
-        return new ImageIcon(icon.getImage().getScaledInstance(scale, scale, Image.SCALE_SMOOTH));
-    }
 }
