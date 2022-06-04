@@ -6,6 +6,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The GameRulesPanel class represents the "Game Rules" tab located either as a button
+ * on the main menu screen or at as a tab at the top of the game screen.
+ */
 public class GameRulesPanel extends JPanel {
     private JPanel myGamePanel;
     private JMenuBar myMenuBar;
@@ -16,54 +20,80 @@ public class GameRulesPanel extends JPanel {
     final static Color GOLD_COLOR = new Color(255,204,51).darker();
     final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
+    /**
+     * Constructor for the GameRulesPanel located as a tab in the game.
+     * @param theGamePanel - the overall game panel screen
+     * @param theMenuBar - the menu bar at the top of the game screen
+     */
     GameRulesPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
         myGamePanel = theGamePanel;
         myMenuBar = theMenuBar;
         setupGameRulesPanel("One");
     }
 
+    /**
+     * Constructor for the GameRulesPanel located as a button on the main menu screen.
+     * @param theMainMenuPanel - the main menu displayed when the player
+     *                          first launches the game
+     */
     GameRulesPanel(final JPanel theMainMenuPanel) {
         myMainMenuPanel = theMainMenuPanel;
         setupGameRulesPanel("Two");
     }
 
+    /**
+     * Sets up the styles and adds components to the game rules panel.
+     * @param theButtonActionType - the indicator if the game rules panel is being
+     *                            accessed from the main menu or in the game
+     */
     private void setupGameRulesPanel(final String theButtonActionType) {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
         setBackground(PURPLE_COLOR);
 
         add(titlePanel(), BorderLayout.NORTH);
-        add(gameRules(), BorderLayout.CENTER);
+        add(rulesPanel(), BorderLayout.CENTER);
         add(buttonPanel(theButtonActionType), BorderLayout.SOUTH);
 
         setVisible(false);
     }
 
+    /**
+     * Sets up the game rules title panel at the top of the game screen.
+     * @return - the set-up game rules title panel
+     */
     private JPanel titlePanel() {
         return setUpTitlePanel("<html><div style='text-align: center;'>"
                 + "Harry Potter<br>Trivia Maze<br>Game Rules" + "</div></html>");
     }
 
-
-    private JPanel gameRules () {
-        JPanel gameRules = new JPanel();
+    /**
+     * Sets up the styles and adds the components to the rules panel.
+     * @return - the set-up rules panel
+     */
+    private JPanel rulesPanel() {
+        JPanel rules = new JPanel();
 
         GridLayout gameRulesPanelLayout = new GridLayout(3,1);
         gameRulesPanelLayout.setVgap(4);
 
-        gameRules.setLayout(gameRulesPanelLayout);
-        gameRules.setBackground(PURPLE_COLOR);
-        gameRules.add(howToPlayPanel());
-        gameRules.add(featuresPanel());
-        gameRules.add(answerLogisticsPanel());
+        rules.setLayout(gameRulesPanelLayout);
+        rules.setBackground(PURPLE_COLOR);
+        rules.add(howToPlayPanel());
+        rules.add(featuresPanel());
+        rules.add(answerLogisticsPanel());
 
-        gameRules.setBackground(PURPLE_COLOR);
-        gameRules.setBorder(new EmptyBorder(10, 10, 0, 10));
+        rules.setBackground(PURPLE_COLOR);
+        rules.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-        return gameRules;
+        return rules;
 
     }
 
+    /**
+     * Sets up the info on how to play the game.
+     * @return - the set-up panel with info on how to play
+     */
     private JPanel howToPlayPanel () {
         final JLabel howToPlayTitle = new JLabel("How To Play:");
         final JLabel howToPlay = new JLabel("<html><div style='text-align: center;'>" +
@@ -74,9 +104,13 @@ public class GameRulesPanel extends JPanel {
                 "to find another way to get to the exit. If you run out of open doors to reach the " +
                 "exit, it's game over.</div></html>");
 
-        return setUpPanelsOnGameRulesPanel(howToPlayTitle, howToPlay);
+        return setUpPanelsOnRulesPanel(howToPlayTitle, howToPlay);
     }
 
+    /**
+     * Sets up the info on the features of the game.
+     * @return - the set-up panel with info on features
+     */
     private JPanel featuresPanel () {
         final JLabel featuresTitle = new JLabel("Features:");
         final JLabel features = new JLabel("<html><div style='text-align: center;'>" +
@@ -84,9 +118,13 @@ public class GameRulesPanel extends JPanel {
                 "permanently and you will be able to move freely through all the " +
                 "doors you answered correctly.</div></html>");
 
-        return setUpPanelsOnGameRulesPanel(featuresTitle, features);
+        return setUpPanelsOnRulesPanel(featuresTitle, features);
     }
 
+    /**
+     * Sets up the info on the answer logistics of the game.
+     * @return - the set-up panel with info on answer logistics
+     */
     private JPanel answerLogisticsPanel () {
         final JLabel answerLogisticsTitle = new JLabel("Answer Logistics:");
         final JLabel answerLogistics = new JLabel("<html><div style='text-align: center;'>" +
@@ -94,10 +132,16 @@ public class GameRulesPanel extends JPanel {
                 " All name questions should be answered with full names." +
                 " Questions are worded to prompt if the answer needs to be plural or not.</div></html>");
 
-        return setUpPanelsOnGameRulesPanel(answerLogisticsTitle, answerLogistics);
+        return setUpPanelsOnRulesPanel(answerLogisticsTitle, answerLogistics);
     }
 
-    private JPanel setUpPanelsOnGameRulesPanel(final JLabel theTitle, final JLabel theText) {
+    /**
+     * Sets up the styles and info of a specific component panel on the rules panel.
+     * @param theTitle - the title to display for the specific panel
+     * @param theText - the text to display for the specific panel
+     * @return - the set-up component panel for the rules panel
+     */
+    private JPanel setUpPanelsOnRulesPanel(final JLabel theTitle, final JLabel theText) {
         JPanel setUpPanel = new JPanel();
         setUpPanel.setLayout(new BoxLayout(setUpPanel, BoxLayout.Y_AXIS));
 
@@ -118,6 +162,13 @@ public class GameRulesPanel extends JPanel {
         return setUpPanel;
     }
 
+    /**
+     * Sets up the styles, info and action listener of the button panel
+     * depending on the indicator.
+     * @param theButtonActionType - the indicator if the game rules panel is being
+     *                            accessed from the main menu or in the game
+     * @return - the set-up button panel
+     */
     private JPanel buttonPanel (final String theButtonActionType) {
         final JPanel buttonPanel = new JPanel(new BorderLayout());
         final JButton okayButton = new JButton("OK");
@@ -137,12 +188,22 @@ public class GameRulesPanel extends JPanel {
     }
 
     /////Helper methods used by both GameRulesPanel and AboutTeamPanel/////
-
+    /**
+     * Scales the images to be the same width and height.
+     * @param theIcon - the image to scale
+     * @param theScale - the scale
+     * @return - the scaled image
+     */
     static ImageIcon scaleImageIcon(final ImageIcon theIcon, final int theScale) {
         return new ImageIcon(theIcon.getImage()
                 .getScaledInstance(theScale, theScale, Image.SCALE_SMOOTH));
     }
 
+    /**
+     * Sets up the styles and info of the title panel.
+     * @param theTeamNameLabel - the label to add
+     * @return - the set-up title panel
+     */
     static JPanel setUpTitlePanel(final String theTeamNameLabel) {
         final JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new GridLayout(1, 3));
@@ -165,7 +226,10 @@ public class GameRulesPanel extends JPanel {
     }
 
 
-
+    /**
+     * Set up the action listener for the OK button on the GameRulesPanel
+     * located as a tab in the game.
+     */
     final ActionListener okayButtonOne = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -175,6 +239,10 @@ public class GameRulesPanel extends JPanel {
         }
     };
 
+    /**
+     * Set up the action listener for the OK button on the GameRulesPanel
+     * located as a button on the main menu screen.
+     */
     final ActionListener okayButtonTwo = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent event) {
