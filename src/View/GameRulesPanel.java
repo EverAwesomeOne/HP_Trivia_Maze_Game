@@ -27,14 +27,14 @@ public class GameRulesPanel extends JPanel {
         setupGameRulesPanel("Two");
     }
 
-    private void setupGameRulesPanel(final String buttonActionType) {
+    private void setupGameRulesPanel(final String theButtonActionType) {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
         setBackground(PURPLE_COLOR);
 
         add(titlePanel(), BorderLayout.NORTH);
         add(gameRules(), BorderLayout.CENTER);
-        add(buttonPanel(buttonActionType), BorderLayout.SOUTH);
+        add(buttonPanel(theButtonActionType), BorderLayout.SOUTH);
 
         setVisible(false);
     }
@@ -138,8 +138,9 @@ public class GameRulesPanel extends JPanel {
 
     /////Helper methods used by both GameRulesPanel and AboutTeamPanel/////
 
-    static ImageIcon scaleImageIcon(final ImageIcon icon, final int scale) {
-        return new ImageIcon(icon.getImage().getScaledInstance(scale, scale, Image.SCALE_SMOOTH));
+    static ImageIcon scaleImageIcon(final ImageIcon theIcon, final int theScale) {
+        return new ImageIcon(theIcon.getImage()
+                .getScaledInstance(theScale, theScale, Image.SCALE_SMOOTH));
     }
 
     static JPanel setUpTitlePanel(final String theTeamNameLabel) {
