@@ -6,17 +6,28 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
+/**
+ * The MazePanel class represents the panel that displays the maze visuals.
+ */
 public class MazePanel extends JPanel{
 
-    private static final ImageIcon ICON_EMPTY_ROOM = new ImageIcon("src//View//Images//EmptyRoom.png");
-    private static final ImageIcon ICON_CURRENT_ROOM = new ImageIcon("src//View//Images//CurrentRoom.png");
-    private static final ImageIcon ICON_START_ROOM = new ImageIcon("src//View//Images//StartRoom.png");
-    private static final ImageIcon ICON_END_ROOM = new ImageIcon("src//View//Images//ExitRoom.png");
+    private static final ImageIcon ICON_EMPTY_ROOM =
+            new ImageIcon("src//View//Images//EmptyRoom.png");
+    private static final ImageIcon ICON_CURRENT_ROOM =
+            new ImageIcon("src//View//Images//CurrentRoom.png");
+    private static final ImageIcon ICON_START_ROOM =
+            new ImageIcon("src//View//Images//StartRoom.png");
+    private static final ImageIcon ICON_END_ROOM =
+            new ImageIcon("src//View//Images//ExitRoom.png");
 
-    private static final ImageIcon ICON_UNLOCKED_VERTICAL_DOOR = new ImageIcon("src//View//Images//UnlockedDoorVertical.png");
-    private static final ImageIcon ICON_UNLOCKED_HORIZONTAL_DOOR = new ImageIcon("src//View//Images//UnlockedDoorHorizontal.png");
-    private static final ImageIcon ICON_LOCKED_VERTICAL_DOOR = new ImageIcon("src//View//Images//LockedDoorVertical.png");
-    private static final ImageIcon ICON_LOCKED_HORIZONTAL_DOOR = new ImageIcon("src//View//Images//LockedDoorHorizontal.png");
+    private static final ImageIcon ICON_UNLOCKED_VERTICAL_DOOR =
+            new ImageIcon("src//View//Images//UnlockedDoorVertical.png");
+    private static final ImageIcon ICON_UNLOCKED_HORIZONTAL_DOOR =
+            new ImageIcon("src//View//Images//UnlockedDoorHorizontal.png");
+    private static final ImageIcon ICON_LOCKED_VERTICAL_DOOR =
+            new ImageIcon("src//View//Images//LockedDoorVertical.png");
+    private static final ImageIcon ICON_LOCKED_HORIZONTAL_DOOR =
+            new ImageIcon("src//View//Images//LockedDoorHorizontal.png");
 
     private static final int ROW = TriviaMazeBrain.MAZE_LENGTH;
     private final int COL = ROW;
@@ -33,6 +44,14 @@ public class MazePanel extends JPanel{
     final static Color GOLD_COLOR = new Color(255,204,51).darker();
     final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
+    /**
+     * The constructor for the MazePanel class.
+     * Initializes some other references to GUI parts and the
+     * overall controller as well as sets up the
+     * maze panel and adds it to the overall game panel screen.
+     * @param theGamePanel - the overall game panel screen
+     * @param theTriviaMazeBrain - the controller that connects the GUI with the logic
+     */
     public MazePanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain) {
         myTriviaMazeBrain = theTriviaMazeBrain;
         
@@ -51,6 +70,10 @@ public class MazePanel extends JPanel{
         setVisible(true);
     }
 
+    /**
+     * Adds the maze visuals to the maze panel.
+     * @param theMazePanel - the panel that displays the maze visuals
+     */
     private void addImagesToMazePanel(JPanel theMazePanel) {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
@@ -59,6 +82,10 @@ public class MazePanel extends JPanel{
         }
     }
 
+    /**
+     * Sets up the initial look of the maze visuals when the player.
+     * first starts a new game.
+     */
     private void initializeMaze() {
         myRoomImages = new JLabel[ROW][COL];
 
@@ -81,6 +108,11 @@ public class MazePanel extends JPanel{
         myCurrentCol = 0;
     }
 
+    /**
+     * Updates the maze visuals of where the player icon is.
+     * @param theRow - the row the player is located
+     * @param theCol - the column the player is located
+     */
     public void updateCharacterPlacement(final int theRow, final int theCol) {
         setOldRoomIcon(myCurrentRow, myCurrentCol);
         setCurrentRoomIcon(theRow, theCol);
@@ -88,11 +120,28 @@ public class MazePanel extends JPanel{
         myCurrentCol = theCol;
     }
 
+    /**
+     * Checks if the specified direction is a valid direction
+     * (i.e. if the door is already locked because the player got it wrong
+     * or a door the edge of the maze).
+     * @param theDirection - the direction in which the door is located
+     * @return - if the door is locked or not
+     */
     public boolean validDirection(final String theDirection) {
         return myTriviaMazeBrain.checkCurrentRoomIsLockedStatus(theDirection);
     }
 
-    public void setDoorIcon(final int theRow, final int theCol, final String theDirectionType, final boolean correctAnswer) {
+    /**
+     * Updates the icons for a specific door depending on the specific room the
+     * player is located in, the direction the player wants to go, and
+     * if the player got the question right or not.
+     * @param theRow - the row the player is located
+     * @param theCol - the column the player is located
+     * @param theDirectionType - the direction in which the door is located
+     * @param correctAnswer - if the player got the answer correct or not
+     */
+    public void setDoorIcon(final int theRow, final int theCol,
+                            final String theDirectionType, final boolean correctAnswer) {
         int rowOffset = 0;
         int columnOffset = 0;
         if ("NORTH".equals(theDirectionType)) {
@@ -107,20 +156,30 @@ public class MazePanel extends JPanel{
 
         if (rowOffset != 0) {
             if (correctAnswer) {
-            myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
+            myRoomImages[theRow + rowOffset][theCol + columnOffset]
+                    .setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
             } else {
-                myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_VERTICAL_DOOR);
+                myRoomImages[theRow + rowOffset][theCol + columnOffset]
+                        .setIcon(ICON_LOCKED_VERTICAL_DOOR);
             }
         } else {
             if (correctAnswer) {
-                myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+                myRoomImages[theRow + rowOffset][theCol + columnOffset]
+                        .setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
             } else {
-                myRoomImages[theRow + rowOffset][theCol + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
+                myRoomImages[theRow + rowOffset][theCol + columnOffset]
+                        .setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
             }
         }
-        myRoomImages[theRow + rowOffset][theCol + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
+        myRoomImages[theRow + rowOffset][theCol + columnOffset]
+                .setHorizontalAlignment(SwingConstants.CENTER);
     }
 
+    /**
+     * Manual deserialization for the maze visuals.
+     * Updates the maze visuals depending on the loaded game data
+     * from the players save.
+     */
     public void loadDoorIcons() {
 
         for (int i = 0; i < 7; i+=2) {
@@ -128,7 +187,8 @@ public class MazePanel extends JPanel{
                 int rowOffset = 0;
                 int columnOffset = 0;
                 //North
-                if (myTriviaMazeBrain.checkSpecificRoomIsNotLocked("NORTH", i, j) && i!=0) {
+                if (myTriviaMazeBrain
+                        .checkSpecificRoomIsNotLocked("NORTH", i, j) && i!=0) {
                     rowOffset = -1;
                     myRoomImages[i + rowOffset][j].setIcon(ICON_LOCKED_VERTICAL_DOOR);
                 } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("NORTH", i, j) && i!=0) {
@@ -171,6 +231,11 @@ public class MazePanel extends JPanel{
         }
     }
 
+    /**
+     * Sets the player icon in the specified coordinates for the room.
+     * @param theRow - the row the player is located
+     * @param theCol - the column the player is located
+     */
     private void setCurrentRoomIcon(final int theRow, final int theCol) {
         myRoomImages[theRow][theCol].setIcon(ICON_CURRENT_ROOM);
     }
@@ -187,6 +252,10 @@ public class MazePanel extends JPanel{
         }
     }
 
+    /**
+     * Sets up the places in the overall maze where a room is not located
+     * @param theRow - the row the player is located
+     */
     private void setNonValidRooms(int theRow) {
         for (int i = 0; i < ROW; i++) {
             if ((i % 2) == 1) {
@@ -195,6 +264,11 @@ public class MazePanel extends JPanel{
         }
     }
 
+    /**
+     * Sets up the maze visuals of a specific row, switching between an
+     * empty room icon to show a room and no visuals to show the doors.
+     * @param theRow - the row the player is located
+     */
     private void createMazeRow(int theRow) {
         if (theRow % 2 == 0) {
             for (int i = 0; i < ROW; i++) {
@@ -215,6 +289,10 @@ public class MazePanel extends JPanel{
         }
     }
 
+    /**
+     * Sets up the starting room for the player.
+     * @return - the starting room
+     */
     private JLabel setStartRoom() {
         final JLabel startRoom = new JLabel();
         startRoom.setIcon(ICON_CURRENT_ROOM);
@@ -222,6 +300,10 @@ public class MazePanel extends JPanel{
         return startRoom;
     }
 
+    /**
+     * Sets up the ending room for the player.
+     * @return - the ending room
+     */
     private JLabel setEndRoom() {
         final JLabel endRoom = new JLabel();
         endRoom.setIcon(ICON_END_ROOM);
