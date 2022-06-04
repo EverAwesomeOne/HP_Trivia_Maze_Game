@@ -216,7 +216,7 @@ class AnswerPanel extends JPanel {
 
     /**
      * Sets up the display group and the action commands of the radio buttons for
-     * the answer
+     * the answer.
      * @param theVerticalBox - the organizer that lets the radio buttons be vertically
      *                       displayed
      * @param theRadioButtonGroup - the organizer that groups the radio buttons
@@ -291,7 +291,7 @@ class AnswerPanel extends JPanel {
     }
 
     /**
-     * Updates the GUI after the player has answered
+     * Updates the GUI after the player has answered.
      */
     private void updatePanels() {
         removeAll();

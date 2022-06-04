@@ -9,6 +9,10 @@ import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * The DirectionButtonPanel class represents the part of the game screen that displays
+ * the direction buttons.
+ */
 public class DirectionButtonPanel extends JPanel implements Serializable {
 
     private final MazePanel myMazePanel;
@@ -33,6 +37,15 @@ public class DirectionButtonPanel extends JPanel implements Serializable {
     @Serial
     private static final long serialVersionUID = 109174852462682090L;
 
+    /**
+     * The constructor for the DirectionButtonPanel class.
+     * Initializes some other references to GUI parts and the
+     * overall controller as well as sets up the
+     * direction button panel and adds it to the overall game panel screen.
+     * @param theGamePanel - the overall game panel screen
+     * @param theMazePanel - the panel that displays the maze visuals
+     * @param theTriviaMazeBrain - the controller that connects the GUI with the logic
+     */
     DirectionButtonPanel(final JPanel theGamePanel, final MazePanel theMazePanel,
                          final TriviaMazeBrain theTriviaMazeBrain) {
 
@@ -56,8 +69,6 @@ public class DirectionButtonPanel extends JPanel implements Serializable {
         myEastButton.setBackground(LIGHT_PURPLE_COLOR);
         myWestButton.setBackground(LIGHT_PURPLE_COLOR);
 
-
-        // Replace with an icon?
         final JLabel centerLabel = new JLabel("<html>Current<br/>Room</html>", SwingConstants.CENTER);
         centerLabel.setFont(TITLE_FONT);
         centerLabel.setForeground(GOLD_COLOR);
@@ -87,6 +98,11 @@ public class DirectionButtonPanel extends JPanel implements Serializable {
         setVisible(true);
     }
 
+    /**
+     * Adds an action listener to the specified arrow button
+     * @param theArrowButton - the GUI arrow button
+     * @param theArrowDirection - the direction the arrow button is pointing
+     */
     private void addArrowActionListener(final BasicArrowButton theArrowButton,
                                         final String theArrowDirection) {
         theArrowButton.addActionListener(
@@ -94,6 +110,10 @@ public class DirectionButtonPanel extends JPanel implements Serializable {
         );
     }
 
+    /**
+     * Updates the visibility of the direction buttons by enabling or
+     * disabling them, depending on if it's a valid direction
+     */
     public void setDirectionButtonsVisibility() {
         myNorthButton.setEnabled(myMazePanel.validDirection(DIR_NORTH));
         mySouthButton.setEnabled(myMazePanel.validDirection(DIR_SOUTH));
@@ -101,6 +121,9 @@ public class DirectionButtonPanel extends JPanel implements Serializable {
         myEastButton.setEnabled(myMazePanel.validDirection(DIR_EAST));
     }
 
+    /**
+     * Set all the direction buttons to disabled
+     */
     void disableAllButtons() {
         myNorthButton.setEnabled(false);
         mySouthButton.setEnabled(false);
