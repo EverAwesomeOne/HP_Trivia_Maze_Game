@@ -40,13 +40,13 @@ public class GamePanel extends JPanel {
 
     /**
      * Set up and display the question and possible answers to the player.
-     * @param theQuestionList - the list of possible answers and the question
+     * @param theQuestionAndAnswerArray - the list of possible answers and the question
      * @param theDirectionType - the direction in which the door is located
      */
-    public void askQuestion(final String[] theQuestionList, final String theDirectionType) {
+    public void askQuestion(final String[] theQuestionAndAnswerArray, final String theDirectionType) {
         myDirectionButtonPanel.disableAllButtons();
-        myQuestionPanel.createQuestion(theQuestionList);
-        myAnswerPanel.createQuestionType(theQuestionList, theDirectionType);
+        myQuestionPanel.createQuestion(theQuestionAndAnswerArray);
+        myAnswerPanel.createQuestionType(theQuestionAndAnswerArray, theDirectionType);
     }
 
     /**
