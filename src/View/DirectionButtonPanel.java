@@ -26,6 +26,10 @@ public class DirectionButtonPanel extends JPanel implements Serializable {
 
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
 
+    final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+    final static Color LIGHT_PURPLE_COLOR = new Color(230,230,255);
+
     @Serial
     private static final long serialVersionUID = 109174852462682090L;
 
@@ -36,17 +40,27 @@ public class DirectionButtonPanel extends JPanel implements Serializable {
         myTriviaMazeBrain = theTriviaMazeBrain;
         setLayout(new GridLayout(3,3));
 
+        setBackground(PURPLE_COLOR);
+
         final TitledBorder border = new TitledBorder("Choose Door");
         border.setTitleFont(TITLE_FONT);
+        border.setTitleColor(GOLD_COLOR);
         setBorder(border);
         myNorthButton = new BasicArrowButton(BasicArrowButton.NORTH);
         mySouthButton = new BasicArrowButton(BasicArrowButton.SOUTH);
         myEastButton = new BasicArrowButton(BasicArrowButton.EAST);
         myWestButton = new BasicArrowButton(BasicArrowButton.WEST);
 
+        myNorthButton.setBackground(LIGHT_PURPLE_COLOR);
+        mySouthButton.setBackground(LIGHT_PURPLE_COLOR);
+        myEastButton.setBackground(LIGHT_PURPLE_COLOR);
+        myWestButton.setBackground(LIGHT_PURPLE_COLOR);
+
+
         // Replace with an icon?
         final JLabel centerLabel = new JLabel("<html>Current<br/>Room</html>", SwingConstants.CENTER);
         centerLabel.setFont(TITLE_FONT);
+        centerLabel.setForeground(GOLD_COLOR);
 
         // initialize BasicArrowButtons based on the start position in maze
         setDirectionButtonsVisibility();

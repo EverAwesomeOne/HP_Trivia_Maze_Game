@@ -30,13 +30,19 @@ public class MazePanel extends JPanel{
 
     final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
 
+    final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+
     public MazePanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain) {
         myTriviaMazeBrain = theTriviaMazeBrain;
         
         setLayout(new GridLayout(ROW, COL));
 
+        setBackground(PURPLE_COLOR);
+
         final TitledBorder border = new TitledBorder("Maze");
         border.setTitleFont(TITLE_FONT);
+        border.setTitleColor(GOLD_COLOR);
         setBorder(border);
 
         initializeMaze();
