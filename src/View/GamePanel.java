@@ -31,11 +31,9 @@ public class GamePanel extends JPanel {
 
         // sets up these panels and adds to gamePanel
         myMazePanel = new MazePanel(this, theTriviaMazeBrain);
-        myDirectionButtonPanel = new DirectionButtonPanel(this, myMazePanel,
-                theTriviaMazeBrain);
+        myDirectionButtonPanel = new DirectionButtonPanel(this, myMazePanel, theTriviaMazeBrain);
         myQuestionPanel = new QuestionPanel(this);
-        myAnswerPanel = new AnswerPanel(this, theTriviaMazeBrain, myQuestionPanel,
-                myDirectionButtonPanel);
+        myAnswerPanel = new AnswerPanel(this, theTriviaMazeBrain, myQuestionPanel, myDirectionButtonPanel);
     }
 
     /**
@@ -81,7 +79,7 @@ public class GamePanel extends JPanel {
      * the player got the answer correct.
      * @return - the list of possible good messages
      */
-    public ArrayList<String> createWinningAnswerMessages() {
+    private ArrayList<String> createWinningAnswerMessages() {
         ArrayList<String> winningMessages = new ArrayList<>();
         winningMessages.add("You're doing awesome :)");
         winningMessages.add("Dementor? You just took my breath away!");
@@ -97,7 +95,7 @@ public class GamePanel extends JPanel {
     public void displayIncorrectAnswerMessageBox() {
         final String title = "Incorrect Answer";
         final Random randomNumber = new Random();
-        ArrayList<String> losingMessages = createLosingAnswerMessages();
+        final ArrayList<String> losingMessages = createLosingAnswerMessages();
         displayPostAnswerMessageHelper(title, randomNumber, losingMessages);
     }
 
@@ -106,8 +104,8 @@ public class GamePanel extends JPanel {
      * the player got the answer incorrect.
      * @return - the list of possible bad messages
      */
-    public ArrayList<String> createLosingAnswerMessages() {
-        ArrayList<String> losingMessages = new ArrayList<>();
+    private ArrayList<String> createLosingAnswerMessages() {
+        final ArrayList<String> losingMessages = new ArrayList<>();
         losingMessages.add("Dang, not quite");
         losingMessages.add("You were so close");
         losingMessages.add("Try again. You got this!");
@@ -126,6 +124,7 @@ public class GamePanel extends JPanel {
      */
     private void displayPostAnswerMessageHelper(final String theTitle, final Random theRandomNumber,
                                                 final ArrayList<String> thePostAnswerMessages) {
+
         int selectRandomMessage = theRandomNumber.nextInt(thePostAnswerMessages.size());
 
         final JDialog endGameMessage = new JDialog();

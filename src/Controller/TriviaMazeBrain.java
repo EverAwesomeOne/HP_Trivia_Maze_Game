@@ -25,7 +25,7 @@ public class TriviaMazeBrain {
     private MainFrame myMainFrame;
     private MazePanel myMazePanel;
 
-    private final String triviaMazeFile = "triviaMaze.txt";
+    private final String myTriviaMazeFile = "triviaMaze.txt";
 
     public final static int MAZE_LENGTH = 7;
     public final static String MOVE_FREELY = "Move freely";
@@ -199,7 +199,7 @@ public class TriviaMazeBrain {
 
         try {
             FileOutputStream file = new FileOutputStream
-                    (triviaMazeFile);
+                    (myTriviaMazeFile);
             ObjectOutputStream out = new ObjectOutputStream
                     (file);
 
@@ -222,7 +222,7 @@ public class TriviaMazeBrain {
     public void deserialize() {
         try {
             FileInputStream file = new FileInputStream
-                    (triviaMazeFile);
+                    (myTriviaMazeFile);
             ObjectInputStream in = new ObjectInputStream
                     (file);
 
