@@ -9,8 +9,8 @@ import java.awt.*;
  */
 class AboutTeamPanel extends JPanel {
 
-    final static Color GOLD_COLOR = new Color(255,204,51).darker();
-    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+    private final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    private final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
     /**
      * Constructor for the AboutTeamPanel class.
@@ -51,12 +51,9 @@ class AboutTeamPanel extends JPanel {
         final ImageIcon EDWIN_ICON = new ImageIcon("src//View//Images//Edwin.png");
 
 
-        final JLabel aboutMaria = setUpTeamMemberJLabel
-                ("Maria Babko - The only actual Potterhead here ⚡");
-        final JLabel aboutChloe = setUpTeamMemberJLabel
-                ("Chloe Duncan - Addicted to Java: ☕ & \uD83D\uDCBB");
-        final JLabel aboutEdwin = setUpTeamMemberJLabel
-                ("Edwin Solis-Bruno - A connoisseur for everything \uD83C\uDF53 related");
+        final JLabel aboutMaria = setUpTeamMemberJLabel("Maria Babko - The only actual Potterhead here ⚡");
+        final JLabel aboutChloe = setUpTeamMemberJLabel("Chloe Duncan - Addicted to Java: ☕ & \uD83D\uDCBB");
+        final JLabel aboutEdwin = setUpTeamMemberJLabel("Edwin Solis-Bruno - A connoisseur for everything \uD83C\uDF53 related");
 
         GridLayout iconPanelLayout = new GridLayout(3,1);
         iconPanelLayout.setVgap(25);
@@ -70,8 +67,7 @@ class AboutTeamPanel extends JPanel {
         GridLayout bioPanelLayout = new GridLayout(3,1);
         bioPanelLayout.setVgap(45);
 
-        final JPanel bioPanel  = setUpPanelsOnMemberPanel(bioPanelLayout, aboutMaria,
-                                                        aboutChloe, aboutEdwin);
+        final JPanel bioPanel  = setUpPanelsOnMemberPanel(bioPanelLayout, aboutMaria, aboutChloe, aboutEdwin);
 
         membersPanel.add(iconPanel);
         membersPanel.add(bioPanel);
@@ -124,8 +120,7 @@ class AboutTeamPanel extends JPanel {
      * @param theMenuBar - the menu tabs located at the top of the game screen
      * @return - the set-up panel with the school info and button set up
      */
-    private JPanel setUpSchoolInfoAndButtonPanel(final JPanel theGamePanel,
-                                                 final JMenuBar theMenuBar) {
+    private JPanel setUpSchoolInfoAndButtonPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
         final JPanel teamInfoAndButtonPanel = new JPanel();
         teamInfoAndButtonPanel.setLayout(new BorderLayout());
 
@@ -160,5 +155,4 @@ class AboutTeamPanel extends JPanel {
 
         return teamInfoAndButtonPanel;
     }
-
 }
