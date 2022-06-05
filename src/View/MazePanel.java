@@ -74,7 +74,7 @@ public class MazePanel extends JPanel{
      * Adds the maze visuals to the maze panel.
      * @param theMazePanel - the panel that displays the maze visuals
      */
-    private void addImagesToMazePanel(JPanel theMazePanel) {
+    private void addImagesToMazePanel(final JPanel theMazePanel) {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 theMazePanel.add(myRoomImages[i][j]);
@@ -256,7 +256,7 @@ public class MazePanel extends JPanel{
      * Sets up the places in the overall maze where a room is not located
      * @param theRow - the row the player is located
      */
-    private void setNonValidRooms(int theRow) {
+    private void setNonValidRooms(final int theRow) {
         for (int i = 0; i < ROW; i++) {
             if ((i % 2) == 1) {
                 myRoomImages[theRow][i] = new JLabel();
@@ -269,7 +269,7 @@ public class MazePanel extends JPanel{
      * empty room icon to show a room and no visuals to show the doors.
      * @param theRow - the row the player is located
      */
-    private void createMazeRow(int theRow) {
+    private void createMazeRow(final int theRow) {
         if (theRow % 2 == 0) {
             for (int i = 0; i < ROW; i++) {
                 if (i % 2 == 0) {

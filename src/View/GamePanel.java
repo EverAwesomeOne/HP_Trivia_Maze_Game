@@ -119,18 +119,19 @@ public class GamePanel extends JPanel {
     /**
      * Helper method to set up and display the good/bad pop-up
      * message for a small duration.
-     * @param title - the title of the pop-up message
-     * @param randomNumber - a random number to pick from the list of
+     * @param theTitle - the title of the pop-up message
+     * @param theRandomNumber - a random number to pick from the list of
      *                     good/bad messages
-     * @param postAnswerMessages - the list of good/bad messages
+     * @param thePostAnswerMessages - the list of good/bad messages
      */
-    private void displayPostAnswerMessageHelper(String title, Random randomNumber, ArrayList<String> postAnswerMessages) {
-        int selectRandomMessage = randomNumber.nextInt(postAnswerMessages.size());
+    private void displayPostAnswerMessageHelper(final String theTitle, final Random theRandomNumber,
+                                                final ArrayList<String> thePostAnswerMessages) {
+        int selectRandomMessage = theRandomNumber.nextInt(thePostAnswerMessages.size());
 
         final JDialog endGameMessage = new JDialog();
-        endGameMessage.setTitle(title);
+        endGameMessage.setTitle(theTitle);
 
-        final JLabel endGameLabel = new JLabel(postAnswerMessages.get(selectRandomMessage));
+        final JLabel endGameLabel = new JLabel(thePostAnswerMessages.get(selectRandomMessage));
         endGameLabel.setHorizontalAlignment(JLabel.CENTER);
         endGameMessage.add(endGameLabel);
 

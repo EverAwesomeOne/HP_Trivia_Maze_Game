@@ -104,7 +104,7 @@ class AnswerPanel extends JPanel {
     /**
      * Sets up the answer panel with the layout for a short answer
      * question.
-     * @return - the short answer question panel to add to the answer panel
+     * @return - the set-up short answer question panel to add to the answer panel
      */
     private JPanel shortAnswerQ() {
         final JPanel shortAnswerQPanel = new JPanel(new BorderLayout());
@@ -141,7 +141,7 @@ class AnswerPanel extends JPanel {
     /**
      * Sets up the answer panel with the layout for a true or false
      * question.
-     * @return - the  true or false question panel to add to the answer panel
+     * @return - the set-up true or false question panel to add to the answer panel
      */
     private JPanel trueFalseQ() {
         final JPanel trueFalseQPanel = new JPanel(new BorderLayout());
@@ -170,7 +170,7 @@ class AnswerPanel extends JPanel {
     /**
      * Sets up the answer panel with the layout for a multiple choice
      * question.
-     * @return - the multiple choice question panel to add to the answer panel
+     * @return - the set-up multiple choice question panel to add to the answer panel
      */
     private JPanel multiChoiceQ() {
         final JPanel multiChoiceQPanel = new JPanel(new BorderLayout());

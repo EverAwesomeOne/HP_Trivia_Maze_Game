@@ -24,27 +24,27 @@ class AboutTeamPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
         setBackground(PURPLE_COLOR);
 
-        add(titlePanel());
-        add(membersPanel());
-        add(schoolInfoAndButtonPanel(theGamePanel, theMenuBar));
+        add(setUpTitlePanel());
+        add(setUpMembersPanel());
+        add(setUpSchoolInfoAndButtonPanel(theGamePanel, theMenuBar));
 
         setVisible(false);
     }
 
     /**
      * Sets up the about team title panel at the top of the game screen.
-     * @return - the about team title panel
+     * @return - the set-up about team title panel
      */
-    private JPanel titlePanel() {
+    private JPanel setUpTitlePanel() {
         return GameRulesPanel.setUpTitlePanel("<html><div style='text-align: center;'>"
                 + "Harry Potter<br>Trivia Maze<br>Team" + "</div></html>");
     }
 
     /**
      * Sets up the panel where all the team members' info is displayed.
-     * @return - the team members' info panel
+     * @return - the set-up team members' info panel
      */
-    private JPanel membersPanel() {
+    private JPanel setUpMembersPanel() {
         final JPanel membersPanel = new JPanel();
         final ImageIcon CHLOE_ICON = new ImageIcon("src//View//Images//Chloe.png");
         final ImageIcon MARIA_ICON = new ImageIcon("src//View//Images//Maria.jpg");
@@ -84,7 +84,7 @@ class AboutTeamPanel extends JPanel {
     /**
      * Sets up styles and text for a team member JLabel.
      * @param theTeamMemberInfo - the team member about info
-     * @return - the team member label
+     * @return - the set-up team member label
      */
     private JLabel setUpTeamMemberJLabel(final String theTeamMemberInfo) {
         final JLabel teamMemberLabel = new JLabel(theTeamMemberInfo);
@@ -122,9 +122,10 @@ class AboutTeamPanel extends JPanel {
      * Also sets up the styles and info for the OK button.
      * @param theGamePanel - the overall game panel screen
      * @param theMenuBar - the menu tabs located at the top of the game screen
-     * @return - the panel with the school info and button set up
+     * @return - the set-up panel with the school info and button set up
      */
-    private JPanel schoolInfoAndButtonPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
+    private JPanel setUpSchoolInfoAndButtonPanel(final JPanel theGamePanel,
+                                                 final JMenuBar theMenuBar) {
         final JPanel teamInfoAndButtonPanel = new JPanel();
         teamInfoAndButtonPanel.setLayout(new BorderLayout());
 

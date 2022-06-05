@@ -52,7 +52,7 @@ public class MainMenuPanel extends JPanel {
 
     /**
      * Sets up the main menu title panel at the top of the game screen.
-     * @return - the main menu title panel
+     * @return - the set-up main menu title panel
      */
     private JPanel setupGameTitlePanel() {
         final JPanel gameTitlePanel = new JPanel();
@@ -73,7 +73,7 @@ public class MainMenuPanel extends JPanel {
 
     /**
      * Sets up the images onto an icon panel on the game screen.
-     * @return - the icon panel
+     * @return - the set-up icon panel
      */
     private JPanel setupIconPanel() {
         final JPanel iconPanel = new JPanel();
@@ -89,7 +89,7 @@ public class MainMenuPanel extends JPanel {
     /**
      * Sets up the button panel with the different main menu buttons
      * onto the game screen.
-     * @return - the button panel
+     * @return - the set-up button panel
      */
     private JPanel setupButtonPanel() {
         final JPanel mainMenuBtnPanel = new JPanel();
@@ -168,11 +168,11 @@ public class MainMenuPanel extends JPanel {
 
     /**
      * Scales the images to be the same width and height.
-     * @param icon - the image to scale
+     * @param theIcon - the image to scale
      * @return - the scaled image
      */
-    private ImageIcon scaleImageIcon(ImageIcon icon) {
-        return new ImageIcon(icon.getImage()
+    private ImageIcon scaleImageIcon(final ImageIcon theIcon) {
+        return new ImageIcon(theIcon.getImage()
                 .getScaledInstance(160, 160, Image.SCALE_SMOOTH));
     }
 }

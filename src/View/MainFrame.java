@@ -32,7 +32,6 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setFrameLocation();
 
-
         myGamePanel = new GamePanel(theTriviaMazeBrain);
         final OptionsMenuBar myMenuBar =
                 new OptionsMenuBar(this, theTriviaMazeBrain, myGamePanel);

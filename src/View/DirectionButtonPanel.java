@@ -6,14 +6,12 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
-import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * The DirectionButtonPanel class represents the part of the game screen that displays
  * the direction buttons.
  */
-public class DirectionButtonPanel extends JPanel implements Serializable {
+public class DirectionButtonPanel extends JPanel {
 
     private final MazePanel myMazePanel;
     private final TriviaMazeBrain myTriviaMazeBrain;
@@ -33,9 +31,6 @@ public class DirectionButtonPanel extends JPanel implements Serializable {
     final static Color GOLD_COLOR = new Color(255,204,51).darker();
     final static Color PURPLE_COLOR = new Color(102,0,153).darker();
     final static Color LIGHT_PURPLE_COLOR = new Color(230,230,255);
-
-    @Serial
-    private static final long serialVersionUID = 109174852462682090L;
 
     /**
      * The constructor for the DirectionButtonPanel class.

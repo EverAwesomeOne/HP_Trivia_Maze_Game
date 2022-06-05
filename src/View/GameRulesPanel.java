@@ -51,9 +51,9 @@ public class GameRulesPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
         setBackground(PURPLE_COLOR);
 
-        add(titlePanel(), BorderLayout.NORTH);
-        add(rulesPanel(), BorderLayout.CENTER);
-        add(buttonPanel(theButtonActionType), BorderLayout.SOUTH);
+        add(setUpTitlePanel(), BorderLayout.NORTH);
+        add(setUpRulesPanel(), BorderLayout.CENTER);
+        add(setUpButtonPanel(theButtonActionType), BorderLayout.SOUTH);
 
         setVisible(false);
     }
@@ -62,7 +62,7 @@ public class GameRulesPanel extends JPanel {
      * Sets up the game rules title panel at the top of the game screen.
      * @return - the set-up game rules title panel
      */
-    private JPanel titlePanel() {
+    private JPanel setUpTitlePanel() {
         return setUpTitlePanel("<html><div style='text-align: center;'>"
                 + "Harry Potter<br>Trivia Maze<br>Game Rules" + "</div></html>");
     }
@@ -71,7 +71,7 @@ public class GameRulesPanel extends JPanel {
      * Sets up the styles and adds the components to the rules panel.
      * @return - the set-up rules panel
      */
-    private JPanel rulesPanel() {
+    private JPanel setUpRulesPanel() {
         JPanel rules = new JPanel();
 
         GridLayout gameRulesPanelLayout = new GridLayout(3,1);
@@ -79,9 +79,9 @@ public class GameRulesPanel extends JPanel {
 
         rules.setLayout(gameRulesPanelLayout);
         rules.setBackground(PURPLE_COLOR);
-        rules.add(howToPlayPanel());
-        rules.add(featuresPanel());
-        rules.add(answerLogisticsPanel());
+        rules.add(setUpHowToPlayPanel());
+        rules.add(setUpFeaturesPanel());
+        rules.add(setUpAnswerLogisticsPanel());
 
         rules.setBackground(PURPLE_COLOR);
         rules.setBorder(new EmptyBorder(10, 10, 0, 10));
@@ -94,7 +94,7 @@ public class GameRulesPanel extends JPanel {
      * Sets up the info on how to play the game.
      * @return - the set-up panel with info on how to play
      */
-    private JPanel howToPlayPanel () {
+    private JPanel setUpHowToPlayPanel() {
         final JLabel howToPlayTitle = new JLabel("How To Play:");
         final JLabel howToPlay = new JLabel("<html><div style='text-align: center;'>" +
                 "Click the arrow buttons to choose a direction and answer trivia questions as " +
@@ -111,7 +111,7 @@ public class GameRulesPanel extends JPanel {
      * Sets up the info on the features of the game.
      * @return - the set-up panel with info on features
      */
-    private JPanel featuresPanel () {
+    private JPanel setUpFeaturesPanel() {
         final JLabel featuresTitle = new JLabel("Features:");
         final JLabel features = new JLabel("<html><div style='text-align: center;'>" +
                 "Once you answer a question correctly that door unlocks " +
@@ -125,7 +125,7 @@ public class GameRulesPanel extends JPanel {
      * Sets up the info on the answer logistics of the game.
      * @return - the set-up panel with info on answer logistics
      */
-    private JPanel answerLogisticsPanel () {
+    private JPanel setUpAnswerLogisticsPanel() {
         final JLabel answerLogisticsTitle = new JLabel("Answer Logistics:");
         final JLabel answerLogistics = new JLabel("<html><div style='text-align: center;'>" +
                 "All short answers will need to be capitalized for the answer to be correct." +
@@ -169,7 +169,7 @@ public class GameRulesPanel extends JPanel {
      *                            accessed from the main menu or in the game
      * @return - the set-up button panel
      */
-    private JPanel buttonPanel (final String theButtonActionType) {
+    private JPanel setUpButtonPanel(final String theButtonActionType) {
         final JPanel buttonPanel = new JPanel(new BorderLayout());
         final JButton okayButton = new JButton("OK");
         if (theButtonActionType.equals("One")) {

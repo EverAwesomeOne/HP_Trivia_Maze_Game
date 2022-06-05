@@ -16,14 +16,14 @@ public class TextWrappingJRadioButton {
     /**
      * Constructor for the TextWrappingJRadioButton class.
      * Sets up the styles and mouse listener for the button.
-     * @param answerText - the text for the custom JRadio button that displays
+     * @param theAnswerText - the text for the custom JRadio button that displays
      *                   a possible answer
      */
-    TextWrappingJRadioButton(String answerText) {
+    TextWrappingJRadioButton(final String theAnswerText) {
         myJRadioButton = new JRadioButton();
         myJRadioButton.setBackground(new Color(230,230,255));
 
-        myJTextArea = new JTextArea(answerText, 2, 18);
+        myJTextArea = new JTextArea(theAnswerText, 2, 18);
         myJTextArea.setLineWrap(true);
         myJTextArea.setWrapStyleWord(true);
         myJTextArea.setEditable(false);
