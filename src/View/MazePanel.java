@@ -11,22 +11,22 @@ import java.awt.*;
  */
 public class MazePanel extends JPanel{
 
-    private static final ImageIcon ICON_EMPTY_ROOM =
+    private static final ImageIcon EMPTY_ROOM_ICON =
             new ImageIcon("src//View//Images//EmptyRoom.png");
-    private static final ImageIcon ICON_CURRENT_ROOM =
+    private static final ImageIcon CURRENT_ROOM_ICON =
             new ImageIcon("src//View//Images//CurrentRoom.png");
-    private static final ImageIcon ICON_START_ROOM =
+    private static final ImageIcon START_ROOM_ICON =
             new ImageIcon("src//View//Images//StartRoom.png");
-    private static final ImageIcon ICON_END_ROOM =
+    private static final ImageIcon END_ROOM_ICON =
             new ImageIcon("src//View//Images//ExitRoom.png");
 
-    private static final ImageIcon ICON_UNLOCKED_VERTICAL_DOOR =
+    private static final ImageIcon UNLOCKED_VERTICAL_DOOR_ICON =
             new ImageIcon("src//View//Images//UnlockedDoorVertical.png");
-    private static final ImageIcon ICON_UNLOCKED_HORIZONTAL_DOOR =
+    private static final ImageIcon UNLOCKED_HORIZONTAL_DOOR_ICON =
             new ImageIcon("src//View//Images//UnlockedDoorHorizontal.png");
-    private static final ImageIcon ICON_LOCKED_VERTICAL_DOOR =
+    private static final ImageIcon LOCKED_VERTICAL_DOOR_ICON =
             new ImageIcon("src//View//Images//LockedDoorVertical.png");
-    private static final ImageIcon ICON_LOCKED_HORIZONTAL_DOOR =
+    private static final ImageIcon LOCKED_HORIZONTAL_DOOR_ICON =
             new ImageIcon("src//View//Images//LockedDoorHorizontal.png");
 
     private static final int ROW = TriviaMazeBrain.MAZE_LENGTH;
@@ -157,18 +157,18 @@ public class MazePanel extends JPanel{
         if (rowOffset != 0) {
             if (correctAnswer) {
             myRoomImages[theRow + rowOffset][theCol + columnOffset]
-                    .setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
+                    .setIcon(UNLOCKED_VERTICAL_DOOR_ICON);
             } else {
                 myRoomImages[theRow + rowOffset][theCol + columnOffset]
-                        .setIcon(ICON_LOCKED_VERTICAL_DOOR);
+                        .setIcon(LOCKED_VERTICAL_DOOR_ICON);
             }
         } else {
             if (correctAnswer) {
                 myRoomImages[theRow + rowOffset][theCol + columnOffset]
-                        .setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+                        .setIcon(UNLOCKED_HORIZONTAL_DOOR_ICON);
             } else {
                 myRoomImages[theRow + rowOffset][theCol + columnOffset]
-                        .setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
+                        .setIcon(LOCKED_HORIZONTAL_DOOR_ICON);
             }
         }
         myRoomImages[theRow + rowOffset][theCol + columnOffset]
@@ -190,40 +190,40 @@ public class MazePanel extends JPanel{
                 if (myTriviaMazeBrain
                         .checkSpecificRoomIsNotLocked("NORTH", i, j) && i!=0) {
                     rowOffset = -1;
-                    myRoomImages[i + rowOffset][j].setIcon(ICON_LOCKED_VERTICAL_DOOR);
+                    myRoomImages[i + rowOffset][j].setIcon(LOCKED_VERTICAL_DOOR_ICON);
                 } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("NORTH", i, j) && i!=0) {
                     rowOffset = -1;
-                    myRoomImages[i + rowOffset][j].setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
+                    myRoomImages[i + rowOffset][j].setIcon(UNLOCKED_VERTICAL_DOOR_ICON);
                 }
                 myRoomImages[i + rowOffset][j].setHorizontalAlignment(SwingConstants.CENTER);
 
                 //East
                 if (myTriviaMazeBrain.checkSpecificRoomIsNotLocked("EAST", i, j) && j!=6) {
                     columnOffset = 1;
-                    myRoomImages[i][j + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
+                    myRoomImages[i][j + columnOffset].setIcon(LOCKED_HORIZONTAL_DOOR_ICON);
                 } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("EAST", i, j) && j!=6) {
                     columnOffset = 1;
-                    myRoomImages[i][j + columnOffset].setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+                    myRoomImages[i][j + columnOffset].setIcon(UNLOCKED_HORIZONTAL_DOOR_ICON);
                 }
                 myRoomImages[i][j + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
 
                 //South
                 if (myTriviaMazeBrain.checkSpecificRoomIsNotLocked("SOUTH", i, j) && i!=6) {
                     rowOffset = 1;
-                    myRoomImages[i + rowOffset][j].setIcon(ICON_LOCKED_VERTICAL_DOOR);
+                    myRoomImages[i + rowOffset][j].setIcon(LOCKED_VERTICAL_DOOR_ICON);
                 } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("SOUTH", i, j) && i!=6) {
                     rowOffset = 1;
-                    myRoomImages[i + rowOffset][j].setIcon(ICON_UNLOCKED_VERTICAL_DOOR);
+                    myRoomImages[i + rowOffset][j].setIcon(UNLOCKED_VERTICAL_DOOR_ICON);
                 }
                 myRoomImages[i + rowOffset][j].setHorizontalAlignment(SwingConstants.CENTER);
 
                 //West
                 if (myTriviaMazeBrain.checkSpecificRoomIsNotLocked("WEST", i, j) && j!=0) {
                     columnOffset = -1;
-                    myRoomImages[i][j + columnOffset].setIcon(ICON_LOCKED_HORIZONTAL_DOOR);
+                    myRoomImages[i][j + columnOffset].setIcon(LOCKED_HORIZONTAL_DOOR_ICON);
                 } else if (myTriviaMazeBrain.checkDoorIsNotFirstTime("WEST", i, j) && j!=0) {
                     columnOffset = -1;
-                    myRoomImages[i][j + columnOffset].setIcon(ICON_UNLOCKED_HORIZONTAL_DOOR);
+                    myRoomImages[i][j + columnOffset].setIcon(UNLOCKED_HORIZONTAL_DOOR_ICON);
                 }
                 myRoomImages[i][j + columnOffset].setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -237,18 +237,18 @@ public class MazePanel extends JPanel{
      * @param theCol - the column the player is located
      */
     private void setCurrentRoomIcon(final int theRow, final int theCol) {
-        myRoomImages[theRow][theCol].setIcon(ICON_CURRENT_ROOM);
+        myRoomImages[theRow][theCol].setIcon(CURRENT_ROOM_ICON);
     }
 
     private void setOldRoomIcon(final int theRow, final int theCol) {
         if (theRow == 0 && theCol == 0) {
-            myRoomImages[theRow][theCol].setIcon(ICON_START_ROOM);
+            myRoomImages[theRow][theCol].setIcon(START_ROOM_ICON);
         }
         else if (theRow == ROW - 1 && theCol == COL - 1) {
-            myRoomImages[theRow][theCol].setIcon(ICON_END_ROOM);
+            myRoomImages[theRow][theCol].setIcon(END_ROOM_ICON);
         }
         else {
-            myRoomImages[theRow][theCol].setIcon(ICON_EMPTY_ROOM);
+            myRoomImages[theRow][theCol].setIcon(EMPTY_ROOM_ICON);
         }
     }
 
@@ -273,7 +273,7 @@ public class MazePanel extends JPanel{
         if (theRow % 2 == 0) {
             for (int i = 0; i < ROW; i++) {
                 if (i % 2 == 0) {
-                    myRoomImages[theRow][i] = new JLabel(ICON_EMPTY_ROOM);
+                    myRoomImages[theRow][i] = new JLabel(EMPTY_ROOM_ICON);
                 } else {
                     myRoomImages[theRow][i] = new JLabel();
                 }
@@ -283,7 +283,7 @@ public class MazePanel extends JPanel{
                 if (i % 2 == 0) {
                     myRoomImages[theRow][i] = new JLabel();
                 } else {
-                    myRoomImages[theRow][i] = new JLabel(ICON_EMPTY_ROOM);
+                    myRoomImages[theRow][i] = new JLabel(EMPTY_ROOM_ICON);
                 }
             }
         }
@@ -295,7 +295,7 @@ public class MazePanel extends JPanel{
      */
     private JLabel setStartRoom() {
         final JLabel startRoom = new JLabel();
-        startRoom.setIcon(ICON_CURRENT_ROOM);
+        startRoom.setIcon(CURRENT_ROOM_ICON);
         startRoom.setHorizontalAlignment(SwingConstants.CENTER);
         return startRoom;
     }
@@ -306,7 +306,7 @@ public class MazePanel extends JPanel{
      */
     private JLabel setEndRoom() {
         final JLabel endRoom = new JLabel();
-        endRoom.setIcon(ICON_END_ROOM);
+        endRoom.setIcon(END_ROOM_ICON);
         endRoom.setHorizontalAlignment(SwingConstants.CENTER);
         return endRoom;
     }
