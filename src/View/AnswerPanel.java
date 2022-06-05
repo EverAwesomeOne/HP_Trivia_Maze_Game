@@ -27,12 +27,12 @@ class AnswerPanel extends JPanel {
 
     private int myNullCount;
 
-    final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
-    final static Font ANSWER_FONT = new Font("SansSerif", Font.PLAIN, 15);
+    private final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+    private final static Font ANSWER_FONT = new Font("SansSerif", Font.PLAIN, 15);
 
-    final static Color GOLD_COLOR = new Color(255,204,51).darker();
-    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
-    final static Color LIGHT_PURPLE_COLOR = new Color(230,230,255);
+    private final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    private final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+    private final static Color LIGHT_PURPLE_COLOR = new Color(230,230,255);
 
     /**
      * The constructor for the AnswerPanel class.
@@ -45,8 +45,7 @@ class AnswerPanel extends JPanel {
      * @param theDirectionButtonPanel - the panel with the direction buttons
      */
     AnswerPanel(final JPanel theGamePanel, final TriviaMazeBrain theTriviaMazeBrain,
-                final QuestionPanel theQuestionPanel,
-                final DirectionButtonPanel theDirectionButtonPanel) {
+                final QuestionPanel theQuestionPanel, final DirectionButtonPanel theDirectionButtonPanel) {
 
         myTriviaMazeBrain = theTriviaMazeBrain;
         myQuestionPanel = theQuestionPanel;
@@ -111,8 +110,8 @@ class AnswerPanel extends JPanel {
         final JLabel questionLabel = new JLabel("Short Answer:");
         final JTextField answerTextArea = new JTextField(10);
 
-        final JButton submitAButton = new JButton("SUBMIT");
-        submitAButton.addActionListener(
+        final JButton submitButton = new JButton("SUBMIT");
+        submitButton.addActionListener(
                 e -> {
                     myPlayerAnswer = answerTextArea.getText();
                     updatePanels();
@@ -124,16 +123,16 @@ class AnswerPanel extends JPanel {
 
         answerTextArea.setBackground(LIGHT_PURPLE_COLOR);
 
-        submitAButton.setFont(TITLE_FONT);
-        submitAButton.setBackground(GOLD_COLOR);
-        submitAButton.setForeground(PURPLE_COLOR);
+        submitButton.setFont(TITLE_FONT);
+        submitButton.setBackground(GOLD_COLOR);
+        submitButton.setForeground(PURPLE_COLOR);
 
         final JPanel labelAndTextAreaPanel = new JPanel();
         labelAndTextAreaPanel.setBackground(LIGHT_PURPLE_COLOR);
         shortAnswerQPanel.add(labelAndTextAreaPanel, BorderLayout.NORTH);
         labelAndTextAreaPanel.add(questionLabel, BorderLayout.NORTH);
         labelAndTextAreaPanel.add(answerTextArea, BorderLayout.SOUTH);
-        shortAnswerQPanel.add(submitAButton, BorderLayout.SOUTH);
+        shortAnswerQPanel.add(submitButton, BorderLayout.SOUTH);
 
         return shortAnswerQPanel;
     }
@@ -200,7 +199,7 @@ class AnswerPanel extends JPanel {
             textWrappingJRadioButton.getJTextArea().setFont(ANSWER_FONT);
 
             final JPanel customJRadioButtonPanel = new JPanel();
-            FlowLayout layout = (FlowLayout) customJRadioButtonPanel.getLayout();
+            final FlowLayout layout = (FlowLayout) customJRadioButtonPanel.getLayout();
             layout.setVgap(0);
             customJRadioButtonPanel.add(textWrappingJRadioButton.getJRadioButton());
             customJRadioButtonPanel.add(textWrappingJRadioButton.getJTextArea());
@@ -224,10 +223,9 @@ class AnswerPanel extends JPanel {
      * @param theAnswerButton - the radio button with a possible answer
      * @param theTextForButton - the text of the answer on the button
      */
-    private void organizeVerticalBox(final Box theVerticalBox,
-                                     final ButtonGroup theRadioButtonGroup,
-                                     final JRadioButton theAnswerButton,
-                                     final String theTextForButton) {
+    private void organizeVerticalBox(final Box theVerticalBox, final ButtonGroup theRadioButtonGroup,
+                                     final JRadioButton theAnswerButton, final String theTextForButton) {
+
         theVerticalBox.add(theAnswerButton);
         theRadioButtonGroup.add(theAnswerButton);
         theAnswerButton.setActionCommand(theTextForButton);
@@ -244,35 +242,34 @@ class AnswerPanel extends JPanel {
      * @param theCustomButtons - the array of custom radio buttons
      * @return - the set-up answer panel
      */
-    private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel,
-                                        final JLabel theQuestionLabel,
-                                        final Box theVerticalBox,
-                                        final ButtonGroup theRadioButtonGroup,
+    private JPanel getQuestionTypePanel(final JPanel theQuestionTypePanel, final JLabel theQuestionLabel,
+                                        final Box theVerticalBox, final ButtonGroup theRadioButtonGroup,
                                         final TextWrappingJRadioButton[] theCustomButtons) {
+
         theQuestionTypePanel.add(theVerticalBox);
         theQuestionTypePanel.setBackground(LIGHT_PURPLE_COLOR);
 
-        final JButton submitAButton = new JButton("SUBMIT");
-        submitAButton.setEnabled(false);
+        final JButton submitButton = new JButton("SUBMIT");
+        submitButton.setEnabled(false);
 
         if (theCustomButtons != null) {
             for (TextWrappingJRadioButton theCustomButton: theCustomButtons) {
                 theCustomButton.getJTextArea().addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        submitAButton.setEnabled(true);
+                        submitButton.setEnabled(true);
                     }
                 });
             }
         }
 
-        Enumeration<AbstractButton> radioButtons = theRadioButtonGroup.getElements();
+        final Enumeration<AbstractButton> radioButtons = theRadioButtonGroup.getElements();
 
         while (radioButtons.hasMoreElements()) {
-            radioButtons.nextElement().addActionListener(e->submitAButton.setEnabled(true));
+            radioButtons.nextElement().addActionListener(e->submitButton.setEnabled(true));
         }
 
-        submitAButton.addActionListener(
+        submitButton.addActionListener(
                 e -> {
                     myPlayerAnswer = theRadioButtonGroup.getSelection().getActionCommand();
                     updatePanels();
@@ -281,12 +278,12 @@ class AnswerPanel extends JPanel {
 
         theQuestionLabel.setFont(ANSWER_FONT);
 
-        submitAButton.setFont(TITLE_FONT);
-        submitAButton.setBackground(GOLD_COLOR);
-        submitAButton.setForeground(PURPLE_COLOR);
+        submitButton.setFont(TITLE_FONT);
+        submitButton.setBackground(GOLD_COLOR);
+        submitButton.setForeground(PURPLE_COLOR);
 
         theQuestionTypePanel.add(theQuestionLabel, BorderLayout.NORTH);
-        theQuestionTypePanel.add(submitAButton, BorderLayout.SOUTH);
+        theQuestionTypePanel.add(submitButton, BorderLayout.SOUTH);
 
         return theQuestionTypePanel;
     }
