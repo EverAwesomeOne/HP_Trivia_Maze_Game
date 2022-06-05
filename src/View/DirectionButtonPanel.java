@@ -23,14 +23,15 @@ public class DirectionButtonPanel extends JPanel {
 
     private final BasicArrowButton myNorthButton;
     private final BasicArrowButton mySouthButton;
-    private final BasicArrowButton myEastButton;
     private final BasicArrowButton myWestButton;
+    private final BasicArrowButton myEastButton;
 
-    final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
 
-    final static Color GOLD_COLOR = new Color(255,204,51).darker();
-    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
-    final static Color LIGHT_PURPLE_COLOR = new Color(230,230,255);
+    private final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+
+    private final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    private final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+    private final static Color LIGHT_PURPLE_COLOR = new Color(230,230,255);
 
     /**
      * The constructor for the DirectionButtonPanel class.
@@ -41,9 +42,7 @@ public class DirectionButtonPanel extends JPanel {
      * @param theMazePanel - the panel that displays the maze visuals
      * @param theTriviaMazeBrain - the controller that connects the GUI with the logic
      */
-    DirectionButtonPanel(final JPanel theGamePanel, final MazePanel theMazePanel,
-                         final TriviaMazeBrain theTriviaMazeBrain) {
-
+    DirectionButtonPanel(final JPanel theGamePanel, final MazePanel theMazePanel, final TriviaMazeBrain theTriviaMazeBrain) {
         myMazePanel = theMazePanel;
         myTriviaMazeBrain = theTriviaMazeBrain;
         setLayout(new GridLayout(3,3));
@@ -98,8 +97,7 @@ public class DirectionButtonPanel extends JPanel {
      * @param theArrowButton - the GUI arrow button
      * @param theArrowDirection - the direction the arrow button is pointing
      */
-    private void addArrowActionListener(final BasicArrowButton theArrowButton,
-                                        final String theArrowDirection) {
+    private void addArrowActionListener(final BasicArrowButton theArrowButton, final String theArrowDirection) {
         theArrowButton.addActionListener(
                 e -> myTriviaMazeBrain.setUpQuestion(theArrowDirection)
         );
