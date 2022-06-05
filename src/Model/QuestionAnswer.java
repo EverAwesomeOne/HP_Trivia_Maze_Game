@@ -16,7 +16,7 @@ public class QuestionAnswer implements Serializable {
     private String myAnswer2;
     private String myAnswer3;
     private String myAnswer4;
-    private final String[] myQuestionList;
+    private final String[] myQuestionAndAnswerArray;
 
     @Serial
     private static final long serialVersionUID = 109174852462682090L;
@@ -32,7 +32,7 @@ public class QuestionAnswer implements Serializable {
         myAnswer2 = "";
         myAnswer3 = "";
         myAnswer4 = "";
-        myQuestionList = new String[5];
+        myQuestionAndAnswerArray = new String[5];
     }
 
     /**
@@ -50,15 +50,15 @@ public class QuestionAnswer implements Serializable {
         try (ResultSet rs = theStatement.executeQuery(query)) {
 
             myQuestion = rs.getString("QUESTION");
-            myQuestionList[0] = myQuestion;
+            myQuestionAndAnswerArray[0] = myQuestion;
             myCorrectAnswer = rs.getString("CORRECT_ANSWER");
-            myQuestionList[1] = myCorrectAnswer;
+            myQuestionAndAnswerArray[1] = myCorrectAnswer;
             myAnswer2 = rs.getString("ANSWER_2");
-            myQuestionList[2] = myAnswer2;
+            myQuestionAndAnswerArray[2] = myAnswer2;
             myAnswer3 = rs.getString("ANSWER_3");
-            myQuestionList[3] = myAnswer3;
+            myQuestionAndAnswerArray[3] = myAnswer3;
             myAnswer4 = rs.getString("ANSWER_4");
-            myQuestionList[4] = myAnswer4;
+            myQuestionAndAnswerArray[4] = myAnswer4;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class QuestionAnswer implements Serializable {
      * @return - the questionList array that hold the question and answers
      */
     public String[] getQuestionList() {
-        return myQuestionList;
+        return myQuestionAndAnswerArray;
     }
 
     /**
