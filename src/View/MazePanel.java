@@ -39,10 +39,10 @@ public class MazePanel extends JPanel{
 
     private final TriviaMazeBrain myTriviaMazeBrain;
 
-    final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
+    private final static Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 15);
 
-    final static Color GOLD_COLOR = new Color(255,204,51).darker();
-    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+    private final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    private final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
     /**
      * The constructor for the MazePanel class.
