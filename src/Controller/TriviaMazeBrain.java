@@ -38,7 +38,7 @@ public class TriviaMazeBrain {
      * Constructor for the TriviaMazeBrain class.
      * Starts running the game.
      */
-    public TriviaMazeBrain() {
+    private TriviaMazeBrain() {
         runGame();
     }
 
