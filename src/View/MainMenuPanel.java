@@ -45,9 +45,9 @@ public class MainMenuPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
         setBackground(PURPLE_COLOR);
 
-        add(setupIconPanel());
+        add(setupIconPanelOne());
         add(setupGameTitlePanel());
-        add(setupIconPanel());
+        add(setupIconPanelTwo());
     }
 
     /**
@@ -75,13 +75,28 @@ public class MainMenuPanel extends JPanel {
      * Sets up the images onto an icon panel on the game screen.
      * @return - the set-up icon panel
      */
-    private JPanel setupIconPanel() {
+    private JPanel setupIconPanelOne() {
         final JPanel iconPanel = new JPanel();
         iconPanel.setLayout(new GridLayout(2,1));
         iconPanel.setBackground(PURPLE_COLOR);
 
         iconPanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON)));
         iconPanel.add(new JLabel(scaleImageIcon(HARRY_POTTER_ICON)));
+
+        return iconPanel;
+    }
+
+    /**
+     * Sets up the images onto an icon panel on the game screen.
+     * @return - the set-up icon panel
+     */
+    private JPanel setupIconPanelTwo() {
+        final JPanel iconPanel = new JPanel();
+        iconPanel.setLayout(new GridLayout(2,1));
+        iconPanel.setBackground(PURPLE_COLOR);
+
+        iconPanel.add(new JLabel(scaleImageIcon(HARRY_POTTER_ICON)));
+        iconPanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON)));
 
         return iconPanel;
     }

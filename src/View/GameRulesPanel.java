@@ -15,10 +15,10 @@ public class GameRulesPanel extends JPanel {
     private JMenuBar myMenuBar;
     private JPanel myMainMenuPanel;
 
-    final static Font ABOUT_FONT = new Font("SansSerif", Font.BOLD, 25);
+    private final static Font ABOUT_FONT = new Font("SansSerif", Font.BOLD, 25);
 
-    final static Color GOLD_COLOR = new Color(255,204,51).darker();
-    final static Color PURPLE_COLOR = new Color(102,0,153).darker();
+    private final static Color GOLD_COLOR = new Color(255,204,51).darker();
+    private final static Color PURPLE_COLOR = new Color(102,0,153).darker();
 
     /**
      * Constructor for the GameRulesPanel located as a tab in the game.
@@ -28,7 +28,7 @@ public class GameRulesPanel extends JPanel {
     GameRulesPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
         myGamePanel = theGamePanel;
         myMenuBar = theMenuBar;
-        setupGameRulesPanel("One");
+        setUpGameRulesPanel("One");
     }
 
     /**
@@ -38,7 +38,7 @@ public class GameRulesPanel extends JPanel {
      */
     GameRulesPanel(final JPanel theMainMenuPanel) {
         myMainMenuPanel = theMainMenuPanel;
-        setupGameRulesPanel("Two");
+        setUpGameRulesPanel("Two");
     }
 
     /**
@@ -46,7 +46,7 @@ public class GameRulesPanel extends JPanel {
      * @param theButtonActionType - the indicator if the game rules panel is being
      *                            accessed from the main menu or in the game
      */
-    private void setupGameRulesPanel(final String theButtonActionType) {
+    private void setUpGameRulesPanel(final String theButtonActionType) {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
         setBackground(PURPLE_COLOR);
@@ -72,9 +72,9 @@ public class GameRulesPanel extends JPanel {
      * @return - the set-up rules panel
      */
     private JPanel setUpRulesPanel() {
-        JPanel rules = new JPanel();
+        final JPanel rules = new JPanel();
 
-        GridLayout gameRulesPanelLayout = new GridLayout(3,1);
+        final GridLayout gameRulesPanelLayout = new GridLayout(3,1);
         gameRulesPanelLayout.setVgap(4);
 
         rules.setLayout(gameRulesPanelLayout);
