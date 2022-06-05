@@ -4,6 +4,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+/**
+ * The Maze class represents the maze the player navigates to play the game.
+ */
 public class Maze implements Serializable {
     private final Room[][] myMaze;
     private int myCharacterRow;
@@ -13,6 +16,12 @@ public class Maze implements Serializable {
     @Serial
     private static final long serialVersionUID = 109174852462682090L;
 
+    /**
+     * Constructor for the Maze class.
+     * Initializes instance fields for the character row and column
+     * as well as the undirected graph of room connections and 2d maze array.
+     * @param theMazeLength The length of the square maze
+     */
     public Maze(final int theMazeLength) {
         final int chosenRows = theMazeLength;
         final int chosenColumns = theMazeLength;
@@ -31,6 +40,10 @@ public class Maze implements Serializable {
         createInitialGraph();
     }
 
+    /**
+     * Updates the players row or column depending on which direction they moved.
+     * @param theDirectionToMove the direction the player moved in
+     */
     public void updatePosition(final Direction theDirectionToMove) {
         if (theDirectionToMove == Direction.NORTH) {
             myCharacterRow -= 2;
@@ -43,12 +56,20 @@ public class Maze implements Serializable {
         }
     }
 
+    /**
+     * Checks to see if the player has won the game or not.
+     * @return whether the game has been won
+     */
     public boolean hasWon() {
         return myCharacterRow == myMaze.length - 1 && myCharacterColumn == myMaze.length - 1;
     }
 
-    // performs a BFS traversal from the current room
+    /**
+     * Checks to see if a path to the exit still exists.
+     * @return whether the game can still be won
+     */
     public boolean hasValidPaths() {
+        // performs a BFS traversal from the current room
         int roomNumber = myCharacterRow * myMaze.length + myCharacterColumn;
 
         // Mark all the nodes as not visited
@@ -82,6 +103,10 @@ public class Maze implements Serializable {
         return false;
     }
 
+    /**
+     * Removes an edge (room connection) from the undirected graph.
+     * @param theDirectionToMove the direction the player failed to move in
+     */
     public void removeEdgeFromGraph(final Direction theDirectionToMove) {
         final int firstNodeToRemoveFrom = myCharacterRow * myMaze.length + myCharacterColumn;
         int secondNodeToRemoveFrom = firstNodeToRemoveFrom;
@@ -100,6 +125,9 @@ public class Maze implements Serializable {
         myRoomConnections[secondNodeToRemoveFrom].remove((Integer) firstNodeToRemoveFrom);
     }
 
+    /**
+     * Creates the initial undirected graph with all room connections.
+     */
     private void createInitialGraph() {
         myRoomConnections = new LinkedList[myMaze.length * myMaze[0].length];
         for (int i = 0; i < myRoomConnections.length; i += 2) {
@@ -133,9 +161,10 @@ public class Maze implements Serializable {
         }
     }
 
+    /**
+     * Connects doors between adjacent rooms so that they are shared (same reference).
+     */
     private void connectSharedDoors() {
-        // we want doors to adjacent rooms to be shared
-
         // east and west door of adjacent rooms
         for (int i = 0; i < myMaze.length; i += 2) {
             for (int j = 0; j < myMaze[i].length - 2; j += 2) {
@@ -153,6 +182,9 @@ public class Maze implements Serializable {
         }
     }
 
+    /**
+     * Locks doors that would lead outside the maze.
+     */
     private void lockEdgeDoors() {
         for (int i = 0; i < myMaze.length; i += 2) {
             // we want to lock the doors on the edge of the maze
@@ -164,18 +196,36 @@ public class Maze implements Serializable {
         }
     }
 
+    /**
+     * Gets the current room the player is in.
+     * @return the room the player is in
+     */
     public Room getCurrentRoom() {
         return myMaze[myCharacterRow][myCharacterColumn];
     }
 
+    /**
+     * Gets a specific room.
+     * @param theRow the row of the room wanted
+     * @param theCol the column of the room wanted
+     * @return the room at the specified row and column
+     */
     public Room getSpecificRoom(final int theRow, final int theCol) {
         return myMaze[theRow][theCol];
     }
 
+    /**
+     * Gets the player's current row.
+     * @return the player's current row
+     */
     public int getCharacterRow() {
         return myCharacterRow;
     }
 
+    /**
+     * Gets the player's current column.
+     * @return the player's current column
+     */
     public int getCharacterColumn() {
         return myCharacterColumn;
     }
