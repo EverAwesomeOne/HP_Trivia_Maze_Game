@@ -142,7 +142,7 @@ public class GameRulesPanel extends JPanel {
      * @return - the set-up component panel for the rules panel
      */
     private JPanel setUpPanelsOnRulesPanel(final JLabel theTitle, final JLabel theText) {
-        JPanel setUpPanel = new JPanel();
+        final JPanel setUpPanel = new JPanel();
         setUpPanel.setLayout(new BoxLayout(setUpPanel, BoxLayout.Y_AXIS));
 
         theTitle.setForeground(GOLD_COLOR);
