@@ -55,7 +55,7 @@ class AboutTeamPanel extends JPanel {
         final JLabel aboutChloe = setUpTeamMemberJLabel("Chloe Duncan - Addicted to Java: ☕ & \uD83D\uDCBB");
         final JLabel aboutEdwin = setUpTeamMemberJLabel("Edwin Solis-Bruno - A connoisseur for everything \uD83C\uDF53 related");
 
-        GridLayout iconPanelLayout = new GridLayout(3,1);
+        final GridLayout iconPanelLayout = new GridLayout(3,1);
         iconPanelLayout.setVgap(25);
 
         final JPanel iconPanel = setUpPanelsOnMemberPanel(iconPanelLayout,
@@ -64,7 +64,7 @@ class AboutTeamPanel extends JPanel {
                 new JLabel(GameRulesPanel.scaleImageIcon(EDWIN_ICON, 40)));
 
 
-        GridLayout bioPanelLayout = new GridLayout(3,1);
+        final GridLayout bioPanelLayout = new GridLayout(3,1);
         bioPanelLayout.setVgap(45);
 
         final JPanel bioPanel  = setUpPanelsOnMemberPanel(bioPanelLayout, aboutMaria, aboutChloe, aboutEdwin);
