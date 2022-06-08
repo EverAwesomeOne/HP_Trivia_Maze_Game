@@ -70,7 +70,7 @@ public class GamePanel extends JPanel {
     public void displayCorrectAnswerMessageBox() {
         final String title = "Correct Answer! You're a wizard, Harry!";
         final Random randomNumber = new Random();
-        ArrayList<String> winningMessages = createWinningAnswerMessages();
+        final ArrayList<String> winningMessages = createWinningAnswerMessages();
         displayPostAnswerMessageHelper(title, randomNumber, winningMessages);
     }
 
@@ -80,7 +80,7 @@ public class GamePanel extends JPanel {
      * @return - the list of possible good messages
      */
     private ArrayList<String> createWinningAnswerMessages() {
-        ArrayList<String> winningMessages = new ArrayList<>();
+        final ArrayList<String> winningMessages = new ArrayList<>();
         winningMessages.add("You're doing awesome :)");
         winningMessages.add("Dementor? You just took my breath away!");
         winningMessages.add("Eek, one step closer!");
