@@ -99,7 +99,7 @@ public class DirectionButtonPanel extends JPanel {
      */
     private void addArrowActionListener(final BasicArrowButton theArrowButton, final String theArrowDirection) {
         theArrowButton.addActionListener(
-                e -> myTriviaMazeBrain.setUpQuestion(theArrowDirection)
+                e -> myTriviaMazeBrain.setupQuestion(theArrowDirection)
         );
     }
 

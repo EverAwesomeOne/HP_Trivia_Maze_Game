@@ -24,9 +24,9 @@ class AboutTeamPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
         setBackground(PURPLE_COLOR);
 
-        add(setUpTitlePanel());
-        add(setUpMembersPanel());
-        add(setUpSchoolInfoAndButtonPanel(theGamePanel, theMenuBar));
+        add(setupTitlePanel());
+        add(setupMembersPanel());
+        add(setupSchoolInfoAndButtonPanel(theGamePanel, theMenuBar));
 
         setVisible(false);
     }
@@ -35,8 +35,8 @@ class AboutTeamPanel extends JPanel {
      * Sets up the about team title panel at the top of the game screen.
      * @return - the set-up about team title panel
      */
-    private JPanel setUpTitlePanel() {
-        return GameRulesPanel.setUpTitlePanel("<html><div style='text-align: center;'>"
+    private JPanel setupTitlePanel() {
+        return GameRulesPanel.setupTitlePanel("<html><div style='text-align: center;'>"
                 + "Harry Potter<br>Trivia Maze<br>Team" + "</div></html>");
     }
 
@@ -44,21 +44,21 @@ class AboutTeamPanel extends JPanel {
      * Sets up the panel where all the team members' info is displayed.
      * @return - the set-up team members' info panel
      */
-    private JPanel setUpMembersPanel() {
+    private JPanel setupMembersPanel() {
         final JPanel membersPanel = new JPanel();
         final ImageIcon CHLOE_ICON = new ImageIcon("src//View//Images//Chloe.png");
         final ImageIcon MARIA_ICON = new ImageIcon("src//View//Images//Maria.jpg");
         final ImageIcon EDWIN_ICON = new ImageIcon("src//View//Images//Edwin.png");
 
 
-        final JLabel aboutMaria = setUpTeamMemberJLabel("Maria Babko - The only actual Potterhead here ⚡");
-        final JLabel aboutChloe = setUpTeamMemberJLabel("Chloe Duncan - Addicted to Java: ☕ & \uD83D\uDCBB");
-        final JLabel aboutEdwin = setUpTeamMemberJLabel("Edwin Solis-Bruno - A connoisseur for everything \uD83C\uDF53 related");
+        final JLabel aboutMaria = setupTeamMemberJLabel("Maria Babko - The only actual Potterhead here ⚡");
+        final JLabel aboutChloe = setupTeamMemberJLabel("Chloe Duncan - Addicted to Java: ☕ & \uD83D\uDCBB");
+        final JLabel aboutEdwin = setupTeamMemberJLabel("Edwin Solis-Bruno - A connoisseur for everything \uD83C\uDF53 related");
 
         GridLayout iconPanelLayout = new GridLayout(3,1);
         iconPanelLayout.setVgap(25);
 
-        final JPanel iconPanel = setUpPanelsOnMemberPanel(iconPanelLayout,
+        final JPanel iconPanel = setupPanelsOnMemberPanel(iconPanelLayout,
                 new JLabel(GameRulesPanel.scaleImageIcon(MARIA_ICON, 40)),
                 new JLabel(GameRulesPanel.scaleImageIcon(CHLOE_ICON, 40)),
                 new JLabel(GameRulesPanel.scaleImageIcon(EDWIN_ICON, 40)));
@@ -67,7 +67,7 @@ class AboutTeamPanel extends JPanel {
         GridLayout bioPanelLayout = new GridLayout(3,1);
         bioPanelLayout.setVgap(45);
 
-        final JPanel bioPanel  = setUpPanelsOnMemberPanel(bioPanelLayout, aboutMaria, aboutChloe, aboutEdwin);
+        final JPanel bioPanel  = setupPanelsOnMemberPanel(bioPanelLayout, aboutMaria, aboutChloe, aboutEdwin);
 
         membersPanel.add(iconPanel);
         membersPanel.add(bioPanel);
@@ -82,7 +82,7 @@ class AboutTeamPanel extends JPanel {
      * @param theTeamMemberInfo - the team member about info
      * @return - the set-up team member label
      */
-    private JLabel setUpTeamMemberJLabel(final String theTeamMemberInfo) {
+    private JLabel setupTeamMemberJLabel(final String theTeamMemberInfo) {
         final JLabel teamMemberLabel = new JLabel(theTeamMemberInfo);
         teamMemberLabel.setHorizontalAlignment(SwingConstants.LEFT);
         teamMemberLabel.setFont(new Font("SanSerif", Font.PLAIN, 15));
@@ -100,7 +100,7 @@ class AboutTeamPanel extends JPanel {
      * @param theLabel3 - the third label added to the panel
      * @return - the set-up component panel to add to member panel
      */
-    private JPanel setUpPanelsOnMemberPanel(final GridLayout thePanelLayout,
+    private JPanel setupPanelsOnMemberPanel(final GridLayout thePanelLayout,
                                             final JLabel theLabel1, final JLabel theLabel2,
                                             final JLabel theLabel3) {
         final JPanel panelOnMemberPanel  = new JPanel();
@@ -120,7 +120,7 @@ class AboutTeamPanel extends JPanel {
      * @param theMenuBar - the menu tabs located at the top of the game screen
      * @return - the set-up panel with the school info and button set up
      */
-    private JPanel setUpSchoolInfoAndButtonPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
+    private JPanel setupSchoolInfoAndButtonPanel(final JPanel theGamePanel, final JMenuBar theMenuBar) {
         final JPanel teamInfoAndButtonPanel = new JPanel();
         teamInfoAndButtonPanel.setLayout(new BorderLayout());
 

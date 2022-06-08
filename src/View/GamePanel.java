@@ -152,7 +152,7 @@ public class GamePanel extends JPanel {
     public void displayWinningMessageBox() {
         final String title = "You Win! :))";
         final String winningMessage = "Take the (U)W!";
-        setUpDialogBox(title, winningMessage);
+        setupDialogBox(title, winningMessage);
     }
 
     /**
@@ -161,7 +161,7 @@ public class GamePanel extends JPanel {
     public void displayLosingMessageBox() {
         final String title = "Game Over...Play Again!";
         final String losingMessage = "Guess you're not a trivia wizard";
-        setUpDialogBox(title, losingMessage);
+        setupDialogBox(title, losingMessage);
     }
 
     /**
@@ -170,7 +170,7 @@ public class GamePanel extends JPanel {
      * @param theTitle - the title of pop-up message
      * @param theMessage - the message to display in the pop-up
      */
-    private void setUpDialogBox(final String theTitle, final String theMessage) {
+    private void setupDialogBox(final String theTitle, final String theMessage) {
         final JDialog endGameMessage = new JDialog();
         endGameMessage.setTitle(theTitle);
 

@@ -59,7 +59,7 @@ public class TriviaMazeBrain {
      * the player can just move freely through the door.
      * @param theDirectionType - the direction in which the door is located
      */
-    public void setUpQuestion(final String theDirectionType) {
+    public void setupQuestion(final String theDirectionType) {
         myGamePanel = myMainFrame.getGamePanel();
         myMazePanel = myGamePanel.getMazePanel();
         final Direction directionToMove = Direction.valueOf(theDirectionType);
