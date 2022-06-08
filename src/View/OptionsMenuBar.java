@@ -65,7 +65,7 @@ public class OptionsMenuBar extends JMenuBar {
                     e -> {
                         setVisible(false);
                         myGamePanel.setVisible(false);
-                        GameRulesPanel gameRulesPanel = myMainFrame.getGameRulesPanelGP();
+                        final GameRulesPanel gameRulesPanel = myMainFrame.getGameRulesPanelGP();
                         myMainFrame.add(gameRulesPanel);
                         gameRulesPanel.setVisible(true);
                     }
@@ -74,7 +74,7 @@ public class OptionsMenuBar extends JMenuBar {
                     e -> {
                         setVisible(false);
                         myGamePanel.setVisible(false);
-                        AboutTeamPanel aboutTeamPanel = myMainFrame.getAboutTeamPanel();
+                        final AboutTeamPanel aboutTeamPanel = myMainFrame.getAboutTeamPanel();
                         myMainFrame.add(aboutTeamPanel);
                         aboutTeamPanel.setVisible(true);
                     }

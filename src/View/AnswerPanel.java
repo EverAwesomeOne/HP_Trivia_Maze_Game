@@ -190,7 +190,7 @@ class AnswerPanel extends JPanel {
         final Box verticalBox = Box.createVerticalBox();
         final ButtonGroup radioButtonGroup = new ButtonGroup();
 
-        TextWrappingJRadioButton[] textWrappingJRadioButtons = new TextWrappingJRadioButton[4];
+        final TextWrappingJRadioButton[] textWrappingJRadioButtons = new TextWrappingJRadioButton[4];
         for (int index : randomizeAnswerOrderList) {
             final String answerText = myQuestionAndAnswerArray[index];
             final TextWrappingJRadioButton textWrappingJRadioButton = new TextWrappingJRadioButton(answerText);

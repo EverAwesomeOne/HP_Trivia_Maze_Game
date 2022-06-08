@@ -45,9 +45,9 @@ public class MainMenuPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(GOLD_COLOR,5));
         setBackground(PURPLE_COLOR);
 
-        add(setupIconPanelOne());
+        add(setupIconPanel(HOGWARTS_ICON, HARRY_POTTER_ICON));
         add(setupGameTitlePanel());
-        add(setupIconPanelTwo());
+        add(setupIconPanel(HARRY_POTTER_ICON, HOGWARTS_ICON));
     }
 
     /**
@@ -71,32 +71,13 @@ public class MainMenuPanel extends JPanel {
         return gameTitlePanel;
     }
 
-    /**
-     * Sets up the images onto an icon panel on the game screen.
-     * @return - the set-up icon panel
-     */
-    private JPanel setupIconPanelOne() {
+    private JPanel setupIconPanel(final ImageIcon hogwartsIcon, final ImageIcon harryPotterIcon) {
         final JPanel iconPanel = new JPanel();
         iconPanel.setLayout(new GridLayout(2,1));
         iconPanel.setBackground(PURPLE_COLOR);
 
-        iconPanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON)));
-        iconPanel.add(new JLabel(scaleImageIcon(HARRY_POTTER_ICON)));
-
-        return iconPanel;
-    }
-
-    /**
-     * Sets up the images onto an icon panel on the game screen.
-     * @return - the set-up icon panel
-     */
-    private JPanel setupIconPanelTwo() {
-        final JPanel iconPanel = new JPanel();
-        iconPanel.setLayout(new GridLayout(2,1));
-        iconPanel.setBackground(PURPLE_COLOR);
-
-        iconPanel.add(new JLabel(scaleImageIcon(HARRY_POTTER_ICON)));
-        iconPanel.add(new JLabel(scaleImageIcon(HOGWARTS_ICON)));
+        iconPanel.add(new JLabel(scaleImageIcon(hogwartsIcon)));
+        iconPanel.add(new JLabel(scaleImageIcon(harryPotterIcon)));
 
         return iconPanel;
     }
@@ -137,7 +118,7 @@ public class MainMenuPanel extends JPanel {
      * @param button - one of the main menu buttons
      * @param buttonName - the name of the button
      */
-    private void addActionListener(JButton button, String buttonName) {
+    private void addActionListener(final JButton button, final String buttonName) {
         if (buttonName.equals(" New Game ")) {
             button.addActionListener(
                     e -> {
