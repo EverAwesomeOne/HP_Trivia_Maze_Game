@@ -30,6 +30,10 @@ public class TriviaMazeBrain {
     public final static int MAZE_LENGTH = 7;
     public final static String MOVE_FREELY = "Move freely";
 
+    /**
+     * Method that calls constructor when program is run.
+     * @param theArgs command line arguments
+     */
     public static void main(final String[] theArgs) {
         new TriviaMazeBrain();
     }
@@ -196,11 +200,10 @@ public class TriviaMazeBrain {
      * saved the game.
      */
     public void serialize() {
-
         try {
-            FileOutputStream file = new FileOutputStream
+            final FileOutputStream file = new FileOutputStream
                     (TRIVIA_MAZE_FILE);
-            ObjectOutputStream out = new ObjectOutputStream
+            final ObjectOutputStream out = new ObjectOutputStream
                     (file);
 
             out.writeObject(myMaze);
@@ -221,9 +224,9 @@ public class TriviaMazeBrain {
      */
     public void deserialize() {
         try {
-            FileInputStream file = new FileInputStream
+            final FileInputStream file = new FileInputStream
                     (TRIVIA_MAZE_FILE);
-            ObjectInputStream in = new ObjectInputStream
+            final ObjectInputStream in = new ObjectInputStream
                     (file);
 
             myMaze = (Maze) in.readObject();
